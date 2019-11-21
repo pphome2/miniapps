@@ -13,7 +13,7 @@
 	$DF_DOWNLOAD_TEXT='Letöltés';
 	$DF_FILEEXT=array('php','jpg');
 
-	$DF_DIR='.';
+	$DF_DIR='./dir';
 	$DF_TEXTFILE_EXT='.txt';
 
 	$DF_LINK_TARGET_NEW_WINDOW=false;
@@ -66,12 +66,12 @@
   
   .df_tda {
     text-decoration:none;
-    color:#808080;'
+    color:#808080;
   }
 
   .df_tda2 {
     text-decoration:none;
-    color:red;'
+    color:red;
   }
 
 
