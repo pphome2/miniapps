@@ -81,12 +81,12 @@
 
   .df_tda {
     text-decoration:none;
-    color:#808080;'
+    color:#808080;
   }
 
   .df_tda2 {
     text-decoration:none;
-    color:red;'
+    color:red;
   }
 
 
