@@ -89,6 +89,59 @@
     color:red;
   }
 
+  .df_table {
+    width:90%;
+  }
+
+  .df_trh {
+    background-color:lightblue;
+  }
+
+  .df_th1 {
+    padding:5px;
+    color:#a7a8a8;
+    width:60%;
+  }
+
+  .df_th2 {
+    padding:5px;
+    color:#a7a8a8;
+    width:20%;
+  }
+
+  .df_tr:nth-child(even){
+    background-color:white;
+  }
+
+  .df_tr:nth-child(odd) {
+    background-color:#f2f2f2;
+  }
+
+  .df_td {
+    color:#808080;
+    text-align:left;
+    padding:10px;
+  }
+
+  .df_td2 {
+    color:#808080;
+    text-align:center;
+  }
+
+  .df_tds {
+    color:red;
+  }
+
+  .df_tda {
+    text-decoration:none;
+    color:#808080;
+  }
+
+  .df_tda2 {
+    text-decoration:none;
+    color:red;
+  }
+
 
 </style>
 
