@@ -1,2 +1,2 @@
 # miniapps
-mini apps for ph based website
+mini apps for php based website
