@@ -116,7 +116,7 @@ foreach ($files as $entry) {
 			echo("<tr class='df_tr'>");
 			$fileext_name=strtoupper($fileext_name);
 			echo("<td class='df_td'><span class='df_tds'>[$fileext_name]</span> ");
-			echo("<a href='$DF_DIR/$entry' target='$target' class='df_tda'>$entry</a>");
+			echo("<a href=\"$DF_DIR/$entry\" target='$target' class='df_tda'>$entry</a>");
 			echo("<br />");
 				echo("<br />");
 			$filetext=$DF_DIR.'/'.$entry.$DF_TEXTFILE_EXT;
@@ -125,7 +125,7 @@ foreach ($files as $entry) {
 				echo("<br />");
 				echo("<br />");
 			}
-			echo("<a href='$DF_DIR/$entry' download class='df_tda2'>$DF_DOWNLOAD_TEXT</a>");
+			echo("<a href=\"$DF_DIR/$entry\" download class='df_tda2'>$DF_DOWNLOAD_TEXT</a>");
 			echo("<br />");
 			echo("<br />");
 			echo("</td>");

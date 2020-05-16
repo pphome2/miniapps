@@ -221,7 +221,7 @@
 
 function formatBytes($size, $precision=2){
     if($size < 0) {
-        size=$size + PHP_INT_MAX + PHP_INT_MAX + 2;
+        $size=$size + PHP_INT_MAX + PHP_INT_MAX + 2;
     }
     $base=log($size, 1024);
     $suffixes=array('', 'K', 'M', 'G', 'T');
