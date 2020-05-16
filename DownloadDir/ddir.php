@@ -4,7 +4,7 @@
 # File list for download from directory (insert iframe to webpage)
 # (show text for files)
 #
-# 2019. WSWDTeam GPLv3
+# 2020. WSWDTeam GPLv3
 #
 #
 
