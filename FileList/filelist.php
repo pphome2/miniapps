@@ -9,7 +9,7 @@
 
 
 	$FL_LANG=array('Név','Dátum','Méret');
-	$FL_FILEEXT=array('php','jpg');
+	$FL_FILEEXT=array('png','jpg');
 
 	$FL_DIR='.';
 
@@ -62,7 +62,7 @@
   
   .fl_tda {
     text-decoration:none;
-    color:#808080;'
+    color:#808080;
   }
 
 
@@ -73,7 +73,7 @@
 
 function formatBytes($size, $precision=2){
 	if($size < 0) {
-		size=$size + PHP_INT_MAX + PHP_INT_MAX + 2;
+		$size=$size + PHP_INT_MAX + PHP_INT_MAX + 2;
 	}
 	$base=log($size, 1024);
 	$suffixes=array('', 'K', 'M', 'G', 'T');   

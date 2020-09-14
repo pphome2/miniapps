@@ -221,7 +221,7 @@
 
 function formatBytes($size, $precision=2){
     if($size < 0) {
-        size=$size + PHP_INT_MAX + PHP_INT_MAX + 2;
+        $size=$size + PHP_INT_MAX + PHP_INT_MAX + 2;
     }
     $base=log($size, 1024);
     $suffixes=array('', 'K', 'M', 'G', 'T');
@@ -243,11 +243,11 @@ function filetable($dir){
 			if (is_dir($dirn)){
 				echo('
 					<div class="df-card">
-						<div class="df-card-header" id="dfardheader'.$dirnum.'">
-							<span onclick="cardclose(dfcardbody'.$dirnum.',dfcardright'.$dirnum.')" class="df-topleftmenu1">
+						<div class="df-card-header" onclick="cardclose(dfcardbody'.$dirnum.',dfcardright'.$dirnum.')"id="dfardheader'.$dirnum.'">
+							<span class="df-topleftmenu1">
 								'.$entry.'
 							</span>
-							<span onclick="cardclose(dfcardbody'.$dirnum.',dfcardright'.$dirnum.')" class="df-topright" id="dfcardright'.$dirnum.'">
+							<span class="df-topright" id="dfcardright'.$dirnum.'">
 								+
 							</span>
 						</div>
@@ -269,11 +269,11 @@ function filetable($dir){
 					$dirx=$dn[$s];
 					echo('
 						<div class="df-card">
-							<div class=df-card-header>
-								<span onclick="cardclose(dfcardbody'.$dirnum.',dfcardright'.$dirnum.')" class="df-topleftmenu1">
+							<div class="df-card-header" onclick="cardclose(dfcardbody'.$dirnum.',dfcardright'.$dirnum.')"id="dfardheader'.$dirnum.'">
+							<span class="df-topleftmenu1">
 								'.$entry.'
 							</span>
-							<span onclick="cardclose(dfcardbody'.$dirnum.',dfcardright'.$dirnum.')" class="df-topright" id="dfcardright'.$dirnum.'">
+							<span class="df-topright" id="dfcardright'.$dirnum.'">
 								+
 							</span>
 							</div>
