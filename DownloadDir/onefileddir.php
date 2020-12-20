@@ -1,4 +1,3 @@
-root@hydra:/var/www/html/https/dl# cat onefileddir.php 
 <?php
 
 #
@@ -197,6 +196,7 @@ function filetable($dir){
     foreach ($files as $entry) {
     if ($entry!="." && $entry!=".." && $entry!="lost+found") {
         $dirn=$dir.'/'.$entry;
+        if (is_dir($dirn)){
 	if ($dirnum==0){
 	    $cardnum++;
 	    echo('
@@ -218,10 +218,15 @@ function filetable($dir){
 	    echo("<th class='df_th2'>$DF_LANG[2]</th>");
 	    echo("</tr>");
 	}
-        if (is_dir($dirn)){
 	$dirnum++;
 	filetable($dirn);
 	$dirnum--;
+	if ($dirnum==0){
+	    echo("</table>");
+	    echo("</center>");
+	    echo("</div>");
+	    echo("</div>");
+	}
         }else{
 	$fileext=explode('.',$entry);
 	$fileext_name=$fileext[count($fileext)-1];
@@ -245,14 +250,6 @@ function filetable($dir){
 	    $m=formatBytes($m);
 	    echo("<td class='df_td2'>$m</td>");
 	    echo("</tr>");
-	}
-        }
-        if (is_dir($dirn)){
-	if ($dirnum==0){
-	    echo("</table>");
-	    echo("</center>");
-	    echo("</div>");
-	    echo("</div>");
 	}
         }
     }
