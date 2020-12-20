@@ -1,4 +1,3 @@
-root@hydra:/var/www/html/https/dl# cat onefileddir.php 
 <?php
 
 #
