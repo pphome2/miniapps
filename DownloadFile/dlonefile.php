@@ -15,9 +15,13 @@
     $DF_FILEEXT=array('mp3','mkv','avi','mp4','pdf','epub');
 
     $DF_DIR='./video';
+    $DF_EXCLUDE_DIR=array('SecCam');
+    $DF_ONLY_DIR=array();
     $DF_TEXTFILE_EXT='.txt';
 
     $DF_LINK_TARGET_NEW_WINDOW=false;
+    $DF_SORT_FILES_BY_DATE=false;
+    $DF_OK=false;
     $dirnum=0;
     $cardnum=0;
 
@@ -186,16 +190,29 @@ function formatBytes($size, $precision=2){
 
 
 
-function filetable($dir){
+function filetable($dir,$dfok){
     global $DF_FILEEXT,$DF_LANG,$DF_TEXTFILE_EXT,$DF_DOWNLOAD_TEXT,$DF_LANG,
+        $DF_EXCLUDE_DIR,$DF_ONLY_DIR,$DF_OK,$DF_SORT_FILES_BY_DATE,
         $cardnum,$dirnum;
 
+    if ($DF_SORT_FILES_BY_DATE) {
+        $files=scandir($dir,SCANDIR_SORT_DESCENDING);
+    } else {
     $files=scandir($dir);
     asort($files);
+    }
+
     $fdb=0;
     foreach ($files as $entry) {
-    if ($entry!="." && $entry!=".." && $entry!="lost+found") {
-        $dirn=$dir.'/'.$entry;
+    if ($entry!="." && $entry!=".." && $entry!="lost+found" && !in_array($entry,$DF_EXCLUDE_DIR)) {
+        $ok=true;
+        if (count($DF_ONLY_DIR)>0) {
+	if (!$dfok && !in_array($entry,$DF_ONLY_DIR)) {
+	    $ok=false;
+	}
+        }
+        if ($ok) {
+	$dirn=$dir.'/'.$entry;
 	if ($dirnum==0){
 	    $cardnum++;
 	    echo('
@@ -205,7 +222,7 @@ function filetable($dir){
 		    '.$entry.'
 		</span>
 		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
-		    +
+		+
 		</span>
 	        </div>
 	        <div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
@@ -217,15 +234,15 @@ function filetable($dir){
 	    echo("<th class='df_th2'>$DF_LANG[2]</th>");
 	    echo("</tr>");
 	}
-        if (is_dir($dirn)){
-	$dirnum++;
-	filetable($dirn);
-	$dirnum--;
-        }else{
-	$fileext=explode('.',$entry);
-	$fileext_name=$fileext[count($fileext)-1];
-	$fileext_name2='.'.$fileext_name;
-	if ((in_array($fileext_name, $DF_FILEEXT))or(in_array($fileext_name2, $DF_FILEEXT))){
+	if (is_dir($dirn)){
+	    $dirnum++;
+	    filetable($dirn,true);
+	    $dirnum--;
+	}else{
+	    $fileext=explode('.',$entry);
+	    $fileext_name=$fileext[count($fileext)-1];
+	    $fileext_name2='.'.$fileext_name;
+	    if ((in_array($fileext_name, $DF_FILEEXT))or(in_array($fileext_name2, $DF_FILEEXT))){
 	    echo("<tr class='df_tr'>");
 	    $fileext_name=strtoupper($fileext_name);
 	    echo("<td class='df_td'><span class='df_tds'>[$fileext_name]</span> ");
@@ -233,8 +250,8 @@ function filetable($dir){
 	    echo(" - <a href='$dir/$entry' download class='df_tda2' onclick='delrow(this);'>$DF_DOWNLOAD_TEXT</a>");
 	    $entry2=$dir.'/'.$entry.$DF_TEXTFILE_EXT;
 	    if (file_exists($entry2)){
-	    echo("<br />");
-	    include($entry2);
+	        echo("<br />");
+	        include($entry2);
 	    }
 	    echo("</td>");
 	    $m=filectime($dir.'/'.$entry);
@@ -244,14 +261,15 @@ function filetable($dir){
 	    $m=formatBytes($m);
 	    echo("<td class='df_td2'>$m</td>");
 	    echo("</tr>");
+	    }
 	}
-        }
-        if (is_dir($dirn)){
-	if ($dirnum==0){
+	if (is_dir($dirn)){
+	    if ($dirnum==0){
 	    echo("</table>");
 	    echo("</center>");
 	    echo("</div>");
 	    echo("</div>");
+	    }
 	}
         }
     }
@@ -267,7 +285,7 @@ if ($DF_LINK_TARGET_NEW_WINDOW){
 
 echo("<div class=df_header>$DF_HEAD_TEXT</div>");
 
-filetable($DF_DIR);
+filetable($DF_DIR,false);
 
 
 ?>
