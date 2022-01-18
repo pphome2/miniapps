@@ -246,8 +246,8 @@ function filetable($dir,$dfok){
 	    echo("<tr class='df_tr'>");
 	    $fileext_name=strtoupper($fileext_name);
 	    echo("<td class='df_td'><span class='df_tds'>[$fileext_name]</span> ");
-	    echo("<a href='$dir/$entry' target='$target' class='df_tda'>$entry</a>");
-	    echo(" - <a href='$dir/$entry' download class='df_tda2' onclick='delrow(this);'>$DF_DOWNLOAD_TEXT</a>");
+	    echo("<a href=\"$dir/$entry\" target='$target' class='df_tda'>$entry</a>");
+	    echo(" - <a href=\"$dir/$entry\" download class='df_tda2' onclick='delrow(this);'>$DF_DOWNLOAD_TEXT</a>");
 	    $entry2=$dir.'/'.$entry.$DF_TEXTFILE_EXT;
 	    if (file_exists($entry2)){
 	        echo("<br />");
