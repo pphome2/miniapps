@@ -27,9 +27,9 @@ function printpage(){
 
 
 function fm_header(){
-	global $FM_TITLE;
+	global $DF_TITLE;
 
-	echo("<header><h3>$FM_TITLE</h3></header>");
+	echo("<header><h3>$DF_TITLE</h3></header>");
 }
 
 
@@ -39,19 +39,19 @@ function fm_footer(){
 
 
 function fm_data(){
-	global $FM_FILEDIR;
+	global $DF_FILEDIR;
 
-	echo("$FM_FILEDIR");
+	#echo("$DF_FILEDIR");
 	echo("<div class=spaceline></div>");
 	echo("<div class=row>");
 	echo("<div class=col3-2>");
 	echo("<div class=box>");
-	fm_dl($FM_FILEDIR,$FM_EXT);
+	fm_dl();
 	echo("</div>");
 	echo("</div>");
 	echo("<div class=col3-1>");
 	echo("<div class=box>");
-	echo("2");
+	fm_up();
 	echo("</div>");
 	echo("</div>");
 	echo("</div>");

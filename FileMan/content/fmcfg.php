@@ -8,7 +8,15 @@
  #
 
 
-$FM_TITLE="Fájlok feltöltése és letöltése";
-$FM_FILEDIR="Raktár";
+$DF_TITLE="Fájlok feltöltése és letöltése";
+$DF_LANG=array('Név','Dátum','Méret');
+$DF_DOWNLOAD_TEXT='Letöltés';
+
+$DF_FILEEXT=array('mp3','mkv','avi','mp4','pdf','epub');
+$DF_FILEDIR="Raktár";
+$DF_DIR='./'.$DF_FILEDIR;
+
+$dirnum=0;
+$cardnum=0;
 
 ?>

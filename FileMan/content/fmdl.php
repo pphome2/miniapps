@@ -7,18 +7,14 @@
  #
  #
 
-    $DF_LANG=array('Név','Dátum','Méret');
-    $DF_DOWNLOAD_TEXT='Letöltés';
-    $DF_FILEEXT=array('jpg','php');
 
-    $DF_DIR='./dir';
-    $DF_TEXTFILE_EXT='.txt';
+function fm_dl(){
+	global $DF_DIR;
 
-    $DF_LINK_TARGET_NEW_WINDOW=false;
-    $table=false;
-    $dirnum=0;
+	ftable($DF_DIR);
+	dirfiletable($DF_DIR);
+}
 
-?>
 
 function formatBytes($size, $precision=2){
     if($size < 0) {
@@ -30,135 +26,91 @@ function formatBytes($size, $precision=2){
 }
 
 
+function filetable($entry){
+	global $DF_FILEEXT,$DF_LANG,$DF_DOWNLOAD_TEXT;
 
-function filetable($dir){
-	global $DF_FILEEXT,$DF_LANG,$DF_TEXTFILE_EXT,$DF_DOWNLOAD_TEXT,$DF_LANG,$table,$dirnum;
-
-	$files=scandir($dir);
+	echo("<table class='df_table_full'>");
+	echo("<tr class='df_trh'>");
+	echo("<th class='df_th1'>$DF_LANG[0]</th>");
+	echo("<th class='df_th2'>$DF_LANG[1]</th>");
+	echo("<th class='df_th2'>$DF_LANG[2]</th>");
+	echo("</tr>");
+	$files=scandir($entry);
 	asort($files);
-	$fdb=0;
-	$dirnum++;
-	foreach ($files as $entry) {
-		if ($entry!="." && $entry!=".." && $entry!="lost+found") {
-			$dirn=$dir.'/'.$entry;
-			if (is_dir($dirn)){
-				echo('
-					<div class="df-card">
-						<div class="df-card-header" onclick="cardclose(dfcardbody'.$dirnum.',dfcardright'.$dirnum.')"id="dfardheader'.$dirnum.'">
-							<span class="df-topleftmenu1">
-								'.$entry.'
-							</span>
-							<span class="df-topright" id="dfcardright'.$dirnum.'">
-								+
-							</span>
-						</div>
-						<div class="df-card-body" id="dfcardbody'.$dirnum.'" style="display:none;">
-				');
-				echo("<table class='df_table_full'>");
-				echo("<tr class='df_trh'>");
-				echo("<th class='df_th1'>$DF_LANG[0]</th>");
-				echo("<th class='df_th2'>$DF_LANG[1]</th>");
-				echo("<th class='df_th2'>$DF_LANG[2]</th>");
-				echo("</tr>");
-				$table=true;
-				filetable($dirn);
-				$table=false;
-			}else{
-				if (!$table){
-					$dn=explode('/',$dir);
-					$s=count($dn)-1;
-					$dirx=$dn[$s];
-					echo('
-						<div class="df-card">
-							<div class="df-card-header" onclick="cardclose(dfcardbody'.$dirnum.',dfcardright'.$dirnum.')"id="dfardheader'.$dirnum.'">
-							<span class="df-topleftmenu1">
-								'.$entry.'
-							</span>
-							<span class="df-topright" id="dfcardright'.$dirnum.'">
-								+
-							</span>
-							</div>
-							<div class="df-card-body" id="dfcardbody'.$dirnum.'" style="display:none;">
-					');
-					echo("<table class='df_table_full'>");
-					echo("<tr class='df_trh'>");
-					echo("<th class='df_th1'>$DF_LANG[0]</th>");
-					echo("<th class='df_th2'>$DF_LANG[1]</th>");
-					echo("<th class='df_th2'>$DF_LANG[2]</th>");
-					echo("</tr>");
-					$table=true;
-				}
-			}
-			$fileext=explode('.',$entry);
-			$fileext_name=$fileext[count($fileext)-1];
-			$fileext_name2='.'.$fileext_name;
-			if ((in_array($fileext_name, $DF_FILEEXT))or(in_array($fileext_name2, $DF_FILEEXT))){
-				echo("<tr class='df_tr'>");
-				$fileext_name=strtoupper($fileext_name);
-				echo("<td class='df_td'><span class='df_tds'>[$fileext_name]</span> ");
-				echo("<a href='$dir/$entry' target='$target' class='df_tda'>$entry</a>");
-				echo(" - <a href='$dir/$entry' download class='df_tda2' onclick='delrow(this);'>$DF_DOWNLOAD_TEXT</a>");
-				$entry2=$dir.'/'.$entry.$DF_TEXTFILE_EXT;
-				if (file_exists($entry2)){
-					echo("<br />");
-					include($entry2);
-				}
-				echo("</td>");
-				$m=filectime($dir.'/'.$entry);
-				$m=gmdate("Y.m.d", $m);
-				echo("<td class='df_td2'>$m</td>");
-				$m=filesize($dir.'/'.$entry);
-				$m=formatBytes($m);
-				echo("<td class='df_td2'>$m</td>");
-				echo("</tr>");
-			}
+	foreach ($files as $e){
+		if (($e!=".") && ($e!="..") && !is_dir($entry.'/'.$e)){
+			echo("<tr class='df_tr'>");
+			$fe=explode('.',$e);
+			$i=count($fe)-1;
+			$fileext_name=$fe[$i];
+			$fileext_name=strtoupper($fileext_name);
+			echo("<td class='df_td'><span class='df_tds'>[$fileext_name]</span> ");
+			echo("<a href=\"$dir/$entry\" target='$target' class='df_tda'>$e</a>");
+			echo(" - <a href=\"$entry/$e\" download class='df_tda2' onclick='delrow(this);'>$DF_DOWNLOAD_TEXT</a>");
+			echo("</td>");
+			$m=filectime($entry.'/'.$e);
+			$m=gmdate("Y.m.d", $m);
+			echo("<td class='df_td2'>$m</td>");
+			$m=filesize($entry.'/'.$e);
+			$m=formatBytes($m);
+			echo("<td class='df_td2'>$m</td>");
+			echo("</tr>");
 		}
 	}
-	if ($table){
-		echo("</table>");
-		echo("</center>");
-		echo("</div>");
-		echo("</div>");
-	}
-
+	echo("</table>");
+	echo("</center>");
 }
 
 
-if ($DF_LINK_TARGET_NEW_WINDOW){
-    $target="_blank";
-}else{
-    $target="";
+function ftable($dir){
+	global $cardnum;
+
+	$cardnum++;
+	$dn=basename($dir);
+	echo('
+		<div class="df-card">
+		<div class="df-card-header" id="dfardheader'.$cardnum.'">
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
+			'.$dn.'
+		</span>
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
+			+
+		</span>
+		</div>
+		<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
+	');
+	filetable($dir);
+	echo("</div>");
+	echo("</div>");
 }
 
 
-filetable($DF_DIR);
+function dirfiletable($dir){
+	global $cardnum;
 
-
-?>
-
-</div>
-
-<script>
-    function delrow(obj){
-		obj2=obj.parentNode;
-		obj2.parentNode.style.display='none';
-    }
-
-	function cardclose(th,th2){
-		if (th.style.display=='none'){
-			th.style.display='block';
-			th2.innerHTML=' -- ';
-		} else {
-			th.style.display='none';
-			th2.innerHTML=' + ';
-		}
+	$dirs=glob("$dir/*",GLOB_ONLYDIR);
+	asort($dirs);
+	foreach ($dirs as $entry) {
+		$cardnum++;
+		$entryname=basename($entry);
+		echo('
+			<div class="df-card">
+			<div class="df-card-header" id="dfardheader'.$cardnum.'">
+			<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
+				'.$entryname.'
+			</span>
+			<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
+				+
+			</span>
+			</div>
+			<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
+		');
+		filetable($entry);
+		echo("</div>");
+		echo("</div>");
+		dirfiletable($entry);
 	}
-</script>
-
-
-</body>
-</html>
-
+}
 
 
 ?>

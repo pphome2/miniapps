@@ -7,6 +7,10 @@
  #
  #
 
+function fm_up(){
+	global $DF_FILEDIR;
 
+	echo("$DF_FILEDIR");
+}
 
 ?>
