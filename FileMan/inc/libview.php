@@ -33,7 +33,7 @@ function button_print(){
 # messages functions
 function mess_error($m){
 	echo('
-		<div class="message_error">
+		<div class="message_error" name="sysmessage" id="sysmessage">
 			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
 				<p class="insidecontent">'.$m.'</p>
 			</div>
@@ -44,7 +44,7 @@ function mess_error($m){
 
 function mess_ok($m){
 	echo('
-		<div class="message_ok">
+		<div class="message_ok" name="sysmessage" id="sysmessage">
 			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
 				<p class="insidecontent">'.$m.'</p>
 			</div>

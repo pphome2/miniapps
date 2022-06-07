@@ -51,6 +51,7 @@ $MA_APPFILE=array(
 				"$MA_CONTENT_DIR/fmcfg.php",
 				"$MA_CONTENT_DIR/fmdl.php",
 				"$MA_CONTENT_DIR/fmup.php",
+				"$MA_CONTENT_DIR/fmadmin.php",
 				"$MA_CONTENT_DIR/fm.php"
 			);
 $MA_APPCSSFILE="$MA_CONTENT_DIR/fm.css";

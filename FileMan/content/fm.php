@@ -1,14 +1,11 @@
 <?php
 
  #
- # MiniApp - demo
+ # MiniApp - FileMan
  #
  # info: main folder copyright file
  #
  #
-
-
-
 
 
 function searchpage(){
@@ -39,9 +36,7 @@ function fm_footer(){
 
 
 function fm_data(){
-	global $DF_FILEDIR;
-
-	#echo("$DF_FILEDIR");
+	fm_admin();
 	echo("<div class=spaceline></div>");
 	echo("<div class=row>");
 	echo("<div class=col3-2>");
@@ -60,11 +55,7 @@ function fm_data(){
 
 function main(){
 	fm_header();
-	if (isset($_GET['i'])){
-		fm_data();
-	}else{
-		fm_data();
-	}
+	fm_data();
 	fm_footer();
 }
 

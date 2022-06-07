@@ -14,4 +14,11 @@ if ($MA_LOGGEDIN){
 }
 ?>
 
+setTimeout(function(){
+  var myId = document.getElementById("sysmessage");
+    if(myId){
+        myId.style.display = "none";
+    }
+}, 10000);
+
 </script>
