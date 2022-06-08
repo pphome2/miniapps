@@ -28,7 +28,8 @@ function formatBytes($size, $precision=2){
 
 
 function filetable($entry){
-	global $DF_FILEEXT,$DF_LANG,$DF_DOWNLOAD_TEXT,$DF_USE_FILEEXT;
+	global $DF_FILEEXT,$DF_LANG,$DF_DOWNLOAD_TEXT,$DF_USE_FILEEXT,
+			$D_EXCLUDEDIR;
 
 	echo("<table class='df_table_full'>");
 	echo("<tr class='df_trh'>");
@@ -97,28 +98,30 @@ function ftable($dir){
 
 
 function dirfiletable($dir){
-	global $cardnum;
+	global $cardnum,$DF_EXCLUDEDIR;
 
 	$dirs=glob("$dir/*",GLOB_ONLYDIR);
 	asort($dirs);
 	foreach ($dirs as $entry) {
-		$cardnum++;
 		$entryname=basename($entry);
-		echo('
-			<div class="df-card">
-			<div class="df-card-header" id="dfardheader'.$cardnum.'">
-			<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
-				'.$entryname.'
-			</span>
-			<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
-				+
-			</span>
-			</div>
-			<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
-		');
-		filetable($entry);
-		echo("</div>");
-		echo("</div>");
+		if (!in_array($entryname,$DF_EXCLUDEDIR)){
+			$cardnum++;
+			echo('
+				<div class="df-card">
+				<div class="df-card-header" id="dfardheader'.$cardnum.'">
+				<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
+					'.$entryname.'
+				</span>
+				<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
+					+
+				</span>
+				</div>
+				<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
+			');
+			filetable($entry);
+			echo("</div>");
+			echo("</div>");
+		}
 		dirfiletable($entry);
 	}
 }

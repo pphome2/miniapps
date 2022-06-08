@@ -10,7 +10,7 @@
 function fm_up(){
 	global $DF_DIR,$DF_FILEDIR,$DF_UPFILE,$DF_NEWDIR,$DF_DELDIR,$DF_DIRNAME,
 			$DF_BUTTON_TEXT,$DF_SECTIONCREATE,$DF_OK,$DF_ERROR,$DF_SECTIONDELETE,
-			$DF_SECTIONUPFILE,$DF_SECTIONDELFILE,$DF_DELFILE;
+			$DF_SECTIONUPFILE,$DF_SECTIONDELFILE,$DF_DELFILE,$DF_EXCLUDEDIR;
 
 	echo("$DF_FILEDIR");
 	$cardnum=1000;
@@ -37,7 +37,7 @@ function fm_up(){
 	for ($i=0;$i<$db;$i++){
 		$tn=explode("/",$dirs[$i]);
 		$le=count($tn)-1;
-		if ($tn[$le]<>""){
+		if (($tn[$le]<>"")and(!in_array($tn[$le],$DF_EXCLUDEDIR))){
 			echo("<option>$tn[$le]");
 		}
 	}
@@ -89,7 +89,7 @@ function fm_up(){
 	for ($i=0;$i<$db;$i++){
 		$tn=explode("/",$dirs[$i]);
 		$le=count($tn)-1;
-		if ($tn[$le]<>""){
+		if (($tn[$le]<>"")and(!in_array($tn[$le],$DF_EXCLUDEDIR))){
 			echo("<option>$tn[$le]");
 		}
 	}
@@ -125,18 +125,27 @@ function fm_up(){
 }
 
 function fm_dirs($dir){
+	global $DF_EXCLUDEDIR;
+
 	$filelist=scandir($dir);
 	asort($filelist);
 	$db=count($filelist);
 	for ($i=0;$i<$db;$i++){
 		if (is_dir($filelist[$i])){
-			if (($filelist[$i]<>".")and($filelist[$i]<>"..")){
+			if (($filelist[$i]<>".")and($filelist[$i]<>"..")
+				and(!in_array($filelist[$i],$DF_EXCLUDEDIR))){
 				$dir2=$dir."/".$filelist[$i];
 				fm_dirs($dir2);
 			}
 		}else{
-			$fn=$dir."/".$filelist[$i];
-			echo("<option>$fn");
+			if (!in_array($filelist[$i],$DF_EXCLUDEDIR)){
+				$fn=$dir."/".$filelist[$i];
+				if (!is_dir($fn)){
+					echo("<option>$fn");
+				}else{
+					fm_dirs($fn);
+				}
+			}
 		}
 	}
 }

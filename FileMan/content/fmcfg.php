@@ -10,6 +10,7 @@
 $DF_USE_FILEEXT=true;
 $DF_FILEEXT=array('mp3','mkv','avi','mp4','pdf','epub');
 $DF_FILEDIR="Raktár";
+$DF_EXCLUDEDIR=array('seccam');
 $DF_DIR='./'.$DF_FILEDIR;
 
 
