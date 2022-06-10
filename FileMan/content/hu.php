@@ -9,7 +9,7 @@
 
 
 $DF_TITLE="Fájlok feltöltése és letöltése";
-$DF_LANG=array('Név','Dátum','Méret');
+$DF_TABLEHEADER=array('Név','Dátum','Méret');
 $DF_DOWNLOAD_TEXT='Letöltés';
 
 $DF_UPFILE="Fájl feltöltése";
@@ -18,6 +18,7 @@ $DF_DELDIR="Tároló törlése";
 $DF_DELFILE="Fájl törlése";
 $DF_BUTTON_TEXT="Mehet";
 $DF_DIRNAME="Tároló neve";
+$DF_FILESELECT="Fájl kiválasztása";
 
 $DF_OK="megtörtént";
 $DF_ERROR="hiba történt";
@@ -25,6 +26,6 @@ $DF_ERROR="hiba történt";
 $DF_SECTIONCREATE="Tároló létrehozása";
 $DF_SECTIONDELETE="Tároló és tartalmának törlése";
 $DF_SECTIONUPFILE="Fájl feltöltése tárolóba";
-$DF_SECTION_DELFILE="Fájl törlése a tárolókból";
+$DF_SECTIONDELFILE="Fájl törlése a tárolókból";
 
 ?>

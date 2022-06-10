@@ -40,7 +40,7 @@ function fm_admin(){
 						}
 					}
 				}
-				
+
 			}
 			if (rmdir($fn)){
 				mess_ok($DF_SECTIONDELETE.": ".$DF_OK.".");

@@ -151,16 +151,20 @@ li:last-child {
 .topright, .toprightclose {
 	text-decoration:none;
 	position:absolute;
-	right:5px;
-	top:15px;
-	padding:10px;
+	right:10px;
+	top:10px;
+	bottom:10px;
+	padding:0px;
+	text-decoration:bolder;
 	font-size:1em;
 	color:white;
 }
 
+
 .toprightclose:after {
 	content:"\274C";
 }
+
 
 .topleftmenu1:before {
 	content:"\2630";
@@ -186,12 +190,13 @@ li:last-child {
 	display:block;
 	cursor:default;
 	clear:both;
-	margin-top:20px;
-	margin-bottom:20px;
-	box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+	margin-top:15px;
+	margin-bottom:15px;
+	border-radius: 5px;
+	box-shadow:1px 1px 1px 1px rgb(128,128,128),1px 1px 1px 1px rgb(211,211,211);
 }
 .card-header {
-	padding:10px 10px 10px 10px;
+	padding:5px;
 	background-color:#2196F3;
 	color:white;
 	font-size:1.3em;
@@ -405,26 +410,28 @@ input[type=submit]:hover {
 	width:50%;
 	float:left;
 	padding:0px;
+	margin:0px;
 }
 
 .col3{
 	width:33.3%;
 	float:left;
 	padding:0px;
-	text-align:center;
+	margin:0px;
 }
 
 .col4{
 	width:25%;
 	float:left;
 	padding:0px;
-	text-align:center;
+	margin:0px;
 }
 
 .col5{
 	width:20%;
 	float:left;
 	padding:0px;
+	margin:0px;
 }
 
 .col3-2{
@@ -435,7 +442,7 @@ input[type=submit]:hover {
 }
 
 .col3-1{
-	width:33.3%;
+	width:33%;
 	float:left;
 	padding:0px;
 	margin:0px;

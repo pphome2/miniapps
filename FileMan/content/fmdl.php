@@ -8,6 +8,7 @@
  #
 
 $cardnum=0;
+$tablenum=0;
 
 function fm_dl(){
 	global $DF_DIR;
@@ -27,16 +28,56 @@ function formatBytes($size, $precision=2){
 }
 
 
+function namecheck($name){
+    global $DF_NAMELENGTH;
+
+    $name=substr($name,0,$DF_NAMELENGTH);
+    return($name);
+}
+
+
+function filetheader(){
+	global $DF_TABLEHEADER,$DF_COMPACTDIR,$tablenum;
+
+    if ($DF_COMPACTDIR){
+        if ($tablenum==0){
+            echo("<table class='df_table_full'>");
+	        echo("<tr class='df_trh'>");
+    	    echo("<th class='df_th1'>$DF_TABLEHEADER[0]</th>");
+    	    echo("<th class='df_th2'>$DF_TABLEHEADER[1]</th>");
+        	echo("<th class='df_th2'>$DF_TABLEHEADER[2]</th>");
+	        echo("</tr>");
+	    }
+    	$tablenum++;
+    }else{
+        echo("<table class='df_table_full'>");
+        echo("<tr class='df_trh'>");
+    	echo("<th class='df_th1'>$DF_TABLEHEADER[0]</th>");
+    	echo("<th class='df_th2'>$DF_TABLEHEADER[1]</th>");
+        echo("<th class='df_th2'>$DF_TABLEHEADER[2]</th>");
+	    echo("</tr>");
+    }
+}
+
+
+function filetfooter(){
+	global $tablenum,$DF_COMPACTDIR;
+
+    $tablenum--;
+    if ($DF_COMPACTDIR){
+        if ($tablenum==0){
+            echo("</table>");
+        }
+    }else{
+        echo("</table>");
+    }
+}
+
+
 function filetable($entry){
-	global $DF_FILEEXT,$DF_LANG,$DF_DOWNLOAD_TEXT,$DF_USE_FILEEXT,
+	global $DF_FILEEXT,$DF_DOWNLOAD_TEXT,$DF_USE_FILEEXT,
 			$D_EXCLUDEDIR;
 
-	echo("<table class='df_table_full'>");
-	echo("<tr class='df_trh'>");
-	echo("<th class='df_th1'>$DF_LANG[0]</th>");
-	echo("<th class='df_th2'>$DF_LANG[1]</th>");
-	echo("<th class='df_th2'>$DF_LANG[2]</th>");
-	echo("</tr>");
 	$files=scandir($entry);
 	asort($files);
 	foreach ($files as $e){
@@ -55,8 +96,9 @@ function filetable($entry){
 			}
 			if ($ok){
 				$fileext_name=strtoupper($fileext_name);
+				$en=namecheck($e);
 				echo("<td class='df_td'><span class='df_tds'>[$fileext_name]</span> ");
-				echo("<a href=\"$dir/$entry\" class='df_tda'>$e</a>");
+				echo("<a href=\"$dir/$entry\" class='df_tda'>$en</a>");
 				echo(" - <a href=\"$entry/$e\" download class='df_tda2' onclick='delrow(this);'>$DF_DOWNLOAD_TEXT</a>");
 				echo("</td>");
 				$m=filectime($entry.'/'.$e);
@@ -69,8 +111,6 @@ function filetable($entry){
 			}
 		}
 	}
-	echo("</table>");
-	echo("</center>");
 }
 
 
@@ -79,50 +119,80 @@ function ftable($dir){
 
 	$cardnum++;
 	$dn=basename($dir);
+	$dn=namecheck($dn);
 	echo('
-		<div class="df-card">
-		<div class="df-card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
+		<div class="card">
+		<div class="card-header" id="dfardheader'.$cardnum.'">
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
 			'.$dn.'
 		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
-			+
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
+			&#65088;
 		</span>
 		</div>
-		<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
+		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
 	');
+  	filetheader();
 	filetable($dir);
+	filetfooter();
 	echo("</div>");
 	echo("</div>");
 }
 
 
 function dirfiletable($dir){
-	global $cardnum,$DF_EXCLUDEDIR;
+	global $cardnum,$DF_EXCLUDEDIR,$DF_COMPACTDIR;
 
 	$dirs=glob("$dir/*",GLOB_ONLYDIR);
 	asort($dirs);
 	foreach ($dirs as $entry) {
 		$entryname=basename($entry);
 		if (!in_array($entryname,$DF_EXCLUDEDIR)){
-			$cardnum++;
-			echo('
-				<div class="df-card">
-				<div class="df-card-header" id="dfardheader'.$cardnum.'">
-				<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
-					'.$entryname.'
-				</span>
-				<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
-					+
-				</span>
-				</div>
-				<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
-			');
+		    $cardnum++;
+        	$entryname=namecheck($entryname);
+	    	echo('
+    			<div class="card">
+  				<div class="card-header" id="dfardheader'.$cardnum.'">
+		    	<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
+	    			'.$entryname.'
+    			</span>
+  				<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
+			    	&#65088;
+		    	</span>
+	    		</div>
+    			<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
+  			');
+  			filetheader();
 			filetable($entry);
-			echo("</div>");
-			echo("</div>");
+			if (!$DF_COMPACTDIR){
+            	filetfooter();
+  	    		echo("</div>");
+        		echo("</div>");
+    		}
 		}
-		dirfiletable($entry);
+		if ($DF_COMPACTDIR){
+		    dirfiletablecompact($entry);
+        	filetfooter();
+        	echo("</div>");
+            echo("</div>");
+		}else{
+		    dirfiletable($entry);
+		}
+	}
+}
+
+
+function dirfiletablecompact($dir){
+	global $DF_EXCLUDEDIR;
+
+	$dirs=glob("$dir/*",GLOB_ONLYDIR);
+	asort($dirs);
+	foreach ($dirs as $entry) {
+		$entryname=basename($entry);
+		if (!in_array($entryname,$DF_EXCLUDEDIR)){
+			filetable($entry);
+		}
+        dirfiletablecompact($entry);
 	}
 }
 

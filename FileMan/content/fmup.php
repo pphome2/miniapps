@@ -10,23 +10,24 @@
 function fm_up(){
 	global $DF_DIR,$DF_FILEDIR,$DF_UPFILE,$DF_NEWDIR,$DF_DELDIR,$DF_DIRNAME,
 			$DF_BUTTON_TEXT,$DF_SECTIONCREATE,$DF_OK,$DF_ERROR,$DF_SECTIONDELETE,
-			$DF_SECTIONUPFILE,$DF_SECTIONDELFILE,$DF_DELFILE,$DF_EXCLUDEDIR;
+			$DF_SECTIONUPFILE,$DF_SECTIONDELFILE,$DF_DELFILE,$DF_EXCLUDEDIR,
+			$DF_FILESELECT;
 
 	echo("$DF_FILEDIR");
 	$cardnum=1000;
 
 	$cardnum++;
 	echo('
-		<div class="df-card">
-		<div class="df-card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
+		<div class="card">
+		<div class="card-header" id="dfardheader'.$cardnum.'">
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
 			'.$DF_UPFILE.'
 		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
-			+
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
+			&#65088;
 		</span>
 		</div>
-		<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
+		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
 	');
 	echo($DF_SECTIONUPFILE);
 	echo("<form  method='post' enctype='multipart/form-data'>");
@@ -38,11 +39,15 @@ function fm_up(){
 		$tn=explode("/",$dirs[$i]);
 		$le=count($tn)-1;
 		if (($tn[$le]<>"")and(!in_array($tn[$le],$DF_EXCLUDEDIR))){
-			echo("<option>$tn[$le]");
+			echo("<option>$tn[$le]</option>");
 		}
 	}
 	echo("</select>");
-	echo("<input type='file' name='filename' id='filename'>");
+	#echo("<input type='file' name='filename' id='filename'>");
+	echo("<div class='upload-btn-wrapper'>");
+	echo("<input type='file' name=filename id=filename  />");
+	echo("<label for=fileupload class='upload-btn'>$DF_FILESELECT</label>");
+	echo("</div>");
 	echo("<input type='submit' value='$DF_BUTTON_TEXT' name='submitup'>");
 	echo("</form>");
 	echo("</div>");
@@ -50,16 +55,16 @@ function fm_up(){
 
 	$cardnum++;
 	echo('
-		<div class="df-card">
-		<div class="df-card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
+		<div class="card">
+		<div class="card-header" id="dfardheader'.$cardnum.'">
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
 			'.$DF_NEWDIR.'
 		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
-			+
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
+			&#65088;
 		</span>
 		</div>
-		<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
+		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
 	');
 	echo("<form  method='post' enctype='multipart/form-data'>");
 	echo("<input type='text' name='new' id='new' placeholder='$DF_DIRNAME' autofocus>");
@@ -70,16 +75,16 @@ function fm_up(){
 
 	$cardnum++;
 	echo('
-		<div class="df-card">
-		<div class="df-card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
+		<div class="card">
+		<div class="card-header" id="dfardheader'.$cardnum.'">
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
 			'.$DF_DELDIR.'
 		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
-			+
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
+			&#65088;
 		</span>
 		</div>
-		<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
+		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
 	');
 	echo($DF_SECTIONDELETE);
 	echo("<form  method='post' enctype='multipart/form-data'>");
@@ -90,7 +95,7 @@ function fm_up(){
 		$tn=explode("/",$dirs[$i]);
 		$le=count($tn)-1;
 		if (($tn[$le]<>"")and(!in_array($tn[$le],$DF_EXCLUDEDIR))){
-			echo("<option>$tn[$le]");
+			echo("<option>$tn[$le]</option>");
 		}
 	}
 	echo("</select>");
@@ -101,16 +106,16 @@ function fm_up(){
 
 	$cardnum++;
 	echo('
-		<div class="df-card">
-		<div class="df-card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topleftmenu1">
+		<div class="card">
+		<div class="card-header" id="dfardheader'.$cardnum.'">
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
 			'.$DF_DELFILE.'
 		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="df-topright" id="dfcardright'.$cardnum.'">
-			+
+		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
+			&#65088;
 		</span>
 		</div>
-		<div class="df-card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
+		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
 	');
 	echo($DF_SECTIONDELFILE);
 	echo("<form  method='post' enctype='multipart/form-data'>");
@@ -125,7 +130,7 @@ function fm_up(){
 }
 
 function fm_dirs($dir){
-	global $DF_EXCLUDEDIR;
+	global $DF_EXCLUDEDIR,$DF_NAMELENGTH;
 
 	$filelist=scandir($dir);
 	asort($filelist);
@@ -141,7 +146,13 @@ function fm_dirs($dir){
 			if (!in_array($filelist[$i],$DF_EXCLUDEDIR)){
 				$fn=$dir."/".$filelist[$i];
 				if (!is_dir($fn)){
-					echo("<option>$fn");
+				    if (strlen($fn)>$DF_NAMELENGTH){
+                        $fndn=basename($fn);
+                        $fnd=substr($fn,0,$DF_NAMELENGTH)." ... ".substr($fndn,0,$DF_NAMELENGTH);
+                    }else{
+                        $fnd=$fn;
+                    }
+					echo("<option value=$fn>$fnd</option>");
 				}else{
 					fm_dirs($fn);
 				}
