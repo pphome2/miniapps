@@ -9,17 +9,23 @@
 
 
 function searchpage(){
-	echo("search page");
+	global $DF_TITLE;
+
+	echo("<header><h3>$DF_TITLE</h3></header>");
 }
 
 
 function privacypage(){
-	echo("privacy page");
+	global $DF_TITLE;
+
+	echo("<header><h3>$DF_TITLE</h3></header>");
 }
 
 
 function printpage(){
-	echo("print page");
+	global $DF_TITLE;
+
+	echo("<header><h3>$DF_TITLE</h3></header>");
 }
 
 
@@ -30,15 +36,22 @@ function fm_header(){
 }
 
 
+function fm_header_view(){
+	global $DF_TITLE_VIEW;
+
+	echo("<header><h3>$DF_TITLE_VIEW</h3></header>");
+}
+
+
 function fm_footer(){
-	echo("<header></header>");
+	echo("<footer></footer>");
 }
 
 
 function fm_data(){
 	fm_admin();
 	echo("<div class=spaceline></div>");
-	echo("<div class=row>");
+	echo("<div class=row100>");
 	echo("<div class=col3-2>");
 	echo("<div class=box>");
 	fm_dl();
@@ -53,9 +66,23 @@ function fm_data(){
 	echo("<div class=spaceline></div>");
 }
 
+function fm_view(){
+	echo("<div class=spaceline></div>");
+	echo("<div class=content>");
+	fm_dl();
+	echo("</div>");
+	echo("<div class=spaceline></div>");
+}
+
 function main(){
 	fm_header();
 	fm_data();
+	fm_footer();
+}
+
+function view(){
+	fm_header_view();
+	fm_view();
 	fm_footer();
 }
 

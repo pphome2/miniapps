@@ -9,13 +9,35 @@
 
 
 
+# load plugins
+function plugins(){
+    global $MA_PLUGINS;
+
+    for($i=0;$i<count($MA_PLUGINS);$i++){
+        $fnx=basename($MA_PLUGINS[$i]);
+        $fn=$MA_PLUGINS[$i].'/'.$fnx.'.php';
+        if (file_exists($fn)){
+            include($fn);
+        }
+        $fn=$MA_PLUGINS[$i].'/'.$fnx.'.css';
+        if (file_exists($fn)){
+            include($fn);
+        }
+        $fn=$MA_PLUGINS[$i].'/'.$fnx.'.js';
+        if (file_exists($fn)){
+            include($fn);
+        }
+    }
+}
+
+
 # login from cookie or param
 function login(){
 	global $MA_LOGGEDIN,$MA_LOGIN_TIME,$MA_PASSWORD,$MA_ENABLE_COOKIES,$MA_COOKIE_PASSWORD,
 			$MA_USER_PASS,$MA_ADMIN_PASS,$MA_ADMIN_USER,$MA_LOGIN_TIME,$MA_LOGIN_TIMEOUT,
 			$MA_COOKIE_TIME,$MA_ENABLE_USERNAME,$MA_USERS_CRED,$MA_USER,$MA_USERS_ADMINUSERS,
 			$MA_COOKIE_USER;
-	
+
 	$MA_LOGGEDIN=false;
 	$MA_LOGIN_TIME=time();
 	$MA_PASSWORD="";
@@ -64,7 +86,7 @@ function login(){
 				}
 			}
 		}
-		
+
 	}else{
 		if ($MA_ENABLE_COOKIES){
 			$MA_PASSWORD=$_COOKIE[$MA_COOKIE_PASSWORD];
@@ -115,7 +137,7 @@ function login(){
 			setcookie($MA_COOKIE_USER, "", time() - 3600);
 		}
 	}
-	
+
 	# admin
 	if ($MA_LOGGEDIN){
 		if (in_array($MA_USER,$MA_USERS_ADMINUSERS)){
@@ -129,7 +151,7 @@ function login(){
 # cookies or param
 function setcss(){
 	global $MA_ENABLE_COOKIES,$MA_STYLEINDEX,$MA_COOKIE_STYLE,$MA_CSS;
-	
+
 	if ($MA_ENABLE_COOKIES){
 		$MA_STYLEINDEX=intval(vinput($_COOKIE[$MA_COOKIE_STYLE]));
 	}else{
@@ -152,7 +174,7 @@ function setcss(){
 
 # page header
 function page_header(){
-	global $MA_HEADER,$MA_JS_BEGIN,$MA_CSS,$MA_STYLEINDEX,$MA_SITENAME,$MA_SITE_HOME,$MA_CSS,
+	global $MA_HEADER,$MA_JS_BEGIN,$MA_CSS,$MA_STYLEINDEX,$MA_SITENAME,$MA_SITE_HOME,
 			$L_SITEHOME,$MA_ENABLE_COOKIES,$MA_ADMINFILE,$L_MTHOME,$MA_COOKIE_STYLE,
 			$MA_MENU,$MA_MENU_FIELD,$MA_LOGGEDIN,$MA_COOKIE_PASSWORD,$L_LOGOUT,
 			$MA_SEARCH_ICON_HREF,$MA_SEARCH_ICON_JS,$MA_LOGOUT_IN_HEADER,$L_SITENAME,
@@ -180,6 +202,33 @@ function page_footer(){
 	}
 	if (file_exists("$MA_FOOTER")){
 		include("$MA_FOOTER");
+	}
+}
+
+
+# page header view
+function page_header_view(){
+	global $MA_HEADER_VIEW,$MA_JS_BEGIN,$MA_CSS,$MA_STYLEINDEX,$MA_SITENAME,
+			$L_SITENAME,$MA_APPCSSFILE,$MA_ENABLE_HEADER,$MA_NOPAGE;
+
+	if (file_exists("$MA_HEADER_VIEW")){
+		include("$MA_HEADER_VIEW");
+	}
+	if (file_exists("$MA_JS_BEGIN")){
+		include("$MA_JS_BEGIN");
+	}
+}
+
+
+# page footer
+function page_footer_view(){
+	global $MA_JS_END,$MA_FOOTER_VIEW,$MA_ENABLE_FOOTER,$MA_NOPAGE;
+
+	if (file_exists("$MA_JS_END")){
+		include("$MA_JS_END");
+	}
+	if (file_exists("$MA_FOOTER_VIEW")){
+		include("$MA_FOOTER_VIEW");
 	}
 }
 

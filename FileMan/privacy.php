@@ -28,11 +28,8 @@ setcss();
 # page build
 page_header();
 
-
-
 # privacy data to screen
-
-$MA_NOPAGE=true;
+#$MA_NOPAGE=true;
 
 for ($i=0;$i<count($MA_APPFILE);$i++){
 	if (file_exists("$MA_APPFILE[$i]")){
@@ -47,12 +44,8 @@ if (function_exists("privacypage")){
 
 button_back();
 
-# end
-
-
-
 # page end
 page_footer();
-	
+
 
 ?>

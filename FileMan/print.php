@@ -20,20 +20,18 @@ for ($i=0;$i<count($MA_LIB);$i++){
 }
 
 
-# build page
-echo("<html>");
-echo("<head>");
-echo("<title>$MA_SITENAME</title><style>");
-include("$MA_CSSPRINT");
-echo("</style>");
-echo("<head>");
-echo("<body onclick=\"window.close();\">");
-
-
-# load local app file
-
 $MA_NOPAGE=true;
 
+# build page
+page_header_view();
+if (file_exists($MA_CSSPRINT)){
+    echo("<style>");
+    include("$MA_CSSPRINT");
+    echo("</style>");
+}
+echo("<body onclick=\"window.close();\">");
+
+# load local app file
 for ($i=0;$i<count($MA_APPFILE);$i++){
 	if (file_exists("$MA_APPFILE[$i]")){
 		include("$MA_APPFILE[$i]");
@@ -48,7 +46,6 @@ if (function_exists("printpage")){
 
 echo("<script>window.print();</script>");
 
-echo("</body>");
-echo("</html>");
+page_footer_view();
 
 ?>

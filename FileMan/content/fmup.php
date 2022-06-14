@@ -17,18 +17,7 @@ function fm_up(){
 	$cardnum=1000;
 
 	$cardnum++;
-	echo('
-		<div class="card">
-		<div class="card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
-			'.$DF_UPFILE.'
-		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
-			&#65088;
-		</span>
-		</div>
-		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
-	');
+	cards_new($DF_UPFILE);
 	echo($DF_SECTIONUPFILE);
 	echo("<form  method='post' enctype='multipart/form-data'>");
 	echo("<select name='dirn' id='dirn'>");
@@ -50,42 +39,18 @@ function fm_up(){
 	echo("</div>");
 	echo("<input type='submit' value='$DF_BUTTON_TEXT' name='submitup'>");
 	echo("</form>");
-	echo("</div>");
-	echo("</div>");
+	cards_close();
 
 	$cardnum++;
-	echo('
-		<div class="card">
-		<div class="card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
-			'.$DF_NEWDIR.'
-		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
-			&#65088;
-		</span>
-		</div>
-		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
-	');
+	cards_new($DF_NEWDIR);
 	echo("<form  method='post' enctype='multipart/form-data'>");
 	echo("<input type='text' name='new' id='new' placeholder='$DF_DIRNAME' autofocus>");
 	echo("<input type='submit' value='$DF_BUTTON_TEXT' name='submitnew'>");
 	echo("</form>");
-	echo("</div>");
-	echo("</div>");
+	cards_close();
 
 	$cardnum++;
-	echo('
-		<div class="card">
-		<div class="card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
-			'.$DF_DELDIR.'
-		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
-			&#65088;
-		</span>
-		</div>
-		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
-	');
+	cards_new($DF_DELDIR);
 	echo($DF_SECTIONDELETE);
 	echo("<form  method='post' enctype='multipart/form-data'>");
 	echo("<select name='del' id='del'>");
@@ -101,22 +66,10 @@ function fm_up(){
 	echo("</select>");
 	echo("<input type='submit' value='$DF_BUTTON_TEXT' name='submitdel'>");
 	echo("</form>");
-	echo("</div>");
-	echo("</div>");
+	cards_close();
 
 	$cardnum++;
-	echo('
-		<div class="card">
-		<div class="card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
-			'.$DF_DELFILE.'
-		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
-			&#65088;
-		</span>
-		</div>
-		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
-	');
+	cards_new($DF_DELFILE);
 	echo($DF_SECTIONDELFILE);
 	echo("<form  method='post' enctype='multipart/form-data'>");
 	echo("<select name='delfile' id='delfile'>");
@@ -124,8 +77,7 @@ function fm_up(){
 	echo("</select>");
 	echo("<input type='submit' value='$DF_BUTTON_TEXT' name='submitdelfile'>");
 	echo("</form>");
-	echo("</div>");
-	echo("</div>");
+	cards_close();
 
 }
 

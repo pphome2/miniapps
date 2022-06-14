@@ -7,7 +7,7 @@
  #
  #
 
-$cardnum=0;
+
 $tablenum=0;
 
 function fm_dl(){
@@ -18,12 +18,12 @@ function fm_dl(){
 }
 
 
-function formatBytes($size, $precision=2){
+function formatbytes($size, $precision=2){
     if($size < 0) {
         $size=$size + PHP_INT_MAX + PHP_INT_MAX + 2;
     }
     $base=log($size, 1024);
-    $suffixes=array('', 'K', 'M', 'G', 'T');
+    $suffixes=array('b', 'Kb', 'Mb', 'Gb', 'Tb');
     return round(pow(1024,$base-floor($base)),$precision).' '.$suffixes[floor($base)];
 }
 
@@ -41,21 +41,11 @@ function filetheader(){
 
     if ($DF_COMPACTDIR){
         if ($tablenum==0){
-            echo("<table class='df_table_full'>");
-	        echo("<tr class='df_trh'>");
-    	    echo("<th class='df_th1'>$DF_TABLEHEADER[0]</th>");
-    	    echo("<th class='df_th2'>$DF_TABLEHEADER[1]</th>");
-        	echo("<th class='df_th2'>$DF_TABLEHEADER[2]</th>");
-	        echo("</tr>");
+            table_new($DF_TABLEHEADER);
 	    }
     	$tablenum++;
     }else{
-        echo("<table class='df_table_full'>");
-        echo("<tr class='df_trh'>");
-    	echo("<th class='df_th1'>$DF_TABLEHEADER[0]</th>");
-    	echo("<th class='df_th2'>$DF_TABLEHEADER[1]</th>");
-        echo("<th class='df_th2'>$DF_TABLEHEADER[2]</th>");
-	    echo("</tr>");
+        table_new($DF_TABLEHEADER);
     }
 }
 
@@ -66,10 +56,10 @@ function filetfooter(){
     $tablenum--;
     if ($DF_COMPACTDIR){
         if ($tablenum==0){
-            echo("</table>");
+            table_close();
         }
     }else{
-        echo("</table>");
+        table_close();
     }
 }
 
@@ -82,7 +72,6 @@ function filetable($entry){
 	asort($files);
 	foreach ($files as $e){
 		if (($e!=".") && ($e!="..") && !is_dir($entry.'/'.$e)){
-			echo("<tr class='df_tr'>");
 			$fe=explode('.',$e);
 			$i=count($fe)-1;
 			$fileext_name=$fe[$i];
@@ -97,17 +86,16 @@ function filetable($entry){
 			if ($ok){
 				$fileext_name=strtoupper($fileext_name);
 				$en=namecheck($e);
-				echo("<td class='df_td'><span class='df_tds'>[$fileext_name]</span> ");
-				echo("<a href=\"$dir/$entry\" class='df_tda'>$en</a>");
-				echo(" - <a href=\"$entry/$e\" download class='df_tda2' onclick='delrow(this);'>$DF_DOWNLOAD_TEXT</a>");
-				echo("</td>");
+				$td[0]="<span class='df_tds'>[$fileext_name]</span> ";
+				$td[0]=$td[0]."<a href=\"$dir/$entry\" class='df_tda'>$en</a>";
+				$td[0]=$td[0]." - <a href=\"$entry/$e\" download class='df_tda2' onclick='delrow(this);'>$DF_DOWNLOAD_TEXT</a>";
 				$m=filectime($entry.'/'.$e);
 				$m=gmdate("Y.m.d", $m);
-				echo("<td class='df_td2'>$m</td>");
+				$td[1]="$m";
 				$m=filesize($entry.'/'.$e);
-				$m=formatBytes($m);
-				echo("<td class='df_td2'>$m</td>");
-				echo("</tr>");
+				$m=formatbytes($m);
+				$td[2]="$m";
+				table_tr($td);
 			}
 		}
 	}
@@ -115,33 +103,18 @@ function filetable($entry){
 
 
 function ftable($dir){
-	global $cardnum;
-
-	$cardnum++;
 	$dn=basename($dir);
 	$dn=namecheck($dn);
-	echo('
-		<div class="card">
-		<div class="card-header" id="dfardheader'.$cardnum.'">
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
-			'.$dn.'
-		</span>
-		<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
-			&#65088;
-		</span>
-		</div>
-		<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
-	');
+	cards_new($dn);
   	filetheader();
 	filetable($dir);
 	filetfooter();
-	echo("</div>");
-	echo("</div>");
+	cards_close();
 }
 
 
 function dirfiletable($dir){
-	global $cardnum,$DF_EXCLUDEDIR,$DF_COMPACTDIR;
+	global $DF_EXCLUDEDIR,$DF_COMPACTDIR;
 
 	$dirs=glob("$dir/*",GLOB_ONLYDIR);
 	asort($dirs);
@@ -150,31 +123,18 @@ function dirfiletable($dir){
 		if (!in_array($entryname,$DF_EXCLUDEDIR)){
 		    $cardnum++;
         	$entryname=namecheck($entryname);
-	    	echo('
-    			<div class="card">
-  				<div class="card-header" id="dfardheader'.$cardnum.'">
-		    	<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topleftmenu1">
-	    			'.$entryname.'
-    			</span>
-  				<span onclick="cardclose(dfcardbody'.$cardnum.',dfcardright'.$cardnum.')" class="topright" id="dfcardright'.$cardnum.'">
-			    	&#65088;
-		    	</span>
-	    		</div>
-    			<div class="card-body" id="dfcardbody'.$cardnum.'" style="display:none;">
-  			');
+        	cards_new($entryname);
   			filetheader();
 			filetable($entry);
 			if (!$DF_COMPACTDIR){
             	filetfooter();
-  	    		echo("</div>");
-        		echo("</div>");
+            	cards_close();
     		}
 		}
 		if ($DF_COMPACTDIR){
 		    dirfiletablecompact($entry);
         	filetfooter();
-        	echo("</div>");
-            echo("</div>");
+        	cards_close();
 		}else{
 		    dirfiletable($entry);
 		}

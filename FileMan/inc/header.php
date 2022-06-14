@@ -71,7 +71,7 @@ if ($MA_ENABLE_HEADER){
 			<div class="search_icon">&#9740;</div>
 			</a>
 		</li>
-	
+
 <?php
 		if ($MA_LOGOUT_IN_HEADER){
 			echo("<li class=\"liright\">");

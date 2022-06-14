@@ -1,0 +1,64 @@
+<style>
+
+  .df_table {
+    width:90%;
+  }
+
+  .df_trh {
+    background-color:blue;
+  }
+
+  .df_th1 {
+    padding:5px;
+    color:#a7a8a8;
+    width:60%;
+  }
+
+  .df_th2 {
+    padding:5px;
+    color:#a7a8a8;
+    width:20%;
+  }
+
+  .df_tr:nth-child(even){
+    background-color:grey;
+  }
+
+  .df_tr:nth-child(odd) {
+    background-color:dimgrey;
+    color:black;
+  }
+
+  .df_td1 {
+    color:white;
+    text-align:left;
+    padding:10px;
+  }
+
+  .df_td2 {
+    padding:10px;
+    color:white;
+    text-align:center;
+  }
+
+  .df_tds {
+    color:red;
+  }
+
+  .df_tda {
+    text-decoration:none;
+    color:white;
+  }
+
+  .df_tda2 {
+    text-decoration:none;
+    font-weight: bold;
+    color:red;
+  }
+
+  .df_table_full {
+    width:100%;
+    padding:0px;
+  }
+
+</style>

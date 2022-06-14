@@ -21,6 +21,7 @@ $MA_DOCTYPE="<!DOCTYPE HTML>";
 $MA_CONFIG_DIR="config";
 $MA_INCLUDE_DIR="inc";
 $MA_CONTENT_DIR="content";
+$MA_PLUGIN_DIR="plugins";
 
 $MA_COOKIE_STYLE="st";
 $MA_COOKIE_USER="user";
@@ -31,19 +32,31 @@ $MA_COOKIE_TIME="ltime";
 $MA_ADMINFILE="start.php";
 $MA_PRIVACY="privacy.php";
 $MA_PRINTFILE="print.php";
+
 $MA_CSS=array(
-			"$MA_INCLUDE_DIR/sitew.css",
-			"$MA_INCLUDE_DIR/siteb.css"
+			"$MA_INCLUDE_DIR/siteb.css",
+			"$MA_INCLUDE_DIR/sitew.css"
 			);
+
 $MA_CSSPRINT="$MA_INCLUDE_DIR/sitepr.css";
+
 $MA_JS_BEGIN="$MA_INCLUDE_DIR/js_begin.js";
 $MA_JS_END="$MA_INCLUDE_DIR/js_end.js";
+
 $MA_HEADER="$MA_INCLUDE_DIR/header.php";
 $MA_FOOTER="$MA_INCLUDE_DIR/footer.php";
+$MA_HEADER_VIEW="$MA_INCLUDE_DIR/header_view.php";
+$MA_FOOTER_VIEW="$MA_INCLUDE_DIR/footer_view.php";
+
 $MA_LIB=array(
 			"$MA_INCLUDE_DIR/lib.php",
 			"$MA_INCLUDE_DIR/libview.php"
 			);
+
+$MA_PLUGINS=array(
+            "$MA_PLUGIN_DIR/cards",
+            "$MA_PLUGIN_DIR/table"
+            );
 
 # local app main and css file
 $MA_APPFILE=array(

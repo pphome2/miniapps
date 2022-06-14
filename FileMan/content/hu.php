@@ -9,6 +9,7 @@
 
 
 $DF_TITLE="Fájlok feltöltése és letöltése";
+$DF_TITLE_VIEW="Fájlok letöltése";
 $DF_TABLEHEADER=array('Név','Dátum','Méret');
 $DF_DOWNLOAD_TEXT='Letöltés';
 

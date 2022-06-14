@@ -7,38 +7,41 @@
  #
  #
 
-# load config
+
+# load config 
 if (file_exists("config/config.php")){
 	include("config/config.php");
 }
 
+echo($MA_DOCTYPE);
+ 
 for ($i=0;$i<count($MA_LIB);$i++){
 	if (file_exists("$MA_LIB[$i]")){
 		include("$MA_LIB[$i]");
 	}
 }
 
-# cookies or param 
+plugins();
+
+# css setting
 setcss();
 
-# page build
-page_header();
+# page header
+page_header_view();
 
-# privacy data to screen
-#$MA_NOPAGE=true;
+# load local app file
 for ($i=0;$i<count($MA_APPFILE);$i++){
-	if (file_exists("$MA_APPFILE[$i]")){
-		include("$MA_APPFILE[$i]");
+	if (file_exists($MA_APPFILE[$i])){
+		include($MA_APPFILE[$i]);
 	}
 }
 
-if (function_exists("searchpage")){
-	searchpage();
+# start public view
+if (function_exists("view")){
+	view();
 }
 
-button_back();
-
-# page end
-page_footer();
+# page footer
+page_footer_view();
 
 ?>
