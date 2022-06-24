@@ -23,6 +23,7 @@ $MA_INCLUDE_DIR="inc";
 $MA_CONTENT_DIR="content";
 $MA_PLUGIN_DIR="plugins";
 
+# cookies
 $MA_COOKIE_STYLE="st";
 $MA_COOKIE_USER="user";
 $MA_COOKIE_PASSWORD="passw";
@@ -30,7 +31,9 @@ $MA_COOKIE_TIME="ltime";
 
 # include files
 $MA_ADMINFILE="start.php";
-$MA_PRIVACY="privacy.php";
+$MA_VIEWFILE="view.php";
+$MA_SEARCHFILE="search.php";
+$MA_PRIVACYFILE="privacy.php";
 $MA_PRINTFILE="print.php";
 
 $MA_CSS=array(
@@ -53,6 +56,7 @@ $MA_LIB=array(
 			"$MA_INCLUDE_DIR/libview.php"
 			);
 
+# plugins directorys (load dirname.php from directory)
 $MA_PLUGINS=array(
             "$MA_PLUGIN_DIR/cards",
             "$MA_PLUGIN_DIR/table"
@@ -73,10 +77,10 @@ $MA_APPCSSFILE="$MA_CONTENT_DIR/fm.css";
 $MA_LANGFILE="hu.php";
 
 # search
-$MA_SEARCH_ICON_HREF="search.php";
+$MA_SEARCH_ICON_HREF="";
 $MA_SEARCH_ICON_JS="";
 
-# other variables
+# variables
 $MA_NOPAGE=false;
 $MA_PASSWORD="";
 $MA_LOGIN_TIME="";
@@ -84,25 +88,26 @@ $MA_LOGGEDIN=false;
 $MA_STYLEINDEX=0;
 $MA_LOGOUT_IN_HEADER=true;
 $MA_PRIVACY_PAGE=false;
-
-# auto logout - second
-$MA_LOGIN_TIMEOUT=600;
 $MA_ENABLE_COOKIES=true;
 $MA_ADMIN_USER=false;
 $MA_USERPAGE=false;
 
+# auto logout (seconds)
+$MA_LOGIN_TIMEOUT=600;
+
 # header, footer
 $MA_ENABLE_HEADER=true;
 $MA_ENABLE_FOOTER=true;
+$MA_ENABLE_HEADER_VIEW=false;
+$MA_ENABLE_FOOTER_VIEW=false;
 
 # login
 $MA_ENABLE_LOGIN=true;
+$MA_ENABLE_LOGIN_VIEW=true;
 
 # multiuser
 $MA_ENABLE_USERNAME=false;
-$MA_USERS_ADMINUSERS=array(
-				"admin"
-			);
+$MA_USERS_ADMINUSERS=array("admin");
 $MA_USERS_CRED=array(
 					array("admin","e3274be5c857fb42ab72d786e281b4b8"),
 					array("user","5f4dcc3b5aa765d61d8327deb882cf99"),
@@ -117,32 +122,12 @@ $MA_MENU=array();
 $MA_ADMINMENU_FIELD="m";
 $MA_ADMINMENU=array();
 
-# load language file
-if (file_exists("$MA_CONFIG_DIR/$MA_LANGFILE")){
-	include("$MA_CONFIG_DIR/$MA_LANGFILE");
-}
-
-
+#
 # if not enable cookie support:
 # - all form need add this lines
-#
 #		<input type='hidden' name='$MA_COOKIE_PASSWORD' id='$MA_COOKIE_PASSWORD' value='$MA_PASSWORD'>
 #		<input type='hidden' name='$MA_COOKIE_STYLE' id='$MA_COOKIE_STYLE' value='$MA_STYLEINDEX'>
 #		<input type='hidden' name='$MA_COOKIE_TIME' id='$MA_COOKIE_TIME' value='$MA_LOGIN_TIME'>
 #
-
-
-############################################
-
-# local app config, variables
-
-$MA_MENU=array(
-				#array($L_MENU1,"list.php")
-			);
-
-$MA_ADMINMENU=array(
-				#array($L_MENU2,"list.php")
-			);
-
 
 ?>

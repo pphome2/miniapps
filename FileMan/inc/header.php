@@ -7,35 +7,35 @@
  #
  #
 
-?>
+echo("<html>");
 
-<html>
-	<head>
-		<title><?php echo($MA_SITENAME." ".$L_SITENAME); ?></title>
-		<meta charset="utf-8" />
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" href="favicon.png">
-		<link rel="shortcut icon" type="image/png" href="favicon.png" />
-		<style><?php include("$MA_CSS[$MA_STYLEINDEX]"); ?></style>
-		<style><?php include("$MA_APPCSSFILE"); ?></style>
-	</head>
-<body>
+echo("<head>");
+echo("<title>$MA_SITENAME $L_SITENAME></title>");
+echo("<meta charset=\"utf-8\" />");
+echo("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" />");
+echo("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />");
+echo("<link rel=\"icon\" href=\"favicon.png\" />");
+echo("<link rel=\"shortcut icon\" type=\"image/png\" href=\"favicon.png\" />");
 
+echo("<style>");
+if (file_exists($MA_CSS[$MA_STYLEINDEX])){
+    include("$MA_CSS[$MA_STYLEINDEX]");
+}
+if (file_exists($MA_APPCSSFILE)){
+    include("$MA_APPCSSFILE");
+}
+echo("</style>");
 
-<div class=all-page>
+echo("</head>");
 
-<?php
+echo("<body>");
+
+echo("<div class=all-page>");
+
 if ($MA_ENABLE_HEADER){
-?>
-
-<header>
-
-<div class="menu">
-<ul class="sidenav">
-
-
-<?php
+    echo("<header>");
+    echo("<div class=\"menu\">");
+    echo("<ul class=\"sidenav\">");
 
 	#if (count($_GET)>0){
 	#	echo("<li><a onclick=\"window.history.back();\">&#8592;</a></li>");
@@ -64,15 +64,17 @@ if ($MA_ENABLE_HEADER){
 				}
 			}
 		}
-?>
 
-		<li class="liright">
-			<a href="<?php echo($MA_SEARCH_ICON_HREF); ?>" onclick="<?php echo($MA_SEARCH_ICON_JS); ?>">
-			<div class="search_icon">&#9740;</div>
-			</a>
-		</li>
+		echo("<li class=\"liright\">");
+		if (!empty($MA_SEARCH_ICON_HREF)){
+		    echo("<a href=\"$MA_SEARCH_ICON_HREF\" onclick=\"$MA_SEARCH_ICON_JS\">");
+		}else{
+		    echo("<a href=\"$MA_SEARCHFILE\" onclick=\"$MA_SEARCH_ICON_JS\">");
+		}
+		echo("<div class=\"search_icon\">&#9740;</div>");
+		echo("</a>");
+		echo("</li>");
 
-<?php
 		if ($MA_LOGOUT_IN_HEADER){
 			echo("<li class=\"liright\">");
 			echo("<a href=#
@@ -80,14 +82,11 @@ if ($MA_ENABLE_HEADER){
 			echo("</li>");
 		}
 	}
-?>
-</ul>
-</div>
-
-</header>
-
-<?php
+    echo("</ul>");
+    echo("</div>");
+    echo("</header>");
 }
-?>
 
-<div class="content">
+echo("<div class=\"content\">");
+
+?>
