@@ -28,6 +28,8 @@ $DF_FILEDIR="Raktár";
 $DF_EXCLUDEDIR=array('seccam');
 $DF_DIR='./'.$DF_FILEDIR;
 
+$DF_TEXT_EXT=".txt";
+
 $DF_NAMELENGTH=30;
 
 $DF_COMPACTDIR=true;

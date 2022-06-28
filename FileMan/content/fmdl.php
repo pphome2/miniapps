@@ -66,7 +66,7 @@ function filetfooter(){
 
 function filetable($entry){
 	global $DF_FILEEXT,$DF_DOWNLOAD_TEXT,$DF_USE_FILEEXT,
-			$D_EXCLUDEDIR;
+			$DF_EXCLUDEDIR,$DF_TEXT_EXT;
 
 	$files=scandir($entry);
 	asort($files);
@@ -87,8 +87,15 @@ function filetable($entry){
 				$fileext_name=strtoupper($fileext_name);
 				$en=namecheck($e);
 				$td[0]="<span class='df_tds'>[$fileext_name]</span> ";
-				$td[0]=$td[0]."<a href=\"$dir/$entry\" class='df_tda'>$en</a>";
+				$td[0]=$td[0]."<a href=\"$entry\" class='df_tda'>$en</a>";
 				$td[0]=$td[0]." - <a href=\"$entry/$e\" download class='df_tda2' onclick='delrow(this);'>$DF_DOWNLOAD_TEXT</a>";
+				$txt=$entry.'/'.$e.$DF_TEXT_EXT;
+				if (file_exists($txt)){
+				    $td[0]=$td[0]."<br />";
+				    $td[0]=$td[0]."<br />";
+				    $txtcont=file_get_contents($txt);
+				    $td[0]=$td[0].$txtcont;
+				}
 				$m=filectime($entry.'/'.$e);
 				$m=gmdate("Y.m.d", $m);
 				$td[1]="$m";

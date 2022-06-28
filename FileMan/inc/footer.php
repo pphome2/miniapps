@@ -24,7 +24,7 @@ if ($MA_ENABLE_FOOTER){
 	echo("<li class=\"padleft\">$MA_COPYRIGHT</li>");
     if ($MA_ENABLE_COOKIES){
         echo("<li class=\"liright\">");
-		echo("<a href=\"\" onclick=\"document.cookie='$MA_COOKIE_STYLE=$nextstyle;return false;' \">$L_THEME</a>");
+		echo("<a href=\"\" onclick=\"document.cookie='$MA_COOKIE_STYLE=$nextstyle;samesite=Lax;' \">$L_THEME</a>");
         echo("</li>");
         echo("<li class=\"liright\">");
 		echo("<a href=\"$MA_PRIVACY\">$L_PRIVACY_MENU</a>");

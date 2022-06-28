@@ -10,7 +10,7 @@
 function fm_admin(){
 	global $DF_DIR,$DF_FILEDIR,$DF_UPFILE,$DF_NEWDIR,$DF_DELDIR,$DF_DIRNAME,
 			$DF_BUTTON_TEXT,$DF_SECTIONCREATE,$DF_OK,$DF_ERROR,$DF_SECTIONDELETE,
-			$DF_SECTIONUPFILE,$DF_SECTIONDELFILE;
+			$DF_SECTIONUPFILE,$DF_SECTIONDELFILE,$DF_TEXT_EXT;
 
 	if (isset($_POST['submitnew'])){
 		$fns=vinput($_POST['new']);
@@ -55,10 +55,15 @@ function fm_admin(){
 		$filen=basename($_FILES["filename"]["name"]);
 		if ($fns<>""){
 			$tfile=$DF_DIR."/".$fns."/".$filen;
+			$txtfile=$DF_DIR."/".$fns."/".$filen.$DF_TEXT_EXT;
 		}else{
 			$tfile=$DF_DIR."/".$filen;
+			$txtfile=$DF_DIR."/".$filen.$DF_TEXT_EXT;
 		}
 		$ok=true;
+		if (file_exists($tfile)){
+		    unlink($tfile);
+		}
 		if (move_uploaded_file($_FILES["filename"]["tmp_name"], $tfile)) {
 			$ok=true;
 		} else {
@@ -68,6 +73,10 @@ function fm_admin(){
 			mess_ok($DF_SECTIONUPFILE.": ".$DF_OK.".");
 		}else{
 			mess_error($DF_SECTIONUPFILE.": (".$fns.") ".$DF_ERROR.".");
+		}
+		$txt=vinput($_POST['texta']);
+		if ($txt<>""){
+		    file_put_contents($txtfile,$txt);
 		}
 	}
 }

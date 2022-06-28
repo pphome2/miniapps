@@ -56,11 +56,8 @@ $MA_LIB=array(
 			"$MA_INCLUDE_DIR/libview.php"
 			);
 
-# plugins directorys (load dirname.php from directory)
-$MA_PLUGINS=array(
-            "$MA_PLUGIN_DIR/cards",
-            "$MA_PLUGIN_DIR/table"
-            );
+# plugins directorys (load dirname.php .css, .js from directory)
+$MA_PLUGINS=array();
 
 # local app main and css file
 $MA_APPFILE=array(

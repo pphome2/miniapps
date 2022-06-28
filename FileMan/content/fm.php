@@ -75,12 +75,16 @@ function fm_view(){
 }
 
 function main(){
+    loadplugin("table");
+    loadplugin("cards");
 	fm_header();
 	fm_data();
 	fm_footer();
 }
 
 function view(){
+    loadplugin("table");
+    loadplugin("cards");
 	fm_header_view();
 	fm_view();
 	fm_footer();

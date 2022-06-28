@@ -19,7 +19,7 @@ function fm_up(){
 	$cardnum++;
 	cards_new($DF_UPFILE);
 	echo($DF_SECTIONUPFILE);
-	echo("<form  method='post' enctype='multipart/form-data'>");
+	echo("<form method='post' enctype='multipart/form-data'>");
 	echo("<select name='dirn' id='dirn'>");
 	echo("<option>");
 	$dirs=glob("$DF_DIR/*",GLOB_ONLYDIR);
@@ -37,6 +37,7 @@ function fm_up(){
 	echo("<input type='file' name=filename id=filename  />");
 	echo("<label for=fileupload class='upload-btn'>$DF_FILESELECT</label>");
 	echo("</div>");
+	echo("<textarea name='texta' id='texta'></textarea>");
 	echo("<input type='submit' value='$DF_BUTTON_TEXT' name='submitup'>");
 	echo("</form>");
 	cards_close();
