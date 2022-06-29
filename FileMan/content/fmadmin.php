@@ -84,6 +84,9 @@ function fm_admin(){
 	if (isset($_POST['submitdelfile'])){
 		$fns=vinput($_POST['delfile']);
 		if ($fns<>""){
+		    if (file_exists($fns.$DF_TEXT_EXT)){
+		        unlink($fns.$DF_TEXT_EXT);
+		    }
 			if (unlink($fns)){
 				mess_ok($DF_SECTIONDELFILE.": ".$DF_OK.".");
 			}else{

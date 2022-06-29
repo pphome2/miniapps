@@ -9,6 +9,7 @@
 
 
 $tablenum=0;
+$cardnum=0;
 
 function fm_dl(){
 	global $DF_DIR;
@@ -121,7 +122,7 @@ function ftable($dir){
 
 
 function dirfiletable($dir){
-	global $DF_EXCLUDEDIR,$DF_COMPACTDIR;
+	global $DF_EXCLUDEDIR,$DF_COMPACTDIR,$cardnum;
 
 	$dirs=glob("$dir/*",GLOB_ONLYDIR);
 	asort($dirs);

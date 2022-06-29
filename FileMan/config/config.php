@@ -77,18 +77,6 @@ $MA_LANGFILE="hu.php";
 $MA_SEARCH_ICON_HREF="";
 $MA_SEARCH_ICON_JS="";
 
-# variables
-$MA_NOPAGE=false;
-$MA_PASSWORD="";
-$MA_LOGIN_TIME="";
-$MA_LOGGEDIN=false;
-$MA_STYLEINDEX=0;
-$MA_LOGOUT_IN_HEADER=true;
-$MA_PRIVACY_PAGE=false;
-$MA_ENABLE_COOKIES=true;
-$MA_ADMIN_USER=false;
-$MA_USERPAGE=false;
-
 # auto logout (seconds)
 $MA_LOGIN_TIMEOUT=600;
 
@@ -118,6 +106,19 @@ $MA_MENU=array();
 # adminmenu
 $MA_ADMINMENU_FIELD="m";
 $MA_ADMINMENU=array();
+
+# variables (no change)
+$MA_NOPAGE=false;
+$MA_PASSWORD="";
+$MA_LOGIN_TIME="";
+$MA_LOGGEDIN=false;
+$MA_STYLEINDEX=0;
+$MA_LOGOUT_IN_HEADER=true;
+$MA_PRIVACY_PAGE=false;
+$MA_SEARCH_PAGE=false;
+$MA_ENABLE_COOKIES=true;
+$MA_ADMIN_USER=false;
+$MA_USERPAGE=false;
 
 #
 # if not enable cookie support:

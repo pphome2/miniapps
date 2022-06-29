@@ -34,5 +34,6 @@ $DF_NAMELENGTH=30;
 
 $DF_COMPACTDIR=true;
 
+$DF_PRIVACY_FILE=$MA_CONTENT_DIR."/privacy.txt";
 
 ?>

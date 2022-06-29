@@ -28,7 +28,7 @@ for ($i=0;$i<count($MA_LIB);$i++){
 $MA_NOPAGE=true;
 
 # build page
-page_header_view();
+#page_header_view();
 if (file_exists($MA_CSSPRINT)){
     echo("<style>");
     include("$MA_CSSPRINT");
@@ -51,6 +51,6 @@ if (function_exists("printpage")){
 
 echo("<script>window.print();</script>");
 
-page_footer_view();
+#page_footer_view();
 
 ?>

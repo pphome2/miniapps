@@ -23,6 +23,14 @@ a {
 	flex: 1 0 auto;
 }
 
+.contentbox {
+    margin-top:20px;
+	margin-left:20%;
+	margin-right:20%;
+    margin-bottom:20px;
+	flex: 1 0 auto;
+}
+
 .insidecontent {
 	padding:20px;
 }

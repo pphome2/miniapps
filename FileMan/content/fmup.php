@@ -83,7 +83,7 @@ function fm_up(){
 }
 
 function fm_dirs($dir){
-	global $DF_EXCLUDEDIR,$DF_NAMELENGTH;
+	global $DF_EXCLUDEDIR,$DF_NAMELENGTH,$DF_TEXT_EXT;
 
 	$filelist=scandir($dir);
 	asort($filelist);
@@ -105,7 +105,10 @@ function fm_dirs($dir){
                     }else{
                         $fnd=$fn;
                     }
-					echo("<option value=$fn>$fnd</option>");
+                    $ext=substr($fnd,strlen($fnd)-strlen($DF_TEXT_EXT),strlen($DF_TEXT_EXT));
+                    if ($ext<>$DF_TEXT_EXT){
+					    echo("<option value=$fn>$fnd</option>");
+					}
 				}else{
 					fm_dirs($fn);
 				}

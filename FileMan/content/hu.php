@@ -13,6 +13,8 @@ $DF_TITLE_VIEW="Fájlok letöltése";
 $DF_TABLEHEADER=array('Név','Dátum','Méret');
 $DF_DOWNLOAD_TEXT='Letöltés';
 
+$DF_SEARCH_TEXT="Keresés";
+
 $DF_UPFILE="Fájl feltöltése";
 $DF_NEWDIR="Új tároló";
 $DF_DELDIR="Tároló törlése";
