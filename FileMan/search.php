@@ -30,7 +30,7 @@ login();
 setcss();
 
 # build page: header
-$mainpage=basename($_SERVER['HTTP_REFERER']);
+$mainpage=refererpage();
 if ($mainpage<>$MA_ADMINFILE){
     if ($MA_ENABLE_HEADER_VIEW){
         page_header();

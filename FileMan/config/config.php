@@ -101,10 +101,9 @@ $MA_USERS_CRED=array(
 
 # menu
 $MA_MENU_FIELD="m";
+# user menu
 $MA_MENU=array();
-
 # adminmenu
-$MA_ADMINMENU_FIELD="m";
 $MA_ADMINMENU=array();
 
 # variables (no change)

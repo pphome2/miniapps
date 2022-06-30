@@ -17,12 +17,18 @@ if (file_exists("$MA_CONFIG_DIR/$MA_LANGFILE")){
 	include("$MA_CONFIG_DIR/$MA_LANGFILE");
 }
 
-
 echo($MA_DOCTYPE);
 
 for ($i=0;$i<count($MA_LIB);$i++){
 	if (file_exists("$MA_LIB[$i]")){
 		include("$MA_LIB[$i]");
+	}
+}
+
+# load local app file
+for ($i=0;$i<count($MA_APPFILE);$i++){
+	if (file_exists($MA_APPFILE[$i])){
+		include($MA_APPFILE[$i]);
 	}
 }
 
@@ -33,47 +39,35 @@ setcss();
 
 # login
 if ($MA_ENABLE_LOGIN){
-	login();
+    login();
 }else{
 	$MA_LOGGEDIN=true;
+}
+
+if ($MA_LOGGEDIN){
+    if (!$MA_ENABLE_USERNAME){
+        $MA_ADMIN_USER=true;
+    }
 }
 
 # build page: header
 page_header();
 
 if ($MA_LOGGEDIN){
-
-	# private menu
-	$param="";
-	$loaded=false;
+	# user/admin menu start
 	if (isset($_GET["$MA_MENU_FIELD"])){
 		$param=$_GET["$MA_MENU_FIELD"];
-		if (substr($param,strlen($param)-3,3)=="php"){
-			$af=$MA_CONTENT_DIR."/".$param;
-			if (file_exists($af)){
-				include($af);
-				$loaded=true;
-			}
-		}
-	}
-
-	if (!$loaded){
-		# load local app file
-		for ($i=0;$i<count($MA_APPFILE);$i++){
-			if (file_exists($MA_APPFILE[$i])){
-				include($MA_APPFILE[$i]);
-			}
-		}
-	}
-
-	if ($param<>"" && !$loaded){
-		if (function_exists($param)){
-			$param();
+   		if (function_exists($param)){
+    		$param();
+    	}else{
+		    if (function_exists("main")){
+			    main();
+		    }
 		}
 	}else{
-		if (function_exists("main")){
-			main();
-		}
+	    if (function_exists("main")){
+		    main();
+	    }
 	}
 
 }else{

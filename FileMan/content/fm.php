@@ -9,46 +9,16 @@
 
 
 function searchpage(){
-	global $DF_TITLE,$DF_BUTTON_TEXT,$DF_SEARCH_TEXT,$MA_LOGGEDIN;
+	global $DF_TITLE,$DF_BUTTON_TEXT,$DF_SEARCH_TEXT;
 
-	echo("<header><h3>$DF_TITLE</h3></header>");
-	echo("<div class=spaceline></div>");
-	echo("<div class=contentbox>");
-	if ($MA_LOGGEDIN){
-    	echo("<form method='post' enctype='multipart/form-data'>");
-	    echo("<input type=text name='search' id='search' placeholder='$DF_SEARCH_TEXT' autofocus />");
-    	echo("<input type='submit' value='$DF_BUTTON_TEXT' name='submitsearch' />");
-	    echo("</form>");
-	    echo("<div class=spaceline></div>");
-    	if (isset($_POST['submitsearch'])){
-	    	$st=vinput($_POST['search']);
-    	    echo("<div class=content>");
-    		echo($DF_SEARCH_TEXT.": $st");
-	        echo("</div>");
-    	}
-    }else{
-    }
-    echo("</div>");
+    searchview($DF_TITLE,$DF_BUTTON_TEXT,$DF_SEARCH_TEXT);
 }
 
 
 function privacypage(){
 	global $DF_TITLE,$DF_PRIVACY_FILE;
 
-	echo("<header><h3>$DF_TITLE</h3></header>");
-	echo("<div class=spaceline></div>");
-	if (file_exists($DF_PRIVACY_FILE)){
-	    echo("<div class=contentbox>");
-	    if ($file=fopen($DF_PRIVACY_FILE, "r")) {
-            while(!feof($file)) {
-                $line=fgets($file);
-        	    echo($line."<br />");
-            }
-            fclose($file);
-        }
-	    echo("</div>");
-	}
-	echo("<div class=spaceline></div>");
+    privacyview($DF_TITLE,$DF_PRIVACY_FILE);
 }
 
 

@@ -8,6 +8,56 @@
  #
 
 
+# preivois page
+function refererpage(){
+    $mainp=basename($_SERVER['HTTP_REFERER']);
+    if (isset($_POST['referer'])){
+        $mainp=$_POST['referer'];
+    }
+    return($mainp);
+}
+
+
+# search in site
+function searchview($title="",$button="",$search=""){
+    $rp=refererpage();
+	echo("<header><h3>$title</h3></header>");
+	echo("<div class=spaceline></div>");
+	echo("<div class=contentbox>");
+   	echo("<form method='post' enctype='multipart/form-data'>");
+    echo("<input type=text name='search' id='search' placeholder='$search' autofocus />");
+    echo("<input type=hidden name='referer' id='referer' value='$rp' />");
+   	echo("<input type='submit' value='$button' name='submitsearch' />");
+    echo("</form>");
+    echo("<div class=spaceline></div>");
+   	if (isset($_POST['submitsearch'])){
+    	$st=vinput($_POST['search']);
+   	    echo("<div class=content>");
+   		echo($search.": $st");
+        echo("</div>");
+   	}
+    echo("</div>");
+}
+
+
+# privacy file view
+function privacyview($title="",$pfile=""){
+	echo("<header><h3>$title</h3></header>");
+	echo("<div class=spaceline></div>");
+	if (file_exists($pfile)){
+	    echo("<div class=contentbox>");
+	    if ($file=fopen($pfile, "r")) {
+            while(!feof($file)) {
+                $line=fgets($file);
+        	    echo($line."<br />");
+            }
+            fclose($file);
+        }
+	    echo("</div>");
+	}
+	echo("<div class=spaceline></div>");
+}
+
 
 # backpage button
 function button_back(){

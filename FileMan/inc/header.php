@@ -48,18 +48,19 @@ if ($MA_ENABLE_HEADER){
 	}
 
 	if ($MA_LOGGEDIN){
-		if (count($MA_MENU)>0){
-			$db=count($MA_MENU);
-			for ($i=0;$i<$db;$i++){
-				echo("<li><a href=\"?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
-			}
-		}
 		if ($MA_ADMIN_USER){
 			if (count($MA_ADMINMENU)>0){
 				$db=count($MA_ADMINMENU);
 				for ($i=0;$i<$db;$i++){
-					echo("<li><a href=\"?$MA_ADMINMENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
+					echo("<li><a href=\"?$MA_MENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
 				}
+			}
+		}else{
+    		if (count($MA_MENU)>0){
+	    		$db=count($MA_MENU);
+		    	for ($i=0;$i<$db;$i++){
+			    	echo("<li><a href=\"?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
+			    }
 			}
 		}
 
