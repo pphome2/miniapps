@@ -68,6 +68,20 @@ function button_back(){
 	echo("<div class=\"spaceline\"></div>");
 }
 
+# backpage button with logout
+function button_back_logout(){
+	global $L_BACKPAGE,$MA_COOKIE_PASSWORD,$L_LOGOUT;
+
+    echo("<script>");
+	echo("document.cookie='$MA_COOKIE_PASSWORD=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;';");
+    echo("</script>");
+	echo("<div class=\"spaceline\"></div>");
+	echo("<div class=insidecontent>
+	    <a onclick=\"document.cookie='$MA_COOKIE_PASSWORD=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;';window.history.back();\">
+	    <input type=submit id=submitar name=submitar value=$L_BACKPAGE></a></div>");
+	echo("<div class=\"spaceline\"></div>");
+}
+
 
 # print button
 function button_print(){
@@ -106,7 +120,7 @@ function mess_ok($m){
 # login box
 function login_form(){
 	global $MA_COOKIE_STYLE,$MA_STYLEINDEX,$L_PASSWORD,$MA_COOKIE_PASSWORD,$L_BUTTON_NEXT,$MA_ENABLE_USERNAME,
-			$MA_USERS,$L_USERNAME,$L_PASS,$MA_COOKIE_USER;
+			$MA_USERS,$L_USERNAME,$L_PASS,$MA_COOKIE_USER,$L_USER,$L_PASSWORD;
 
 	echo("<div class=spaceline100></div>");
 	echo("<div class=row100>");
@@ -114,7 +128,7 @@ function login_form(){
 	echo("<div class=col2>");
 	echo("<form  method='post' enctype='multipart/form-data'>");
 	if ($MA_ENABLE_USERNAME){
-		echo("	<input type='text' name='$MA_COOKIE_USER' id='$MA_COOKIE_USER' placeholder='$L_USERNAME' autofocus>");
+		echo("	<input type='text' name='$MA_COOKIE_USER' id='$MA_COOKIE_USER' placeholder='$L_USER' autofocus>");
 		echo("	<input type='password' name='$MA_COOKIE_PASSWORD' id='$MA_COOKIE_PASSWORD' placeholder='$L_PASSWORD'>");	
 	}else{
 		echo("	$L_PASS:");

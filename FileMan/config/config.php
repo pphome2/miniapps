@@ -56,6 +56,12 @@ $MA_LIB=array(
 			"$MA_INCLUDE_DIR/libview.php"
 			);
 
+# pages
+$MA_ENABLE_PRIVACY=true;
+$MA_ENABLE_PRINT=true;
+$MA_ENABLE_SEARCH=true;
+$MA_ENABLE_THEME=true;
+
 # plugins directorys (load dirname.php .css, .js from directory)
 $MA_PLUGINS=array();
 

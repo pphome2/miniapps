@@ -64,15 +64,17 @@ if ($MA_ENABLE_HEADER){
 			}
 		}
 
-		echo("<li class=\"liright\">");
-		if (!empty($MA_SEARCH_ICON_HREF)){
-		    echo("<a href=\"$MA_SEARCH_ICON_HREF\" onclick=\"$MA_SEARCH_ICON_JS\">");
-		}else{
-		    echo("<a href=\"$MA_SEARCHFILE\" onclick=\"$MA_SEARCH_ICON_JS\">");
+        if ($MA_ENABLE_SEARCH){
+	    	echo("<li class=\"liright\">");
+    		if (!empty($MA_SEARCH_ICON_HREF)){
+		        echo("<a href=\"$MA_SEARCH_ICON_HREF\" onclick=\"$MA_SEARCH_ICON_JS\">");
+		    }else{
+	    	    echo("<a href=\"$MA_SEARCHFILE\" onclick=\"$MA_SEARCH_ICON_JS\">");
+    		}
+		    echo("<div class=\"search_icon\">&#9740;</div>");
+	    	echo("</a>");
+    		echo("</li>");
 		}
-		echo("<div class=\"search_icon\">&#9740;</div>");
-		echo("</a>");
-		echo("</li>");
 
 		if ($MA_LOGOUT_IN_HEADER){
         	if ((!$MA_PRIVACY_PAGE)and(!$MA_SEARCH_PAGE)){
