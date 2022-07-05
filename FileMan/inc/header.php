@@ -7,10 +7,15 @@
  #
  #
 
+
+if ($L_SITENAME<>""){
+    $MA_TITLE=$MA_TITLE." - ".$L_SITENAME;
+}
+
 echo("<html>");
 
 echo("<head>");
-echo("<title>$MA_SITENAME $L_SITENAME</title>");
+echo("<title>$MA_TITLE</title>");
 echo("<meta charset=\"utf-8\" />");
 echo("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" />");
 echo("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />");
@@ -37,17 +42,27 @@ if ($MA_ENABLE_HEADER){
     echo("<div class=\"menu\">");
     echo("<ul class=\"sidenav\">");
 
-	#if (count($_GET)>0){
-	#	echo("<li><a onclick=\"window.history.back();\">&#8592;</a></li>");
-	#}
-	if ($L_SITEHOME<>""){
-		echo("<li><a class=\"active\" href=\"$MA_SITE_HOME\">$L_SITEHOME</a></li>");
+	if ($MA_BACKPAGE){
+		echo("<li><a onclick=\"window.history.back();\" href=\"\">&#8592;</a></li>");
 	}
-	if ($MA_ENABLE_COOKIES){
-		echo("<li><a href=\"$MA_ADMINFILE\">$L_MTHOME</a></li>");
+	if ($MA_ROOT_HOME<>""){
+    	if ($L_ROOTHOME<>""){
+	        echo("<li><a class=\"active\" href=\"$MA_ROOT_HOME\">$L_ROOTHOME</a></li>");
+    	}else{
+	    	echo("<li><a class=\"active\" href=\"$MA_ROOT_HOME\">$MA_ROOTNAME</a></li>");
+    	}
 	}
 
-	if ($MA_LOGGEDIN){
+    if ($MA_SITE_HOME<>""){
+        $MA_ADMINFILE=$MA_SITE_HOME;
+    }
+   	if ($L_SITEHOME<>""){
+       	echo("<li><a href=\"$MA_ADMINFILE\">$L_SITEHOME</a></li>");
+   	}else{
+       	echo("<li><a href=\"$MA_ADMINFILE\">$MA_SITENAME</a></li>");
+   	}
+
+    if ($MA_LOGGEDIN){
 		if ($MA_ADMIN_USER){
 			if (count($MA_ADMINMENU)>0){
 				$db=count($MA_ADMINMENU);

@@ -42,6 +42,11 @@ function searchview($title="",$button="",$search=""){
 
 # privacy file view
 function privacyview($title="",$pfile=""){
+    global $L_PRIVACY_HEADER;
+
+    if ($title=""){
+        $title=$L_PRIVACY_HEADER;
+    }
 	echo("<header><h3>$title</h3></header>");
 	echo("<div class=spaceline></div>");
 	if (file_exists($pfile)){

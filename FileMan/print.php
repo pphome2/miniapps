@@ -8,13 +8,14 @@
  #
 
 
-# load config
-if (file_exists("config/config.php")){
-	include("config/config.php");
-}
-# load language file
-if (file_exists("$MA_CONFIG_DIR/$MA_LANGFILE")){
-	include("$MA_CONFIG_DIR/$MA_LANGFILE");
+# load config and language file
+if (!isset($MA_CONFIG_DIR)){
+    if (file_exists("config/config.php")){
+	    include("config/config.php");
+    }
+    if (file_exists("$MA_CONFIG_DIR/$MA_LANGFILE")){
+	    include("$MA_CONFIG_DIR/$MA_LANGFILE");
+	}
 }
 
 

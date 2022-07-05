@@ -51,6 +51,15 @@ footer {
 	cursor:default;
 }
 
+.footerv {
+	margin: 0;
+	padding: 0;
+	display: block;
+	background-color: lightgrey;
+	color: black;
+	cursor:default;
+}
+
 p a{
 	display: inline-block;
 	color: black;
@@ -84,8 +93,8 @@ li {
 
 li a, .dropbtn{
 	display: inline-block;
-	color: white;
 	text-align: center;
+	color:white;
 	padding: 14px 16px;
 	text-decoration: none;
 }
@@ -97,6 +106,10 @@ li a:hover, .dropdown:hover .dropbtn {
 .liright {
 	float:right;
 	padding:0px;
+}
+
+.footerbutton{
+    color:black;
 }
 
 

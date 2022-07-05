@@ -10,7 +10,7 @@
 echo("<html>");
 
 echo("<head>");
-echo("<title>$MA_SITENAME $L_SITENAME</title>");
+echo("<title>$MA_TITLE</title>");
 echo("<meta charset=\"utf-8\" />");
 echo("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" />");
 echo("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />");

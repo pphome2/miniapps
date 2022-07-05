@@ -14,7 +14,10 @@ $MA_COPYRIGHT="© ".date("Y").". <a href=https://github.com/pphome2>Github</a>";
 
 # title, home link
 $MA_SITENAME="FM";
-$MA_SITE_HOME="http://www.google.com";
+$MA_TITLE="FM";
+$MA_CODENAME="fm";
+$MA_ROOT_HOME="https://google.com";
+$MA_SITE_HOME="";
 $MA_DOCTYPE="<!DOCTYPE HTML>";
 
 # directories
@@ -111,6 +114,8 @@ $MA_MENU_FIELD="m";
 $MA_MENU=array();
 # adminmenu
 $MA_ADMINMENU=array();
+# back icon in menu
+$MA_BACKPAGE=false;
 
 # variables (no change)
 $MA_NOPAGE=false;
