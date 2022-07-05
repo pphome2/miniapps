@@ -17,6 +17,7 @@ $MA_SITENAME="FM";
 $MA_TITLE="FM";
 $MA_CODENAME="fm";
 $MA_ROOT_HOME="https://google.com";
+$MA_ROOT_NAME="Google";
 $MA_SITE_HOME="";
 $MA_DOCTYPE="<!DOCTYPE HTML>";
 
