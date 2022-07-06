@@ -168,6 +168,28 @@ li:last-child {
 	border-radius:10px;
 }
 
+.message_warning {
+	position:relative;
+	display:block;
+	padding:0px;
+	background-color:yellow;
+	color:black;
+	cursor:default;
+	border: 0px solid;
+	border-radius:10px;
+}
+
+.message_info {
+	position:relative;
+	display:block;
+	padding:0px;
+	background-color:green;
+	color:white;
+	cursor:default;
+	border: 0px solid;
+	border-radius:10px;
+}
+
 
 .topright, .toprightclose {
 	text-decoration:none;

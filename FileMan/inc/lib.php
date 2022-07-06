@@ -50,153 +50,13 @@ function loadplugin($p){
 }
 
 
-# login from cookie or param
-function login(){
-	global $MA_LOGGEDIN,$MA_LOGIN_TIME,$MA_PASSWORD,$MA_ENABLE_COOKIES,$MA_COOKIE_PASSWORD,
-			$MA_USER_PASS,$MA_ADMIN_PASS,$MA_ADMIN_USER,$MA_LOGIN_TIME,$MA_LOGIN_TIMEOUT,
-			$MA_COOKIE_TIME,$MA_ENABLE_USERNAME,$MA_USERS_CRED,$MA_USER,$MA_USERS_ADMINUSERS,
-			$MA_COOKIE_USER;
-
-	$MA_LOGGEDIN=false;
-	$MA_LOGIN_TIME=time();
-	$MA_PASSWORD="";
-	$MA_USER="";
-
-	$db=count($MA_USERS_CRED);
-	# cookie 
-	# username support
-	if ($MA_ENABLE_USERNAME){
-		# username - cookie
-		if ($MA_ENABLE_COOKIES){
-			if (isset($_COOKIE[$MA_COOKIE_PASSWORD])){
-			    $MA_PASSWORD=$_COOKIE[$MA_COOKIE_PASSWORD];
-			}else{
-			    $MA_PASSWORD="";
-			}
-			if (isset($_COOKIE[$MA_COOKIE_USER])){
-			    $MA_USER=$_COOKIE[$MA_COOKIE_USER];
-			}else{
-			    $MA_USER="";
-			}
-			for ($i=0;$i<$db;$i++){
-				if (($MA_USER==$MA_USERS_CRED[$i][0])and($MA_PASSWORD==$MA_USERS_CRED[$i][1])){
-					$MA_LOGGEDIN=true;
-				}
-			}
-		}else{
-		}
-		if (!$MA_LOGGEDIN){
-			if ((isset($_POST["$MA_COOKIE_PASSWORD"]))and(isset($_POST["$MA_COOKIE_USER"]))){
-				$MA_PASSWORD=$_POST["$MA_COOKIE_PASSWORD"];
-				$MA_USER=$_POST["$MA_COOKIE_USER"];
-				$MA_PASSWORD=vinput($MA_PASSWORD);
-				$MA_USER=vinput($MA_USER);
-				if (strlen($MA_PASSWORD)<30){
-					$MA_PASSWORD=md5($MA_PASSWORD);
-				}
-
-				for ($i=0;$i<$db;$i++){
-					if (($MA_USER==$MA_USERS_CRED[$i][0])and($MA_PASSWORD==$MA_USERS_CRED[$i][1])){
-						$MA_LOGGEDIN=true;
-					}
-				}
-				# login timeout
-				if (isset($_POST["$MA_COOKIE_TIME"])){
-					$outime=$_POST["$MA_COOKIE_TIME"];
-					$outime=vinput($outime);
-					$utime2=$MA_LOGIN_TIME-$outime;
-					if ($utime2<$MA_LOGIN_TIMEOUT){
-						$MA_LOGGEDIN=true;
-					}else{
-						$MA_LOGGEDIN=false;
-					}
-				}
-			}
-		}
-
-	}else{
-		if ($MA_ENABLE_COOKIES){
-		    if (isset($_COOKIE[$MA_COOKIE_PASSWORD])){
-			    $MA_PASSWORD=$_COOKIE[$MA_COOKIE_PASSWORD];
-		    	for ($i=0;$i<$db;$i++){
-	    			if ($MA_PASSWORD==$MA_USERS_CRED[$i][1]){
-    					$MA_LOGGEDIN=true;
-					    $MA_USER=$MA_USERS_CRED[$i][0];
-				    }
-				}
-			}
-		}else{
-		}
-		if (!$MA_LOGGEDIN){
-			if (isset($_POST["$MA_COOKIE_PASSWORD"])){
-				$MA_PASSWORD=$_POST["$MA_COOKIE_PASSWORD"];
-				$MA_PASSWORD=vinput($MA_PASSWORD);
-				if (strlen($MA_PASSWORD)<30){
-					$MA_PASSWORD=md5($MA_PASSWORD);
-				}
-
-				for ($i=0;$i<$db;$i++){
-					if ($MA_PASSWORD==$MA_USERS_CRED[$i][1]){
-						$MA_LOGGEDIN=true;
-						$MA_USER=$MA_USERS_CRED[$i][0];
-					}
-				}
-				# login timeout
-				if (isset($_POST["$MA_COOKIE_TIME"])){
-					$outime=$_POST["$MA_COOKIE_TIME"];
-					$outime=vinput($outime);
-					$utime2=$MA_LOGIN_TIME-$outime;
-					if ($utime2<$MA_LOGIN_TIMEOUT){
-						$MA_LOGGEDIN=true;
-					}else{
-						$MA_LOGGEDIN=false;
-					}
-				}
-			}
-		}
-	}
-
-	if ($MA_ENABLE_COOKIES){
-		# set cookie
-		if ($MA_LOGGEDIN){
-			#setcookie($MA_COOKIE_PASSWORD, $MA_PASSWORD, time()+$MA_LOGIN_TIMEOUT);
-			#setcookie($MA_COOKIE_USER, $MA_USER, time()+$MA_LOGIN_TIMEOUT);
-			setcookie($MA_COOKIE_PASSWORD, $MA_PASSWORD, ['expires'=>time()+$MA_LOGIN_TIMEOUT,'samesite'=>'Lax']);
-			setcookie($MA_COOKIE_USER, $MA_USER, ['expires'=>time()+$MA_LOGIN_TIMEOUT,'samesite'=>'Lax']);
-		}else{
-			setcookie($MA_COOKIE_PASSWORD, "", time() - 3600);
-			setcookie($MA_COOKIE_USER, "", time() - 3600);
-		}
-	}
-
-	# admin
-	if ($MA_LOGGEDIN){
-		if (in_array($MA_USER,$MA_USERS_ADMINUSERS)){
-			$MA_ADMIN_USER=true;
-		}
-	}
-
-}
-
 
 # cookies or param
 function setcss(){
-	global $MA_ENABLE_COOKIES,$MA_STYLEINDEX,$MA_COOKIE_STYLE,$MA_CSS;
+	global $MA_STYLEINDEX,$MA_COOKIE_STYLE,$MA_CSS;
 
-	if ($MA_ENABLE_COOKIES){
-	    if (isset($_COOKIE[$MA_COOKIE_STYLE])){
-    		$MA_STYLEINDEX=intval(vinput($_COOKIE[$MA_COOKIE_STYLE]));
-		}
-	}else{
-		if (isset($_POST[$MA_COOKIE_STYLE])){
-			$MA_STYLEINDEX=htmlspecialchars($_POST[$MA_COOKIE_STYLE]);
-		}else{
-			if (isset($_GET[$MA_COOKIE_STYLE])){
-				$MA_STYLEINDEX=htmlspecialchars($_GET[$MA_COOKIE_STYLE]);
-			}else{
-			$MA_STYLEINDEX=0;
-			}
-		}
+    if (isset($_COOKIE[$MA_COOKIE_STYLE])){
+   		$MA_STYLEINDEX=intval(vinput($_COOKIE[$MA_COOKIE_STYLE]));
 	}
 	if ($MA_STYLEINDEX>count($MA_CSS)){
 		$MA_STYLEINDEX=0;
@@ -208,11 +68,11 @@ function setcss(){
 # page header
 function page_header(){
 	global $MA_HEADER,$MA_JS_BEGIN,$MA_CSS,$MA_STYLEINDEX,$MA_SITENAME,$MA_ROOT_HOME,
-			$MA_ENABLE_COOKIES,$MA_ADMINFILE,$L_ROOTHOME,$MA_COOKIE_STYLE,$MA_SITE_HOME,
-			$MA_MENU,$MA_MENU_FIELD,$MA_LOGGEDIN,$MA_COOKIE_PASSWORD,$L_LOGOUT,
+			$MA_ADMINFILE,$L_ROOTHOME,$MA_COOKIE_STYLE,$MA_SITE_HOME,
+			$MA_MENU,$MA_MENU_FIELD,$MA_LOGGEDIN,$MA_COOKIE_LOGIN,$L_LOGOUT,
 			$MA_SEARCH_ICON_HREF,$MA_SEARCH_ICON_JS,$MA_SEARCHFILE,$MA_LOGOUT_IN_HEADER,
 			$L_SITENAME,$MA_ADMIN_USER,$MA_ADMINMENU,$MA_ADMINMENU_FIELD,$MA_APPCSSFILE,
-			$MA_ENABLE_HEADER,$MA_COOKIE_STYLE,$MA_SEARCH_PAGE,$MA_PRIVACY_PAGE,
+			$MA_ENABLE_HEADER,$MA_SEARCH_PAGE,$MA_PRIVACY_PAGE,$MA_FAVICON,
             $MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,$MA_ENABLE_THEME,
             $MA_TITLE,$MA_BACKPAGE,$L_SITEHOME;
 
@@ -229,8 +89,8 @@ function page_header(){
 # page footer
 function page_footer(){
 	global $MA_JS_END,$MA_FOOTER,$MA_ADMINFILE,$MA_LOGIN_TIMEOUT,$MA_COOKIE_STYLE,$MA_STYLEINDEX,
-			$MA_COPYRIGHT,$MA_CSS,$MA_ENABLE_COOKIES,$MA_COOKIE_STYLE,$L_THEME,$MA_PRIVACYFILE,
-			$L_PRIVACY_MENU,$MA_LOGGEDIN,$MA_COOKIE_PASSWORD,$L_LOGOUT,$L_COOKIE_TEXT,
+			$MA_COPYRIGHT,$MA_CSS,$L_THEME,$MA_PRIVACYFILE,
+			$L_PRIVACY_MENU,$MA_LOGGEDIN,$MA_COOKIE_LOGIN,$L_LOGOUT,$L_COOKIE_TEXT,
 			$MA_PRIVACY_PAGE,$MA_ENABLE_FOOTER,$MA_STYLEPARAM_NAME,$MA_SEARCH_PAGE,
             $MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,$MA_ENABLE_THEME;
 
@@ -246,11 +106,11 @@ function page_footer(){
 # page header view
 function page_header_view(){
 	global $MA_HEADER_VIEW,$MA_JS_BEGIN,$MA_CSS,$MA_STYLEINDEX,$MA_SITENAME,$MA_ROOT_HOME,
-			$MA_ENABLE_COOKIES,$MA_ADMINFILE,$L_ROOTHOME,$MA_COOKIE_STYLE,$MA_SITE_HOME,
-			$MA_MENU,$MA_MENU_FIELD,$MA_LOGGEDIN,$MA_COOKIE_PASSWORD,$L_LOGOUT,
+			$MA_ADMINFILE,$L_ROOTHOME,$MA_COOKIE_STYLE,$MA_SITE_HOME,
+			$MA_MENU,$MA_MENU_FIELD,$MA_LOGGEDIN,$MA_COOKIE_LOGIN,$L_LOGOUT,
 			$MA_SEARCH_ICON_HREF,$MA_SEARCH_ICON_JS,$MA_SEARCHFILE,$MA_LOGOUT_IN_HEADER,
 			$L_SITENAME,$MA_ADMIN_USER,$MA_ADMINMENU,$MA_ADMINMENU_FIELD,$MA_APPCSSFILE,
-			$MA_ENABLE_HEADER,$MA_COOKIE_STYLE,$MA_PRIVACY_PAGE,$MA_SEARCH_PAGE,
+			$MA_ENABLE_HEADER,$MA_PRIVACY_PAGE,$MA_SEARCH_PAGE,$MA_FAVICON,
 			$MA_ENABLE_LOGIN_VIEW,$MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,
 			$MA_ENABLE_THEME,$MA_TITLE,$MA_BACKPAGE,$L_SITEHOME;
 
@@ -265,9 +125,9 @@ function page_header_view(){
 
 # page footer
 function page_footer_view(){
-	global $MA_JS_END,$MA_FOOTER_VIEW,$MA_ADMINFILE,$MA_LOGIN_TIMEOUT,$MA_COOKIE_STYLE,$MA_STYLEINDEX,
-			$MA_COPYRIGHT,$MA_CSS,$MA_ENABLE_COOKIES,$MA_COOKIE_STYLE,$L_THEME,$MA_PRIVACYFILE,
-			$L_PRIVACY_MENU,$MA_LOGGEDIN,$MA_COOKIE_PASSWORD,$L_LOGOUT,$L_COOKIE_TEXT,
+	global $MA_JS_END,$MA_FOOTER_VIEW,$MA_ADMINFILE,$MA_LOGIN_TIMEOUT,$MA_STYLEINDEX,
+			$MA_COPYRIGHT,$MA_CSS,$MA_COOKIE_STYLE,$L_THEME,$MA_PRIVACYFILE,
+			$L_PRIVACY_MENU,$MA_LOGGEDIN,$MA_COOKIE_LOGIN,$L_LOGOUT,$L_COOKIE_TEXT,
 			$MA_PRIVACY_PAGE,$MA_ENABLE_FOOTER,$MA_STYLEPARAM_NAME,$MA_SEARCH_PAGE,
 			$MA_ENABLE_LOGIN_VIEW,
             $MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,$MA_ENABLE_THEME;

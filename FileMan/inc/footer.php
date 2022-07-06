@@ -14,7 +14,7 @@ if ($nextstyle>(count($MA_CSS)-1)){
 	$nextstyle=0;
 }
 
-if (($MA_ENABLE_COOKIES)and(!$MA_LOGGEDIN)and(!$MA_PRIVACY_PAGE)and(!$MA_SEARCH_PAGE)and($MA_ENABLE_PRIVACY)){
+if ((!$MA_LOGGEDIN)and(!$MA_PRIVACY_PAGE)and(!$MA_SEARCH_PAGE)and($MA_ENABLE_PRIVACY)){
     echo("<p class=cookietext>$L_COOKIE_TEXT <a class=\"privacybutton\" href=\"$MA_PRIVACYFILE\">$L_PRIVACY_MENU</a></p>");
 }
 
@@ -25,21 +25,17 @@ if ($MA_ENABLE_FOOTER){
 	if (($MA_LOGGEDIN)and(!$MA_PRIVACY_PAGE)and(!$MA_SEARCH_PAGE)){
     	echo("<li class=\"liright\">");
 		echo("<a href=#
-			onclick=\"document.cookie='$MA_COOKIE_PASSWORD=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;';window.location = window.location.href;\">$L_LOGOUT</a>");
+			onclick=\"document.cookie='$MA_COOKIE_LOGIN=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+			window.history.replaceState(null, null, window.location.pathname);window.location = window.location.href;\">
+			$L_LOGOUT</a>");
     	echo("</li>");
 	}
 	if ($MA_ENABLE_THEME){
-        if ($MA_ENABLE_COOKIES){
-            echo("<li class=\"liright\">");
-    		echo("<a href=\"\" onclick=\"document.cookie='$MA_COOKIE_STYLE=$nextstyle;samesite=Lax;' \">$L_THEME</a>");
-            echo("</li>");
-        }else{
-            echo("<li class=\"liright\">");
-		    echo("<a href=\"$MA_ADMINFILE?\">$L_THEME</a>");
-            echo("</li>");
-        }
+        echo("<li class=\"liright\">");
+  		echo("<a href=\"\" onclick=\"document.cookie='$MA_COOKIE_STYLE=$nextstyle;samesite=Strict;' \">$L_THEME</a>");
+        echo("</li>");
     }
-    if ((!$MA_PRIVACY_PAGE)and($MA_ENABLE_PRIVACY)){
+    if ((!$MA_PRIVACY_PAGE)and(!$MA_SEARCH_PAGE)and($MA_ENABLE_PRIVACY)){
         echo("<li class=\"liright\">");
 	 	echo("<a href=\"$MA_PRIVACYFILE\" >$L_PRIVACY_MENU</a>");
         echo("</li>");

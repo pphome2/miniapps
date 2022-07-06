@@ -102,7 +102,7 @@ function button_print(){
 # messages functions
 function mess_error($m){
 	echo('
-		<div class="message_error" name="sysmessage" id="sysmessage">
+		<div class="message_error" name="esysmessage" id="esysmessage">
 			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
 				<p class="insidecontent">'.$m.'</p>
 			</div>
@@ -113,7 +113,28 @@ function mess_error($m){
 
 function mess_ok($m){
 	echo('
-		<div class="message_ok" name="sysmessage" id="sysmessage">
+		<div class="message_ok" name="osysmessage" id="osysmessage">
+			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
+				<p class="insidecontent">'.$m.'</p>
+			</div>
+		</div>
+	');
+}
+
+
+function mess_info($m){
+	echo('
+		<div class="message_info" name="isysmessage" id="isysmessage">
+			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
+				<p class="insidecontent">'.$m.'</p>
+			</div>
+		</div>
+	');
+}
+
+function mess_warning($m){
+	echo('
+		<div class="message_warning" name="wsysmessage" id="wsysmessage">
 			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
 				<p class="insidecontent">'.$m.'</p>
 			</div>
@@ -124,7 +145,8 @@ function mess_ok($m){
 
 # login box
 function login_form(){
-	global $MA_COOKIE_STYLE,$MA_STYLEINDEX,$L_PASSWORD,$MA_COOKIE_PASSWORD,$L_BUTTON_NEXT,$MA_ENABLE_USERNAME,
+	global $MA_COOKIE_STYLE,$MA_STYLEINDEX,$L_PASSWORD,$MA_COOKIE_PASS,
+	        $L_BUTTON_NEXT,$MA_ENABLE_USERNAME,
 			$MA_USERS,$L_USERNAME,$L_PASS,$MA_COOKIE_USER,$L_USER,$L_PASSWORD;
 
 	echo("<div class=spaceline100></div>");
@@ -134,10 +156,10 @@ function login_form(){
 	echo("<form  method='post' enctype='multipart/form-data'>");
 	if ($MA_ENABLE_USERNAME){
 		echo("	<input type='text' name='$MA_COOKIE_USER' id='$MA_COOKIE_USER' placeholder='$L_USER' autofocus>");
-		echo("	<input type='password' name='$MA_COOKIE_PASSWORD' id='$MA_COOKIE_PASSWORD' placeholder='$L_PASSWORD'>");	
+		echo("	<input type='password' name='$MA_COOKIE_PASS' id='$MA_COOKIE_PASS' placeholder='$L_PASSWORD'>");	
 	}else{
 		echo("	$L_PASS:");
-		echo("	<input type='password' name='$MA_COOKIE_PASSWORD' id='$MA_COOKIE_PASSWORD' autofocus>");	
+		echo("	<input type='password' name='$MA_COOKIE_PASS' id='$MA_COOKIE_PASS' autofocus>");
 	}
 	echo("	<div class=spaceline></div>");
 	echo("	<input type='submit' value='$L_BUTTON_NEXT' name='submit'>");

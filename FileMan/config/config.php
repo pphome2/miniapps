@@ -28,10 +28,8 @@ $MA_CONTENT_DIR="content";
 $MA_PLUGIN_DIR="plugins";
 
 # cookies
-$MA_COOKIE_STYLE="st";
-$MA_COOKIE_USER="user";
-$MA_COOKIE_PASSWORD="passw";
-$MA_COOKIE_TIME="ltime";
+$MA_COOKIE_STYLE=$MA_CODENAME."st";
+$MA_COOKIE_LOGIN=$MA_CODENAME."u";
 
 # include files
 $MA_ADMINFILE="start.php";
@@ -57,6 +55,7 @@ $MA_FOOTER_VIEW="$MA_INCLUDE_DIR/footer_view.php";
 
 $MA_LIB=array(
 			"$MA_INCLUDE_DIR/lib.php",
+			"$MA_INCLUDE_DIR/libadmin.php",
 			"$MA_INCLUDE_DIR/libview.php"
 			);
 
@@ -69,6 +68,9 @@ $MA_ENABLE_THEME=true;
 # plugins directorys (load dirname.php .css, .js from directory)
 $MA_PLUGINS=array();
 
+# language
+$MA_LANGFILE="hu.php";
+
 # local app main and css file
 $MA_APPFILE=array(
 				"$MA_CONTENT_DIR/fm.js",
@@ -76,19 +78,10 @@ $MA_APPFILE=array(
 				"$MA_CONTENT_DIR/fmdl.php",
 				"$MA_CONTENT_DIR/fmup.php",
 				"$MA_CONTENT_DIR/fmadmin.php",
-				"$MA_CONTENT_DIR/fm.php"
+				"$MA_CONTENT_DIR/fm.php",
+				"$MA_CONTENT_DIR/$MA_LANGFILE"
 			);
 $MA_APPCSSFILE="$MA_CONTENT_DIR/fm.css";
-
-# language
-$MA_LANGFILE="hu.php";
-
-# search
-$MA_SEARCH_ICON_HREF="";
-$MA_SEARCH_ICON_JS="";
-
-# auto logout (seconds)
-$MA_LOGIN_TIMEOUT=600;
 
 # header, footer
 $MA_ENABLE_HEADER=true;
@@ -119,24 +112,16 @@ $MA_ADMINMENU=array();
 $MA_BACKPAGE=false;
 
 # variables (no change)
+$MA_BACKPAGE=false;
 $MA_NOPAGE=false;
-$MA_PASSWORD="";
-$MA_LOGIN_TIME="";
 $MA_LOGGEDIN=false;
+$MA_ADMIN_USER=false;
 $MA_STYLEINDEX=0;
 $MA_LOGOUT_IN_HEADER=true;
 $MA_PRIVACY_PAGE=false;
 $MA_SEARCH_PAGE=false;
-$MA_ENABLE_COOKIES=true;
-$MA_ADMIN_USER=false;
-$MA_USERPAGE=false;
+$MA_COOKIE_USER="user";
+$MA_COOKIE_PASS="pass";
 
-#
-# if not enable cookie support:
-# - all form need add this lines
-#		<input type='hidden' name='$MA_COOKIE_PASSWORD' id='$MA_COOKIE_PASSWORD' value='$MA_PASSWORD'>
-#		<input type='hidden' name='$MA_COOKIE_STYLE' id='$MA_COOKIE_STYLE' value='$MA_STYLEINDEX'>
-#		<input type='hidden' name='$MA_COOKIE_TIME' id='$MA_COOKIE_TIME' value='$MA_LOGIN_TIME'>
-#
 
 ?>

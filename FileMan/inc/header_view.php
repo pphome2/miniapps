@@ -14,8 +14,8 @@ echo("<title>$MA_TITLE</title>");
 echo("<meta charset=\"utf-8\" />");
 echo("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" />");
 echo("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />");
-echo("<link rel=\"icon\" href=\"favicon.png\" />");
-echo("<link rel=\"shortcut icon\" type=\"image/png\" href=\"favicon.png\" />");
+echo("<link rel=\"icon\" href=\"$MA_FAVICON\" />");
+echo("<link rel=\"shortcut icon\" type=\"image/png\" href=\"$MA_FAVICON\" />");
 
 echo("<style>");
 if (file_exists($MA_CSS[$MA_STYLEINDEX])){

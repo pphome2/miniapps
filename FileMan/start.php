@@ -46,12 +46,6 @@ if ($MA_ENABLE_LOGIN){
 	$MA_LOGGEDIN=true;
 }
 
-if ($MA_LOGGEDIN){
-    if (!$MA_ENABLE_USERNAME){
-        $MA_ADMIN_USER=true;
-    }
-}
-
 # build page: header
 page_header();
 

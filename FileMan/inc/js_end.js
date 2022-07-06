@@ -1,24 +1,31 @@
 <script>
 
-<?php
-if ($MA_LOGGEDIN){
-	if ($MA_ENABLE_COOKIES){
-?>
-	setTimeout(function () { window.location.href = "<?php echo($MA_ADMINFILE); ?>"; }, <?php echo((($MA_LOGIN_TIMEOUT+1)*1000)); ?>);
-<?php
-	}else{
-?>
-	setTimeout(function () { window.location.href = "<?php echo($MA_ADMINFILE.'?'.$MA_COOKIE_STYLE.'='.$MA_STYLEINDEX); ?>"; }, <?php echo((($MA_LOGIN_TIMEOUT+1)*1000)); ?>);
-<?php
-	}
+var eid = document.getElementById("esysmessage");
+if (eid){
+    setTimeout(function(){
+        eid.style.display = "none";
+    }, 12000);
 }
-?>
 
-setTimeout(function(){
-  var myId = document.getElementById("sysmessage");
-    if(myId){
-        myId.style.display = "none";
-    }
-}, 10000);
+var wid = document.getElementById("wsysmessage");
+if (wid){
+    setTimeout(function(){
+        wid.style.display = "none";
+    }, 11000);
+}
+
+var oid = document.getElementById("osysmessage");
+if (oid){
+    setTimeout(function(){
+        oid.style.display = "none";
+    }, 10000);
+}
+
+var iid = document.getElementById("isysmessage");
+if (iid){
+    setTimeout(function(){
+        iid.style.display = "none";
+    }, 13000);
+}
 
 </script>

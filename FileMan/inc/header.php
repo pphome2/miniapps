@@ -19,8 +19,8 @@ echo("<title>$MA_TITLE</title>");
 echo("<meta charset=\"utf-8\" />");
 echo("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\" />");
 echo("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />");
-echo("<link rel=\"icon\" href=\"favicon.png\" />");
-echo("<link rel=\"shortcut icon\" type=\"image/png\" href=\"favicon.png\" />");
+echo("<link rel=\"icon\" href=\"$MA_FAVICON\" />");
+echo("<link rel=\"shortcut icon\" type=\"image/png\" href=\"$MA_FAVICON\" />");
 
 echo("<style>");
 if (file_exists($MA_CSS[$MA_STYLEINDEX])){
@@ -79,13 +79,9 @@ if ($MA_ENABLE_HEADER){
 			}
 		}
 
-        if ($MA_ENABLE_SEARCH){
+        if (($MA_ENABLE_SEARCH)and(!$MA_PRIVACY_PAGE)){
 	    	echo("<li class=\"liright\">");
-    		if (!empty($MA_SEARCH_ICON_HREF)){
-		        echo("<a href=\"$MA_SEARCH_ICON_HREF\" onclick=\"$MA_SEARCH_ICON_JS\">");
-		    }else{
-	    	    echo("<a href=\"$MA_SEARCHFILE\" onclick=\"$MA_SEARCH_ICON_JS\">");
-    		}
+    	    echo("<a href=\"$MA_SEARCHFILE\">");
 		    echo("<div class=\"search_icon\">&#9740;</div>");
 	    	echo("</a>");
     		echo("</li>");
@@ -95,7 +91,9 @@ if ($MA_ENABLE_HEADER){
         	if ((!$MA_PRIVACY_PAGE)and(!$MA_SEARCH_PAGE)){
 		    	echo("<li class=\"liright\">");
 			    echo("<a href=#
-				    onclick=\"document.cookie='$MA_COOKIE_PASSWORD=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;';window.location = window.location.href;\">$L_LOGOUT</a>");
+				        onclick=\"document.cookie='$MA_COOKIE_LOGIN=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+				        window.history.replaceState(null, null, window.location.pathname);window.location = window.location.href;\">
+				        $L_LOGOUT</a>");
     			echo("</li>");
 	    	}
 	    }
