@@ -38,6 +38,8 @@ $MA_SEARCHFILE="search.php";
 $MA_PRIVACYFILE="privacy.php";
 $MA_PRINTFILE="print.php";
 
+$MA_FAVICON="favicon.png";
+
 $MA_CSS=array(
 			"$MA_INCLUDE_DIR/siteb.css",
 			"$MA_INCLUDE_DIR/sitew.css"
