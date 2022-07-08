@@ -25,11 +25,13 @@ for ($i=0;$i<count($MA_LIB);$i++){
 	}
 }
 
-
 $MA_NOPAGE=true;
 
 # build page
 #page_header_view();
+
+echo($MA_DOCTYPE);
+
 if (file_exists($MA_CSSPRINT)){
     echo("<style>");
     include("$MA_CSSPRINT");

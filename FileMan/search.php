@@ -33,6 +33,13 @@ login();
 # cookies or param 
 setcss();
 
+# local app files
+for ($i=0;$i<count($MA_APPFILE);$i++){
+	if (file_exists("$MA_APPFILE[$i]")){
+		include("$MA_APPFILE[$i]");
+	}
+}
+
 # build page: header
 $mainpage=refererpage();
 if ($mainpage<>$MA_ADMINFILE){
@@ -45,12 +52,13 @@ if ($mainpage<>$MA_ADMINFILE){
     page_header();
 }
 
-
 # search
 #$MA_NOPAGE=true;
-for ($i=0;$i<count($MA_APPFILE);$i++){
-	if (file_exists("$MA_APPFILE[$i]")){
-		include("$MA_APPFILE[$i]");
+
+# load local app jsfile
+for ($i=0;$i<count($MA_APPJSFILE);$i++){
+	if (file_exists($MA_APPJSFILE[$i])){
+		include($MA_APPJSFILE[$i]);
 	}
 }
 

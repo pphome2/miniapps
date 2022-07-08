@@ -36,9 +36,14 @@ function login(){
 
 	$db=count($MA_USERS_CRED);
 	if (isset($_COOKIE[$MA_COOKIE_LOGIN])){
-	    $MA_LOGGEDIN=true;
-	    $user=$_COOKIE[$MA_COOKIE_LOGIN];
-	}else{
+        $user=$_COOKIE[$MA_COOKIE_LOGIN];
+   		for ($i=0;$i<$db;$i++){
+    		if ($user==$MA_USERS_CRED[$i][0]){
+	    		$MA_LOGGEDIN=true;
+		    }
+	    }
+	}
+	if (!$MA_LOGGEDIN){
 		if (isset($_POST["$MA_COOKIE_PASS"])){
 			$pass=$_POST["$MA_COOKIE_PASS"];
 			$pass=vinput($pass);
@@ -69,7 +74,7 @@ function login(){
 		setcookie($MA_COOKIE_LOGIN, $user, ['expires'=>0,'samesite'=>'Strict']);
 		#setcookie($MA_COOKIE_LOGIN, $user, ['expires'=>strtotime("+1 day"),'samesite'=>'Strict']);
 	}else{
-		setcookie($MA_COOKIE_LOGIN, "", time() - 3600);
+		setcookie($MA_COOKIE_LOGIN, "", ['expires'=>-1,'samesite'=>'Strict']);
 	}
 
 	# admin
@@ -78,6 +83,18 @@ function login(){
 			$MA_ADMIN_USER=true;
 		}
 	}
+}
+
+
+# logout: cookie delete
+function logout(){
+	global $MA_LOGGEDIN,$MA_COOKIE_LOGIN,$L_LOGOUT;
+
+	$MA_LOGGEDIN=false;
+	#setcookie($MA_COOKIE_LOGIN, "", time() - 3600);
+    echo("<script>
+        document.cookie='$MA_COOKIE_LOGIN=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;samesite=Strict;';
+        </script>");
 }
 
 

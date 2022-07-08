@@ -75,14 +75,17 @@ function button_back(){
 
 # backpage button with logout
 function button_back_logout(){
-	global $L_BACKPAGE,$MA_COOKIE_PASSWORD,$L_LOGOUT;
+	global $L_BACKPAGE,$MA_COOKIE_LOGIN,$L_LOGOUT;
 
     echo("<script>");
-	echo("document.cookie='$MA_COOKIE_PASSWORD=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;';");
+	echo("document.cookie='$MA_COOKIE_LOGIN=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;somesite=Strict;';");
     echo("</script>");
 	echo("<div class=\"spaceline\"></div>");
 	echo("<div class=insidecontent>
-	    <a onclick=\"document.cookie='$MA_COOKIE_PASSWORD=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;';window.history.back();\">
+	    <a onclick=\"
+	    document.cookie=
+	    '$MA_COOKIE_LOGIN=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;somesite=Strict;';
+	    window.history.back();\">
 	    <input type=submit id=submitar name=submitar value=$L_BACKPAGE></a></div>");
 	echo("<div class=\"spaceline\"></div>");
 }

@@ -18,8 +18,6 @@ if (!isset($MA_CONFIG_DIR)){
     }
 }
 
-echo($MA_DOCTYPE);
-
 for ($i=0;$i<count($MA_LIB);$i++){
 	if (file_exists("$MA_LIB[$i]")){
 		include("$MA_LIB[$i]");
@@ -49,6 +47,13 @@ if ($MA_ENABLE_LOGIN){
 # build page: header
 page_header();
 
+# load local app jsfile
+for ($i=0;$i<count($MA_APPJSFILE);$i++){
+	if (file_exists($MA_APPJSFILE[$i])){
+		include($MA_APPJSFILE[$i]);
+	}
+}
+
 if ($MA_LOGGEDIN){
 	# user/admin menu start
 	if (isset($_GET["$MA_MENU_FIELD"])){
@@ -73,7 +78,6 @@ if ($MA_LOGGEDIN){
 }
 
 # end local app file
-
 
 # page end
 page_footer();

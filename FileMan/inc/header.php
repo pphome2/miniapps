@@ -12,6 +12,8 @@ if ($L_SITENAME<>""){
     $MA_TITLE=$MA_TITLE." - ".$L_SITENAME;
 }
 
+echo($MA_DOCTYPE);
+
 echo("<html>");
 
 echo("<head>");
@@ -23,11 +25,21 @@ echo("<link rel=\"icon\" href=\"$MA_FAVICON\" />");
 echo("<link rel=\"shortcut icon\" type=\"image/png\" href=\"$MA_FAVICON\" />");
 
 echo("<style>");
-if (file_exists($MA_CSS[$MA_STYLEINDEX])){
-    include("$MA_CSS[$MA_STYLEINDEX]");
+if ($MA_ENABLE_SYSTEM_CSS){
+    if (file_exists($MA_CSS[$MA_STYLEINDEX])){
+        include("$MA_CSS[$MA_STYLEINDEX]");
+    }else{
+        if (file_exists($MA_CSS[0])){
+            include("$MA_CSS[0]");
+        }
+    }
 }
-if (file_exists($MA_APPCSSFILE)){
-    include("$MA_APPCSSFILE");
+if (file_exists($MA_APPCSSFILE[$MA_STYLEINDEX])){
+    include("$MA_APPCSSFILE[$MA_STYLEINDEX]");
+}else{
+    if (file_exists($MA_APPCSSFILE[0])){
+        include("$MA_APPCSSFILE[0]");
+    }
 }
 echo("</style>");
 

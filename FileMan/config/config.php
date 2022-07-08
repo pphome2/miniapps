@@ -44,11 +44,12 @@ $MA_CSS=array(
 			"$MA_INCLUDE_DIR/siteb.css",
 			"$MA_INCLUDE_DIR/sitew.css"
 			);
-
+$MA_ENABLE_SYSTEM_CSS=true;
 $MA_CSSPRINT="$MA_INCLUDE_DIR/sitepr.css";
 
 $MA_JS_BEGIN="$MA_INCLUDE_DIR/js_begin.js";
 $MA_JS_END="$MA_INCLUDE_DIR/js_end.js";
+$MA_ENABLE_SYSTEM_JS=true;
 
 $MA_HEADER="$MA_INCLUDE_DIR/header.php";
 $MA_FOOTER="$MA_INCLUDE_DIR/footer.php";
@@ -75,7 +76,6 @@ $MA_LANGFILE="hu.php";
 
 # local app main and css file
 $MA_APPFILE=array(
-				"$MA_CONTENT_DIR/fm.js",
 				"$MA_CONTENT_DIR/fmcfg.php",
 				"$MA_CONTENT_DIR/fmdl.php",
 				"$MA_CONTENT_DIR/fmup.php",
@@ -83,7 +83,8 @@ $MA_APPFILE=array(
 				"$MA_CONTENT_DIR/fm.php",
 				"$MA_CONTENT_DIR/$MA_LANGFILE"
 			);
-$MA_APPCSSFILE="$MA_CONTENT_DIR/fm.css";
+$MA_APPCSSFILE=array("$MA_CONTENT_DIR/fm.css");
+$MA_APPJSFILE=array("$MA_CONTENT_DIR/fm.js");
 
 # header, footer
 $MA_ENABLE_HEADER=true;
