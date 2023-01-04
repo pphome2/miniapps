@@ -40,7 +40,7 @@ for ($i=0;$i<count($MA_APPFILE);$i++){
 
 # build page: header
 $mainpage=refererpage();
-echo($mainpage);
+#echo($mainpage);
 if ($mainpage<>$MA_ADMINFILE){
     if ($MA_ENABLE_HEADER_VIEW){
         page_header();
