@@ -23,8 +23,9 @@ $MA_FOOTERMENU=array(
 
 $I_FILESTORE="Files";
 $I_FILECOUNTLIMIT=30;
+$I_FILEFROMSCANNER="SKM";
 
-$I_LISTCODE=array("1","2","3","4");
+$I_LISTCODE=array("1","2","3","4","5");
 
 $I_SEPARATOR=";";
 
@@ -32,7 +33,7 @@ $I_DOWNLOAD_FILE="dl.php";
 
 $I_FIRSTDOCNUM="10000";
 
-$I_PAGEROW=2;
+$I_PAGEROW=100;
 
 $I_FIRSTYEAR="2020";
 

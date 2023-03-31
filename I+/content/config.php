@@ -8,10 +8,10 @@
  #
 
 # configuration
-$MA_COPYRIGHT="© ".date("Y").". <a href=https://github.com/pphome2>I+</a>";
+$MA_COPYRIGHT="© ".date("Y").". <a href=https://google.com>Google</a>";
 
 # title, home link
-$MA_SITENAME="I+";
+$MA_SITENAME="Ikt";
 $MA_TITLE="I+";
 $MA_CODENAME="ko";
 $MA_ROOT_HOME="http://10.16.1.249";
@@ -32,7 +32,10 @@ $MA_APPFILE=array("$MA_LANGFILE",
 				"ic.php",
 				"ip.php",
 				"il.php",
+				"ild.php",
+				"ilp.php",
 				"id.php",
+				"id2.php",
 				"ipar.php",
 				"i.php"
 			);
@@ -44,7 +47,7 @@ $MA_APPPRIVACYFILE="$MA_CONTENT_DIR/privacy.txt";
 # SQL
 $MA_SQL_SERVER="localhost";
 $MA_SQL_DB="demo";
-$MA_SQL_USER="admin";
-$MA_SQL_PASS="";
+$MA_SQL_USER="demousewr";
+$MA_SQL_PASS="demopass";
 
 ?>

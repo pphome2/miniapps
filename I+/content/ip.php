@@ -129,7 +129,7 @@ function i_partnerdata($new){
 
 
 function i_partner(){
-	global $MA_SQL_RESULT,$I_NEWPARTNER,$I_TABLE_TITLE,
+	global $MA_SQL_RESULT,$I_NEWPARTNER,$I_PARTNERTABLE_TITLE,
 			$I_WORKPARTNER,$I_SEARCH,$I_PAGEROW,$I_PAGE_LEFT,$I_PAGE_RIGHT;
 
 	$ptable=true;
@@ -169,11 +169,12 @@ function i_partner(){
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");
-		echo("<th class='df_th0'>$I_TABLE_TITLE[0]</th>");
-		echo("<th class='df_th1'>$I_TABLE_TITLE[1]</th>");
-		echo("<th class='df_th2'>$I_TABLE_TITLE[2]</th>");
-		echo("<th class='df_th3'>$I_TABLE_TITLE[3]</th>");
-		echo("<th class='df_th4'>$I_TABLE_TITLE[4]</th>");
+		echo("<th class='df_th'>$I_PARTNERTABLE_TITLE[0]</th>");
+		echo("<th class='df_th'>$I_PARTNERTABLE_TITLE[1]</th>");
+		echo("<th class='df_th'>$I_PARTNERTABLE_TITLE[2]</th>");
+		echo("<th class='df_th0'>$I_PARTNERTABLE_TITLE[3]</th>");
+		echo("<th class='df_th0'>$I_PARTNERTABLE_TITLE[4]</th>");
+		echo("<th class='df_th0'>$I_PARTNERTABLE_TITLE[5]</th>");
 		echo("</tr>");
 		$db=count($MA_SQL_RESULT);
 		for($i=0;$i<$db;$i++){
@@ -183,6 +184,7 @@ function i_partner(){
 			echo("<td class='df_td'>$r[4]</td>");
 			echo("<td class='df_td'>$r[7]</td>");
 			echo("<td class='df_td'>$r[8]</td>");
+			echo("<td class='df_td'>$r[9]</td>");
 			echo("<td class='df_td'>");
 			echo("<center>");
 			echo("<form method=post>");

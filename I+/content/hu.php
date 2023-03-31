@@ -24,7 +24,7 @@ $I_SAVE="Mentés";
 $I_TITLE_NEW="Új partner";
 $I_TITLE_CHANGE="Partneradatok módosítása";
 $I_TITLE_DEL="Partneradatok törlése";
-$I_TABLE_TITLE=array("Név","Város","E-mail","Adószám","Töröl / Javít");
+$I_PARTNERTABLE_TITLE=array("Név","Város","E-mail","Adószám","Számlaszám","Töröl / Javít");
 $I_NEWPARTNER="+";
 $I_WORKPARTNER=">>>";
 $I_DELPARTNER="Törlés";
@@ -38,7 +38,7 @@ $I_PARTNER_FIELDS=array(
 					"Cím 2",
 					"E-mail",
 					"Adószám",
-					"Megjegyzés"
+					"Számlaszám"
 			);
 
 $I_PARTNERNEWDOC="Új dokumentum érkezett a partnertől";
@@ -56,7 +56,7 @@ $I_CAT_FIELDS=array("ID","Kód","Név");
 $I_DOCTITLE_NEW="Új dokumentum";
 $I_DOCTITLE_CHANGE="Dokumentum adatainak módosítása";
 $I_DOCTITLE_DEL="Dokumentum törlése";
-$I_DOCTABLE_TITLE=array("Sorszám","Kiállító","Határidő","Bank","Töröl / Javít");
+$I_DOCTABLE_TITLE=array("Sorszám","Kiállító","Határidő","Átadás","Fizetve","Bank","Töröl / Javít");
 $I_NEWDOC="+";
 $I_WORKDOC=">>>";
 $I_DELDOC="Törlés";
@@ -71,6 +71,7 @@ $I_DOC_FIELDS=array("ID",
 					"Kiállítás dátuma",
 					"Fizetési határidő",
 					"Kifizetés dátuma",
+					"Átadás dátuma",
 					"Telephely",
 					"Bank",
 					"Megjegyzés",
@@ -82,17 +83,21 @@ $I_SITE=array("Szolnok","Magyarszecsőd","Dég");
 $I_LISTS=array("Lejáró számlák",
 				"Partnerenkénti számlák",
 				"Kategóriánkénti számlák",
-				"Telephelyenkénti számlák"
+				"Telephelyenkénti számlák",
+				"Átadásra kerülő",
+				"Partnerlista"
 				);
 $I_GO=">>>";
 
-$I_LISTTABLE_TITLE=array("Sorszám","Kiállító","Kategória","Határidő","Fizetve");
+$I_LISTTABLE_TITLE=array("Sorszám","Kiállító","Kategória","Határidő","Átadás","Fizetve");
 $I_DOWNLOAD="Letöltés";
+$I_DOWNLOADTEXT="A letöltés előkészítve.";
 
 $I_PAGE_RIGHT=">";
 $I_PAGE_LEFT="<";
 
 $I_BACK="Vissza";
 
+$I_PTABLE_TITLE=array("Név","Város","E-mail","Adószám","Számlaszám");
 
 ?>

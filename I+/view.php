@@ -53,8 +53,8 @@ if ($MA_ENABLE_HEADER_VIEW){
 
 # load local app jsfile
 for ($i=0;$i<count($MA_APPJSFILE);$i++){
-	if (file_exists($MA_APPJSFILE[$i])){
-		include($MA_APPJSFILE[$i]);
+	if (file_exists("$MA_CONTENT_DIR/$MA_APPJSFILE[$i]")){
+		include("$MA_CONTENT_DIR/$MA_APPJSFILE[$i]");
 	}
 }
 

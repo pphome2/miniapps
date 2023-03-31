@@ -1,7 +1,7 @@
 
 body {
 	margin:0px;
-	font-size:16px;
+	font-size:14px;
 	color: black;
 	background-color: lightgrey;
 }
@@ -95,7 +95,8 @@ li a, .dropbtn{
 	display: inline-block;
 	text-align: center;
 	color:white;
-	padding: 14px 16px;
+	padding: 10px 12px;
+	border-radius:5px;
 	text-decoration: none;
 }
 
