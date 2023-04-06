@@ -46,19 +46,19 @@ function i_table(){
 
 
 function i_data(){
-	global $MA_MENU_FIELD,$I_MENUCODE;
+	global $MA_MENU_FIELD,$MA_MENUCODE;
 
 	echo("<div class=spaceline></div>");
 	echo("<div class=content>");
 	if (isset($_GET[$MA_MENU_FIELD])){
 		switch ($_GET[$MA_MENU_FIELD]){
-			case $I_MENUCODE[0]:
+			case $MA_MENUCODE[0]:
 				i_partner();
 				break;
-			case $I_MENUCODE[1]:
+			case $MA_MENUCODE[1]:
 				i_cat();
 				break;
-			case $I_MENUCODE[2]:
+			case $MA_MENUCODE[2]:
 				i_list();
 				break;
 			default:

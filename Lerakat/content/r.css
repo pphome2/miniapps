@@ -1,0 +1,118 @@
+
+.frow {
+  width: 100%;
+  float: left;
+}
+
+.fcol1 {
+  width: 20%;
+  float: left;
+  margin-top: 20px;
+}
+
+.fcol2 {
+  width: 80%;
+  float: left;
+}
+
+.tbutton{
+  width:20%;
+  padding:0px 50px 0px 30px;
+  margin:0px;
+}
+
+.df_table {
+  width:90%;
+}
+
+.df_table_full {
+  width:100%;
+}
+
+.df_trh {
+  background-color:blue;
+}
+
+.df_th0 {
+  padding:5px;
+  color:#a7a8a8;
+  width:10%;
+}
+
+.df_th {
+  padding:5px;
+  color:#a7a8a8;
+}
+
+.df_th1 {
+  padding:5px;
+  color:#a7a8a8;
+  width:30%;
+}
+
+.df_th2 {
+  padding:5px;
+  color:#a7a8a8;
+  width:20%;
+}
+
+.df_th3 {
+  padding:5px;
+  color:#a7a8a8;
+  width:20%;
+}
+
+.df_th4 {
+  padding:5px;
+  color:#a7a8a8;
+  width:10%;
+}
+
+.df_th5 {
+  padding:5px;
+  color:#a7a8a8;
+  width:50%;
+}
+
+.df_tr:nth-child(even){
+  background-color:grey;
+}
+
+.df_tr:nth-child(odd) {
+  background-color:dimgrey;
+  color:black;
+}
+
+.df_td {
+  color:white;
+  text-align:left;
+  padding:10px;
+}
+
+.colx2{
+  width:50%;
+  margin:20px;
+  float:left;
+}
+
+.colx1{
+  width:25%;
+  margin:20px;
+  float:left;
+}
+
+.pcol1{
+  width:50%;
+  float:left;
+}
+
+.pcol2{
+  width:25%;
+  float:left;
+}
+
+.pagerform{
+  margin:0px;
+  padding:0px;
+}
+

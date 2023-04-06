@@ -8,7 +8,7 @@
  #
 
 # configuration
-$MA_COPYRIGHT="© ".date("Y").". <a href=https://google.com>Google</a>";
+$MA_COPYRIGHT="<a href=https://google.com>Google</a>";
 
 # title, home link
 $MA_SITENAME="Ikt";
@@ -47,7 +47,7 @@ $MA_APPPRIVACYFILE="$MA_CONTENT_DIR/privacy.txt";
 # SQL
 $MA_SQL_SERVER="localhost";
 $MA_SQL_DB="demo";
-$MA_SQL_USER="demousewr";
-$MA_SQL_PASS="demopass";
+$MA_SQL_USER="demouser";
+$MA_SQL_PASS="demopassword";
 
 ?>

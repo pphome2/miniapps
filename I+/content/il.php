@@ -32,8 +32,15 @@ function i_list(){
 				$listall=false;
 				if (isset($_POST['id'])){
 					$id=$_POST['id'];
+					$sqlc="select * from ik_cat where id=$id;";
+					if (sql_run($sqlc)){
+						$r=$MA_SQL_RESULT[0];
+						$n=$I_LISTS[2].": ".$r[2];
+					}else{
+						$n=$I_LISTS[2];
+					}
 					$sqlc="kat = $id";
-					i_listtable($I_LISTCODE[2],$sqlc,$I_LISTS[2]);
+					i_listtable($I_LISTCODE[2],$sqlc,$n);
 				}
 				break;
 			case $I_LISTCODE[3]:
@@ -41,7 +48,8 @@ function i_list(){
 				if (isset($_POST['id'])){
 					$id=$_POST['id'];
 					$sqlc="telep = \"$id\"";
-					i_listtable($I_LISTCODE[3],$sqlc,$I_LISTS[3]);
+					$n=$I_LISTS[3].": $id";
+					i_listtable($I_LISTCODE[3],$sqlc,$n);
 				}
 				break;
 			case $I_LISTCODE[4]:
@@ -97,7 +105,9 @@ function i_list(){
 			$db=count($MA_SQL_RESULT);
 			for($j=0;$j<$db;$j++){
 				$r=$MA_SQL_RESULT[$j];
-				echo("<option value=\"$r[0]\">$r[2]</option>");
+				if ($r[2]<>""){
+					echo("<option value=\"$r[0]\">$r[2]</option>");
+				}
 			}
 			echo("</select>");
 		}

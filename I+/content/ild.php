@@ -92,7 +92,7 @@ function i_listtable($lcode=0,$sqlc="",$title=""){
 			for($i=0;$i<$db;$i++){
 				$r=$dr[$i];
 				echo("<tr class=df_tr>");
-				$fn="$I_FILESTORE/$r[14]";
+				$fn="$I_FILESTORE/$r[15]";
 				echo("<td class='df_td'><a href=\"$fn\">$r[1]</a></td>");
 				$sqlc="select * from ik_partner where id=$r[4];";
 				if (sql_run($sqlc)){

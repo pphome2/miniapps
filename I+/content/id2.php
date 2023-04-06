@@ -44,11 +44,11 @@ function i_docdata($new){
 				if (sql_run($sqlc)){
 					$d=$MA_SQL_RESULT[0];
 					$fn=date('Ymd')." - ".$d[1]." ".date('His').".pdf";
-                    $f1=$I_FILESTORE."/".$_POST[15];
-                    $f2=$I_FILESTORE."/".$fn;
-                    if (!rename("$f1","$f2")){
-                      $fn=$_POST[15];
-                    }
+					$f1=$I_FILESTORE."/".$_POST[15];
+					$f2=$I_FILESTORE."/".$fn;
+					if (!rename("$f1","$f2")){
+						$fn=$_POST[15];
+					}
 				}else{
 					$fn=$_POST[15];
 				}
@@ -91,12 +91,12 @@ function i_docdata($new){
 					$sqlc="select * from ik_partner where id=$_POST[4];";
 					if (sql_run($sqlc)){
 						$d=$MA_SQL_RESULT[0];
-					    $fn=date('Ymd')." - ".$d[1]." ".date('His').".pdf";
-                        $f1=$I_FILESTORE."/".$_POST[15];
-                        $f2=$I_FILESTORE."/".$fn;
-                        if (!rename("$f1","$f2")){
-                          $fn=$_POST[15];
-                        }
+						$fn=date('Ymd')." - ".$d[1]." ".date('His').".pdf";
+						$f1=$I_FILESTORE."/".$_POST[15];
+						$f2=$I_FILESTORE."/".$fn;
+						if (!rename("$f1","$f2")){
+							$fn=$_POST[15];
+						}
 					}else{
 						$fn=$_POST[15];
 					}

@@ -12,7 +12,7 @@
 
 function sql_run($sqlcomm=""){
   global $MA_SQL_SERVER,$MA_SQL_DB,$MA_SQL_USER,$MA_SQL_PASS,$MA_SQL_ERROR,
-	  $MA_SQL_RESULT;
+	  $MA_SQL_RESULT,$MA_SQL_ERROR_ECHO;
 
   $ret=false;
   if (function_exists('mysqli_connect')){
@@ -43,7 +43,8 @@ function sql_run($sqlcomm=""){
       }
     }
   }
-  if ($MA_SQL_ERROR<>""){
+  if (($MA_SQL_ERROR<>"")and($MA_SQL_ERROR_ECHO)){
+	echo("$sqlcomm\n");
     echo("$MA_SQL_ERROR\n");
   }
   return($ret);
@@ -124,7 +125,6 @@ function sql_install(){
         }
       }
     }
-    #echo($sqlc);
     sql_multi_run($sqlc);
   }
 }
