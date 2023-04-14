@@ -37,6 +37,7 @@ create table if not exists ik_doc (
     kiall varchar(20) charset utf8,
     fhat varchar(20) charset utf8,
     fiz varchar(20) charset utf8,
+    atad varchar(20) charset utf8,
     telep varchar(40) charset utf8,
     bank varchar(40) charset utf8,
     megj varchar(128) charset utf8,

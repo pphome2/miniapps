@@ -9,18 +9,30 @@
 
 
 
-function r_listout($title=""){
-	global $MA_SQL_RESULT,$R_OUT_TABLE_TITLE,$R_SEARCH,$R_PAGEROW,$R_PAGE_LEFT,
+function r_outklt($title=""){
+	global $MA_SQL_RESULT,$R_OUT_TABLE_TITLE_MOUNTH,$R_SEARCH,$R_PAGEROW,$R_PAGE_LEFT,
 			$R_PAGE_RIGHT,$R_GO,$R_LISTCODE,$R_DOWNLOADTEXT,$R_DOWNLOAD,$R_BACK,
 			$R_DOWNLOAD_FILE,$R_OUT_FIELDS,$R_OUT_FIELDS2;
 
-	echo("<h3>$title</h3><br />");
 	$d="";
 	$d2="";
 	if (isset($_POST['date'])){
 		$d2=$_POST['date'];
 		$d=str_replace("-",".",$d2);
+		$d=substr($d,0,7);
 	}
+	if (isset($_POST['klt'])){
+		$klt=$_POST['klt'];
+		$sqlc="select * from r_kolt where id=$klt;";
+		if (sql_run($sqlc)){
+			$da=$MA_SQL_RESULT[0];
+			$kltn=$da[1];
+		}
+	}
+	if ($d===""){
+		$d=date('Y.m');
+	}
+	echo("<h3>$title - $d - $kltn</h3><br />");
 	if (isset($_POST['download'])){
 		echo("<div class=frow>");
 		echo("<div class=colx1></div>");
@@ -31,12 +43,15 @@ function r_listout($title=""){
 		echo("$R_DOWNLOADTEXT");
 		$w="";
 		if ($d<>""){
-			$w="where dat=\"$d\"";
+			$w="where dat between \"$d.01\" and \"$d.31\"";
+			if ($klt<>""){
+				$w=$w." and klt=\"$klt\"";
+			}
 		}
 		$dload="";
-		$db=count($R_OUT_FIELDS2);
+		$db=count($R_OUT_TABLE_TITLE_MOUNTH);
 		for($i=0;$i<$db;$i++){
-			$dload=$dload.$R_OUT_FIELDS2[$i].";";
+			$dload=$dload.$R_OUT_TABLE_TITLE_MOUNTH[$i].";";
 		}
 		$dload=$dload.PHP_EOL;
 		sql_run("select * from r_kiad $w order by id desc;");
@@ -44,6 +59,11 @@ function r_listout($title=""){
 		$db=count($data);
 		for($i=0;$i<$db;$i++){
 			$r=$data[$i];
+			$sqlc="select * from r_keszlet where cikk=$r[2] and rakt=$r[7];";
+			if (sql_run($sqlc)){
+				$d=$MA_SQL_RESULT[0];
+				$ear=$d[6];
+			}
 			$sqlc="select * from r_cikk where id=$r[2];";
 			if (sql_run($sqlc)){
 				$d=$MA_SQL_RESULT[0];
@@ -59,10 +79,14 @@ function r_listout($title=""){
 				$d=$MA_SQL_RESULT[0];
 				$r[5]=$d[1];
 			}
-			$xdb=count($r);
-			for($j=0;$j<$xdb;$j++){
-				$dload=$dload.$r[$j].";";
-			}
+			$dload=$dload.$r[1].";";
+			$dload=$dload.$r[2].";";
+			$dload=$dload.$ear.";";
+			$dload=$dload.$r[3].";";
+			$dload=$dload.$r[4].";";
+			$dload=$dload.$r[5].";";
+			$dload=$dload.$r[6].";";
+			$dload=$dload.$r[7].";";
 			$dload=$dload.PHP_EOL;
 		}
 		echo("<div class=spaceline></div>");
@@ -85,7 +109,7 @@ function r_listout($title=""){
 			$page=(int)$_POST['page'];
 			$first=$R_PAGEROW*$page;
 		}else{
-		}
+			}
 		$last=false;
 		if (sql_run("select count(*) from r_kiad;")){
 			$r=$MA_SQL_RESULT[0];
@@ -96,47 +120,41 @@ function r_listout($title=""){
 			}
 		}
 		echo("<form method=post>");
-		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
+		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[4]\">");
 		echo("<input type=hidden id=date name=date value=\"$d2\"> ");
+		echo("<input type=hidden id=klt name=klt value=\"$klt\"> ");
 		echo("<input type=submit id=download name=download value=\"$R_DOWNLOAD\">");
-		echo("</form>");
-		echo("<form method=post>");
-		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
-		echo("<input type=hidden id=page name=page value=$page>");
-		echo("<div class=frow>");
-		echo("<div class=pcol1>");
-		echo("<span style=\"color:transparent;\">?</span>");
-		echo("</div>");
-		echo("<div class=pcol2>");
-		echo("<input style=\"width:95%;\" type=date id=date name=date value=\"$d2\"> ");
-		echo("</div>");
-		echo("<div class=pcol2>");
-		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
-		echo("<input type=submit id=dgo name=dgo value=\"$R_GO\">");
-		echo("</div>");
-		echo("</div>");
 		echo("</form>");
 		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$R_SEARCH\">");
 		$w="";
 		if ($d<>""){
-			$w="where dat=\"$d\"";
+			$w="where dat between \"$d.01\" and \"$d.31\"";
+			if ($klt<>""){
+				$w=$w." and klt=\"$klt\"";
+			}
 		}
 		sql_run("select * from r_kiad $w order by id desc limit $first,$R_PAGEROW;");
 		$dat=$MA_SQL_RESULT;
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[0]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[1]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[2]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[3]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[4]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[5]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[6]</th>");
+		echo("<th class='df_th'>$R_OUT_TABLE_TITLE_MOUNTH[0]</th>");
+		echo("<th class='df_th'>$R_OUT_TABLE_TITLE_MOUNTH[1]</th>");
+		echo("<th class='df_th'>$R_OUT_TABLE_TITLE_MOUNTH[2]</th>");
+		echo("<th class='df_th'>$R_OUT_TABLE_TITLE_MOUNTH[3]</th>");
+		echo("<th class='df_th'>$R_OUT_TABLE_TITLE_MOUNTH[4]</th>");
+		echo("<th class='df_th'>$R_OUT_TABLE_TITLE_MOUNTH[5]</th>");
+		echo("<th class='df_th'>$R_OUT_TABLE_TITLE_MOUNTH[6]</th>");
+		echo("<th class='df_th'>$R_OUT_TABLE_TITLE_MOUNTH[7]</th>");
 		echo("</tr>");
 		$db=count($dat);
 		for($i=0;$i<$db;$i++){
 			$r=$dat[$i];
+			$sqlc="select * from r_keszlet where cikk=$r[2] and rakt=$r[7];";
+			if (sql_run($sqlc)){
+				$d=$MA_SQL_RESULT[0];
+				$ear=$d[6];
+			}
 			$sqlc="select * from r_cikk where id=$r[2];";
 			if (sql_run($sqlc)){
 				$d=$MA_SQL_RESULT[0];
@@ -155,6 +173,7 @@ function r_listout($title=""){
 			echo("<tr class=df_tr>");
 			echo("<td class='df_td'>$r[1]</td>");
 			echo("<td class='df_td'>$r[2]</td>");
+			echo("<td class='df_td'>$ear</td>");
 			echo("<td class='df_td'>$r[3]</td>");
 			echo("<td class='df_td'>$r[4]</td>");
 			echo("<td class='df_td'>$r[5]</td>");
@@ -170,7 +189,8 @@ function r_listout($title=""){
 			$p=$page-1;
 			echo("<input type=hidden id=page name=page value=$p>");
 			echo("<input type=hidden id=date name=date value=\"$d2\"> ");
-			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
+			echo("<input type=hidden id=klt name=klt value=\"$klt\"> ");
+			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[4]\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 			echo("</form>");
 		}else{
@@ -188,7 +208,8 @@ function r_listout($title=""){
 			echo("<form method=post>");
 			echo("<input type=hidden id=page name=page value=$p>");
 			echo("<input type=hidden id=date name=date value=\"$d2\"> ");
-			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
+			echo("<input type=hidden id=klt name=klt value=\"$klt\"> ");
+			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[4]\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 			echo("</form>");
 		}else{

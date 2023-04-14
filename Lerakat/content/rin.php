@@ -8,18 +8,18 @@
  #
 
 
-function r_st1($pid){
+function r_inst1($pid){
 	global $MA_SQL_RESULT,$R_NEW_INAME,$R_INAME_TABLE_TITLE,
 		$R_WORK_INAME,$R_SEARCH,$R_PAGEROW,$R_PAGE_LEFT,$R_PAGE_RIGHT,
 		$R_IN_STAGE,$R_SELECT;
 
 	echo("<h3>$R_IN_STAGE[1] </h3><br />");
+	$page=0;
+	$first=0;
 	if (isset($_POST['page'])){
 		$page=(int)$_POST['page'];
 		$first=$R_PAGEROW*$page;
 	}else{
-		$page=0;
-		$first=0;
 	}
 	$last=false;
 	if (sql_run("select count(*) from r_cikk;")){
@@ -73,6 +73,7 @@ function r_st1($pid){
 		echo("<form method=post>");
 		$p=$page-1;
 		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=pid name=pid value=\"$pid\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 		echo("</form>");
 	}else{
@@ -89,6 +90,7 @@ function r_st1($pid){
 		$p=$page+1;
 		echo("<form method=post>");
 		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=pid name=pid value=\"$pid\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 		echo("</form>");
 	}else{
@@ -101,7 +103,7 @@ function r_st1($pid){
 
 
 
-function r_st0(){
+function r_inst0(){
 	global $MA_SQL_RESULT,$R_NEW_PARTNER,$R_PARTNER_TABLE_TITLE,
 			$R_WORK_PARTNER,$R_SEARCH,$R_PAGEROW,$R_PAGE_LEFT,$R_PAGE_RIGHT,
 			$R_IN_STAGE,$R_SELECT;
@@ -202,13 +204,13 @@ function r_in(){
 	}else{
 		switch($st){
 			case 0:
-				r_st0();
+				r_inst0();
 				break;
 			case 1:
-				r_st1($pid);
+				r_inst1($pid);
 				break;
 			case 2:
-				r_st2($pid,$iid);
+				r_inst2($pid,$iid);
 				break;
 			default:
 				break;

@@ -104,12 +104,11 @@ $MA_ENABLE_LOGIN_VIEW=true;
 
 # multiuser
 $MA_ENABLE_USERNAME=false;
-$MA_USERNAME="";
 $MA_USERS_ADMINUSERS=array("admin");
+$MA_USERNAME="";
 $MA_USERS_CRED=array(
 					array("admin","e3274be5c857fb42ab72d786e281b4b8"),
-					array("user","5f4dcc3b5aa765d61d8327deb882cf99"),
-					array("fouser","3dfcc3705e01fa98e3c00efc3b65409d")
+					array("user","5f4dcc3b5aa765d61d8327deb882cf99")
 				);
 # need md5 passcode -- user password: password - admin password: adminpassword
 

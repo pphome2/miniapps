@@ -72,6 +72,7 @@ $MA_SQL_PASS="";
 $MA_SQL_ERROR="";
 $MA_SQL_RESULT=array();
 $MA_SQL_FILE="inst.sql";
+$MA_SQL_ERROR_ECHO=true;
 
 # pages
 $MA_ENABLE_PRIVACY=true;
@@ -103,16 +104,17 @@ $MA_ENABLE_LOGIN_VIEW=true;
 
 # multiuser
 $MA_ENABLE_USERNAME=false;
-$MA_USERNAME="";
 $MA_USERS_ADMINUSERS=array("admin");
+$MA_USERNAME="";
 $MA_USERS_CRED=array(
 					array("admin","e3274be5c857fb42ab72d786e281b4b8"),
-					array("user","5f4dcc3b5aa765d61d8327deb882cf99"),
+					array("user","5f4dcc3b5aa765d61d8327deb882cf99")
 				);
 # need md5 passcode -- user password: password - admin password: adminpassword
 
 # menu
 $MA_MENU_FIELD="m";
+$MA_MENUCODE=array();
 # user menu
 $MA_MENU=array();
 # adminmenu

@@ -31,6 +31,7 @@ create table if not exists r_cikk (
     kat bigint,
     nev varchar(80) charset utf8,
     vkod varchar(40) charset utf8,
+    me varchar(20) charset utf8,
     key name (csz(20))
 ) engine=InnoDB default charset latin1;
 
@@ -64,5 +65,29 @@ create table if not exists r_bev (
     biz varchar(80) charset utf8,
     megj varchar(120) charset utf8,
     megr varchar(40) charset utf8,
-    key name (dawwwt(20))
+    rakt bigint,
+    key name (dat(20))
+) engine=InnoDB default charset latin1;
+
+create table if not exists r_keszlet (
+    id bigint auto_increment primary key,
+    cikk bigint,
+    rakt bigint,
+    menny bigint,
+    ukid varchar(20) charset utf8,
+    ubev varchar(20) charset utf8,
+    ear int,
+    key name (cikk)
+) engine=InnoDB default charset latin1;
+
+create table if not exists r_kiad (
+    id bigint auto_increment primary key,
+    dat varchar(20) charset utf8,
+    cikk bigint,
+    menny bigint,
+    biz varchar(80) charset utf8,
+    klt bigint,
+    megj varchar(120) charset utf8,
+    rakt bigint,
+    key name (dat(20))
 ) engine=InnoDB default charset latin1;

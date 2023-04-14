@@ -135,12 +135,11 @@ function r_raktar(){
 		$ptable=r_raktardata(false);
 	}
 	if ($ptable){
+		$page=0;
+		$first=0;
 		if (isset($_POST['page'])){
 			$page=(int)$_POST['page'];
 			$first=$R_PAGEROW*$page;
-		}else{
-			$page=0;
-			$first=0;
 		}
 		$last=false;
 		if (sql_run("select count(*) from r_raktar;")){

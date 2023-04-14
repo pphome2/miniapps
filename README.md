@@ -9,6 +9,9 @@ Fejlesztő: [pphome2](https:/github.com/pphome2)
 **Első megjelenés: 2019.**
 
 
+# FileList
+
+Fájlok elérése felhasználói korlátozással
 
 # Telephely
 
@@ -18,6 +21,10 @@ súly adatai.
 # I+ - dokumentum kezelő
 
 Egyszerű iktatási program számlákhoz, szerződésekhez
+
+# FileMan
+
+Weboldalon keresztül fájlkezelés
 
 # Web-tools
 

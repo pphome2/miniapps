@@ -40,7 +40,7 @@ function r_inamedata($new){
 			for($i=1;$i<$db;$i++){
 				$da=$da.", '".$_POST[$i]."'";
 			}
-			$sqlc="insert into r_cikk (id,csz,kat,nev,vkod) values ($da);";
+			$sqlc="insert into r_cikk (id,csz,kat,nev,vkod,me) values ($da);";
 			if (sql_run($sqlc)){
 				mess_ok($R_INAME_TITLE_NEW.": ".$R_OK.".");
 			}else{
@@ -62,7 +62,8 @@ function r_inamedata($new){
 				$sqlc=$sqlc." csz = \"$_POST[1]\", ";
 				$sqlc=$sqlc." kat = \"$_POST[2]\", ";
 				$sqlc=$sqlc." nev = \"$_POST[3]\", ";
-				$sqlc=$sqlc." vkod = \"$_POST[4]\" ";
+				$sqlc=$sqlc." vkod = \"$_POST[4]\", ";
+				$sqlc=$sqlc." me = \"$_POST[5]\" ";
 				$sqlc=$sqlc." where id=$id2;";
 				if (sql_run($sqlc)){
 					mess_ok($R_INAME_TITLE_CHANGE.": ".$R_OK.".");

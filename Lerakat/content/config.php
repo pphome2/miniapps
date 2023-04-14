@@ -14,8 +14,8 @@ $MA_COPYRIGHT="<a href=https://google.com>Google</a>";
 $MA_SITENAME="Raktar";
 $MA_TITLE="R+";
 $MA_CODENAME="ra";
-$MA_ROOT_HOME="http://10.16.1.249";
-$MA_ROOT_NAME="Intranet";
+$MA_ROOT_HOME="http://10.1.12.249";
+$MA_ROOT_NAME="Raktár";
 $MA_SITE_HOME="";
 $MA_FAVICON="favicon.png";
 
@@ -36,10 +36,16 @@ $MA_APPFILE=array("","$MA_LANGFILE",
 				"rpar.php",
 				"rct.php",
 				"rout.php",
+				"rout2.php",
 				"rin.php",
 				"rin2.php",
 				"rl.php",
+				"rl0.php",
+				"rl1.php",
 				"rl2.php",
+				"rl3.php",
+				"rl4.php",
+				"rt.php",
 				"r.php"
 			);
 
@@ -49,8 +55,8 @@ $MA_APPPRIVACYFILE="$MA_CONTENT_DIR/privacy.txt";
 
 # SQL
 $MA_SQL_SERVER="localhost";
-$MA_SQL_DB="demo";
-$MA_SQL_USER="demouser";
-$MA_SQL_PASS="demopassword";
+$MA_SQL_DB="demoserver";
+$MA_SQL_USER="demo";
+$MA_SQL_PASS="password";
 
 ?>

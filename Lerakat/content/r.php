@@ -44,10 +44,6 @@ function r_print(){
 }
 
 
-function r_table(){
-}
-
-
 function r_data(){
 	global $MA_MENU_FIELD,$MA_MENUCODE;
 

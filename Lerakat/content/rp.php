@@ -48,7 +48,7 @@ function r_partnerdata($new){
 				mess_error($R_PARTNER_TITLE_NEW.": ".$R_ERROR.".");
 			}
 		}
-		$d[0]=r-genid();;
+		$d[0]=r_genid();
 		for($i=1;$i<$db;$i++){
 			$d[$i]="";
 		}
@@ -150,12 +150,11 @@ function r_partner(){
 		$ptable=r_partnerdata(false);
 	}
 	if ($ptable){
+		$page=0;
+		$first=0;
 		if (isset($_POST['page'])){
 			$page=(int)$_POST['page'];
 			$first=$R_PAGEROW*$page;
-		}else{
-			$page=0;
-			$first=0;
 		}
 		$last=false;
 		if (sql_run("select count(*) from r_partner;")){

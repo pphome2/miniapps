@@ -9,14 +9,13 @@
 
 
 
-function r_listout($title=""){
-	global $MA_SQL_RESULT,$R_OUT_TABLE_TITLE,$R_SEARCH,$R_PAGEROW,$R_PAGE_LEFT,
+function r_listin($title=""){
+	global $MA_SQL_RESULT,$R_IN_TABLE_TITLE,$R_SEARCH,$R_PAGEROW,$R_PAGE_LEFT,
 			$R_PAGE_RIGHT,$R_GO,$R_LISTCODE,$R_DOWNLOADTEXT,$R_DOWNLOAD,$R_BACK,
-			$R_DOWNLOAD_FILE,$R_OUT_FIELDS,$R_OUT_FIELDS2;
+			$R_DOWNLOAD_FILE,$R_IN_FIELDS;
 
 	echo("<h3>$title</h3><br />");
 	$d="";
-	$d2="";
 	if (isset($_POST['date'])){
 		$d2=$_POST['date'];
 		$d=str_replace("-",".",$d2);
@@ -34,30 +33,30 @@ function r_listout($title=""){
 			$w="where dat=\"$d\"";
 		}
 		$dload="";
-		$db=count($R_OUT_FIELDS2);
+		$db=count($R_IN_FIELDS);
 		for($i=0;$i<$db;$i++){
-			$dload=$dload.$R_OUT_FIELDS2[$i].";";
+			$dload=$dload.$R_IN_FIELDS[$i].";";
 		}
 		$dload=$dload.PHP_EOL;
-		sql_run("select * from r_kiad $w order by id desc;");
+		sql_run("select * from r_bev $w order by id desc;");
 		$data=$MA_SQL_RESULT;
 		$db=count($data);
 		for($i=0;$i<$db;$i++){
 			$r=$data[$i];
-			$sqlc="select * from r_cikk where id=$r[2];";
+			$sqlc="select * from r_partner where id=$r[2];";
 			if (sql_run($sqlc)){
 				$d=$MA_SQL_RESULT[0];
-				$r[2]=$d[3];
+				$r[2]=$d[1];
 			}
-			$sqlc="select * from r_raktar where id=$r[7];";
+			$sqlc="select * from r_cikk where id=$r[3];";
 			if (sql_run($sqlc)){
 				$d=$MA_SQL_RESULT[0];
-				$r[7]=$d[1];
+				$r[3]=$d[3];
 			}
-			$sqlc="select * from r_kolt where id=$r[5];";
+			$sqlc="select * from r_raktar where id=$r[10];";
 			if (sql_run($sqlc)){
 				$d=$MA_SQL_RESULT[0];
-				$r[5]=$d[1];
+				$r[10]=$d[1];
 			}
 			$xdb=count($r);
 			for($j=0;$j<$xdb;$j++){
@@ -87,7 +86,7 @@ function r_listout($title=""){
 		}else{
 		}
 		$last=false;
-		if (sql_run("select count(*) from r_kiad;")){
+		if (sql_run("select count(*) from r_bev;")){
 			$r=$MA_SQL_RESULT[0];
 			$odb=$r[0];
 			$adb=$first+$R_PAGEROW;
@@ -96,12 +95,12 @@ function r_listout($title=""){
 			}
 		}
 		echo("<form method=post>");
-		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
+		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[0]\">");
 		echo("<input type=hidden id=date name=date value=\"$d2\"> ");
 		echo("<input type=submit id=download name=download value=\"$R_DOWNLOAD\">");
 		echo("</form>");
 		echo("<form method=post>");
-		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
+		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[0]\">");
 		echo("<input type=hidden id=page name=page value=$page>");
 		echo("<div class=frow>");
 		echo("<div class=pcol1>");
@@ -111,7 +110,7 @@ function r_listout($title=""){
 		echo("<input style=\"width:95%;\" type=date id=date name=date value=\"$d2\"> ");
 		echo("</div>");
 		echo("<div class=pcol2>");
-		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
+		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[0]\">");
 		echo("<input type=submit id=dgo name=dgo value=\"$R_GO\">");
 		echo("</div>");
 		echo("</div>");
@@ -121,36 +120,38 @@ function r_listout($title=""){
 		if ($d<>""){
 			$w="where dat=\"$d\"";
 		}
-		sql_run("select * from r_kiad $w order by id desc limit $first,$R_PAGEROW;");
+		sql_run("select * from r_bev $w order by id desc limit $first,$R_PAGEROW;");
 		$dat=$MA_SQL_RESULT;
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[0]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[1]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[2]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[3]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[4]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[5]</th>");
-		echo("<th class='df_th'>$R_OUT_TABLE_TITLE[6]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[0]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[1]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[2]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[3]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[4]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[5]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[6]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[7]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[8]</th>");
 		echo("</tr>");
 		$db=count($dat);
 		for($i=0;$i<$db;$i++){
 			$r=$dat[$i];
-			$sqlc="select * from r_cikk where id=$r[2];";
+			$sqlc="select * from r_partner where id=$r[2];";
 			if (sql_run($sqlc)){
 				$d=$MA_SQL_RESULT[0];
-				$r[2]=$d[3];
+				$r[2]=$d[1];
 			}
-			$sqlc="select * from r_raktar where id=$r[7];";
+			$sqlc="select * from r_cikk where id=$r[3];";
 			if (sql_run($sqlc)){
 				$d=$MA_SQL_RESULT[0];
-				$r[7]=$d[1];
+				$r[3]=$d[3];
 			}
-			$sqlc="select * from r_kolt where id=$r[5];";
+			$sqlc="select * from r_raktar where id=$r[10];";
 			if (sql_run($sqlc)){
 				$d=$MA_SQL_RESULT[0];
-				$r[5]=$d[1];
+				$r[10]=$d[1];
 			}
 			echo("<tr class=df_tr>");
 			echo("<td class='df_td'>$r[1]</td>");
@@ -160,6 +161,8 @@ function r_listout($title=""){
 			echo("<td class='df_td'>$r[5]</td>");
 			echo("<td class='df_td'>$r[6]</td>");
 			echo("<td class='df_td'>$r[7]</td>");
+			echo("<td class='df_td'>$r[9]</td>");
+			echo("<td class='df_td'>$r[10]</td>");
 			echo("</tr>");
 		}
 		echo("</table>");
@@ -170,7 +173,7 @@ function r_listout($title=""){
 			$p=$page-1;
 			echo("<input type=hidden id=page name=page value=$p>");
 			echo("<input type=hidden id=date name=date value=\"$d2\"> ");
-			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
+			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[0]\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 			echo("</form>");
 		}else{
@@ -188,7 +191,7 @@ function r_listout($title=""){
 			echo("<form method=post>");
 			echo("<input type=hidden id=page name=page value=$p>");
 			echo("<input type=hidden id=date name=date value=\"$d2\"> ");
-			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[1]\">");
+			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[0]\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 			echo("</form>");
 		}else{
@@ -198,5 +201,6 @@ function r_listout($title=""){
 		echo("</div>");
 	}
 }
+
 
 ?>
