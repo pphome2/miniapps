@@ -75,12 +75,13 @@ function i_doctable(){
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");
 		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[0]</th>");
-		echo("<th class='df_th1'>$I_DOCTABLE_TITLE[1]</th>");
-		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[2]</th>");
+		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[1]</th>");
+		echo("<th class='df_th1'>$I_DOCTABLE_TITLE[2]</th>");
 		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[3]</th>");
 		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[4]</th>");
-		echo("<th class='df_th2'>$I_DOCTABLE_TITLE[5]</th>");
+		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[5]</th>");
 		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[6]</th>");
+		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[7]</th>");
 		echo("</tr>");
 		sql_run("select * from ik_doc where id like \"%$year%\" order by sorsz desc limit $first,$I_PAGEROW;");
 		$dr=$MA_SQL_RESULT;
@@ -95,6 +96,7 @@ function i_doctable(){
 				}
 			}
 			echo("<td class='df_td'><a href=\"$fn\">$r[1]</a></td>");
+			echo("<td class='df_td'>$r[3]</td>");
 			$idp=$r[4];
 			$sqlc="select * from ik_partner where id=$idp;";
 			if (sql_run($sqlc)){

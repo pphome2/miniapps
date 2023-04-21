@@ -14,17 +14,18 @@ function i_list(){
 
 	$listall=true;
 	if (isset($_POST['lcode'])){
+	$i=$_POST['lcode'];
 		switch ($_POST['lcode']){
 			case $I_LISTCODE[0]:
 				$listall=false;
-				$sqlc="fiz = \"\"";
+				$sqlc="fiz=\"\"";
 				i_listtable($I_LISTCODE[0],$sqlc,$I_LISTS[0]);
 				break;
 			case $I_LISTCODE[1]:
 				$listall=false;
 				if (isset($_POST['id'])){
 					$id=$_POST['id'];
-					$sqlc="partner = $id";
+					$sqlc="partner=$id";
 					i_listtable($I_LISTCODE[1],$sqlc,$I_LISTS[1]);
 				}
 				break;
@@ -39,7 +40,7 @@ function i_list(){
 					}else{
 						$n=$I_LISTS[2];
 					}
-					$sqlc="kat = $id";
+					$sqlc="kat=$id";
 					i_listtable($I_LISTCODE[2],$sqlc,$n);
 				}
 				break;
@@ -47,14 +48,14 @@ function i_list(){
 				$listall=false;
 				if (isset($_POST['id'])){
 					$id=$_POST['id'];
-					$sqlc="telep = \"$id\"";
+					$sqlc="telep=\"$id\"";
 					$n=$I_LISTS[3].": $id";
 					i_listtable($I_LISTCODE[3],$sqlc,$n);
 				}
 				break;
 			case $I_LISTCODE[4]:
 				$listall=false;
-				$sqlc="atad = \"\"";
+				$sqlc="atad=\"\"";
 				i_listtable($I_LISTCODE[4],$sqlc,$I_LISTS[4]);
 				break;
 			case $I_LISTCODE[5]:
@@ -67,21 +68,20 @@ function i_list(){
 		}
 	}
 	if ($listall){
-		$db=count($I_LISTS);
 		echo("<div class=frow>");
 		echo("<div class=colx1></div>");
 		echo("<div class=colx2>");
 		echo("<div class=spaceline></div>");
 
 		echo("<h3>$I_LISTS[0]</h3>");
-		echo("<form id=$i name=$i method=post>");
+		echo("<form method=post>");
 		echo("<input type=hidden id=lcode name=lcode value=\"$I_LISTCODE[0]\">");
 		echo("<input type=submit id=x name=x value=\"$I_GO\">");
 		echo("</form>");
 		echo("<div class=spaceline></div>");
 
 		echo("<h3>$I_LISTS[1]</h3>");
-		echo("<form id=$i name=$i method=post>");
+		echo("<form method=post>");
 		$sqlc="select * from ik_partner;";
 		if (sql_run($sqlc)){
 			echo("<select id=id name=id>");
@@ -98,7 +98,7 @@ function i_list(){
 		echo("<div class=spaceline></div>");
 
 		echo("<h3>$I_LISTS[2]</h3>");
-		echo("<form id=$i name=$i method=post>");
+		echo("<form method=post>");
 		$sqlc="select * from ik_cat;";
 		if (sql_run($sqlc)){
 			echo("<select id=id name=id>");
@@ -117,7 +117,7 @@ function i_list(){
 		echo("<div class=spaceline></div>");
 
 		echo("<h3>$I_LISTS[3]</h3>");
-		echo("<form id=$i name=$i method=post>");
+		echo("<form method=post>");
 		echo("<select id=id name=id>");
 		$db=count($I_SITE);
 		for($j=0;$j<$db;$j++){
@@ -130,14 +130,14 @@ function i_list(){
 		echo("<div class=spaceline></div>");
 
 		echo("<h3>$I_LISTS[4]</h3>");
-		echo("<form id=$i name=$i method=post>");
+		echo("<form method=post>");
 		echo("<input type=hidden id=lcode name=lcode value=\"$I_LISTCODE[4]\">");
 		echo("<input type=submit id=x name=x value=\"$I_GO\">");
 		echo("</form>");
 		echo("<div class=spaceline></div>");
 
 		echo("<h3>$I_LISTS[5]</h3>");
-		echo("<form id=$i name=$i method=post>");
+		echo("<form method=post>");
 		echo("<input type=hidden id=lcode name=lcode value=\"$I_LISTCODE[5]\">");
 		echo("<input type=submit id=x name=x value=\"$I_GO\">");
 		echo("</form>");

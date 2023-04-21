@@ -43,15 +43,8 @@ for ($i=0;$i<count($MA_APPFILE);$i++){
 
 # build page: header
 $mainpage=refererpage();
-if ($mainpage<>$MA_ADMINFILE){
-    #if ($MA_ENABLE_HEADER_VIEW){
-        page_header();
-    #}else{
-    #    page_header_view();
-    #}
-}else{
-    page_header();
-}
+page_header();
+
 
 # search
 #$MA_NOPAGE=true;
@@ -67,18 +60,8 @@ if (function_exists("searchpage")){
 	searchpage();
 }
 
-button_back();
+#button_back();
 
-# page footer
-if ($mainpage<>$MA_ADMINFILE){
-    if ($MA_ENABLE_FOOTER_VIEW){
-        page_footer();
-    }else{
-        page_footer_view();
-    }
-}else{
-    page_footer();
-}
-
+page_footer();
 
 ?>

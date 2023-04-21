@@ -8,92 +8,45 @@
  #
 
 
-function i_exporttable($sqlc=""){
-	global $MA_SQL_RESULT,$I_DOWNLOAD,$I_SEPARATOR,$I_DOWNLOAD_FILE,$I_DOC_FIELDS,$I_DOWNLOADTEXT,$I_BACK;
-
-	$dload="";
-	$db=count($I_DOC_FIELDS);
-	for($i=0;$i<$db;$i++){
-		$dload=$dload.$I_DOC_FIELDS[$i].";";
-	}
-	$dload=$dload.PHP_EOL;
-	$ex=array(4,7);
-	$date=array(2,8,9,10);
-	$sqldlc="select * from ik_doc where $sqlc order by id desc;";
-	#echo($sqldlc);
-	sql_run($sqldlc);
-	$dat=$MA_SQL_RESULT;
-	$db=count($dat);
-	for($i=0;$i<$db;$i++){
-		$r=$dat[$i];
-		$xdb=count($r);
-		for($j=0;$j<$xdb;$j++){
-			$out="";
-			if (in_array($j,$ex)){
-				if ($j===$ex[0]){
-					if (sql_run("select * from ik_partner where id=$r[$j];")){
-						$rw=$MA_SQL_RESULT[0];
-						$out=$rw[1];
-					}
-				}
-				if ($j===$ex[1]){
-					if (sql_run("select * from ik_cat where id=$r[$j];")){
-						$rw=$MA_SQL_RESULT[0];
-						$out=$rw[2];
-					}
-				}
-			}else{
-				$out=$r[$j];
-			}
-			if (in_array($j,$date)){
-				$out=str_replace("-",".",$out);
-			}
-			$dload=$dload.$out.";";
-		}
-		$dload=$dload.PHP_EOL;
-	}
-	echo("<div class=frow>");
-	echo("<div class=colx1></div>");
-	echo("<div class=colx2>");
-	echo("<div class=spaceline></div>");
-	echo("<div class=spaceline></div>");
-	echo("<div class=spaceline></div>");
-	echo("$I_DOWNLOADTEXT");
-	echo("<div class=spaceline></div>");
-	echo("<div class=spaceline></div>");
-	echo("<form method=post action=$I_DOWNLOAD_FILE>");
-	echo("<input type=hidden id=lcode name=lcode value=\"$lcode\">");
-	echo("<input type=hidden id=f name=f value=\"$dload\">");
-	echo("<input class='button' type=submit id=x name=x value=\"$I_DOWNLOAD\">");
-	echo("</form>");
-	echo("<div class=spaceline></div>");
-	echo("<div class=spaceline></div>");
-	echo("<input class='button' type=submit id=x name=x value=\"$I_BACK\" onclick=\"history.back();\">");
-	echo("</div>");
-	echo("<div class=colx1></div>");
-	echo("</div>");
-}
-
-
-function i_listtable($lcode=0,$sqlc="",$title=""){
+function i_search(){
 	global $MA_SQL_RESULT,$I_LISTTABLE_TITLE,$I_FILESTORE,$I_DOWNLOAD,
-			$I_SEPARATOR,$I_PAGEROW,$I_PAGE_LEFT,$I_PAGE_RIGHT,$I_BACK;
+			$I_SEPARATOR,$I_DOWNLOAD_FILE,$I_DOC_FIELDS,$I_DOWNLOADTEXT,
+			$I_PAGEROW,$I_PAGE_LEFT,$I_PAGE_RIGHT,$I_BACK,$I_SEARCH_TEXT,
+			$L_SEARCH,$I_SEARCH_LABEL;
 
-	if ($sqlc<>""){
-		echo("<h3>$title</h3>");
+	echo("<h3>$I_SEARCH_TEXT</h3>");
+	if (isset($_POST['s'])){
+		$sqlc="";
+		if ($_POST[0]<>""){
+			$sqlc="szsz like \"$_POST[0]%\"";
+		}
+		if ($_POST[1]<>""){
+			if (sql_run("select * from ik_partner where nev like \"$_POST[1]%\";")){
+				$r=$MA_SQL_RESULT[0];
+				$pid=$r[0];
+				if ($sqlc===""){
+					$sqlc="partner=$pid";
+				}else{
+					$sqlc=$sqlc." and partner=$pid";
+				}
+			}
+		}
+		if ($sqlc<>""){
+			$sqlc=$sqlc." and ";
+		}
+		$d1=$_POST[2];
+		$d2=$_POST[3];
+		$sqlc=$sqlc." datum between \"$d1\" and \"$d2\"";
 		if (isset($_POST['f'])){
 			i_exporttable($sqlc);
 		}else{
-			if (isset($_POST['id'])){
-				$id=$_POST['id'];
-			}else{
-				$id="";
-			}
 			echo("<form method=post>");
-			echo("<input type=hidden id=lcode name=lcode value=\"$lcode\">");
+			echo("<input type=hidden id=0 name=0 value=\"$_POST[0]\">");
+			echo("<input type=hidden id=1 name=1 value=\"$_POST[1]\">");
+			echo("<input type=hidden id=2 name=2 value=\"$_POST[2]\">");
+			echo("<input type=hidden id=3 name=3 value=\"$_POST[3]\">");
 			echo("<input type=hidden id=f name=f value=\"f\">");
-			echo("<input type=hidden id=id name=id value=\"$id\">");
-			echo("<input class='button' type=submit id=x name=x value=\"$I_DOWNLOAD\">");
+			echo("<input class='button' type=submit id=s name=s value=\"$I_DOWNLOAD\">");
 			echo("</form>");
 			if (isset($_POST['page'])){
 					$page=(int)$_POST['page'];
@@ -199,9 +152,44 @@ function i_listtable($lcode=0,$sqlc="",$title=""){
 			echo("</div>");
 			echo("</div>");
 		}
+	}else{
+		$year=i_year();
+		echo("<div class=spaceline></div>");
+		echo("<div class=spaceline></div>");
+		echo("<form method=post>");
+		echo("<div class=frow>");
+		echo("<div class=fcol1>$I_SEARCH_LABEL[0]");
+		echo("</div>");
+		echo("<div class=fcol2>");
+		echo("<input type=text id=0 name=0 placeholder='$I_SEARCH_LABEL[0]' value=''>");
+		echo("</div>");
+		echo("</div>");
+		echo("<div class=frow>");
+		echo("<div class=fcol1>$I_SEARCH_LABEL[1]");
+		echo("</div>");
+		echo("<div class=fcol2>");
+		echo("<input type=text id=1 name=1 placeholder='$I_SEARCH_LABEL[1]' value=''>");
+		echo("</div>");
+		echo("</div>");
+		echo("<div class=frow>");
+		echo("<div class=fcol1>$I_SEARCH_LABEL[2]");
+		echo("</div>");
+		echo("<div class=fcol2>");
+		echo("<input type=date id=2 name=2 placeholder='$I_SEARCH_LABEL[2]' value='$year-01-01'>");
+		echo("</div>");
+		echo("</div>");
+		echo("<div class=frow>");
+		echo("<div class=fcol1>$I_SEARCH_LABEL[3]");
+		echo("</div>");
+		echo("<div class=fcol2>");
+		echo("<input type=date id=3 name=3 placeholder='$I_SEARCH_LABEL[3]' value='$year-12-31'>");
+		echo("</div>");
+		echo("</div>");
+		echo("<div class=frow><br /></div>");
+		echo("<input type=submit id=s name=s value=\"$L_SEARCH\">");
+		echo("</form>");
 	}
 }
-
 
 
 

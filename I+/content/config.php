@@ -14,8 +14,8 @@ $MA_COPYRIGHT="<a href=https://google.com>Google</a>";
 $MA_SITENAME="Ikt";
 $MA_TITLE="I+";
 $MA_CODENAME="ko";
-$MA_ROOT_HOME="http://10.1.10.249";
-$MA_ROOT_NAME="Intranet";
+$MA_ROOT_HOME="http://15.20.1.249";
+$MA_ROOT_NAME="Demo";
 $MA_SITE_HOME="";
 $MA_FAVICON="favicon.png";
 
@@ -31,6 +31,7 @@ $MA_APPFILE=array("$MA_LANGFILE",
 				"icfg.php",
 				"ic.php",
 				"ip.php",
+				"is.php",
 				"il.php",
 				"ild.php",
 				"ilp.php",
@@ -46,8 +47,8 @@ $MA_APPPRIVACYFILE="$MA_CONTENT_DIR/privacy.txt";
 
 # SQL
 $MA_SQL_SERVER="localhost";
-$MA_SQL_DB="demoserver";
+$MA_SQL_DB="demo";
 $MA_SQL_USER="demo";
-$MA_SQL_PASS="password";
+$MA_SQL_PASS="demopassword";
 
 ?>

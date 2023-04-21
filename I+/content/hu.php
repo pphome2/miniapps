@@ -9,12 +9,13 @@
 
 # rendszer
 $L_SITENAME="Iktatás";
-$L_ROOTHOME="Demo Intranet";
+$L_ROOTHOME="Intranet";
 $L_SITEHOME="Iktatás";
 
 # applikáció
-$I_MENU=array("Partner adatok","Kategória","Lekérdezések");
+$I_MENU=array("Partner adatok","Kategória","Lekérdezések","Keresés");
 
+$I_SEARCH_TEXT="Tárolt elem keresése";
 $I_PRIVACYTITLE="Adatvédelmi tájékoztató";
 
 $I_OK="rendben";
@@ -56,7 +57,7 @@ $I_CAT_FIELDS=array("ID","Kód","Név");
 $I_DOCTITLE_NEW="Új dokumentum";
 $I_DOCTITLE_CHANGE="Dokumentum adatainak módosítása";
 $I_DOCTITLE_DEL="Dokumentum törlése";
-$I_DOCTABLE_TITLE=array("Sorszám","Kiállító","Határidő","Átadás","Fizetve","Bank","Töröl / Javít");
+$I_DOCTABLE_TITLE=array("Sorszám","Számlaszám","Kiállító","Határidő","Átadás","Fizetve","Telephely","Töröl / Javít");
 $I_NEWDOC="+";
 $I_WORKDOC=">>>";
 $I_DELDOC="Törlés";
@@ -68,7 +69,7 @@ $I_DOC_FIELDS=array("ID",
 					"Összeg",
 					"Pénznem",
 					"Kategória",
-					"Kiállítás dátuma",
+					"Teljesítés dátuma",
 					"Fizetési határidő",
 					"Kifizetés dátuma",
 					"Átadás dátuma",
@@ -89,7 +90,7 @@ $I_LISTS=array("Lejáró számlák",
 				);
 $I_GO=">>>";
 
-$I_LISTTABLE_TITLE=array("Sorszám","Kiállító","Kategória","Határidő","Átadás","Fizetve");
+$I_LISTTABLE_TITLE=array("Sorszám","Számlaszám","Kiállító","Kategória","Határidő","Átadás","Fizetve");
 $I_DOWNLOAD="Letöltés";
 $I_DOWNLOADTEXT="A letöltés előkészítve.";
 
@@ -99,5 +100,7 @@ $I_PAGE_LEFT="<";
 $I_BACK="Vissza";
 
 $I_PTABLE_TITLE=array("Név","Város","E-mail","Adószám","Számlaszám");
+
+$I_SEARCH_LABEL=array("Partner számlaszáma","Partner neve (részlet)","Kezdő dátum","Vége dátum");
 
 ?>

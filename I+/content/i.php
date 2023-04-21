@@ -9,16 +9,17 @@
 
 
 function searchpage(){
-	global $I_TITLE,$MA_BUTTON_TEXT,$MA_SEARCH_TEXT;
+	global $I_SEARCH_TEXT,$L_BUTTON_NEXT,$L_SEARCH;
 
-	searchview($I_TITLE,$MA_BUTTON_TEXT,$MA_SEARCH_TEXT);
+	#searchview($I_SEARCH_TEXT,$L_BUTTON_NEXT,$L_SEARCH);
+	i_search();
 }
 
 
 function privacypage(){
 	global $I_PRIVACYTITLE,$MA_APPPRIVACYFILE;
 
-	privacyview("",$MA_APPPRIVACYFILE);
+	privacyview($I_PRIVACYTITLE,$MA_APPPRIVACYFILE);
 }
 
 
@@ -60,6 +61,9 @@ function i_data(){
 				break;
 			case $MA_MENUCODE[2]:
 				i_list();
+				break;
+			case $MA_MENUCODE[3]:
+				i_search();
 				break;
 			default:
 				i_table();
