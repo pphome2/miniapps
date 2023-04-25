@@ -9,7 +9,7 @@
 
 # rendszer
 $L_SITENAME="Iktatás";
-$L_ROOTHOME="Intranet";
+$L_ROOTHOME="Derula Intranet";
 $L_SITEHOME="Iktatás";
 
 # applikáció
@@ -30,17 +30,17 @@ $I_NEWPARTNER="+";
 $I_WORKPARTNER=">>>";
 $I_DELPARTNER="Törlés";
 $I_PARTNER_FIELDS=array(
-					"ID",
-					"Név",
-					"Ország",
-					"Irányítószám",
-					"Város",
-					"Cím 1",
-					"Cím 2",
-					"E-mail",
-					"Adószám",
-					"Számlaszám"
-			);
+          "ID",
+          "Név",
+          "Ország",
+          "Irányítószám",
+          "Város",
+          "Cím 1",
+          "Cím 2",
+          "E-mail",
+          "Adószám",
+          "Számlaszám"
+      );
 
 $I_PARTNERNEWDOC="Új dokumentum érkezett a partnertől";
 $I_SEARCH="Keresés...";
@@ -57,41 +57,42 @@ $I_CAT_FIELDS=array("ID","Kód","Név");
 $I_DOCTITLE_NEW="Új dokumentum";
 $I_DOCTITLE_CHANGE="Dokumentum adatainak módosítása";
 $I_DOCTITLE_DEL="Dokumentum törlése";
-$I_DOCTABLE_TITLE=array("Sorszám","Számlaszám","Kiállító","Határidő","Átadás","Fizetve","Telephely","Töröl / Javít");
+$I_DOCTABLE_TITLE=array("Sorszám","Számlaszám","Kiállító","Határidő","Engedélyezve","Fizetve","Telephely","Töröl / Javít");
 $I_NEWDOC="+";
 $I_WORKDOC=">>>";
 $I_DELDOC="Törlés";
 $I_DOC_FIELDS=array("ID",
-					"Sorszám",
-					"Érkezés",
-					"Számlaszám",
-					"Partner azonosító",
-					"Összeg",
-					"Pénznem",
-					"Kategória",
-					"Teljesítés dátuma",
-					"Fizetési határidő",
-					"Kifizetés dátuma",
-					"Átadás dátuma",
-					"Telephely",
-					"Bank",
-					"Megjegyzés",
-					"Csatolmány");
+          "Sorszám",
+          "Érkezés",
+          "Számlaszám",
+          "Partner azonosító",
+          "Összeg",
+          "Pénznem",
+          "Kategória",
+          "Teljesítés dátuma",
+          "Fizetési határidő",
+          "Kifizetés dátuma",
+          "Engedélyezés dátuma",
+          "Telephely",
+          "Bank",
+          "Megjegyzés",
+          "Csatolmány");
 $I_DOCFROMPARTNER="Partner:";
 $I_MONEYTYPE=array("Forint","Euro","Dollár");
 $I_SITE=array("Szolnok","Magyarszecsőd","Dég");
+$I_BANK=array("OTP Bank - huf","OTP Bank - euro","Unicredit - huf","Unicredit - euro","Intensa - euro");
 
 $I_LISTS=array("Lejáró számlák",
-				"Partnerenkénti számlák",
-				"Kategóriánkénti számlák",
-				"Telephelyenkénti számlák",
-				"Átadásra kerülő",
-				"Partnerlista",
-				"Nullás összegű számlák",
-				);
+        "Partnerenkénti számlák",
+        "Kategóriánkénti számlák",
+        "Telephelyenkénti számlák",
+        "Átadásra kerülő",
+        "Partnerlista",
+        "Nullás összegű számlák",
+        );
 $I_GO=">>>";
 
-$I_LISTTABLE_TITLE=array("Sorszám","Számlaszám","Kiállító","Kategória","Határidő","Átadás","Fizetve","Javít");
+$I_LISTTABLE_TITLE=array("Sorszám","Számlaszám","Kiállító","Kategória","Határidő","Engedélyezve","Fizetve","Javít");
 $I_DOWNLOAD="Letöltés";
 $I_DOWNLOADTEXT="A letöltés előkészítve.";
 
@@ -102,6 +103,6 @@ $I_BACK="Vissza";
 
 $I_PTABLE_TITLE=array("Név","Város","E-mail","Adószám","Számlaszám");
 
-$I_SEARCH_LABEL=array("Partner számlaszáma","Partner neve (részlet)","Kezdő dátum","Vége dátum");
+$I_SEARCH_LABEL=array("Partner számlaszáma","Partner neve (részlet)","Bank","Kezdő dátum","Vége dátum");
 
 ?>
