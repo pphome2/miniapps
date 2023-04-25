@@ -12,7 +12,7 @@ function i_search(){
 	global $MA_SQL_RESULT,$I_LISTTABLE_TITLE,$I_FILESTORE,$I_DOWNLOAD,
 			$I_SEPARATOR,$I_DOWNLOAD_FILE,$I_DOC_FIELDS,$I_DOWNLOADTEXT,
 			$I_PAGEROW,$I_PAGE_LEFT,$I_PAGE_RIGHT,$I_BACK,$I_SEARCH_TEXT,
-			$L_SEARCH,$I_SEARCH_LABEL;
+			$L_SEARCH,$I_SEARCH_LABEL,$I_WORKDOC,$MA_ADMINFILE;
 
 	echo("<h3>$I_SEARCH_TEXT</h3>");
 	if (isset($_POST['s'])){
@@ -74,6 +74,7 @@ function i_search(){
 			echo("<th class='df_th0'>$I_LISTTABLE_TITLE[4]</th>");
 			echo("<th class='df_th0'>$I_LISTTABLE_TITLE[5]</th>");
 			echo("<th class='df_th0'>$I_LISTTABLE_TITLE[6]</th>");
+			echo("<th class='df_th0'>$I_LISTTABLE_TITLE[7]</th>");
 			echo("</tr>");
 			$sqlc="select * from ik_doc where $sqlc order by id desc limit $first,$I_PAGEROW;";
 			sql_run($sqlc);
@@ -116,6 +117,13 @@ function i_search(){
 					$r[10]=date('Y. m. d.',$r[10]);
 				}
 				echo("<td class='df_td'>$r[10]</td>");
+				echo("<td class='df_td'>");
+				echo("<center>");
+				echo("<form method=post action=$MA_ADMINFILE>");
+				echo("<input type=hidden id=id name=id value=\"$r[0]\">");
+				echo("<input class='tbutton' style=\"width:20%;padding:0px 50px 0px 30px;margin:0px;\" type=submit id=chd name=chd value=\"$I_WORKDOC\">");
+				echo("</form>");
+				echo("</td>");
 				echo("</tr>");
 			}
 			echo("</table>");

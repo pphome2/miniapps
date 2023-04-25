@@ -31,7 +31,7 @@ create table if not exists ik_doc (
     datum varchar(20) charset utf8,
     szsz varchar(40) charset utf8,
     partner bigint,
-    ossz bigint,
+    ossz decimal(10,2),
     pnem varchar(10) charset utf8,
     kat bigint,
     kiall varchar(20) charset utf8,
@@ -41,7 +41,7 @@ create table if not exists ik_doc (
     telep varchar(40) charset utf8,
     bank varchar(40) charset utf8,
     megj varchar(128) charset utf8,
-    fajl varchar(60) charset utf8,
+    fajl varchar(200) charset utf8,
     key name (sorsz(20))
 ) engine=InnoDB default charset latin1;
 

@@ -1,7 +1,7 @@
 
 body {
 	margin:0px;
-	font-size:16px;
+	font-size:14px;
 	color: lightgrey;
 	background-color: black;
 }
@@ -92,11 +92,12 @@ li a, .dropbtn{
 	display: inline-block;
 	color: white;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 10px 12px;
+	border-radius:5px;
 	text-decoration: none;
 }
 
-li a:hover, .dropdown:hover .dropbtn {
+li a:hover, .dropdown:hover, .dropbtn, .actmenu{
 	background-color: red;
 }
 
@@ -515,6 +516,9 @@ textarea {
 	border-radius: 4px;
 }
 
+.placeholder{
+    color:transparent;
+}
 
-/* local app css */
+
 

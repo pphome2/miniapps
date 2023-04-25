@@ -23,11 +23,16 @@ $MA_FOOTERMENU=array(
 		array($I_MENU[3],$MA_MENUCODE[3])
 			);
 
+$I_COOKIE_YEAR="$MA_CODENAME-y";
+$MA_COOKIES=array(
+		array($I_COOKIE_YEAR,""),
+			);
+
 $I_FILESTORE="Files";
 $I_FILECOUNTLIMIT=30;
 $I_FILEFROMSCANNER="SKM";
 
-$I_LISTCODE=array("0","1","2","3","4","5");
+$I_LISTCODE=array("0","1","2","3","4","5","6");
 
 $I_SEPARATOR=";";
 
@@ -37,6 +42,6 @@ $I_FIRSTDOCNUM="2664";
 
 $I_PAGEROW=200;
 
-$I_FIRSTYEAR="2023";
+$I_FIRSTYEAR="2021";
 
 ?>

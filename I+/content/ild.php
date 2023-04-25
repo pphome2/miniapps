@@ -8,9 +8,10 @@
  #
 
 
-function i_exporttable($sqlc=""){
+function i_exporttable($sqlc="",$lcode=""){
 	global $MA_SQL_RESULT,$I_DOWNLOAD,$I_SEPARATOR,$I_DOWNLOAD_FILE,$I_DOC_FIELDS,$I_DOWNLOADTEXT,$I_BACK;
 
+	$year=i_year();
 	$dload="";
 	$db=count($I_DOC_FIELDS);
 	for($i=0;$i<$db;$i++){
@@ -19,7 +20,7 @@ function i_exporttable($sqlc=""){
 	$dload=$dload.PHP_EOL;
 	$ex=array(4,7);
 	$date=array(2,8,9,10);
-	$sqldlc="select * from ik_doc where $sqlc order by id desc;";
+	$sqldlc="select * from ik_doc where $sqlc and id like \"%$year%\" order by id desc;";
 	#echo($sqldlc);
 	sql_run($sqldlc);
 	$dat=$MA_SQL_RESULT;
@@ -52,6 +53,7 @@ function i_exporttable($sqlc=""){
 		}
 		$dload=$dload.PHP_EOL;
 	}
+	#echo("<h3>$year</h3>");
 	echo("<div class=frow>");
 	echo("<div class=colx1></div>");
 	echo("<div class=colx2>");
@@ -79,10 +81,11 @@ function i_listtable($lcode=0,$sqlc="",$title=""){
 	global $MA_SQL_RESULT,$I_LISTTABLE_TITLE,$I_FILESTORE,$I_DOWNLOAD,
 			$I_SEPARATOR,$I_PAGEROW,$I_PAGE_LEFT,$I_PAGE_RIGHT,$I_BACK;
 
+	$year=i_year();
 	if ($sqlc<>""){
-		echo("<h3>$title</h3>");
+		echo("<h3>$title - $year</h3>");
 		if (isset($_POST['f'])){
-			i_exporttable($sqlc);
+			i_exporttable($sqlc,$lcode);
 		}else{
 			if (isset($_POST['id'])){
 				$id=$_POST['id'];
@@ -103,7 +106,7 @@ function i_listtable($lcode=0,$sqlc="",$title=""){
 				$first=0;
 			}
 			$last=false;
-			if (sql_run("select count(*) from ik_doc where ".$sqlc.";")){
+			if (sql_run("select count(*) from ik_doc where $sqlc and id like \"%$year%\";")){
 				$r=$MA_SQL_RESULT[0];
 				$odb=$r[0];
 				$adb=$first+$I_PAGEROW;
@@ -122,7 +125,7 @@ function i_listtable($lcode=0,$sqlc="",$title=""){
 			echo("<th class='df_th0'>$I_LISTTABLE_TITLE[5]</th>");
 			echo("<th class='df_th0'>$I_LISTTABLE_TITLE[6]</th>");
 			echo("</tr>");
-			$sqlc="select * from ik_doc where $sqlc order by id desc limit $first,$I_PAGEROW;";
+			$sqlc="select * from ik_doc where $sqlc and id like \"%$year%\" order by id desc limit $first,$I_PAGEROW;";
 			sql_run($sqlc);
 			$dr=$MA_SQL_RESULT;
 			$db=count($dr);

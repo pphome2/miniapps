@@ -122,7 +122,7 @@ function button_print(){
 # messages functions
 function mess_error($m){
 	echo('
-		<div class="message_error" name="sysmessage" id="esysmessage" onshow="remove(this);">
+		<div class="message_error" name="sysmessage" id="esysmessage">
 			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
 				<p class="insidecontent">'.$m.'</p>
 			</div>

@@ -25,14 +25,6 @@ for ($i=0;$i<count($MA_LIB);$i++){
 	}
 }
 
-$MA_SEARCH_PAGE=true;
-$MA_BACKPAGE=true;
-
-login();
-
-# cookies or param 
-setcss();
-
 # local app files
 for ($i=0;$i<count($MA_APPFILE);$i++){
 	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$i]")){
@@ -40,14 +32,18 @@ for ($i=0;$i<count($MA_APPFILE);$i++){
 	}
 }
 
+# prepare system
+startcookies();
+setcss();
+
+$MA_SEARCH_PAGE=true;
+$MA_BACKPAGE=true;
+
+login();
 
 # build page: header
 $mainpage=refererpage();
 page_header();
-
-
-# search
-#$MA_NOPAGE=true;
 
 # load local app jsfile
 for ($i=0;$i<count($MA_APPJSFILE);$i++){

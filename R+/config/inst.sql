@@ -77,6 +77,7 @@ create table if not exists r_keszlet (
     ukid varchar(20) charset utf8,
     ubev varchar(20) charset utf8,
     ear int,
+    megj varchar(200),
     key name (cikk)
 ) engine=InnoDB default charset latin1;
 

@@ -8,8 +8,111 @@
  #
 
 
+# get cookies
+function getcookies(){
+	global $MA_COOKIES;
+
+	$cdb=count($MA_COOKIES);
+	for($i=0;$i<$cdb;$i++){
+		$ac=$MA_COOKIES[$i];
+		$acname=$ac[0];
+		if(isset($_COOKIE[$acname])) {
+			$acdata=$_COOKIE[$acname];
+		}else{
+			$acdata="";
+		}
+		$MA_COOKIES[$i]=array($acname,$acdata);
+	}
+}
+
+
+# store cookie
+function setcookies($n="",$d="",$td=0){
+	if ($td===0){
+		$td=1;
+	}
+	# 86400 = 1 nap
+	setcookie($n, $d, time() + (86400 * $td), "/");
+}
+
+
+# preivois page
+function refererpage(){
+    $mainp=basename($_SERVER['REQUEST_URI']);
+    if (isset($_POST['referer'])){
+        $mainp=$_POST['referer'];
+    }
+    return($mainp);
+}
+
+
+# load plugins
+function plugins(){
+    global $MA_PLUGINS,$MA_PLUGIN_DIR;
+
+    for($i=0;$i<count($MA_PLUGINS);$i++){
+        $fnx=basename($MA_PLUGINS[$i]);
+        $fn="$MA_PLUGIN_DIR/$MA_PLUGINS[$i]/$fnx".'.php';
+        if (file_exists($fn)){
+            include($fn);
+        }
+        $fn="$MA_PLUGIN_DIR/$MA_PLUGINS[$i]/$fnx".'.css';
+        if (file_exists($fn)){
+            include($fn);
+        }
+        $fn="$MA_PLUGIN_DIR/$MA_PLUGINS[$i]/$fnx".'.js';
+        if (file_exists($fn)){
+            include($fn);
+        }
+    }
+}
+
+
+# load one plugin
+function loadplugin($p){
+    global $MA_PLUGINS,$MA_PLUGIN_DIR;
+
+    $fn="$MA_PLUGIN_DIR/$p/$p".'.php';
+    if (file_exists($fn)){
+        include($fn);
+    }
+    $fn="$MA_PLUGIN_DIR/$p/$p".'.css';
+    if (file_exists($fn)){
+        include($fn);
+    }
+    $fn="$MA_PLUGIN_DIR/$p/$p".'.js';
+    if (file_exists($fn)){
+        include($fn);
+    }
+}
+
+
+
+# cookies or param
+function setcss(){
+	global $MA_STYLEINDEX,$MA_COOKIE_STYLE,$MA_CSS;
+
+    if (isset($_COOKIE[$MA_COOKIE_STYLE])){
+   		$MA_STYLEINDEX=intval(vinput($_COOKIE[$MA_COOKIE_STYLE]));
+	}
+	if ($MA_STYLEINDEX>count($MA_CSS)){
+		$MA_STYLEINDEX=0;
+	}
+}
+
+
+# cookie names settings
 function setcookienames(){
-    global $MA_COOKIE_STYLE,$MA_COOKIE_LOGIN;
+    global $MA_CODENAME,$MA_COOKIE_STYLE,$MA_COOKIE_LOGIN;
+
+    $MA_COOKIE_STYLE=$MA_CODENAME."-".$MA_COOKIE_STYLE;
+    $MA_COOKIE_LOGIN=$MA_CODENAME."-".$MA_COOKIE_LOGIN;
+}
+
+
+# cookie names settings
+function setcookienamesfromdir(){
+    global $MA_CODENAME,$MA_COOKIE_STYLE,$MA_COOKIE_LOGIN;
 
     $p=explode('/',(dirname(__FILE__)));
     if (count($p)>=2){
@@ -17,8 +120,8 @@ function setcookienames(){
     }else{
         $px="";
     }
-    $MA_COOKIE_STYLE=$px."st";
-    $MA_COOKIE_LOGIN=$px."l";
+    $MA_COOKIE_STYLE=$px."-".$MA_COOKIE_STYLE;
+    $MA_COOKIE_LOGIN=$px."-".$MA_COOKIE_LOGIN;
 }
 
 

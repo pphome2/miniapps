@@ -15,6 +15,7 @@ $L_SITEHOME="Raktárkészlet";
 # applikáció
 $R_MENU=array("Beszállítók","Cikk kategória","Cikktörzs","Raktárak","Költséghely, felhasználó","Bevételezés","Kiadás","Lekérdezések");
 
+$R_SEARCH_TEXT="Tárolt elem keresése";
 $R_PRIVACYTITLE="Adatvédelmi tájékoztató";
 
 $R_OK="rendben";
@@ -99,14 +100,15 @@ $R_P_TEXT="Kiválasztott beszállító: ";
 $R_R_TEXT="Kiválasztott raktár: ";
 
 $R_IN_STAGE=array("Első lépés: beszállító kiválasztása.","Második lépés: cikk kiválasztása.","Harmadik lépés: cikkadatok megadása.");
-$R_IN_FIELDS=array("ID","Dátum","Beszállító","Cikk","Mennyiség","Egységár","Érték","Bizonylat","Megjegyzés","Megrendelő","Raktár");
+$R_IN_FIELDS=array("ID","Dátum","Beszállító","Cikk","Mennyiség","Egységár","Érték","Bizonylat","Megjegyzés","Megrendelő","Raktár","Elhelyezés");
 $R_IN_TITLE_NEW="Új cikk bevételezése";
 $R_IN_NEWITEM="Új cikk a beszállítótól";
 $R_IN_RESTART="Bevételezés újrakezdése";
 $R_IN_TABLE_TITLE=array("Dátum","Beszállító","Cikk","Mennyiség","Egységár","Érték","Bizonylat","Megrendelő","Raktár");
 
-$R_STR_TABLE_TITLE=array("Raktár","Kategória","Cikkszám","Cikk","Mennyiség","Mennyiségi egység","Egységár","Utolsó bevétel","Utolsó kiadás");
-$R_STR_TABLE_TITLE2=array("Raktár","Kategória","Cikkszám","Cikk","Mennyiség","Mennyiségi egység","Egységár","Összérték","Utolsó bevétel","Utolsó kiadás");
+$R_STR_TITLE="Raktár";
+$R_STR_TABLE_TITLE=array("Kategória","Cikkszám","Cikk","Mennyiség","Mennyiségi egység","Egységár","Utolsó bevétel","Utolsó kiadás","Megjegyzés");
+$R_STR_TABLE_TITLE2=array("Kategória","Cikkszám","Cikk","Mennyiség","Mennyiségi egység","Egységár","Összérték","Utolsó bevétel","Utolsó kiadás","Megjegyzés");
 
 $R_OUT_STAGE=array("Első lépés: raktár kiválasztása.","Második lépés: cikk kiválasztása.","Harmadik lépés: cikkadatok megadása.");
 $R_OUT_FIELDS=array("ID","Dátum","Raktár","Cikk","Mennyiség","Bizonylat","Megjegyzés","Költséghely");

@@ -62,6 +62,11 @@ function i_list(){
 				$listall=false;
 				i_lpartner();
 				break;
+			case $I_LISTCODE[6]:
+				$listall=false;
+				$sqlc="ossz=0";
+				i_listtable($I_LISTCODE[6],$sqlc,$I_LISTS[6]);
+				break;
 			default:
 				$listall=true;
 				break;
@@ -139,6 +144,13 @@ function i_list(){
 		echo("<h3>$I_LISTS[5]</h3>");
 		echo("<form method=post>");
 		echo("<input type=hidden id=lcode name=lcode value=\"$I_LISTCODE[5]\">");
+		echo("<input type=submit id=x name=x value=\"$I_GO\">");
+		echo("</form>");
+		echo("<div class=spaceline></div>");
+
+		echo("<h3>$I_LISTS[6]</h3>");
+		echo("<form method=post>");
+		echo("<input type=hidden id=lcode name=lcode value=\"$I_LISTCODE[6]\">");
 		echo("<input type=submit id=x name=x value=\"$I_GO\">");
 		echo("</form>");
 		echo("<div class=spaceline></div>");

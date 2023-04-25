@@ -20,40 +20,38 @@ if (!isset($MA_CONFIG_DIR)){
 
 
 for ($i=0;$i<count($MA_LIB);$i++){
-	if (file_exists("$MA_LIB[$i]")){
-		include("$MA_LIB[$i]");
+	if (file_exists("$MA_INCLUDE_DIR/$MA_LIB[$i]")){
+		include("$MA_INCLUDE_DIR/$MA_LIB[$i]");
 	}
 }
 
 $MA_NOPAGE=true;
 
-# build page
-#page_header_view();
+# load local app file
+for ($i=0;$i<count($MA_APPFILE);$i++){
+	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$i]")){
+		include("$MA_CONTENT_DIR/$MA_APPFILE[$i]");
+	}
+}
+
+# prepare system
+setcookienames();
+getcookies();
 
 echo($MA_DOCTYPE);
 
-if (file_exists($MA_CSSPRINT)){
+if (file_exists("$MA_INCLUDE_DIR/$MA_CSSPRINT")){
     echo("<style>");
-    include("$MA_CSSPRINT");
+    include("$MA_INCLUDE_DIR/$MA_CSSPRINT");
     echo("</style>");
 }
 echo("<body onclick=\"window.close();\">");
-
-# load local app file
-for ($i=0;$i<count($MA_APPFILE);$i++){
-	if (file_exists("$MA_APPFILE[$i]")){
-		include("$MA_APPFILE[$i]");
-	}
-}
 
 if (function_exists("printpage")){
 	printpage();
 }
 
 # end
-
 echo("<script>window.print();</script>");
-
-#page_footer_view();
 
 ?>

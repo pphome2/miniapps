@@ -42,7 +42,7 @@ function r_initem($p,$c,$pn,$cn){
 	if (isset($_POST['0'])){
 		$form=false;
 		$da="'".$_POST[0]."'";
-		for($i=1;$i<$db;$i++){
+		for($i=1;$i<$db-1;$i++){
 			$da=$da.", '".$_POST[$i]."'";
 		}
 		$sqlc="insert into r_bev (id,dat,besz,cikk,menny,ear,ertek,biz,megj,megr,rakt) values ($da);";
@@ -60,14 +60,24 @@ function r_initem($p,$c,$pn,$cn){
 			if (count($MA_SQL_RESULT)>0){
 				$du=$MA_SQL_RESULT[0];
 				$m=intval($du[3])+intval($_POST[4]);
-				$sqlc="update r_keszlet set id=$du[0],cikk=$du[1],rakt=$du[2],menny=$m,ukid=\"\",ubev=\"$_POST[1]\",ear=$_POST[5] where id=$du[0];";
+				$megj="";
+				if ($_POST[11]===""){
+					$sqlc="select * from r_keszlet where id=$du[0];";
+					if (sql_tun($sqlc)){
+						$rd=$MA_SQL_RESULT[0];
+						$megj=$rd[7];
+					}
+				}else{
+					$megj=$_POST[11];
+				}
+				$sqlc="update r_keszlet set id=$du[0],cikk=$du[1],rakt=$du[2],menny=$m,ukid=\"\",ubev=\"$_POST[1]\",ear=$_POST[5],megj=\"$megj\" where id=$du[0];";
 				if (sql_run($sqlc)){
 					mess_ok($R_IN_TITLE_NEW.": ".$R_OK.".");
 				}else{
 					mess_error($R_IN_TITLE_NEW.": ".$R_ERROR.".");
 				}
 			}else{
-				$sqlc="insert into r_keszlet (id,cikk,rakt,menny,ukid,ubev,ear) values ($d[0],$_POST[3],$_POST[10],$_POST[4],\"\",\"$_POST[1]\",$_POST[5]);";
+				$sqlc="insert into r_keszlet (id,cikk,rakt,menny,ukid,ubev,ear) values ($d[0],$_POST[3],$_POST[10],$_POST[4],\"\",\"$_POST[1]\",$_POST[5]),\"$_POST[11]\";";
 				if (sql_run($sqlc)){
 					mess_ok($R_IN_TITLE_NEW.": ".$R_OK.".");
 				}else{
@@ -109,7 +119,7 @@ function r_initem($p,$c,$pn,$cn){
 		$rof=array(1,2,3);
 		$num=array(4,5,6);
 		$numscr="oninput=\"this.value = this.value.replace(/[^0-9.,]/g, '').replace(/(\..*?)\..*/g, '$1');\"";
-		for($i=1;$i<$db-1;$i++){
+		for($i=1;$i<$db;$i++){
 			if (in_array($i,$rof)){
 				$ro="readonly";
 			}else{
@@ -120,29 +130,32 @@ function r_initem($p,$c,$pn,$cn){
 			}else{
 				$s="";
 			}
-			echo("<div class=frow>");
-			echo("<div class=fcol1>$R_IN_FIELDS[$i]");
-			echo("</div>");
-			echo("<div class=fcol2>");
-			echo("<input type=text id=$i name=$i placeholder='$R_IN_FIELDS[$i]' value='$d[$i]' $ro $s>");
-			echo("</div>");
-			echo("</div>");
+			if ($i===($db-2)){
+				echo("<div class=frow>");
+				echo("<div class=fcol1>$R_IN_FIELDS[$i]");
+				echo("</div>");
+				echo("<div class=fcol2>");
+				$sqlc="select * from r_raktar;";
+				sql_run($sqlc);
+				echo("<select id=$i name=$i>");
+				for($x=0;$x<count($MA_SQL_RESULT);$x++){
+					$d=$MA_SQL_RESULT[$x];
+					echo("<option value='$d[0]'>$d[1]</option>");
+				}
+				echo("</select>");
+				echo("</div>");
+				echo("</div>");
+			}else{
+				echo("<div class=frow>");
+				echo("<div class=fcol1>$R_IN_FIELDS[$i]");
+				echo("</div>");
+				echo("<div class=fcol2>");
+				echo("<input type=text id=$i name=$i placeholder='$R_IN_FIELDS[$i]' value='$d[$i]' $ro $s>");
+				echo("</div>");
+				echo("</div>");
+			}
 		}
 		#$i++;
-		echo("<div class=frow>");
-		echo("<div class=fcol1>$R_IN_FIELDS[$i]");
-		echo("</div>");
-		echo("<div class=fcol2>");
-		$sqlc="select * from r_raktar;";
-		sql_run($sqlc);
-		echo("<select id=$i name=$i>");
-		for($x=0;$x<count($MA_SQL_RESULT);$x++){
-			$d=$MA_SQL_RESULT[$x];
-			echo("<option value='$d[0]'>$d[1]</option>");
-		}
-		echo("</select>");
-		echo("</div>");
-		echo("</div>");
 		echo("<div class=frow><br /></div>");
 		echo("<input type=hidden id=id name=id value=\"$d[0]\">");
 		echo("<input type=submit id=newi name=newi value=\"$R_SAVE\">");

@@ -29,8 +29,8 @@ $MA_CONTENT_DIR="content";
 $MA_PLUGIN_DIR="plugins";
 
 # cookies
-$MA_COOKIE_STYLE=$MA_CODENAME."st";
-$MA_COOKIE_LOGIN=$MA_CODENAME."u";
+$MA_COOKIE_STYLE="st";
+$MA_COOKIE_LOGIN="u";
 
 # include files
 $MA_ADMINFILE="start.php";
@@ -42,25 +42,25 @@ $MA_PRINTFILE="print.php";
 $MA_FAVICON="favicon.png";
 
 $MA_CSS=array(
-			"$MA_INCLUDE_DIR/siteb.css",
-			"$MA_INCLUDE_DIR/sitew.css"
+			"siteb.css",
+			"sitew.css"
 			);
 $MA_ENABLE_SYSTEM_CSS=true;
-$MA_CSSPRINT="$MA_INCLUDE_DIR/sitepr.css";
+$MA_CSSPRINT="sitepr.css";
 
-$MA_JS_BEGIN="$MA_INCLUDE_DIR/js_begin.js";
-$MA_JS_END="$MA_INCLUDE_DIR/js_end.js";
+$MA_JS_BEGIN="js_begin.js";
+$MA_JS_END="js_end.js";
 $MA_ENABLE_SYSTEM_JS=true;
 
-$MA_HEADER="$MA_INCLUDE_DIR/header.php";
-$MA_FOOTER="$MA_INCLUDE_DIR/footer.php";
-$MA_HEADER_VIEW="$MA_INCLUDE_DIR/header_view.php";
-$MA_FOOTER_VIEW="$MA_INCLUDE_DIR/footer_view.php";
+$MA_HEADER="header.php";
+$MA_FOOTER="footer.php";
+$MA_HEADER_VIEW="header_view.php";
+$MA_FOOTER_VIEW="footer_view.php";
 
 $MA_LIB=array(
-			"$MA_INCLUDE_DIR/lib.php",
-			"$MA_INCLUDE_DIR/libadmin.php",
-			"$MA_INCLUDE_DIR/libview.php"
+			"lib.php",
+			"libadmin.php",
+			"libview.php"
 			);
 
 # pages
@@ -72,13 +72,14 @@ $MA_ENABLE_THEME=true;
 # plugins directorys (load dirname.php .css, .js from directory)
 $MA_PLUGINS=array();
 
+# cookies
+$MA_COOKIES=array();
+
 # language
 $MA_LANGFILE="hu.php";
 
 # local app main and css file
-$MA_APPFILE=array(
-				"$MA_CONTENT_DIR/config.php"
-			);
+$MA_APPFILE=array("config.php");
 $MA_APPCSSFILE=array("");
 $MA_APPJSFILE=array("");
 $MA_APPPRIVACYFILE="";
@@ -95,7 +96,6 @@ $MA_ENABLE_LOGIN_VIEW=true;
 
 # multiuser
 $MA_ENABLE_USERNAME=false;
-$MA_USERNAME="";
 $MA_USERS_ADMINUSERS=array("admin");
 $MA_USERS_CRED=array(
 					array("admin","e3274be5c857fb42ab72d786e281b4b8"),
@@ -107,6 +107,8 @@ $MA_USERS_CRED=array(
 $MA_MENU_FIELD="m";
 # user menu
 $MA_MENU=array();
+$MA_FOOTERMENU=array();
+$MA_MENUCODE=array();
 # adminmenu
 $MA_ADMINMENU=array();
 # back icon in menu

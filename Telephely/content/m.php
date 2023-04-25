@@ -87,12 +87,16 @@ function m_view(){
 }
 
 function main(){
+	#loadplugin("table");
+	#loadplugin("cards");
 	m_header();
 	m_data();
 	m_footer();
 }
 
 function view(){
+	#loadplugin("table");
+	#loadplugin("cards");
 	m_header();
 	m_view();
 	m_footer();

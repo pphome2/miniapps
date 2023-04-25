@@ -13,8 +13,8 @@ $MA_COPYRIGHT="<a href=https://google.com>Google</a>";
 # title, home link
 $MA_SITENAME="Ikt";
 $MA_TITLE="I+";
-$MA_CODENAME="ko";
-$MA_ROOT_HOME="http://15.20.1.249";
+$MA_CODENAME="ik";
+$MA_ROOT_HOME="http://10.16.1.249";
 $MA_ROOT_NAME="Demo";
 $MA_SITE_HOME="";
 $MA_FAVICON="favicon.png";

@@ -9,7 +9,6 @@
 
 
 # paramétert : 0
-
 function i_genid($iddoc=""){
 	global $I_FIRSTDOCNUM,$MA_SQL_RESULT;
 
@@ -47,11 +46,11 @@ function i_genid($iddoc=""){
 
 
 # paramétert : 1
-
 function i_year($year=0){
-	global $MA_SQL_RESULT;
+	global $MA_SQL_RESULT,$I_COOKIE_YEAR,$MA_COOKIES;
 
-	$id=2;
+	$ia=explode(".",$_SERVER['REMOTE_ADDR']);
+	$id=$ia[3];
 	$sqlc="select * from ik_param where id=$id;";
 	if ((sql_run($sqlc))and(count($MA_SQL_RESULT)>0)){
 		$r=$MA_SQL_RESULT[0];

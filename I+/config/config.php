@@ -29,8 +29,8 @@ $MA_CONTENT_DIR="content";
 $MA_PLUGIN_DIR="plugins";
 
 # cookies
-$MA_COOKIE_STYLE=$MA_CODENAME."st";
-$MA_COOKIE_LOGIN=$MA_CODENAME."u";
+$MA_COOKIE_STYLE="st";
+$MA_COOKIE_LOGIN="u";
 
 # include files
 $MA_ADMINFILE="start.php";
@@ -83,6 +83,9 @@ $MA_ENABLE_THEME=true;
 # plugins directorys (load dirname.php .css, .js from directory)
 $MA_PLUGINS=array();
 
+# cookies
+$MA_COOKIES=array();
+
 # language
 $MA_LANGFILE="hu.php";
 
@@ -105,7 +108,6 @@ $MA_ENABLE_LOGIN_VIEW=true;
 # multiuser
 $MA_ENABLE_USERNAME=false;
 $MA_USERS_ADMINUSERS=array("admin");
-$MA_USERNAME="";
 $MA_USERS_CRED=array(
 					array("admin","e3274be5c857fb42ab72d786e281b4b8"),
 					array("user","5f4dcc3b5aa765d61d8327deb882cf99")

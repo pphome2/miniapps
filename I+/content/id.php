@@ -30,6 +30,12 @@ function i_doctable(){
 		i_docdata(false);
 	}
 	if ($ptable){
+		if (isset($_POST['year'])){
+			$year=$_POST['year'];
+		}else{
+			$year=0;
+		}
+		$year=i_year($year);
 		if (isset($_POST['page'])){
 			$page=(int)$_POST['page'];
 			$first=$I_PAGEROW*$page;
@@ -38,7 +44,7 @@ function i_doctable(){
 			$first=0;
 		}
 		$last=false;
-		if (sql_run("select count(*) from ik_doc;")){
+		if (sql_run("select count(*) from ik_doc where id like \"%$year%\";")){
 			$r=$MA_SQL_RESULT[0];
 			$odb=$r[0];
 			$adb=$first+$I_PAGEROW;
@@ -46,12 +52,6 @@ function i_doctable(){
 				$last=true;
 			}
 		}
-		if (isset($_POST['year'])){
-			$year=$_POST['year'];
-		}else{
-			$year=0;
-		}
-		$year=i_year($year);
 		echo("<form method=post>");
 		echo("<input type=hidden id=page name=page value=$page>");
 		echo("<div class=frow>");

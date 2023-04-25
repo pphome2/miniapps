@@ -25,18 +25,17 @@ for ($i=0;$i<count($MA_LIB);$i++){
 }
 
 # local app files
-for ($j=0;$j<count($MA_APPFILE);$j++){
-	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$j]")){
-		include("$MA_CONTENT_DIR/$MA_APPFILE[$j]");
+for ($i=0;$i<count($MA_APPFILE);$i++){
+	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$i]")){
+		include("$MA_CONTENT_DIR/$MA_APPFILE[$i]");
 	}
 }
 
 $MA_ENABLE_SYSTEM_CSS=true;
 
-#setcookienames();
+# prepare system
+startcookies();
 plugins();
-
-# css setting
 setcss();
 
 # login

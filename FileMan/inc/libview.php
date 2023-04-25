@@ -8,19 +8,11 @@
  #
 
 
-# preivois page
-function refererpage(){
-    $mainp=basename($_SERVER['HTTP_REFERER']);
-    if (isset($_POST['referer'])){
-        $mainp=$_POST['referer'];
-    }
-    return($mainp);
-}
-
 
 # search in site
 function searchview($title="",$button="",$search=""){
     $rp=refererpage();
+    $st="";
 	echo("<header><h3>$title</h3></header>");
 	echo("<div class=spaceline></div>");
 	echo("<div class=contentbox>");
@@ -37,31 +29,39 @@ function searchview($title="",$button="",$search=""){
         echo("</div>");
    	}
     echo("</div>");
+    return($st);
 }
+
 
 
 # privacy file view
 function privacyview($title="",$pfile=""){
-    global $L_PRIVACY_HEADER;
+    global $L_PRIVACY_HEADER,$MA_CONTENT_DIR;
 
     if ($title=""){
         $title=$L_PRIVACY_HEADER;
     }
-	echo("<header><h3>$title</h3></header>");
-	echo("<div class=spaceline></div>");
-	if (file_exists($pfile)){
-	    echo("<div class=contentbox>");
-	    if ($file=fopen($pfile, "r")) {
+  echo("<header><h3>$title</h3></header>");
+  echo("<div class=spaceline></div>");
+  if (!file_exists($pfile)){
+  	if (file_exists("$MA_CONTENT_DIR/$pfile")){
+  	    $pfile="$MA_CONTENT_DIR/$pfile";
+  	}
+  }
+  if (file_exists($pfile)){
+      echo("<div class=contentbox>");
+      if ($file=fopen($pfile, "r")) {
             while(!feof($file)) {
                 $line=fgets($file);
-        	    echo($line."<br />");
+      	    echo($line."<br />");
             }
             fclose($file);
         }
-	    echo("</div>");
-	}
-	echo("<div class=spaceline></div>");
+      echo("</div>");
+  }
+  echo("<div class=spaceline></div>");
 }
+
 
 
 # backpage button
@@ -72,6 +72,23 @@ function button_back(){
 	echo("<div class=insidecontent><a onclick=\"window.history.back();\"><input type=submit id=submitar name=submitar value=$L_BACKPAGE></a></div>");
 	echo("<div class=\"spaceline\"></div>");
 }
+
+
+# button jump to URL
+function button_go($url="", $title=""){
+    global $L_JUMP,$MA_SITEURL;
+
+    if ($title==""){
+        $title=$L_JUMP;
+    }
+    if ($url==""){
+        $url=$MA_SITEURL;
+    }
+    echo("<div class=\"spaceline\"></div>");
+    echo("<div class=insidecontent><a href=\"$url\"><input type=submit id=submitar name=submitar value=$L_JUMP></a></div>");
+    echo("<div class=\"spaceline\"></div>");
+}
+
 
 # backpage button with logout
 function button_back_logout(){
@@ -105,7 +122,7 @@ function button_print(){
 # messages functions
 function mess_error($m){
 	echo('
-		<div class="message_error" name="esysmessage" id="esysmessage">
+		<div class="message_error" name="sysmessage" id="esysmessage">
 			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
 				<p class="insidecontent">'.$m.'</p>
 			</div>
@@ -116,7 +133,7 @@ function mess_error($m){
 
 function mess_ok($m){
 	echo('
-		<div class="message_ok" name="osysmessage" id="osysmessage">
+		<div class="message_ok" name="sysmessage" id="osysmessage">
 			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
 				<p class="insidecontent">'.$m.'</p>
 			</div>
@@ -127,7 +144,7 @@ function mess_ok($m){
 
 function mess_info($m){
 	echo('
-		<div class="message_info" name="isysmessage" id="isysmessage">
+		<div class="message_info" name="sysmessage" id="isysmessage">
 			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
 				<p class="insidecontent">'.$m.'</p>
 			</div>
@@ -137,7 +154,7 @@ function mess_info($m){
 
 function mess_warning($m){
 	echo('
-		<div class="message_warning" name="wsysmessage" id="wsysmessage">
+		<div class="message_warning" name="sysmessage" id="wsysmessage">
 			<div onclick="this.parentElement.style.display=\'none\'" class="ttoprightclose">
 				<p class="insidecontent">'.$m.'</p>
 			</div>

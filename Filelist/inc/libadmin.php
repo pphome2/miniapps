@@ -8,6 +8,94 @@
  #
 
 
+
+# cookie system start
+function startcookies($n="",$d="",$td=0){
+	setcookienames();
+	setcookies($n,$d,$td);
+	getcookies($n,$d,$td);
+}
+
+
+# load, get cookies
+function getcookies($n="",$d="",$td=0){
+	global $MA_COOKIES;
+
+	$d="";
+	if ($n<>""){
+		if (isset($_COOKIE['$n'])){
+			$d=$_COOKIE['$n'];
+		}
+	}else{
+		$cdb=count($MA_COOKIES);
+		for($i=0;$i<$cdb;$i++){
+			$ac=$MA_COOKIES[$i];
+			$acname=$ac[0];
+			if(isset($_COOKIE[$acname])) {
+				$acdata=$_COOKIE[$acname];
+			}else{
+				$acdata="";
+			}
+			if (isset($ac[2])){
+				$acd=$ac[2];
+			}else{
+				$acd=0;
+			}
+			$MA_COOKIES[$i]=array($acname,$acdata,$acd);
+		}
+	}
+	return($d);
+}
+
+
+# store cookie
+function setcookies($n="",$d="",$td=0){
+	global $MA_COOKIES;
+
+	if ($n<>""){
+		setcookie($n,$d,time()+(86400*$td),"/");
+	}else{
+		$cdb=count($MA_COOKIES);
+		for($i=0;$i<$cdb;$i++){
+			$ac=$MA_COOKIES[$i];
+			$n=$ac[0];
+			if (isset($_POST['$n'])){
+				$d=$_POST['$n'];
+				$ac[2]=$d;
+				$td=$ac[3];
+				$MA_COOKIES[$i]=array($n,$d,$td);
+				#86400=1nap
+				setcookie($n,$d,time()+(86400*$td),"/");
+			}
+		}
+	}
+}
+
+
+# cookie names settings
+function setcookienames(){
+    global $MA_CODENAME,$MA_COOKIE_STYLE,$MA_COOKIE_LOGIN;
+
+    $MA_COOKIE_STYLE=$MA_CODENAME."-".$MA_COOKIE_STYLE;
+    $MA_COOKIE_LOGIN=$MA_CODENAME."-".$MA_COOKIE_LOGIN;
+}
+
+
+# cookie names settings
+function setcookienamesfromdir(){
+    global $MA_CODENAME,$MA_COOKIE_STYLE,$MA_COOKIE_LOGIN;
+
+    $p=explode('/',(dirname(__FILE__)));
+    if (count($p)>=2){
+        $px=$p[count($p)-2];
+    }else{
+        $px="";
+    }
+    $MA_COOKIE_STYLE=$px."-".$MA_COOKIE_STYLE;
+    $MA_COOKIE_LOGIN=$px."-".$MA_COOKIE_LOGIN;
+}
+
+
 # preivois page
 function refererpage(){
     $mainp=basename($_SERVER['REQUEST_URI']);
@@ -73,31 +161,15 @@ function setcss(){
 }
 
 
-# cookie names settings
-function setcookienames(){
-    global $MA_COOKIE_STYLE,$MA_COOKIE_LOGIN;
-
-    $p=explode('/',(dirname(__FILE__)));
-    if (count($p)>=2){
-        $px=$p[count($p)-2];
-    }else{
-        $px="";
-    }
-    $MA_COOKIE_STYLE=$px."st";
-    $MA_COOKIE_LOGIN=$px."l";
-}
-
-
 
 # login from cookie or param
 function login(){
-	global $MA_LOGGEDIN,$MA_COOKIE_LOGIN,$MA_USERNAME,
+	global $MA_LOGGEDIN,$MA_COOKIE_LOGIN,
 			$MA_ADMIN_USER,$MA_ENABLE_USERNAME,
 			$MA_USERS_CRED,$MA_USERS_ADMINUSERS,
 			$MA_COOKIE_PASS,$MA_COOKIE_USER;
 
 	$MA_LOGGEDIN=false;
-	$MA_USERNAME="";
 	$pass="";
 	$user="";
 
@@ -144,7 +216,6 @@ function login(){
 		setcookie($MA_COOKIE_LOGIN, "", ['expires'=>-1,'samesite'=>'Strict']);
 	}
 
-	$MA_USERNAME=$user;
 	# admin
 	if ($MA_LOGGEDIN){
 		if (in_array($user,$MA_USERS_ADMINUSERS)){

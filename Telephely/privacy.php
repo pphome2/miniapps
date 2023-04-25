@@ -25,18 +25,19 @@ for ($i=0;$i<count($MA_LIB);$i++){
 	}
 }
 
-$MA_PRIVACY_PAGE=true;
-$MA_BACKPAGE=true;
-
-# cookies or param 
-setcss();
-
 # local app files
 for ($i=0;$i<count($MA_APPFILE);$i++){
 	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$i]")){
 		include("$MA_CONTENT_DIR/$MA_APPFILE[$i]");
 	}
 }
+
+# prepare system
+startcookies();
+setcss();
+
+$MA_PRIVACY_PAGE=true;
+$MA_BACKPAGE=true;
 
 # build page: header
 $mainpage=refererpage();

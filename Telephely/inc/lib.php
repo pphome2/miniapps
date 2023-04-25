@@ -8,63 +8,6 @@
  #
 
 
-
-# load plugins
-function plugins(){
-    global $MA_PLUGINS;
-
-    for($i=0;$i<count($MA_PLUGINS);$i++){
-        $fnx=basename($MA_PLUGINS[$i]);
-        $fn=$MA_PLUGINS[$i].'/'.$fnx.'.php';
-        if (file_exists($fn)){
-            include($fn);
-        }
-        $fn=$MA_PLUGINS[$i].'/'.$fnx.'.css';
-        if (file_exists($fn)){
-            include($fn);
-        }
-        $fn=$MA_PLUGINS[$i].'/'.$fnx.'.js';
-        if (file_exists($fn)){
-            include($fn);
-        }
-    }
-}
-
-
-# load one plugin
-function loadplugin($p){
-    global $MA_PLUGIN_DIR;
-
-    $fn=$MA_PLUGIN_DIR.'/'.$p.'/'.$p.'.php';
-    if (file_exists($fn)){
-        include($fn);
-    }
-    $fn=$MA_PLUGIN_DIR.'/'.$p.'/'.$p.'.css';
-    if (file_exists($fn)){
-        include($fn);
-    }
-    $fn=$MA_PLUGIN_DIR.'/'.$p.'/'.$p.'.js';
-    if (file_exists($fn)){
-        include($fn);
-    }
-}
-
-
-
-# cookies or param
-function setcss(){
-	global $MA_STYLEINDEX,$MA_COOKIE_STYLE,$MA_CSS;
-
-    if (isset($_COOKIE[$MA_COOKIE_STYLE])){
-   		$MA_STYLEINDEX=intval(vinput($_COOKIE[$MA_COOKIE_STYLE]));
-	}
-	if ($MA_STYLEINDEX>count($MA_CSS)){
-		$MA_STYLEINDEX=0;
-	}
-}
-
-
-
 # page header
 function page_header(){
 	global $MA_HEADER,$MA_JS_BEGIN,$MA_CSS,$MA_STYLEINDEX,$MA_SITENAME,$MA_ROOT_HOME,
@@ -72,17 +15,18 @@ function page_header(){
 			$MA_MENU,$MA_MENU_FIELD,$MA_LOGGEDIN,$MA_COOKIE_LOGIN,$L_LOGOUT,$MA_DOCTYPE,
 			$MA_SEARCH_ICON_HREF,$MA_SEARCH_ICON_JS,$MA_SEARCHFILE,$MA_LOGOUT_IN_HEADER,
 			$L_SITENAME,$MA_ADMIN_USER,$MA_ADMINMENU,$MA_ADMINMENU_FIELD,$MA_APPCSSFILE,
-			$MA_ENABLE_HEADER,$MA_SEARCH_PAGE,$MA_PRIVACY_PAGE,$MA_FAVICON,
+			$MA_ENABLE_HEADER,$MA_SEARCH_PAGE,$MA_PRIVACY_PAGE,$MA_FAVICON,$MA_MENUCODE,
             $MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,$MA_ENABLE_THEME,
-            $MA_TITLE,$MA_BACKPAGE,$L_SITEHOME,$MA_ENABLE_SYSTEM_JS;
+            $MA_TITLE,$MA_BACKPAGE,$L_SITEHOME,$MA_ENABLE_SYSTEM_JS,
+            $MA_INCLUDE_DIR,$MA_CONTENT_DIR;
 
 
-	if (file_exists("$MA_HEADER")){
-		include("$MA_HEADER");
+	if (file_exists("$MA_INCLUDE_DIR/$MA_HEADER")){
+		include("$MA_INCLUDE_DIR/$MA_HEADER");
 	}
 	if ($MA_ENABLE_SYSTEM_JS){
-    	if (file_exists("$MA_JS_BEGIN")){
-	    	include("$MA_JS_BEGIN");
+    	if (file_exists("$MA_INCLUDE_DIR/$MA_JS_BEGIN")){
+	    	include("$MA_INCLUDE_DIR/$MA_JS_BEGIN");
     	}
 	}
 }
@@ -94,15 +38,17 @@ function page_footer(){
 			$MA_COPYRIGHT,$MA_CSS,$L_THEME,$MA_PRIVACYFILE,$MA_ENABLE_SYSTEM_JS,
 			$L_PRIVACY_MENU,$MA_LOGGEDIN,$MA_COOKIE_LOGIN,$L_LOGOUT,$L_COOKIE_TEXT,
 			$MA_PRIVACY_PAGE,$MA_ENABLE_FOOTER,$MA_STYLEPARAM_NAME,$MA_SEARCH_PAGE,
-            $MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,$MA_ENABLE_THEME;
+            $MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,$MA_ENABLE_THEME,
+            $MA_FOOTERMENU,$MA_MENU_FIELD,$MA_MENUCODE,
+            $MA_INCLUDE_DIR,$MA_CONTENT_DIR;
 
 	if ($MA_ENABLE_SYSTEM_JS){
-    	if (file_exists("$MA_JS_END")){
-	    	include("$MA_JS_END");
+    	if (file_exists("$MA_INCLUDE_DIR/$MA_JS_END")){
+	    	include("$MA_INCLUDE_DIR/$MA_JS_END");
     	}
 	}
-	if (file_exists("$MA_FOOTER")){
-		include("$MA_FOOTER");
+	if (file_exists("$MA_INCLUDE_DIR/$MA_FOOTER")){
+		include("$MA_INCLUDE_DIR/$MA_FOOTER");
 	}
 }
 
@@ -114,16 +60,17 @@ function page_header_view(){
 			$MA_MENU,$MA_MENU_FIELD,$MA_LOGGEDIN,$MA_COOKIE_LOGIN,$L_LOGOUT,$MA_DOCTYPE,
 			$MA_SEARCH_ICON_HREF,$MA_SEARCH_ICON_JS,$MA_SEARCHFILE,$MA_LOGOUT_IN_HEADER,
 			$L_SITENAME,$MA_ADMIN_USER,$MA_ADMINMENU,$MA_ADMINMENU_FIELD,$MA_APPCSSFILE,
-			$MA_ENABLE_HEADER,$MA_PRIVACY_PAGE,$MA_SEARCH_PAGE,$MA_FAVICON,
+			$MA_ENABLE_HEADER,$MA_PRIVACY_PAGE,$MA_SEARCH_PAGE,$MA_FAVICON,$MA_MENUCODE,
 			$MA_ENABLE_LOGIN_VIEW,$MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,
-			$MA_ENABLE_THEME,$MA_TITLE,$MA_BACKPAGE,$L_SITEHOME,$MA_ENABLE_SYSTEM_JS;
+			$MA_ENABLE_THEME,$MA_TITLE,$MA_BACKPAGE,$L_SITEHOME,$MA_ENABLE_SYSTEM_JS,
+            $MA_INCLUDE_DIR,$MA_CONTENT_DIR;
 
-	if (file_exists("$MA_HEADER_VIEW")){
-		include("$MA_HEADER_VIEW");
+	if (file_exists("$MA_INCLUDE_DIR/$MA_HEADER_VIEW")){
+		include("$MA_INCLUDE_DIR/$MA_HEADER_VIEW");
 	}
 	if ($MA_ENABLE_SYSTEM_JS){
-    	if (file_exists("$MA_JS_BEGIN")){
-	    	include("$MA_JS_BEGIN");
+    	if (file_exists("$MA_INCLUDE_DIR/$MA_JS_BEGIN")){
+	    	include("$MA_INCLUDE_DIR/$MA_JS_BEGIN");
     	}
 	}
 }
@@ -135,16 +82,18 @@ function page_footer_view(){
 			$MA_COPYRIGHT,$MA_CSS,$MA_COOKIE_STYLE,$L_THEME,$MA_PRIVACYFILE,
 			$L_PRIVACY_MENU,$MA_LOGGEDIN,$MA_COOKIE_LOGIN,$L_LOGOUT,$L_COOKIE_TEXT,
 			$MA_PRIVACY_PAGE,$MA_ENABLE_FOOTER,$MA_STYLEPARAM_NAME,$MA_SEARCH_PAGE,
-			$MA_ENABLE_LOGIN_VIEW,$MA_ENABLE_SYSTEM_JS,
-            $MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,$MA_ENABLE_THEME;
+			$MA_ENABLE_LOGIN_VIEW,$MA_ENABLE_SYSTEM_JS,$MA_ENABLE_FOOTER_VIEW,
+            $MA_ENABLE_PRIVACY,$MA_ENABLE_PRINT,$MA_ENABLE_SEARCH,$MA_ENABLE_THEME,
+            $MA_FOOTERMENU,$MA_MENU_FIELD,$MA_MENUCODE,
+            $MA_INCLUDE_DIR,$MA_CONTENT_DIR;
 
 	if ($MA_ENABLE_SYSTEM_JS){
-    	if (file_exists("$MA_JS_END")){
-	    	include("$MA_JS_END");
+    	if (file_exists("$MA_INCLUDE_DIR/$MA_JS_END")){
+	    	include("$MA_INCLUDE_DIR/$MA_JS_END");
     	}
 	}
-	if (file_exists("$MA_FOOTER_VIEW")){
-		include("$MA_FOOTER_VIEW");
+	if (file_exists("$MA_INCLUDE_DIR/$MA_FOOTER_VIEW")){
+		include("$MA_INCLUDE_DIR/$MA_FOOTER_VIEW");
 	}
 }
 

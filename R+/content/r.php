@@ -9,16 +9,15 @@
 
 
 function searchpage(){
-	global $R_TITLE,$MA_BUTTON_TEXT,$MA_SEARCH_TEXT;
+	global $R_SEARCH_TEXT,$L_BUTTON_NEXT,$L_SEARCH;
 
-	searchview($R_TITLE,$MA_BUTTON_TEXT,$MA_SEARCH_TEXT);
+	searchview($R_SEARCH_TEXT,$L_BUTTON_NEXT,$L_SEARCH);
 }
-
 
 function privacypage(){
 	global $R_PRIVACYTITLE,$MA_APPPRIVACYFILE;
 
-	privacyview("",$MA_APPPRIVACYFILE);
+	privacyview($R_PRIVACYTITLE,$MA_APPPRIVACYFILE);
 }
 
 

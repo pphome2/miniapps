@@ -33,10 +33,9 @@ for ($i=0;$i<count($MA_APPFILE);$i++){
 	}
 }
 
-#setcookienames();
+# prepare system
+startcookies();
 plugins();
-
-# css setting
 setcss();
 
 # login

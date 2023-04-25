@@ -55,8 +55,10 @@ function i_docdata($new){
 			}else{
 				$fn=$_POST[15];
 			}
+			#$os=(int)$_POST[5];
+			$os=$_POST[5];
 			$sqlc="insert into ik_doc (id,sorsz,datum,szsz,partner,ossz,pnem,kat,kiall,fhat,fiz,atad,telep,bank,megj,fajl) ";
-			$sqlc=$sqlc."values ('$_POST[0]','$_POST[1]','$_POST[2]','$_POST[3]',$_POST[4],$_POST[5],'$_POST[6]',$_POST[7],";
+			$sqlc=$sqlc."values ('$_POST[0]','$_POST[1]','$_POST[2]','$_POST[3]',$_POST[4],$os,'$_POST[6]',$_POST[7],";
 			$sqlc=$sqlc."'$_POST[8]','$_POST[9]','$_POST[10]','$_POST[11]','$_POST[12]','$_POST[13]','$_POST[14]','$fn');";
 			#echo($sqlc);
 			if (sql_run($sqlc)){
@@ -71,7 +73,7 @@ function i_docdata($new){
 			$d[$i]="";
 		}
 		$d[2]=date('Y-m-d');
-		$d[4]=$_POST[4];
+		#$d[4]=$_POST[4];
 		$d[5]=0;
 		echo("<h3>$I_DOCTITLE_NEW<h3>");
 		if (isset($_POST['ndid'])){
@@ -110,11 +112,14 @@ function i_docdata($new){
 				$sqlc=$sqlc." datum = \"$_POST[2]\", ";
 				$sqlc=$sqlc." szsz = \"$_POST[3]\", ";
 				$sqlc=$sqlc." partner = $_POST[4], ";
-				if (!is_numeric($_POST[5])){
-					$sqlc=$sqlc." ossz = 0, ";
-				}else{
-					$sqlc=$sqlc." ossz = $_POST[5], ";
-				}
+				#if (!is_numeric($_POST[5])){
+				#	$sqlc=$sqlc." ossz = 0, ";
+				#}else{
+				#	$sqlc=$sqlc." ossz = $_POST[5], ";
+				#}
+				#$os=(int)$_POST[5];
+				$os=$_POST[5];
+				$sqlc=$sqlc." ossz = $os, ";
 				$sqlc=$sqlc." pnem = \"$_POST[6]\", ";
 				$sqlc=$sqlc." kat = $_POST[7], ";
 				$sqlc=$sqlc." kiall = \"$_POST[8]\", ";
@@ -221,8 +226,8 @@ function i_docdata($new){
 					return filemtime($b)-filemtime($a);
 				});
 				$dbl=count($fl);
-				if ($db1>$I_FILECOUNTLIMIT){
-					$db1=$I_FILECOUNTLIMIT;
+				if ($dbl>$I_FILECOUNTLIMIT){
+					$dbl=$I_FILECOUNTLIMIT;
 				}
 				for($j=0;$j<$dbl;$j++){
 					$fn=explode("/",$fl[$j]);

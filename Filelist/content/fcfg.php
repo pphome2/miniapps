@@ -13,7 +13,7 @@ $F_FILECOUNTLIMIT=500;
 $F_PAGEROW=50;
 
 $F_USER_FILE_RIGHTS=array(
-					  array("fouser",array("Der","Du"))
+					  array("user",array("Der","Du"))
 					);
 
 

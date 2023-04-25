@@ -7,31 +7,24 @@
  #
  #
 
+
 # load config and language file
 if (!isset($MA_CONFIG_DIR)){
     if (file_exists("config/config.php")){
 	    include("config/config.php");
     }
-
     if (file_exists("$MA_CONFIG_DIR/$MA_LANGFILE")){
 	    include("$MA_CONFIG_DIR/$MA_LANGFILE");
     }
 }
 
+$MA_ADMINFILE=$MA_VIEWFILE;
 
 for ($i=0;$i<count($MA_LIB);$i++){
 	if (file_exists("$MA_INCLUDE_DIR/$MA_LIB[$i]")){
 		include("$MA_INCLUDE_DIR/$MA_LIB[$i]");
 	}
 }
-
-$MA_SEARCH_PAGE=true;
-$MA_BACKPAGE=true;
-
-login();
-
-# cookies or param 
-setcss();
 
 # local app files
 for ($i=0;$i<count($MA_APPFILE);$i++){
@@ -40,14 +33,22 @@ for ($i=0;$i<count($MA_APPFILE);$i++){
 	}
 }
 
+# prepare system
+startcookies();
+plugins();
+setcss();
+
+# login
+if ($MA_ENABLE_LOGIN_VIEW){
+	login();
+}
 
 # build page: header
-$mainpage=refererpage();
-page_header();
-
-
-# search
-#$MA_NOPAGE=true;
+if ($MA_ENABLE_HEADER_VIEW){
+    page_header();
+}else{
+    page_header_view();
+}
 
 # load local app jsfile
 for ($i=0;$i<count($MA_APPJSFILE);$i++){
@@ -56,12 +57,34 @@ for ($i=0;$i<count($MA_APPJSFILE);$i++){
 	}
 }
 
-if (function_exists("searchpage")){
-	searchpage();
+if (($MA_LOGGEDIN)or(!$MA_ENABLE_LOGIN_VIEW)){
+	# user/admin menu start
+	if (isset($_GET["$MA_MENU_FIELD"])){
+		$param=$_GET["$MA_MENU_FIELD"];
+   		if (function_exists($param)){
+    		$param();
+    	}else{
+		    if (function_exists("view")){
+			    view();
+		    }
+		}
+	}else{
+	    if (function_exists("view")){
+		    view();
+	    }
+	}
+
+}else{
+    if ($MA_ENABLE_LOGIN_VIEW){
+		login_form();
+	}
 }
 
-#button_back();
-
-page_footer();
+# page footer
+if ($MA_ENABLE_FOOTER_VIEW){
+    page_footer();
+}else{
+    page_footer_view();
+}
 
 ?>

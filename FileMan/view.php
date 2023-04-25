@@ -21,22 +21,22 @@ if (!isset($MA_CONFIG_DIR)){
 $MA_ADMINFILE=$MA_VIEWFILE;
 
 for ($i=0;$i<count($MA_LIB);$i++){
-	if (file_exists("$MA_LIB[$i]")){
-		include("$MA_LIB[$i]");
+	if (file_exists("$MA_INCLUDE_DIR/$MA_LIB[$i]")){
+		include("$MA_INCLUDE_DIR/$MA_LIB[$i]");
 	}
 }
 
-# load local app file
+# local app files
 for ($i=0;$i<count($MA_APPFILE);$i++){
-    if (file_exists($MA_APPFILE[$i])){
-        include($MA_APPFILE[$i]);
-    }
+	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$i]")){
+		include("$MA_CONTENT_DIR/$MA_APPFILE[$i]");
+	}
 }
 
-#setcookienames();
+# prepare system
+setcookienames();
+getcookies();
 plugins();
-
-# css setting
 setcss();
 
 # login
@@ -53,8 +53,8 @@ if ($MA_ENABLE_HEADER_VIEW){
 
 # load local app jsfile
 for ($i=0;$i<count($MA_APPJSFILE);$i++){
-	if (file_exists($MA_APPJSFILE[$i])){
-		include($MA_APPJSFILE[$i]);
+	if (file_exists("$MA_CONTENT_DIR/$MA_APPJSFILE[$i]")){
+		include("$MA_CONTENT_DIR/$MA_APPJSFILE[$i]");
 	}
 }
 

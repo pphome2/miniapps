@@ -1,6 +1,6 @@
 <?php
 
-$x=md5("p");
+$x=md5("password");
 echo($x);
 
 ?>

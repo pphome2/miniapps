@@ -54,30 +54,28 @@ function sql_run($sqlcomm=""){
 # többszörös utasítás futtatása SQL szerveren
 
 function sql_multi_run($sqlcomm=""){
-  global $MA_SQL_SERVER,$MA_SQL_DB,$MA_SQL_USER,$MA_SQL_PASS,$MA_SQL_ERROR,
-		  $MA_SQL_RESULT,$MA_SQL_ERROR_ECHO;
+  global $MA_SQL_SERVER,$MA_SQL_DB,$MA_SQL_USER,$MA_SQL_PASS,$MA_SQL_ERROR,$MA_SQL_RESULT;
 
-  $ret=true;
   if (function_exists("mysqli_connect")){
     if ($sqlcomm<>""){
       $sqllink=mysqli_connect("$MA_SQL_SERVER","$MA_SQL_USER","$MA_SQL_PASS","$MA_SQL_DB");
       $MA_SQL_ERROR=mysqli_error($sqllink);
       if ($MA_SQL_ERROR===""){
-        $ret=mysqli_multi_query($sqllink,$sqlcomm);
+        $result=mysqli_multi_query($sqllink,$sqlcomm);
         $MA_SQL_ERROR=mysqli_error($sqllink);
         mysqli_close($sqllink);
       }
-      if ($MA_SQL_ERROR<>""){
-        $ret=false;;
+      if ($MA_SQL_ERROR===""){
+        return(true);
+      }else{
+        return(false);
       }
-	  #$res=mysqli_next_result($connect);
     }else{
-      $ret=false;
+      return(false);
     }
   }else{
-    $ret=false;;
+    return(false);
   }
-  return($ret);
 }
 
 
@@ -121,18 +119,13 @@ function sql_install(){
     $sqlc="";
     foreach ($lines as $v) {
       if (($v<>"")and(substr($v,0,1)<>"#")){
-        $sqlc=$sqlc." \n".$v;
+        $sqlc=$sqlc." ".$v;
         if (substr($v,strlen($v)-1,1)==";"){
           $sqlc=$sqlc."\n";
-          #sql_run($sqlc);
-          #echo("$sqlc <br />");
-          #$sqlc="";
         }
       }
     }
-    if(!sql_multi_run($sqlc)){
-  	  echo($sqlc);
-    }
+    sql_multi_run($sqlc);
   }
 }
 

@@ -27,8 +27,15 @@ for ($i=0;$i<count($MA_LIB);$i++){
 
 $MA_NOPAGE=true;
 
-# build page
-#page_header_view();
+# load local app file
+for ($i=0;$i<count($MA_APPFILE);$i++){
+	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$i]")){
+		include("$MA_CONTENT_DIR/$MA_APPFILE[$i]");
+	}
+}
+
+# prepare system
+startcookies();
 
 echo($MA_DOCTYPE);
 
@@ -39,21 +46,11 @@ if (file_exists("$MA_INCLUDE_DIR/$MA_CSSPRINT")){
 }
 echo("<body onclick=\"window.close();\">");
 
-# load local app file
-for ($i=0;$i<count($MA_APPFILE);$i++){
-	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$i]")){
-		include("$MA_CONTENT_DIR/$MA_APPFILE[$i]");
-	}
-}
-
 if (function_exists("printpage")){
 	printpage();
 }
 
 # end
-
 echo("<script>window.print();</script>");
-
-#page_footer_view();
 
 ?>

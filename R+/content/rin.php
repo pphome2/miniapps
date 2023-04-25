@@ -200,7 +200,7 @@ function r_in(){
 		$st++;
 	}
 	if (isset($_POST['newi'])){
-		r_st2($pid,$iid);
+		r_inst2($pid,$iid);
 	}else{
 		switch($st){
 			case 0:

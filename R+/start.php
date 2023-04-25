@@ -18,8 +18,6 @@ if (!isset($MA_CONFIG_DIR)){
     }
 }
 
-$MA_ADMINFILE=$MA_VIEWFILE;
-
 for ($i=0;$i<count($MA_LIB);$i++){
 	if (file_exists("$MA_INCLUDE_DIR/$MA_LIB[$i]")){
 		include("$MA_INCLUDE_DIR/$MA_LIB[$i]");
@@ -27,29 +25,28 @@ for ($i=0;$i<count($MA_LIB);$i++){
 }
 
 # local app files
-for ($j=0;$j<count($MA_APPFILE);$j++){
-	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$j]")){
-		include("$MA_CONTENT_DIR/$MA_APPFILE[$j]");
+for ($i=0;$i<count($MA_APPFILE);$i++){
+	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$i]")){
+		include("$MA_CONTENT_DIR/$MA_APPFILE[$i]");
 	}
 }
 
-#setcookienames();
-plugins();
+$MA_ENABLE_SYSTEM_CSS=true;
 
-# css setting
+# prepare system
+startcookies();
+plugins();
 setcss();
 
 # login
-if ($MA_ENABLE_LOGIN_VIEW){
-	login();
+if ($MA_ENABLE_LOGIN){
+    login();
+}else{
+	$MA_LOGGEDIN=true;
 }
 
 # build page: header
-if ($MA_ENABLE_HEADER_VIEW){
-    page_header();
-}else{
-    page_header_view();
-}
+page_header();
 
 # load local app jsfile
 for ($i=0;$i<count($MA_APPJSFILE);$i++){
@@ -58,34 +55,32 @@ for ($i=0;$i<count($MA_APPJSFILE);$i++){
 	}
 }
 
-if (($MA_LOGGEDIN)or(!$MA_ENABLE_LOGIN_VIEW)){
+if ($MA_LOGGEDIN){
 	# user/admin menu start
 	if (isset($_GET["$MA_MENU_FIELD"])){
 		$param=$_GET["$MA_MENU_FIELD"];
    		if (function_exists($param)){
     		$param();
     	}else{
-		    if (function_exists("view")){
-			    view();
+		    if (function_exists("main")){
+			    main();
 		    }
 		}
 	}else{
-	    if (function_exists("view")){
-		    view();
+	    if (function_exists("main")){
+		    main();
 	    }
 	}
 
 }else{
-    if ($MA_ENABLE_LOGIN_VIEW){
+	if ($MA_ENABLE_LOGIN){
 		login_form();
 	}
 }
 
-# page footer
-if ($MA_ENABLE_FOOTER_VIEW){
-    page_footer();
-}else{
-    page_footer_view();
-}
+# end local app file
+
+# page end
+page_footer();
 
 ?>

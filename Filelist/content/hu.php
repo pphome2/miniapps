@@ -10,7 +10,7 @@
 # rendszer
 $L_SITENAME="Fájlok";
 $L_ROOTHOME="Intranet";
-$L_SITEHOME="Filelisk";
+$L_SITEHOME="Számlák";
 
 $F_PRIVACYTITLE="Adatvédelmi tájékoztató";
 

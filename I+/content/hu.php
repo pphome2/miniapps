@@ -86,11 +86,12 @@ $I_LISTS=array("Lejáró számlák",
 				"Kategóriánkénti számlák",
 				"Telephelyenkénti számlák",
 				"Átadásra kerülő",
-				"Partnerlista"
+				"Partnerlista",
+				"Nullás összegű számlák",
 				);
 $I_GO=">>>";
 
-$I_LISTTABLE_TITLE=array("Sorszám","Számlaszám","Kiállító","Kategória","Határidő","Átadás","Fizetve");
+$I_LISTTABLE_TITLE=array("Sorszám","Számlaszám","Kiállító","Kategória","Határidő","Átadás","Fizetve","Javít");
 $I_DOWNLOAD="Letöltés";
 $I_DOWNLOADTEXT="A letöltés előkészítve.";
 
