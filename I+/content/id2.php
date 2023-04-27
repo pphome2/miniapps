@@ -231,9 +231,6 @@ function i_docdata($new){
         echo("</select>");
       }
       if ($i===15){
-        echo("<select id=$i name=$i>");
-        echo("<option value=\"\"></option>");
-        #echo("<option value=\"$d[$i]\">$d[$i]</option>");
         #$fl=scandir($I_FILESTORE);
         $fl=glob("$I_FILESTORE/*.pdf");
         usort($fl,function($a,$b){
@@ -241,7 +238,14 @@ function i_docdata($new){
         });
         $dbl=count($fl);
         if ($dbl>$I_FILECOUNTLIMIT){
-          $dbl=$I_FILECOUNTLIMIT;
+          #$dbl=$I_FILECOUNTLIMIT;
+        };
+        echo("<select id=$i name=$i>");
+        #echo("<option value=\"\"></option>");
+        if ($d[$i]<>""){
+          echo("<option value=\"$d[$i]\" selected>$d[$i]</option>");
+        }else{
+          echo("<option value=\"\"></option>");
         }
         for($j=0;$j<$dbl;$j++){
           $fn=explode("/",$fl[$j]);

@@ -165,7 +165,7 @@ function i_partner(){
 		echo("<input type=submit id=newp name=newp value=\"$I_NEWPARTNER\">");
 		echo("</form>");
 		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$I_SEARCH\">");
-		sql_run("select * from ik_partner order by nev desc limit $first,$I_PAGEROW;");
+		sql_run("select * from ik_partner order by nev limit $first,$I_PAGEROW;");
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");

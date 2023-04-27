@@ -152,7 +152,7 @@ function i_cat(){
 		echo("<input type=submit id=newc name=newc value=\"$I_NEWCAT\">");
 		echo("</form>");
 		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$I_SEARCH\">");
-		sql_run("select * from ik_cat order by kod limit $first,$I_PAGEROW;");
+		sql_run("select * from ik_cat order by nev limit $first,$I_PAGEROW;");
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");

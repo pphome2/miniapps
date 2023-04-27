@@ -9,9 +9,13 @@ Fejlesztő: [pphome2](https:/github.com/pphome2)
 **Első megjelenés: 2019.**
 
 
+# R+ - raktárkezelő
+
+Egyszerű raktár-, készletkezelő program temékek, beszállítók, bevétel, kiadás kezeléséhez.
+
 # FileList
 
-Fájlok elérése felhasználói korlátozással
+Fájlok elérése felhasználói korlátozással.
 
 # Telephely
 
@@ -20,11 +24,11 @@ súly adatai.
 
 # I+ - dokumentum kezelő
 
-Egyszerű iktatási program számlákhoz, szerződésekhez
+Egyszerű iktatási program számlákhoz, szerződésekhez.
 
 # FileMan
 
-Weboldalon keresztül fájlkezelés
+Weboldalon keresztül fájlkezelés.
 
 # Web-tools
 

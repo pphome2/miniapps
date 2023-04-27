@@ -87,7 +87,7 @@ function i_list(){
 
 		echo("<h3>$I_LISTS[1]</h3>");
 		echo("<form method=post>");
-		$sqlc="select * from ik_partner;";
+		$sqlc="select * from ik_partner order by nev;";
 		if (sql_run($sqlc)){
 			echo("<select id=id name=id>");
 			$db=count($MA_SQL_RESULT);
