@@ -41,9 +41,9 @@ function r_initem($p,$c,$pn,$cn){
 	$form=true;
 	if (isset($_POST['0'])){
 		$form=false;
-		$da="'".$_POST[0]."'";
+		$da="\"".$_POST[0]."\"";
 		for($i=1;$i<$db-1;$i++){
-			$da=$da.", '".$_POST[$i]."'";
+			$da=$da.", \"".$_POST[$i]."\"";
 		}
 		$sqlc="insert into r_bev (id,dat,besz,cikk,menny,ear,ertek,biz,megj,megr,rakt) values ($da);";
 		if (sql_run($sqlc)){
@@ -86,9 +86,9 @@ function r_initem($p,$c,$pn,$cn){
 			}
 		}
 		$line="";
-		$da="'".$_POST[0]."'";
+		$da="\"".$_POST[0]."\"";
 		for($i=1;$i<$db;$i++){
-			$da=$da.", '".$_POST[$i]."'";
+			$da=$da.", \"".$_POST[$i]."\"";
 			$line=$line.$R_IN_FIELDS[$i]." - ".$_POST[$i]."<br />";
 		}
 		echo("<br /><br />");
@@ -112,9 +112,9 @@ function r_initem($p,$c,$pn,$cn){
 		#echo("<h3>$title</h3>");
 		#echo("<div class=spaceline></div>");
 		echo("<form id=1 name=1 method=post>");
-		echo("<input type=hidden id=pid name=pid value='$p'>");
-		echo("<input type=hidden id=iid name=iid value='$c'>");
-		echo("<input type=hidden id=0 name=0 value='$d[0]'>");
+		echo("<input type=hidden id=pid name=pid value=\"$p\">");
+		echo("<input type=hidden id=iid name=iid value=\"$c\">");
+		echo("<input type=hidden id=0 name=0 value=\"$d[0]\">");
 		echo("<h3>$R_IN_STAGE[2] </h3><br />");
 		$rof=array(1,2,3);
 		$num=array(4,5,6);
@@ -140,7 +140,7 @@ function r_initem($p,$c,$pn,$cn){
 				echo("<select id=$i name=$i>");
 				for($x=0;$x<count($MA_SQL_RESULT);$x++){
 					$d=$MA_SQL_RESULT[$x];
-					echo("<option value='$d[0]'>$d[1]</option>");
+					echo("<option value=\"$d[0]\">$d[1]</option>");
 				}
 				echo("</select>");
 				echo("</div>");
@@ -150,7 +150,7 @@ function r_initem($p,$c,$pn,$cn){
 				echo("<div class=fcol1>$R_IN_FIELDS[$i]");
 				echo("</div>");
 				echo("<div class=fcol2>");
-				echo("<input type=text id=$i name=$i placeholder='$R_IN_FIELDS[$i]' value='$d[$i]' $ro $s>");
+				echo("<input type=text id=$i name=$i placeholder=\"$R_IN_FIELDS[$i]\" value=\"$d[$i]\" $ro $s>");
 				echo("</div>");
 				echo("</div>");
 			}

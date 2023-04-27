@@ -68,7 +68,7 @@ function r_list(){
 		echo("<select id=r name=r>");
 		for($x=0;$x<count($MA_SQL_RESULT);$x++){
 			$d=$MA_SQL_RESULT[$x];
-			echo("<option value='$d[0]'>$d[1]</option>");
+			echo("<option value=\"$d[0]\">$d[1]</option>");
 		}
 		echo("</select>");
 		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[2]\">");
@@ -78,7 +78,7 @@ function r_list(){
 
 		echo("<h3>$R_LISTS[3]</h3>");
 		echo("<form method=post>");
-		echo("<input type=date id=date name=date min=2023-01 value=2023-01>");
+		echo("<input type=date id=date name=date min=2023-01 value=\"2023-01\">");
 		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[3]\">");
 		echo("<input type=submit id=x name=x value=\"$R_GO\">");
 		echo("</form>");
@@ -86,13 +86,13 @@ function r_list(){
 
 		echo("<h3>$R_LISTS[4]</h3>");
 		echo("<form method=post>");
-		echo("<input type=date id=date name=date min=2023-01 value=2023-01>");
+		echo("<input type=date id=date name=date min=2023-01 value=\"2023-01\">");
 		$sqlc="select * from r_kolt;";
 		sql_run($sqlc);
 		echo("<select id=klt name=klt>");
 		for($x=0;$x<count($MA_SQL_RESULT);$x++){
 			$d=$MA_SQL_RESULT[$x];
-			echo("<option value='$d[0]'>$d[1]</option>");
+			echo("<option value=\"$d[0]\">$d[1]</option>");
 		}
 		echo("</select>");
 		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[4]\">");

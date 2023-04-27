@@ -61,7 +61,7 @@ function i_doctable(){
 		echo("<div class=pcol1>");
 		echo("<select style=\"width:20%;margin-right:20px;float:right;\" id=year name=year>");
 		for($y=date('Y');$y>=$I_FIRSTYEAR;$y--){
-			echo("<option value=$y>$y</option>");
+			echo("<option value=\"$y\">$y</option>");
 		}
 		echo("</select>");
 		echo("</div>");
@@ -136,8 +136,8 @@ function i_doctable(){
 		if (($page>0)and($first>0)){
 			echo("<form method=post>");
 			$p=$page-1;
-			echo("<input type=hidden id=page name=page value=$p>");
-			echo("<input type=hidden id=year name=year value=$year>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
+			echo("<input type=hidden id=year name=year value=\"$year\">");
 			echo("<input type=submit id=p name=p value=\"$I_PAGE_LEFT\">");
 			echo("</form>");
 		}else{
@@ -153,8 +153,8 @@ function i_doctable(){
 		if (($db==$I_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
-			echo("<input type=hidden id=page name=page value=$p>");
-			echo("<input type=hidden id=year name=year value=$year>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
+			echo("<input type=hidden id=year name=year value=\"$year\">");
 			echo("<input type=submit id=p name=p value=\"$I_PAGE_RIGHT\">");
 			echo("</form>");
 		}else{

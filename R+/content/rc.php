@@ -36,9 +36,9 @@ function r_catdata($new){
 		$title=$R_CAT_TITLE_NEW;
 		if (isset($_POST['0'])){
 			$form=false;
-			$da="'".$_POST[0]."'";
+			$da="\"".$_POST[0]."\"";
 			for($i=1;$i<$db;$i++){
-				$da=$da.", '".$_POST[$i]."'";
+				$da=$da.", \"".$_POST[$i]."\"";
 			}
 			$sqlc="insert into r_kat (id,kod,nev) values ($da);";
 			if (sql_run($sqlc)){
@@ -88,13 +88,13 @@ function r_catdata($new){
 		echo("<h3>$title</h3>");
 		echo("<div class=spaceline></div>");
 		echo("<form method=post>");
-		echo("<input type=hidden id=0 name=0 value='$d[0]'>");
+		echo("<input type=hidden id=0 name=0 value=\"$d[0]\">");
 		for($i=1;$i<$db;$i++){
 			echo("<div class=frow>");
 			echo("<div class=fcol1>$R_CAT_FIELDS[$i]");
 			echo("</div>");
 			echo("<div class=fcol2>");
-			echo("<input type=text id=$i name=$i placeholder='$R_CAT_FIELDS[$i]' value='$d[$i]'>");
+			echo("<input type=text id=$i name=$i placeholder=\"$R_CAT_FIELDS[$i]\" value=\"$d[$i]\">");
 			echo("</div>");
 			echo("</div>");
 		}
@@ -184,7 +184,7 @@ function r_cat(){
 		if (($page>0)and($first>0)){
 			echo("<form method=post>");
 			$p=$page-1;
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 			echo("</form>");
 		}else{
@@ -200,7 +200,7 @@ function r_cat(){
 		if (($db==$R_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 			echo("</form>");
 		}else{

@@ -40,7 +40,7 @@ function r_table(){
 			}
 		}
 		echo("<form method=post>");
-		echo("<input type=hidden id=page name=page value=$page>");
+		echo("<input type=hidden id=page name=page value=\"$page\">");
 		echo("<div class=frow>");
 		echo("<div class=pcol2>");
 		echo("<h3>$R_STR_TITLE: $storen</h3>");
@@ -52,7 +52,7 @@ function r_table(){
 		$rdb=count($MA_SQL_RESULT);
 		for($y=0;$y<$rdb;$y++){
 			$rd=$MA_SQL_RESULT[$y];
-			echo("<option value=$rd[0]>$rd[1]</option>");
+			echo("<option value=\"$rd[0]\">$rd[1]</option>");
 		}
 		echo("</select>");
 		echo("</div>");
@@ -115,7 +115,7 @@ function r_table(){
 		if (($page>0)and($first>0)){
 			echo("<form method=post>");
 			$p=$page-1;
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 			echo("</form>");
 		}else{
@@ -131,7 +131,7 @@ function r_table(){
 		if (($db==$I_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 			echo("</form>");
 		}else{

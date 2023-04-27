@@ -187,7 +187,7 @@ function r_outklt($title=""){
 		if (($page>0)and($first>0)){
 			echo("<form method=post>");
 			$p=$page-1;
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=hidden id=date name=date value=\"$d2\"> ");
 			echo("<input type=hidden id=klt name=klt value=\"$klt\"> ");
 			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[4]\">");
@@ -206,7 +206,7 @@ function r_outklt($title=""){
 		if (($db==$I_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=hidden id=date name=date value=\"$d2\"> ");
 			echo("<input type=hidden id=klt name=klt value=\"$klt\"> ");
 			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[4]\">");

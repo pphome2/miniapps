@@ -21,14 +21,14 @@ function sqlinput($d){
 # sql parancs futtatása az sql szerveren
 function sql_run($sqlcomm="",$html=false){
   global $MA_SQL_SERVER,$MA_SQL_DB,$MA_SQL_USER,$MA_SQL_PASS,$MA_SQL_ERROR,
-    $MA_SQL_RESULT,$MA_SQL_ERROR_ECHO;
+	  $MA_SQL_RESULT,$MA_SQL_ERROR_ECHO;
 
   $ret=false;
   if (function_exists('mysqli_connect')){
     if ($sqlcomm<>""){
-      if (!$html){
-      $sqlcomm=sqlinput($sqlcomm);
-      }
+  	  if (!$html){
+  		$sqlcomm=sqlinput($sqlcomm);
+  	  }
       $MA_SQL_ERROR="";
       $MA_SQL_RESULT=array();
       $sqllink=mysqli_connect("$MA_SQL_SERVER","$MA_SQL_USER","$MA_SQL_PASS","$MA_SQL_DB");
@@ -56,7 +56,7 @@ function sql_run($sqlcomm="",$html=false){
     }
   }
   if (($MA_SQL_ERROR<>"")and($MA_SQL_ERROR_ECHO)){
-  echo("$sqlcomm\n");
+	echo("$sqlcomm\n");
     echo("$MA_SQL_ERROR\n");
   }
   return($ret);

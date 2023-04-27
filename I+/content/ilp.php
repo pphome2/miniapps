@@ -103,7 +103,7 @@ function i_lpartner(){
 		if (($page>0)and($first>0)){
 			echo("<form method=post>");
 			$p=$page-1;
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$I_PAGE_LEFT\">");
 			echo("</form>");
 		}else{
@@ -119,7 +119,7 @@ function i_lpartner(){
 		if (($db==$I_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$I_PAGE_RIGHT\">");
 			echo("</form>");
 		}else{

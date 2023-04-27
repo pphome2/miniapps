@@ -37,7 +37,7 @@ function i_catdata($new){
 		if (isset($_POST['0'])){
 			$da="'".$_POST[0]."'";
 			for($i=1;$i<$db;$i++){
-				$da=$da.", '".$_POST[$i]."'";
+				$da=$da.", \"".$_POST[$i]."\"";
 			}
 			$sqlc="insert into ik_cat (id,kod,nev) values ($da);";
 			if (sql_run($sqlc)){
@@ -86,13 +86,13 @@ function i_catdata($new){
 	echo("<h3>$title</h3>");
 	echo("<div class=spaceline></div>");
 	echo("<form method=post>");
-	echo("<input type=hidden id=0 name=0 value='$d[0]'>");
+	echo("<input type=hidden id=0 name=0 value=\"$d[0]\">");
 	for($i=1;$i<$db;$i++){
 		echo("<div class=frow>");
 		echo("<div class=fcol1>$I_CAT_FIELDS[$i]");
 		echo("</div>");
 		echo("<div class=fcol2>");
-		echo("<input type=text id=$i name=$i placeholder='$I_CAT_FIELDS[$i]' value='$d[$i]'>");
+		echo("<input type=text id=$i name=$i placeholder=\"$I_CAT_FIELDS[$i]\" value=\"$d[$i]\">");
 		echo("</div>");
 		echo("</div>");
 	}

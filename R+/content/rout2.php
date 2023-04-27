@@ -45,14 +45,14 @@ function r_outitem($r,$c){
 		echo($sqlc);
 		if (count($MA_SQL_RESULT)>0){
 			$kesz=$MA_SQL_RESULT;
-			$da="'".$_POST[0]."'";
-			$da=$da.",'".$_POST[1]."'";
-			$da=$da.",'".$_POST[3]."'";
-			$da=$da.",'".$_POST[4]."'";
-			$da=$da.",'".$_POST[5]."'";
-			$da=$da.",'".$_POST[7]."'";
-			$da=$da.",'".$_POST[6]."'";
-			$da=$da.",'".$_POST[2]."'";
+			$da="\"".$_POST[0]."\"";
+			$da=$da.",\"".$_POST[1]."\"";
+			$da=$da.",\"".$_POST[3]."\"";
+			$da=$da.",\"".$_POST[4]."\"";
+			$da=$da.",\"".$_POST[5]."\"";
+			$da=$da.",\"".$_POST[7]."\"";
+			$da=$da.",\"".$_POST[6]."\"";
+			$da=$da.",\"".$_POST[2]."\"";
 			$sqlc="insert into r_kiad (id,dat,cikk,menny,biz,klt,megj,rakt) values ($da);";
 			if (sql_run($sqlc)){
 				$ok=true;
@@ -102,9 +102,9 @@ function r_outitem($r,$c){
 		#echo("<h3>$title</h3>");
 		#echo("<div class=spaceline></div>");
 		echo("<form id=1 name=1 method=post>");
-		echo("<input type=hidden id=rid name=rid value='$r'>");
-		echo("<input type=hidden id=iid name=iid value='$c'>");
-		echo("<input type=hidden id=0 name=0 value='$d[0]'>");
+		echo("<input type=hidden id=rid name=rid value=\"$r\">");
+		echo("<input type=hidden id=iid name=iid value=\"$c\">");
+		echo("<input type=hidden id=0 name=0 value=\"$d[0]\">");
 		echo("<h3>$R_OUT_STAGE[2] </h3><br />");
 		$rof=array(1,2,3);
 		$num=array(4);
@@ -124,7 +124,7 @@ function r_outitem($r,$c){
 			echo("<div class=fcol1>$R_OUT_FIELDS[$i]");
 			echo("</div>");
 			echo("<div class=fcol2>");
-			echo("<input type=text id=$i name=$i placeholder='$R_OUT_FIELDS[$i]' value='$d[$i]' $ro $s>");
+			echo("<input type=text id=$i name=$i placeholder=\"$R_OUT_FIELDS[$i]\" value=\"$d[$i]\" $ro $s>");
 			echo("</div>");
 			echo("</div>");
 		}
@@ -137,7 +137,7 @@ function r_outitem($r,$c){
 		echo("<select id=$i name=$i>");
 		for($x=0;$x<count($MA_SQL_RESULT);$x++){
 			$d=$MA_SQL_RESULT[$x];
-			echo("<option value='$d[0]'>$d[1]</option>");
+			echo("<option value=\"$d[0]\">$d[1]</option>");
 		}
 		echo("</select>");
 		echo("</div>");

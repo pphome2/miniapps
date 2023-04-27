@@ -172,7 +172,7 @@ function r_calcout($title=""){
 		if (($page>0)and($first>0)){
 			echo("<form method=post>");
 			$p=$page-1;
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=hidden id=date name=date value=\"$d2\"> ");
 			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[3]\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
@@ -190,7 +190,7 @@ function r_calcout($title=""){
 		if (($db==$I_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=hidden id=date name=date value=\"$d2\"> ");
 			echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[3]\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");

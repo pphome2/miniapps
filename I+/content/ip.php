@@ -37,7 +37,8 @@ function i_partnerdata($new){
 		if (isset($_POST['0'])){
 			$da="'".$_POST[0]."'";
 			for($i=1;$i<$db;$i++){
-				$da=$da.", '".$_POST[$i]."'";
+				$t=$_POST[$i];
+				$da=$da.", \"$t\"";
 			}
 			$sqlc="insert into ik_partner (id,nev,orsz,irsz,varo,cim1,cim2,mail,asz,megj) values ($da);";
 			if (sql_run($sqlc)){
@@ -57,17 +58,25 @@ function i_partnerdata($new){
 				$id2=$_POST['id2'];
 				$sqlc="update ik_partner set";
 				$sqlc=$sqlc." id = ".$_POST[0].", ";
-				$sqlc=$sqlc." nev = \"$_POST[1]\", ";
-				$sqlc=$sqlc." orsz = \"$_POST[2]\", ";
-				$sqlc=$sqlc." irsz = \"$_POST[3]\", ";
-				$sqlc=$sqlc." varo = \"$_POST[4]\", ";
-				$sqlc=$sqlc." cim1 = \"$_POST[5]\", ";
-				$sqlc=$sqlc." cim2 = \"$_POST[6]\", ";
-				$sqlc=$sqlc." mail = \"$_POST[7]\", ";
-				$sqlc=$sqlc." asz = \"$_POST[8]\", ";
-				$sqlc=$sqlc." megj = \"$_POST[9]\" ";
+				$t=$_POST[1];
+				$sqlc=$sqlc." nev = \"$t\", ";
+				$t=$_POST[2];
+				$sqlc=$sqlc." orsz = \"$t\", ";
+				$t=$_POST[3];
+				$sqlc=$sqlc." irsz = \"$t\", ";
+				$t=$_POST[4];
+				$sqlc=$sqlc." varo = \"$t\", ";
+				$t=$_POST[5];
+				$sqlc=$sqlc." cim1 = \"$t\", ";
+				$t=$_POST[6];
+				$sqlc=$sqlc." cim2 = \"$t\", ";
+				$t=$_POST[7];
+				$sqlc=$sqlc." mail = \"$t\", ";
+				$t=$_POST[8];
+				$sqlc=$sqlc." asz = \"$t\", ";
+				$t=$_POST[9];
+				$sqlc=$sqlc." megj = \"$t\" ";
 				$sqlc=$sqlc." where id=$id2;";
-				#echo($sqlc);
 				if (sql_run($sqlc)){
 					mess_ok($I_TITLE_CHANGE.": ".$I_OK.".");
 				}else{
@@ -99,13 +108,13 @@ function i_partnerdata($new){
 	echo("<h3>$title</h3>");
 	echo("<div class=spaceline></div>");
 	echo("<form method=post>");
-	echo("<input type=hidden id=0 name=0 value='$d[0]'>");
+	echo("<input type=hidden id=0 name=0 value=\"$d[0]\">");
 	for($i=1;$i<$db;$i++){
 		echo("<div class=frow>");
 		echo("<div class=fcol1>$I_PARTNER_FIELDS[$i]");
 		echo("</div>");
 		echo("<div class=fcol2>");
-		echo("<input type=text id=$i name=$i placeholder='$I_PARTNER_FIELDS[$i]' value='$d[$i]'>");
+		echo("<input type=text id=$i name=$i placeholder=\"$I_PARTNER_FIELDS[$i]\" value=\"$d[$i]\">");
 		echo("</div>");
 		echo("</div>");
 	}
@@ -200,7 +209,7 @@ function i_partner(){
 		if (($page>0)and($first>0)){
 			echo("<form method=post>");
 			$p=$page-1;
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$I_PAGE_LEFT\">");
 			echo("</form>");
 		}else{
@@ -216,7 +225,7 @@ function i_partner(){
 		if (($db==$I_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$I_PAGE_RIGHT\">");
 			echo("</form>");
 		}else{

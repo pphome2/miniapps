@@ -29,16 +29,16 @@ if ($MA_ENABLE_FOOTER){
     #   window.history.replaceState(null, null, window.location.pathname);window.location = window.location.href;\">
     #   $L_LOGOUT</a>");
     #echo("</li>");
-  $mp=1000;
-    if (isset($_GET[$MA_MENU_FIELD])){
-    $mp=array_search($_GET[$MA_MENU_FIELD],$MA_MENUCODE);
-    }
+	$mp=1000;
+  	if (isset($_GET[$MA_MENU_FIELD])){
+		$mp=array_search($_GET[$MA_MENU_FIELD],$MA_MENUCODE);
+  	}
     for($i=count($MA_FOOTERMENU)-1;$i>=0;$i--){
       echo("<li class=\"liright\">");
       if ($mp==$i){
-      echo("<a class=actmenu href=\"?$MA_MENU_FIELD=".$MA_FOOTERMENU[$i][1]."\">".$MA_FOOTERMENU[$i][0]."</a>");
+    	echo("<a class=actmenu href=\"?$MA_MENU_FIELD=".$MA_FOOTERMENU[$i][1]."\">".$MA_FOOTERMENU[$i][0]."</a>");
       }else{
-      echo("<a href=\"?$MA_MENU_FIELD=".$MA_FOOTERMENU[$i][1]."\">".$MA_FOOTERMENU[$i][0]."</a>");
+    	echo("<a href=\"?$MA_MENU_FIELD=".$MA_FOOTERMENU[$i][1]."\">".$MA_FOOTERMENU[$i][0]."</a>");
       }
       echo("</li>");
     }

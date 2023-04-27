@@ -73,7 +73,7 @@ function r_outst1($rid){
 		echo("<form method=post>");
 		$p=$page-1;
 		echo("<input type=hidden id=rid name=pid value=\"$rid\">");
-		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=page name=page value=\"$p\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 		echo("</form>");
 	}else{
@@ -90,7 +90,7 @@ function r_outst1($rid){
 		$p=$page+1;
 		echo("<form method=post>");
 		echo("<input type=hidden id=rid name=pid value=\"$rid\">");
-		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=page name=page value=\"$p\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 		echo("</form>");
 	}else{
@@ -153,7 +153,7 @@ function r_outst0(){
 	if (($page>0)and($first>0)){
 		echo("<form method=post>");
 		$p=$page-1;
-		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=page name=page value=\"$p\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 		echo("</form>");
 	}else{
@@ -169,7 +169,7 @@ function r_outst0(){
 	if (($db==$I_PAGEROW)and(!$last)){
 		$p=$page+1;
 		echo("<form method=post>");
-		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=page name=page value=\"$p\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 		echo("</form>");
 	}else{

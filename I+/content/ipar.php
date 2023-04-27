@@ -66,7 +66,7 @@ function i_year($year=0){
 		}else{
 			$y=date('Y');
 		}
-		$sqlc="insert into ik_param (id,kod) values ($id,$y);";
+		$sqlc="insert into ik_param (id,kod) values ($id,\"$y\");";
 		sql_run($sqlc);
 	}
 	return($y);

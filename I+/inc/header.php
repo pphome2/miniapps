@@ -68,20 +68,20 @@ if ($MA_ENABLE_HEADER){
   }
   $mp=1000;
   if (isset($_GET[$MA_MENU_FIELD])){
-  $mp=array_search($_GET[$MA_MENU_FIELD],$MA_MENUCODE);
+	$mp=array_search($_GET[$MA_MENU_FIELD],$MA_MENUCODE);
   }
   if ($mp==1000){
-  if ($L_SITEHOME<>""){
-      echo("<li><a class=actmenu href=\"$MA_ADMINFILE\">$L_SITEHOME</a></li>");
+	if ($L_SITEHOME<>""){
+  	  echo("<li><a class=actmenu href=\"$MA_ADMINFILE\">$L_SITEHOME</a></li>");
+	}else{
+  	  echo("<li><a class=actmenu href=\"$MA_ADMINFILE\">$MA_SITENAME</a></li>");
+	}
   }else{
-      echo("<li><a class=actmenu href=\"$MA_ADMINFILE\">$MA_SITENAME</a></li>");
-  }
-  }else{
-  if ($L_SITEHOME<>""){
-      echo("<li><a href=\"$MA_ADMINFILE\">$L_SITEHOME</a></li>");
-  }else{
-      echo("<li><a href=\"$MA_ADMINFILE\">$MA_SITENAME</a></li>");
-  }
+	if ($L_SITEHOME<>""){
+  	  echo("<li><a href=\"$MA_ADMINFILE\">$L_SITEHOME</a></li>");
+	}else{
+  	  echo("<li><a href=\"$MA_ADMINFILE\">$MA_SITENAME</a></li>");
+	}
   }
 
   if (($MA_LOGGEDIN)and(!$MA_PRIVACY_PAGE)and(!$MA_SEARCH_PAGE)){
@@ -89,10 +89,10 @@ if ($MA_ENABLE_HEADER){
       if (count($MA_ADMINMENU)>0){
         $db=count($MA_ADMINMENU);
         for ($i=0;$i<$db;$i++){
-      if ($i==$mp){
-          echo("<li><a class=actmenu href=\"?$MA_MENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
-      }else{
-          echo("<li><a href=\"?$MA_MENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
+		  if ($i==$mp){
+        	echo("<li><a class=actmenu href=\"?$MA_MENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
+		  }else{
+        	echo("<li><a href=\"?$MA_MENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
           }
         }
       }
@@ -100,10 +100,10 @@ if ($MA_ENABLE_HEADER){
       if (count($MA_MENU)>0){
         $db=count($MA_MENU);
         for ($i=0;$i<$db;$i++){
-          if ($mp==$i){
-          echo("<li><a class=actmenu href=\"?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
-          }else{
-          echo("<li><a href=\"?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
+      	  if ($mp==$i){
+        	echo("<li><a class=actmenu href=\"?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
+      	  }else{
+        	echo("<li><a href=\"?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
           }
         }
       }

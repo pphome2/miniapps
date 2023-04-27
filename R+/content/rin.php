@@ -72,7 +72,7 @@ function r_inst1($pid){
 	if (($page>0)and($first>0)){
 		echo("<form method=post>");
 		$p=$page-1;
-		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=page name=page value=\"$p\">");
 		echo("<input type=hidden id=pid name=pid value=\"$pid\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 		echo("</form>");
@@ -89,7 +89,7 @@ function r_inst1($pid){
 	if (($db==$R_PAGEROW)and(!$last)){
 		$p=$page+1;
 		echo("<form method=post>");
-		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=page name=page value=\"$p\">");
 		echo("<input type=hidden id=pid name=pid value=\"$pid\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 		echo("</form>");
@@ -161,7 +161,7 @@ function r_inst0(){
 	if (($page>0)and($first>0)){
 		echo("<form method=post>");
 		$p=$page-1;
-		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=page name=page value=\"$p\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 		echo("</form>");
 	}else{
@@ -177,7 +177,7 @@ function r_inst0(){
 	if (($db==$I_PAGEROW)and(!$last)){
 		$p=$page+1;
 		echo("<form method=post>");
-		echo("<input type=hidden id=page name=page value=$p>");
+		echo("<input type=hidden id=page name=page value=\"$p\">");
 		echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 		echo("</form>");
 	}else{

@@ -38,7 +38,7 @@ function r_inamedata($new){
 			$form=false;
 			$da="'".$_POST[0]."'";
 			for($i=1;$i<$db;$i++){
-				$da=$da.", '".$_POST[$i]."'";
+				$da=$da.", \"".$_POST[$i]."\"";
 			}
 			$sqlc="insert into r_cikk (id,csz,kat,nev,vkod,me) values ($da);";
 			if (sql_run($sqlc)){
@@ -91,7 +91,7 @@ function r_inamedata($new){
 		echo("<h3>$title</h3>");
 		echo("<div class=spaceline></div>");
 		echo("<form method=post>");
-		echo("<input type=hidden id=0 name=0 value='$d[0]'>");
+		echo("<input type=hidden id=0 name=0 value=\"$d[0]\">");
 		for($i=1;$i<$db;$i++){
 			echo("<div class=frow>");
 			echo("<div class=fcol1>$R_INAME_FIELDS[$i]");
@@ -111,7 +111,7 @@ function r_inamedata($new){
 					echo("</select>");
 				}
 			}else{
-				echo("<input type=text id=$i name=$i placeholder='$R_INAME_FIELDS[$i]' value='$d[$i]'>");
+				echo("<input type=text id=$i name=$i placeholder=\"$R_INAME_FIELDS[$i]\" value=\"$d[$i]\">");
 			}
 			echo("</div>");
 			echo("</div>");
@@ -213,7 +213,7 @@ function r_iname(){
 		if (($page>0)and($first>0)){
 			echo("<form method=post>");
 			$p=$page-1;
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_LEFT\">");
 			echo("</form>");
 		}else{
@@ -229,7 +229,7 @@ function r_iname(){
 		if (($db==$R_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
-			echo("<input type=hidden id=page name=page value=$p>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
 			echo("<input type=submit id=p name=p value=\"$R_PAGE_RIGHT\">");
 			echo("</form>");
 		}else{

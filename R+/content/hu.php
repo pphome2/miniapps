@@ -9,11 +9,11 @@
 
 # rendszer
 $L_SITENAME="Raktár";
-$L_ROOTHOME="Intranet";
+$L_ROOTHOME="Derula Intranet";
 $L_SITEHOME="Raktárkészlet";
 
 # applikáció
-$R_MENU=array("Beszállítók","Cikk kategória","Cikktörzs","Raktárak","Költséghely, felhasználó","Bevételezés","Kiadás","Lekérdezések");
+$R_MENU=array("Beszállítók","Cikk kategória","Cikktörzs","Raktárak","Költséghely, felhasználó","Bevételezés","Kiadás","Lekérdezések","Keresés");
 
 $R_SEARCH_TEXT="Tárolt elem keresése";
 $R_PRIVACYTITLE="Adatvédelmi tájékoztató";

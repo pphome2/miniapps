@@ -7,7 +7,7 @@
  #
  #
 
-$MA_MENUCODE=array("p","c","t","r","b","k","f","l");
+$MA_MENUCODE=array("p","c","t","r","b","k","f","l","s");
 
 # app menu
 $MA_MENU=array(
@@ -18,7 +18,8 @@ $MA_MENU=array(
 		array($R_MENU[4],$MA_MENUCODE[4]),
 		array($R_MENU[5],$MA_MENUCODE[5]),
 		array($R_MENU[6],$MA_MENUCODE[6]),
-		array($R_MENU[7],$MA_MENUCODE[7])
+		array($R_MENU[7],$MA_MENUCODE[7]),
+		array($R_MENU[8],$MA_MENUCODE[8])
 			);
 $MA_FOOTERMENU=array(
 		array($R_MENU[0],$MA_MENUCODE[0]),
@@ -28,7 +29,8 @@ $MA_FOOTERMENU=array(
 		array($R_MENU[4],$MA_MENUCODE[4]),
 		array($R_MENU[5],$MA_MENUCODE[5]),
 		array($R_MENU[6],$MA_MENUCODE[6]),
-		array($R_MENU[7],$MA_MENUCODE[7])
+		array($R_MENU[7],$MA_MENUCODE[7]),
+		array($R_MENU[8],$MA_MENUCODE[8])
 			);
 
 $R_FILESTORE="Files";
