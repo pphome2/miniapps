@@ -53,7 +53,7 @@ if ($MA_ENABLE_HEADER){
   echo("<div class=\"menu\">");
   echo("<ul class=\"sidenav\">");
   if ($MA_BACKPAGE){
-    echo("<li><a onclick=\"window.history.back();\" href=\"\">&#8592;</a></li>");
+    #echo("<li><a onclick=\"window.history.back();\" href=\"\">&#8592;</a></li>");
   }
   if ($MA_ROOT_HOME<>""){
     if ($L_ROOTHOME<>""){
@@ -84,15 +84,19 @@ if ($MA_ENABLE_HEADER){
   }
   }
 
-  if (($MA_LOGGEDIN)and(!$MA_PRIVACY_PAGE)and(!$MA_SEARCH_PAGE)){
+  if ($MA_LOGGEDIN){
+  $link="";
+  if (($MA_PRIVACY_PAGE)or($MA_SEARCH_PAGE)){
+    $link=$MA_ADMINFILE;
+  }
     if ($MA_ADMIN_USER){
       if (count($MA_ADMINMENU)>0){
         $db=count($MA_ADMINMENU);
         for ($i=0;$i<$db;$i++){
       if ($i==$mp){
-          echo("<li><a class=actmenu href=\"?$MA_MENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
+          echo("<li><a class=actmenu href=\"$link?$MA_MENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
       }else{
-          echo("<li><a href=\"?$MA_MENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
+          echo("<li><a href=\"$link?$MA_MENU_FIELD=".$MA_ADMINMENU[$i][1]."\">".$MA_ADMINMENU[$i][0]."</a></li>");
           }
         }
       }
@@ -101,9 +105,9 @@ if ($MA_ENABLE_HEADER){
         $db=count($MA_MENU);
         for ($i=0;$i<$db;$i++){
           if ($mp==$i){
-          echo("<li><a class=actmenu href=\"?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
+          echo("<li><a class=actmenu href=\"$link?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
           }else{
-          echo("<li><a href=\"?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
+          echo("<li><a href=\"$link?$MA_MENU_FIELD=".$MA_MENU[$i][1]."\">".$MA_MENU[$i][0]."</a></li>");
           }
         }
       }
@@ -112,21 +116,19 @@ if ($MA_ENABLE_HEADER){
 
   if (($MA_ENABLE_SEARCH)and(!$MA_PRIVACY_PAGE)){
     echo("<li class=\"liright\">");
-    echo("<a href=\"$MA_ADMINFILE\">");
+    echo("<a href=\"$MA_SEARCHFILE\">");
     echo("<div class=\"search_icon\">&#9740;</div>");
     echo("</a>");
     echo("</li>");
   }
 
   if ($MA_LOGOUT_IN_HEADER){
-    #if ((!$MA_PRIVACY_PAGE)and(!$MA_SEARCH_PAGE)){
       echo("<li class=\"liright\">");
       echo("<a href=#
         onclick=\"document.cookie='$MA_COOKIE_LOGIN=$L_LOGOUT; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
         window.history.replaceState(null, null, window.location.pathname);window.location = window.location.href;\">
         $L_LOGOUT</a>");
       echo("</li>");
-    #}
   }
   echo("</ul>");
   echo("</div>");
