@@ -1,5 +1,4 @@
 <?php
-
  #
  # Raktár
  #
@@ -9,7 +8,7 @@
 
 # rendszer
 $L_SITENAME="Raktár";
-$L_ROOTHOME="Intranet";
+$L_ROOTHOME="Derula Intranet";
 $L_SITEHOME="Raktárkészlet";
 
 # applikáció
@@ -21,7 +20,7 @@ $R_PRIVACYTITLE="Adatvédelmi tájékoztató";
 $R_OK="rendben";
 $R_ERROR="hiba történt";
 $R_SAVE="Mentés";
-$R_SEARCH="Keresés...";
+$R_SEARCH="Keresés lapon belül...";
 
 $R_GO=">>>";
 $R_PAGE_RIGHT=">";
@@ -29,13 +28,16 @@ $R_PAGE_LEFT="<";
 $R_BACK="Vissza";
 
 $R_LISTS=array("Bevételezések",
-				"Raktári kiadások",
-				"Raktárkészlet",
-				"Havi kiadási mennyiségek",
-				"Havi kiadás költséghelyként"
-				);
+        "Raktári kiadások",
+        "Raktárkészlet",
+        "Havi kiadási mennyiségek",
+        "Havi kiadás költséghelyként"
+        );
 $R_DOWNLOAD="Letöltés";
 $R_DOWNLOADTEXT="A letöltés előkészítve.";
+
+$R_TOOMANYROW="Túl sok találat, pontosítsa a keresést.";
+$R_NOITEM="Nincs találat, pontosítsa a keresést.";
 
 $R_PARTNER_TITLE_NEW="Új partner";
 $R_PARTNER_TITLE_CHANGE="Partneradatok módosítása";
@@ -45,18 +47,19 @@ $R_NEW_PARTNER="+";
 $R_WORK_PARTNER=">>>";
 $R_DEL_PARTNER="Törlés";
 $R_PARTNER_FIELDS=array(
-					"ID",
-					"Név",
-					"Ország",
-					"Irányítószám",
-					"Város",
-					"Cím 1",
-					"Cím 2",
-					"E-mail",
-					"Adószám",
-					"Számlaszám"
-			);
+          "ID",
+          "Név",
+          "Ország",
+          "Irányítószám",
+          "Város",
+          "Cím 1",
+          "Cím 2",
+          "E-mail",
+          "Adószám",
+          "Számlaszám"
+      );
 $R_PARTNER_NEWITEMS="Új bevételezés a partnertől";
+$R_PARTNER_SEARCH="Keresés név alapján";
 
 $R_CAT_TITLE_NEW="Új cikk kategória";
 $R_CAT_TITLE_CHANGE="Kategória módosítása";
@@ -75,6 +78,7 @@ $R_NEW_INAME="+";
 $R_WORK_INAME=">>>";
 $R_DEL_INAME="Törlés";
 $R_INAME_FIELDS=array("ID","Cikkszám","Kategória","Név","Vonalkód","Menniségi egység");
+$R_INAME_SEARCH="Keresés cikkszám, név, vonalkór alapján";
 
 $R_RAK_TITLE_NEW="Új raktár";
 $R_RAK_TITLE_CHANGE="Raktár módosítása";
@@ -84,6 +88,7 @@ $R_NEW_RAK="+";
 $R_WORK_RAK=">>>";
 $R_DEL_RAK="Törlés";
 $R_RAK_FIELDS=array("ID","Név");
+$R_RAK_SEARCH="Keresés raktárnév alapján";
 
 $R_KLT_TITLE_NEW="Új költséghely/felhasználó";
 $R_KLT_TITLE_CHANGE="Költséghely/felhasználó módosítása";
@@ -119,6 +124,11 @@ $R_OUT_RESTART="Kiadás újrakezdése";
 $R_OUT_NOITEM="nincs még cikk a raktárban";
 $R_OUT_TABLE_TITLE=array("Dátum","Cikk","Mennyiség","Bizonylat","Költséghely","Megjegyzés","Raktár");
 $R_OUT_TABLE_TITLE_MOUNTH=array("Dátum","Cikk","Egységár","Mennyiség","Bizonylat","Költséghely","Megjegyzés","Raktár");
+
+$R_SEARCH_TITLE="Cikk keresés";
+$R_SEARCH_LABEL=array("Cikk neve vagy cikkszáma vagy vonalkódja");
+$R_SEARCH_BUTTON="Keresés";
+$R_SEARCH_TABLE_TITLE=array("Cikkszám","Kategória","Név","Vonalkód","Raktár","Mennyiség","Megjegyzés");
 
 
 ?>
