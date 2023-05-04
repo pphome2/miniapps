@@ -37,10 +37,12 @@ function r_inamedata($new){
 		if (isset($_POST['0'])){
 			$form=false;
 			$da="'".$_POST[0]."'";
-			for($i=1;$i<$db;$i++){
+			for($i=1;$i<$db-1;$i++){
 				$da=$da.", \"".$_POST[$i]."\"";
 			}
-			$sqlc="insert into r_cikk (id,csz,kat,nev,vkod,me) values ($da);";
+			$mink=(int)$_POST[6];
+			$da=$da.", \"".$mink."\"";
+			$sqlc="insert into r_cikk (id,csz,kat,nev,vkod,me,mink) values ($da);";
 			if (sql_run($sqlc)){
 				mess_ok($R_INAME_TITLE_NEW.": ".$R_OK.".");
 			}else{
@@ -57,13 +59,15 @@ function r_inamedata($new){
 			if (isset($_POST['id2'])){
 				$form=false;
 				$id2=$_POST['id2'];
+				$mink=(int)$_POST[6];
 				$sqlc="update r_cikk set";
 				$sqlc=$sqlc." id = ".$_POST[0].", ";
 				$sqlc=$sqlc." csz = \"$_POST[1]\", ";
-				$sqlc=$sqlc." kat = \"$_POST[2]\", ";
+				$sqlc=$sqlc." kat = $_POST[2], ";
 				$sqlc=$sqlc." nev = \"$_POST[3]\", ";
 				$sqlc=$sqlc." vkod = \"$_POST[4]\", ";
-				$sqlc=$sqlc." me = \"$_POST[5]\" ";
+				$sqlc=$sqlc." me = \"$_POST[5]\", ";
+				$sqlc=$sqlc." mink = \"$mink\" ";
 				$sqlc=$sqlc." where id=$id2;";
 				if (sql_run($sqlc)){
 					mess_ok($R_INAME_TITLE_CHANGE.": ".$R_OK.".");
@@ -182,6 +186,7 @@ function r_iname(){
 		echo("<th class='df_th1'>$R_INAME_TABLE_TITLE[2]</th>");
 		echo("<th class='df_th'>$R_INAME_TABLE_TITLE[3]</th>");
 		echo("<th class='df_th'>$R_INAME_TABLE_TITLE[4]</th>");
+		echo("<th class='df_th'>$R_INAME_TABLE_TITLE[5]</th>");
 		echo("</tr>");
 		$res=$MA_SQL_RESULT;
 		$db=count($res);
@@ -191,13 +196,14 @@ function r_iname(){
 			echo("<td class='df_td'>$r[1]</td>");
 			$sqlc="select * from r_kat where id=$r[2];";
 			if (sql_run($sqlc)){
-				$resx=$MA_SQL_RESULT[$i];
+				$resx=$MA_SQL_RESULT[0];
 				echo("<td class='df_td'>$resx[2]</td>");
 			}else{
 				echo("<td class='df_td'>$r[2]</td>");
 			}
 			echo("<td class='df_td'>$r[3]</td>");
 			echo("<td class='df_td'>$r[4]</td>");
+			echo("<td class='df_td'>$r[6]</td>");
 			echo("<td class='df_td'>");
 			echo("<center>");
 			echo("<form method=post>");

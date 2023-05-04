@@ -43,7 +43,7 @@ function r_calcout($title=""){
 			$dload=$dload.$R_OUT_TABLE_TITLE_MOUNTH[$i].";";
 		}
 		$dload=$dload.PHP_EOL;
-		sql_run("select * from r_kiad $w order by id desc;");
+		sql_run("select * from r_kiad $w order by id;");
 		$data=$MA_SQL_RESULT;
 		$db=count($data);
 		for($i=0;$i<$db;$i++){
@@ -118,7 +118,7 @@ function r_calcout($title=""){
 		if ($d<>""){
 			$w="where dat between \"$d.01\" and \"$d.31\"";
 		}
-		sql_run("select * from r_kiad $w order by id desc limit $first,$R_PAGEROW;");
+		sql_run("select * from r_kiad $w order by id limit $first,$R_PAGEROW;");
 		$dat=$MA_SQL_RESULT;
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");
@@ -187,7 +187,7 @@ function r_calcout($title=""){
 		echo("</div>");
 		echo("</div>");
 		echo("<div class=pcol2>");
-		if (($db==$I_PAGEROW)and(!$last)){
+		if (($db==$R_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
 			echo("<input type=hidden id=page name=page value=\"$p\">");

@@ -14,8 +14,8 @@ $MA_COPYRIGHT="<a href=https://google.com>Google</a>";
 $MA_SITENAME="Raktar";
 $MA_TITLE="R+";
 $MA_CODENAME="ra";
-$MA_ROOT_HOME="http://192.168.11.24";
-$MA_ROOT_NAME="Demo";
+$MA_ROOT_HOME="http://192.168.10.249";
+$MA_ROOT_NAME="Intranet";
 $MA_SITE_HOME="";
 $MA_FAVICON="favicon.png";
 
@@ -45,6 +45,7 @@ $MA_APPFILE=array("","$MA_LANGFILE",
 				"rl2.php",
 				"rl3.php",
 				"rl4.php",
+				"rl5.php",
 				"rt.php",
 				"rs.php",
 				"r.php"

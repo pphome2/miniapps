@@ -62,7 +62,7 @@ function r_table(){
 		echo("</div>");
 		echo("</form>");
 		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$R_SEARCH\">");
-		sql_run("select * from r_keszlet where rakt like \"%$store%\" order by cikk desc limit $first,$R_PAGEROW;");
+		sql_run("select * from r_keszlet where rakt like \"%$store%\" order by cikk limit $first,$R_PAGEROW;");
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");
@@ -128,7 +128,7 @@ function r_table(){
 		echo("</div>");
 		echo("</div>");
 		echo("<div class=pcol2>");
-		if (($db==$I_PAGEROW)and(!$last)){
+		if (($db==$R_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
 			echo("<input type=hidden id=page name=page value=\"$p\">");

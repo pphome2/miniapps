@@ -1,4 +1,5 @@
 <?php
+
  #
  # Raktár
  #
@@ -8,7 +9,7 @@
 
 # rendszer
 $L_SITENAME="Raktár";
-$L_ROOTHOME="Derula Intranet";
+$L_ROOTHOME="Intranet";
 $L_SITEHOME="Raktárkészlet";
 
 # applikáció
@@ -28,11 +29,12 @@ $R_PAGE_LEFT="<";
 $R_BACK="Vissza";
 
 $R_LISTS=array("Bevételezések",
-        "Raktári kiadások",
-        "Raktárkészlet",
-        "Havi kiadási mennyiségek",
-        "Havi kiadás költséghelyként"
-        );
+				"Raktári kiadások",
+				"Raktárkészlet",
+				"Havi kiadási mennyiségek",
+				"Havi kiadás költséghelyként",
+				"Termékek minimum készlet alatt"
+				);
 $R_DOWNLOAD="Letöltés";
 $R_DOWNLOADTEXT="A letöltés előkészítve.";
 
@@ -47,17 +49,17 @@ $R_NEW_PARTNER="+";
 $R_WORK_PARTNER=">>>";
 $R_DEL_PARTNER="Törlés";
 $R_PARTNER_FIELDS=array(
-          "ID",
-          "Név",
-          "Ország",
-          "Irányítószám",
-          "Város",
-          "Cím 1",
-          "Cím 2",
-          "E-mail",
-          "Adószám",
-          "Számlaszám"
-      );
+					"ID",
+					"Név",
+					"Ország",
+					"Irányítószám",
+					"Város",
+					"Cím 1",
+					"Cím 2",
+					"E-mail",
+					"Adószám",
+					"Számlaszám"
+			);
 $R_PARTNER_NEWITEMS="Új bevételezés a partnertől";
 $R_PARTNER_SEARCH="Keresés név alapján";
 
@@ -73,11 +75,11 @@ $R_CAT_FIELDS=array("ID","Kód","Név");
 $R_INAME_TITLE_NEW="Új cikk";
 $R_INAME_TITLE_CHANGE="Cikkadatok módosítása";
 $R_INAME_TITLE_DEL="Cikk törlése";
-$R_INAME_TABLE_TITLE=array("Cikkszám","Kategória","Név","Vonalkód","Töröl / Javít");
+$R_INAME_TABLE_TITLE=array("Cikkszám","Kategória","Név","Vonalkód","Minimum készlet","Töröl / Javít");
 $R_NEW_INAME="+";
 $R_WORK_INAME=">>>";
 $R_DEL_INAME="Törlés";
-$R_INAME_FIELDS=array("ID","Cikkszám","Kategória","Név","Vonalkód","Menniségi egység");
+$R_INAME_FIELDS=array("ID","Cikkszám","Kategória","Név","Vonalkód","Menniségi egység","Minimum készlet");
 $R_INAME_SEARCH="Keresés cikkszám, név, vonalkór alapján";
 
 $R_RAK_TITLE_NEW="Új raktár";

@@ -32,7 +32,7 @@ function r_store($title=""){
 		$dload=$dload.$R_STR_TABLE_TITLE2[$i].";";
 	}
 	$dload=$dload.PHP_EOL;
-	sql_run("select * from r_keszlet where rakt=$r order by id desc;");
+	sql_run("select * from r_keszlet where rakt=$r order by id;");
 	$data=$MA_SQL_RESULT;
 	$db=count($data);
 	for($i=0;$i<$db;$i++){

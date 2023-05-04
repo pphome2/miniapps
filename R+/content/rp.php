@@ -169,7 +169,7 @@ function r_partner(){
 		echo("<input type=submit id=newp name=newp value=\"$R_NEW_PARTNER\">");
 		echo("</form>");
 		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$R_SEARCH\">");
-		sql_run("select * from r_partner order by nev desc limit $first,$R_PAGEROW;");
+		sql_run("select * from r_partner order by nev limit $first,$R_PAGEROW;");
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");
@@ -217,7 +217,7 @@ function r_partner(){
 		echo("</div>");
 		echo("</div>");
 		echo("<div class=pcol2>");
-		if (($db==$I_PAGEROW)and(!$last)){
+		if (($db==$R_PAGEROW)and(!$last)){
 			$p=$page+1;
 			echo("<form method=post>");
 			echo("<input type=hidden id=page name=page value=\"$p\">");
