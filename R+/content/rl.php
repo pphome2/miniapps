@@ -39,12 +39,17 @@ function r_list(){
 				$listall=false;
 				r_minklt($R_LISTS[5]);
 				break;
+			case $R_LISTCODE[6]:
+				$listall=false;
+				r_lelist($R_LISTS[6]);
+				break;
 			default:
 				$listall=true;
 				break;
 		}
 	}
 	if ($listall){
+		$date=date('Y');
 		$db=count($R_LISTS);
 		echo("<div class=frow>");
 		echo("<div class=colx1></div>");
@@ -82,7 +87,7 @@ function r_list(){
 
 		echo("<h3>$R_LISTS[3]</h3>");
 		echo("<form method=post>");
-		echo("<input type=date id=date name=date min=2023-01 value=\"2023-01\">");
+		echo("<input type=date id=date name=date min=$d-01 value=\"$date-01-01\">");
 		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[3]\">");
 		echo("<input type=submit id=x name=x value=\"$R_GO\">");
 		echo("</form>");
@@ -90,7 +95,7 @@ function r_list(){
 
 		echo("<h3>$R_LISTS[4]</h3>");
 		echo("<form method=post>");
-		echo("<input type=date id=date name=date min=2023-01 value=\"2023-01\">");
+		echo("<input type=date id=date name=date min=$d-01 value=\"$date-01-01\">");
 		$sqlc="select * from r_kolt;";
 		sql_run($sqlc);
 		echo("<select id=klt name=klt>");
@@ -115,6 +120,23 @@ function r_list(){
 		}
 		echo("</select>");
 		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[5]\">");
+		echo("<input type=submit id=x name=x value=\"$R_GO\">");
+		echo("</form>");
+		echo("<div class=spaceline></div>");
+
+		echo("<h3>$R_LISTS[6]</h3>");
+		echo("<form method=post>");
+		$sqlc="select * from r_raktar;";
+		sql_run($sqlc);
+		echo("<select id=r name=r>");
+		for($x=0;$x<count($MA_SQL_RESULT);$x++){
+			$d=$MA_SQL_RESULT[$x];
+			echo("<option value=\"$d[0]\">$d[1]</option>");
+		}
+		echo("</select>");
+		echo("<input type=date id=dat1 name=dat1 value=\"$date-01-01\">");
+		echo("<input type=date id=dat2 name=dat2 value=\"$date-12-31\">");
+		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[6]\">");
 		echo("<input type=submit id=x name=x value=\"$R_GO\">");
 		echo("</form>");
 		echo("<div class=spaceline></div>");

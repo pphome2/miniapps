@@ -112,6 +112,7 @@ $MA_USERS_ADMINUSERS=array("admin");
 $MA_USERS_CRED=array(
 					array("admin","e3274be5c857fb42ab72d786e281b4b8")
 				);
+$MA_USERNAME="";
 # need md5 passcode -- user password: password - admin password: adminpassword
 
 # menu

@@ -9,7 +9,7 @@
 
 
 function r_outst2($rid,$iid){
-	global $MA_SQL_RESULT,
+	global $MA_SQL_RESULT,$R_S_TEXT,
 		$R_R_TEXT,$R_I_TEXT,$R_OUT_STAGE,$R_SELECT;
 
 	echo("<h3>$R_OUT_STAGE[2] </h3><br />");
@@ -27,41 +27,52 @@ function r_outst2($rid,$iid){
 		$c=$dat[3];
 		echo("<h3>$R_I_TEXT $dat[3]</h3>");
 	}
+	$sqlc="select * from r_keszlet where cikk=$iid and rakt=$rid;";
+	if (sql_run($sqlc)){
+		$dat=$MA_SQL_RESULT[0];
+		$cdb=$dat[3];
+		if(!(($cdb>0)and($cdb<100000000))){
+			$cdb=0;
+		}
+	}
+	echo("<h3>$R_S_TEXT: $cdb</h3>");
 	r_outitem($rid,$iid);
 }
 
 
 function r_outitem($r,$c){
 	global $MA_SQL_RESULT,$R_OUT_FIELDS,$MA_ADMINFILE,$R_OUT_NEWITEM,
-			$R_SAVE,$R_OK,$R_ERROR,$R_OUT_RESTART,$R_OUT_TITLE_NEW,$R_OUT_NOITEM;
+			$R_SAVE,$R_OK,$R_ERROR,$R_OUT_RESTART,$R_OUT_TITLE_NEW,$R_OUT_NOITEM,
+			$R_MIN_TEXT,$R_MIN,$R_REAL,$MA_USERNAME;
 
 	$db=count($R_OUT_FIELDS);
 	$title=$R_OUT_TITLE_NEW;
 	$form=true;
 	if (isset($_POST[0])){
 		$form=false;
-		$sqlc="select * from r_keszlet where cikk=$_POST[3] and rakt=$_POST[2];";
-		sql_run($sqlc);
-		echo($sqlc);
-		if (count($MA_SQL_RESULT)>0){
-			$kesz=$MA_SQL_RESULT;
-			$da="\"".$_POST[0]."\"";
-			$da=$da.",\"".$_POST[1]."\"";
-			$da=$da.",\"".$_POST[3]."\"";
-			$da=$da.",\"".$_POST[4]."\"";
-			$da=$da.",\"".$_POST[5]."\"";
-			$da=$da.",\"".$_POST[7]."\"";
-			$da=$da.",\"".$_POST[6]."\"";
-			$da=$da.",\"".$_POST[2]."\"";
-			$sqlc="insert into r_kiad (id,dat,cikk,menny,biz,klt,megj,rakt) values ($da);";
-			if (sql_run($sqlc)){
-				$ok=true;
-				mess_ok($R_OUT_TITLE_NEW.": ".$R_OK.".");
-			}else{
-				$ok=true;
-				mess_error($R_OUT_TITLE_NEW.": ".$R_ERROR.".");
-			}
-			if ($ok){
+		$kesz=$MA_SQL_RESULT;
+		$da="\"".$_POST[0]."\"";
+		$da=$da.",\"".$_POST[1]."\"";
+		$da=$da.",\"".$_POST[3]."\"";
+		$da=$da.",\"".$_POST[4]."\"";
+		$da=$da.",\"".$_POST[5]."\"";
+		$da=$da.",\"".$_POST[7]."\"";
+		$da=$da.",\"".$_POST[6]."\"";
+		$da=$da.",\"".$_POST[2]."\"";
+		$da=$da.",\"$MA_USERNAME\"";
+		$sqlc="insert into r_kiad (id,dat,cikk,menny,biz,klt,megj,rakt,usern) values ($da);";
+		if (sql_run($sqlc)){
+			$ok=true;
+			mess_ok($R_OUT_TITLE_NEW.": ".$R_OK.".");
+		}else{
+			$ok=true;
+			mess_error($R_OUT_TITLE_NEW.": ".$R_ERROR.".");
+		}
+		if ($ok){
+			$sqlc="select * from r_keszlet where cikk=$_POST[3] and rakt=$_POST[2];";
+			sql_run($sqlc);
+			#echo($sqlc);
+			if (count($MA_SQL_RESULT)>0){
 				$du=$kesz[0];
 				$m=intval($du[3])-intval($_POST[4]);
 				$sqlc="update r_keszlet set id=$du[0],cikk=$du[1],rakt=$du[2],menny=$m,ukid=\"$_POST[1]\",ubev=\"$du[5]\",ear=$du[6] where id=$du[0];";
@@ -71,9 +82,17 @@ function r_outitem($r,$c){
 				}else{
 					mess_error($R_OUT_TITLE_NEW.": ".$R_ERROR.".");
 				}
+				$sqlc="select * from r_cikk where id=$c;";
+				if (sql_run($sqlc)){
+					$dat=$MA_SQL_RESULT[0];
+					$c=$dat[6];
+					if ($m<$c){
+						echo("<h3>$R_MIN_TEXT ( $R_MIN: $c $R_REAL: $m )</h3>");
+					}
+				}
+			}else{
+				mess_error($R_OUT_TITLE_NEW.": ".$R_OUT_NOITEM.".");
 			}
-		}else{
-			mess_error($R_OUT_TITLE_NEW.": ".$R_OUT_NOITEM.".");
 		}
 		$line="";
 		$da="'".$_POST[0]."'";

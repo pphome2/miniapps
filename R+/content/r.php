@@ -75,6 +75,9 @@ function r_data(){
 				r_list();
 				break;
 			case $MA_MENUCODE[8]:
+				r_lel();
+				break;
+			case $MA_MENUCODE[9]:
 				r_search();
 				break;
 			default:

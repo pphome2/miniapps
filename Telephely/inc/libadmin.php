@@ -167,7 +167,8 @@ function login(){
 	global $MA_LOGGEDIN,$MA_COOKIE_LOGIN,
 			$MA_ADMIN_USER,$MA_ENABLE_USERNAME,
 			$MA_USERS_CRED,$MA_USERS_ADMINUSERS,
-			$MA_COOKIE_PASS,$MA_COOKIE_USER;
+			$MA_COOKIE_PASS,$MA_COOKIE_USER,
+			$MA_USERNAME;
 
 	$MA_LOGGEDIN=false;
 	$pass="";
@@ -209,6 +210,7 @@ function login(){
 	}
 	# set cookie
 	if ($MA_LOGGEDIN){
+	    $MA_USERNAME=$user;
 		#setcookie($MA_COOKIE_LOGIN, $user, ['expires'=>time()+6000,'samesite'=>'Strict']);
 		setcookie($MA_COOKIE_LOGIN, $user, ['expires'=>0,'samesite'=>'Strict']);
 		#setcookie($MA_COOKIE_LOGIN, $user, ['expires'=>strtotime("+1 day"),'samesite'=>'Strict']);

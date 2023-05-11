@@ -32,7 +32,7 @@ function r_inst2($pid,$iid){
 
 
 function r_initem($p,$c,$pn,$cn){
-	global $MA_SQL_RESULT,$R_IN_FIELDS,$MA_ADMINFILE,
+	global $MA_SQL_RESULT,$R_IN_FIELDS,$MA_ADMINFILE,$MA_USERNAME,
 			$R_SAVE,$R_IN_TITLE_NEW,$R_IN_TITLE_CHANGE,
 			$R_OK,$R_ERROR,$R_DEL_IN,$R_IN_NEWITEM,$R_IN_RESTART;
 
@@ -45,17 +45,19 @@ function r_initem($p,$c,$pn,$cn){
 		for($i=1;$i<$db-1;$i++){
 			$da=$da.", \"".$_POST[$i]."\"";
 		}
-		$sqlc="insert into r_bev (id,dat,besz,cikk,menny,ear,ertek,biz,megj,megr,rakt) values ($da);";
+		$da=$da.", \"".$MA_USERNAME."\"";
+		$sqlc="insert into r_bev (id,dat,besz,cikk,menny,ear,ertek,biz,megj,megr,rakt,usern) values ($da);";
 		if (sql_run($sqlc)){
 			$ok=true;
 			mess_ok($R_IN_TITLE_NEW.": ".$R_OK.".");
 		}else{
-			$ok=true;
+			$ok=false;
 			mess_error($R_IN_TITLE_NEW.": ".$R_ERROR.".");
 		}
 		if ($ok){
 			$d[0]=r_genid();
 			$sqlc="select * from r_keszlet where cikk=$_POST[3] and rakt=$_POST[10];";
+			echo($sqlc);
 			sql_run($sqlc);
 			if (count($MA_SQL_RESULT)>0){
 				$du=$MA_SQL_RESULT[0];
@@ -77,7 +79,7 @@ function r_initem($p,$c,$pn,$cn){
 					mess_error($R_IN_TITLE_NEW.": ".$R_ERROR.".");
 				}
 			}else{
-				$sqlc="insert into r_keszlet (id,cikk,rakt,menny,ukid,ubev,ear) values ($d[0],$_POST[3],$_POST[10],$_POST[4],\"\",\"$_POST[1]\",$_POST[5]),\"$_POST[11]\";";
+				$sqlc="insert into r_keszlet (id,cikk,rakt,menny,ukid,ubev,ear,megj) values ($d[0],$_POST[3],$_POST[10],$_POST[4],\"\",\"$_POST[1]\",$_POST[5],\"$_POST[11]\");";
 				if (sql_run($sqlc)){
 					mess_ok($R_IN_TITLE_NEW.": ".$R_OK.".");
 				}else{
@@ -155,7 +157,6 @@ function r_initem($p,$c,$pn,$cn){
 				echo("</div>");
 			}
 		}
-		#$i++;
 		echo("<div class=frow><br /></div>");
 		echo("<input type=hidden id=id name=id value=\"$d[0]\">");
 		echo("<input type=submit id=newi name=newi value=\"$R_SAVE\">");

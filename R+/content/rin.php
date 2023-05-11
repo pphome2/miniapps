@@ -11,7 +11,8 @@
 function r_inst1($pid){
 	global $MA_SQL_RESULT,$R_NEW_INAME,$R_INAME_TABLE_TITLE,$R_TOOMANYROW,
 		$R_WORK_INAME,$R_SEARCH,$R_PAGEROW,$R_PAGE_LEFT,$R_PAGE_RIGHT,
-		$R_IN_STAGE,$R_SELECT,$R_INAME_SEARCH;
+		$R_IN_STAGE,$R_SELECT,$R_INAME_SEARCH,$R_NEW_INAME,
+		$MA_MENU_FIELD,$MA_MENUCODE;
 
 	echo("<h3>$R_IN_STAGE[1] </h3><br />");
 	$sqlc="";
@@ -43,6 +44,9 @@ function r_inst1($pid){
 	if ($odb>$R_PAGEROW){
 		mess_error("$R_TOOMANYROW ( $R_PAGEROW / $odb )");
 	}
+	echo("<form action=\"?$MA_MENU_FIELD=$MA_MENUCODE[2]\" method=post>");
+	echo("<input type=submit id=newc name=newc value=\"$R_NEW_INAME\">");
+	echo("</form>");
 	echo("<form method=post>");
 	echo("<div class=frow>");
 	echo("<div class=pcol1>");
@@ -135,7 +139,8 @@ function r_inst1($pid){
 function r_inst0(){
 	global $MA_SQL_RESULT,$R_NEW_PARTNER,$R_PARTNER_TABLE_TITLE,$R_TOOMANYROW,
 			$R_WORK_PARTNER,$R_SEARCH,$R_PAGEROW,$R_PAGE_LEFT,$R_PAGE_RIGHT,
-			$R_IN_STAGE,$R_SELECT,$R_PARTNER_SEARCH;
+			$R_IN_STAGE,$R_SELECT,$R_PARTNER_SEARCH,$MA_MENUCODE,$MA_MENU_FIELD,
+			$R_NEW_INAME;
 
 	echo("<h3>$R_IN_STAGE[0] </h3><br />");
 	$sqlc="";
@@ -167,6 +172,9 @@ function r_inst0(){
 	if ($odb>$R_PAGEROW){
 		mess_error("$R_TOOMANYROW ( $R_PAGEROW / $odb )");
 	}
+	echo("<form action=\"?$MA_MENU_FIELD=$MA_MENUCODE[0]\" method=post>");
+	echo("<input type=submit id=newp name=newp value=\"$R_NEW_INAME\">");
+	echo("</form>");
 	echo("<form method=post>");
 	echo("<div class=frow>");
 	echo("<div class=pcol1>");

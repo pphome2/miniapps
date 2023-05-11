@@ -24,7 +24,7 @@ function r_minklt($title=""){
 		}
 	}
 	echo("<h3>$title: $rak</h3><br />");
-	if (isset($_POST['d'])){
+	if (isset($_POST['download'])){
 		echo("<div class=frow>");
 		echo("<div class=colx1></div>");
 		echo("<div class=colx2>");
@@ -33,14 +33,14 @@ function r_minklt($title=""){
 		echo("<div class=spaceline></div>");
 		echo("$R_DOWNLOADTEXT");
 		$dload="";
-		$db=count($R_STR_TABLE_TITLE2);
+		$db=count($R_STR_TABLE_TITLE);
 		for($i=0;$i<$db;$i++){
-			$dload=$dload.$R_STR_TABLE_TITLE2[$i].";";
+			$dload=$dload.$R_STR_TABLE_TITLE[$i].";";
 		}
 		$dload=$dload.PHP_EOL;
-		sql_run("select * from r_keszlet where rakt=$rid order by id;");
+		sql_run("select * from r_keszlet where rakt=$rid order by cikk;");
+		$db=count($MA_SQL_RESULT);
 		$data=$MA_SQL_RESULT;
-		$db=count($data);
 		for($i=0;$i<$db;$i++){
 			$r=$data[$i];
 			$ck="";
@@ -57,35 +57,28 @@ function r_minklt($title=""){
 				$csz=$d[1];
 				$min=$d[6];
 			}
-			if($r[3]<$min){
-				$sqlc="select * from r_kat where id=$ck;";
-				if (($ck<>"")and(sql_run($sqlc))){
+			if($r[6]<$min){
+				$sqlc2="select * from r_kat where id=$ck;";
+				if (($ck<>"")and(sql_run($sqlc2))){
 					$d=$MA_SQL_RESULT[0];
 					$ck=$d[2];
 				}
-				$sqlc="select * from r_raktar where id=$r[2];";
-				if (($r[2]<>"")and(sql_run($sqlc))){
-					$d=$MA_SQL_RESULT[0];
-					$cr=$d[1];
-				}
-				$dload=$dload.$cr.";";
 				$dload=$dload.$ck.";";
 				$dload=$dload.$csz.";";
 				$dload=$dload.$cn.";";
 				$dload=$dload.$r[3].";";
 				$dload=$dload.$ce.";";
 				$dload=$dload.$r[6].";";
-				$oe=intval($r[6])*intval($r[3]);
-				$dload=$dload.$oe.";";
 				$dload=$dload.$r[5].";";
 				$dload=$dload.$r[4].";";
+				$dload=$dload.$r[7].";";
 				$dload=$dload.PHP_EOL;
 			}
 		}
 		echo("<div class=spaceline></div>");
 		echo("<div class=spaceline></div>");
 		echo("<form method=post action=$R_DOWNLOAD_FILE>");
-		echo("<input type=hidden id=lcode name=lcode value=\"$lcode\">");
+		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[5]\">");
 		echo("<input type=hidden id=f name=f value=\"$dload\">");
 		echo("<input class='button' type=submit id=x name=x value=\"$R_DOWNLOAD\">");
 		echo("</form>");
@@ -96,6 +89,12 @@ function r_minklt($title=""){
 		echo("<div class=colx1></div>");
 		echo("</div>");
 	}else{
+		echo("<form method=post>");
+		echo("<input type=hidden id=lcode name=lcode value=\"$R_LISTCODE[5]\">");
+		echo("<input type=hidden id=r name=r value=\"$rid\"> ");
+		echo("<input type=submit id=download name=download value=\"$R_DOWNLOAD\">");
+		echo("</form>");
+		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$R_SEARCH\">");
 		sql_run("select * from r_keszlet where rakt=$rid order by cikk;");
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");

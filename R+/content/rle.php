@@ -9,10 +9,11 @@
 
 
 
-function r_table(){
-	global $MA_SQL_RESULT,$R_STR_TABLE_TITLE,$R_STR_TITLE,$R_GO,
+function r_lel(){
+	global $MA_SQL_RESULT,$R_LEL_TABLE_TITLE,$R_GO,
 			$R_SEARCH,$R_PAGEROW,$R_PAGE_LEFT,$R_PAGE_RIGHT,$R_DB,
-			$R_INAME_SEARCH,$R_WORK_INAME,$MA_USERNAME;
+			$R_INAME_SEARCH,$R_WORK_INAME,$R_LELTITLE,
+			$R_OK,$R_ERROR,$MA_USERNAME;
 
 		if (isset($_POST['storename'])){
 			$store=r_storeage($_POST['storename']);
@@ -65,28 +66,31 @@ function r_table(){
 				}
 			}
 		}
-		echo("<form method=post>");
-		echo("<input type=hidden id=page name=page value=\"$page\">");
-		echo("<div class=frow>");
-		echo("<div class=pcol2>");
-		echo("<h3>$R_STR_TITLE: $storen ( $odb $R_DB )</h3>");
-		echo("</div>");
-		echo("<div class=pcol1>");
-		echo("<select style=\"width:20%;margin-right:20px;float:right;\" id=storename name=storename>");
-		$sqlc="select * from r_raktar";
-		sql_run($sqlc);
-		$rdb=count($MA_SQL_RESULT);
-		for($y=0;$y<$rdb;$y++){
-			$rd=$MA_SQL_RESULT[$y];
-			echo("<option value=\"$rd[0]\">$rd[1]</option>");
+		if(isset($_POST['leldata'])){
+			$leld=$_POST['leldata'];
+			$cid=$_POST['cid'];
+			if($leld<>0){
+				$sqlc="select * from r_keszlet where id=$cid;";
+				if(sql_run($sqlc)){
+					$r=$MA_SQL_RESULT[0];
+					$nd=$r[3]+$leld;
+					$sqlc="update r_keszlet set menny=$nd where id=$cid;";
+					if (sql_run($sqlc)){
+						mess_ok($R_LELTITLE." ( $r[3] => $nd ): ".$R_OK.".");
+					}else{
+						mess_error($R_LELTITLE." ( $r[3] => $nd ): ".$R_ERROR.".");
+					}
+					$lelid=r_genid();
+					$datum=date('Y.m.d');
+					$cikkid=$r[1];
+					$rakid=$r[2];
+					$sqlc="insert into r_lel (id,dat,rakt,cikk,elter,usern) values ($lelid,\"$datum\",$rakid,$cikkid,$leld,\"$MA_USERNAME\");";
+					sql_run($sqlc);
+				}
+			}
+			#echo("$leld - $cid");
 		}
-		echo("</select>");
-		echo("</div>");
-		echo("<div class=pcol2>");
-		echo("<input type=submit id=storego name=storego value=\"$R_GO\">");
-		echo("</div>");
-		echo("</div>");
-		echo("</form>");
+		echo("<h3>$R_LELTITLE ( $R_STR_TITLE: $storen - $odb $R_DB )</h3>");;
 		echo("<form method=post>");
 		echo("<div class=frow>");
 		echo("<div class=pcol1>");
@@ -101,20 +105,20 @@ function r_table(){
 		echo("<input type=submit id=go name=go value=\"$R_WORK_INAME\">");
 		echo("</div>");
 		echo("</div>");
+		echo("</form>");
 		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$R_SEARCH\">");
 		$sqlc="select * from r_keszlet where rakt like \"%$store%\" $wh order by cikk limit $first,$R_PAGEROW;";
 		sql_run($sqlc);
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");
-		echo("<th class='df_th0'>$R_STR_TABLE_TITLE[0]</th>");
-		echo("<th class='df_th0'>$R_STR_TABLE_TITLE[1]</th>");
-		echo("<th class='df_th0'>$R_STR_TABLE_TITLE[2]</th>");
-		echo("<th class='df_th0'>$R_STR_TABLE_TITLE[3]</th>");
-		echo("<th class='df_th0'>$R_STR_TABLE_TITLE[4]</th>");
-		echo("<th class='df_th0'>$R_STR_TABLE_TITLE[5]</th>");
-		echo("<th class='df_th0'>$R_STR_TABLE_TITLE[6]</th>");
-		echo("<th class='df_th0'>$R_STR_TABLE_TITLE[7]</th>");
-		echo("<th class='df_th'>$R_STR_TABLE_TITLE[8]</th>");
+		echo("<th class='df_th0'>$R_LEL_TABLE_TITLE[0]</th>");
+		echo("<th class='df_th0'>$R_LEL_TABLE_TITLE[1]</th>");
+		echo("<th class='df_th0'>$R_LEL_TABLE_TITLE[2]</th>");
+		echo("<th class='df_th0'>$R_LEL_TABLE_TITLE[3]</th>");
+		echo("<th class='df_th0'>$R_LEL_TABLE_TITLE[4]</th>");
+		echo("<th class='df_th0'>$R_LEL_TABLE_TITLE[5]</th>");
+		echo("<th class='df_th'>$R_LEL_TABLE_TITLE[6]</th>");
+		echo("<th class='df_th0'>$R_LEL_TABLE_TITLE[7]</th>");
 		echo("</tr>");
 		$db=count($MA_SQL_RESULT);
 		$data=$MA_SQL_RESULT;
@@ -124,6 +128,7 @@ function r_table(){
 			$cn="";
 			$ce="";
 			$cr="";
+			$cid=$r[0];
 			$sqlc="select * from r_cikk where id=$r[1];";
 			if (sql_run($sqlc)){
 				$d=$MA_SQL_RESULT[0];
@@ -144,9 +149,16 @@ function r_table(){
 			echo("<td class='df_td'>$r[3]</td>");
 			echo("<td class='df_td'>$ce</td>");
 			echo("<td class='df_td'>$r[6]</td>");
-			echo("<td class='df_td'>$r[5]</td>");
-			echo("<td class='df_td'>$r[4]</td>");
-			echo("<td class='df_td'>$r[7]</td>");
+			echo("<form method=post>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
+			echo("<input type=hidden id=cid name=cid value=\"$cid\">");
+			echo("<td class='df_td'>");
+			echo("<input type=text id=leldata name=leldata value=\"0\">");
+			echo("</td>");
+			echo("<td class='df_td'><center>");
+			echo("<input class='tbutton' style=\"width:20%;padding:0px 50px 0px 30px;margin:0px;\" type=submit id=chp name=chp value=\"$R_GO\">");
+			echo("</td>");
+			echo("</form>");
 			echo("</tr>");
 		}
 		echo("</table>");

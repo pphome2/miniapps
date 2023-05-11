@@ -30,17 +30,17 @@ $I_NEWPARTNER="+";
 $I_WORKPARTNER=">>>";
 $I_DELPARTNER="Törlés";
 $I_PARTNER_FIELDS=array(
-          "ID",
-          "Név",
-          "Ország",
-          "Irányítószám",
-          "Város",
-          "Cím 1",
-          "Cím 2",
-          "E-mail",
-          "Adószám",
-          "Számlaszám"
-      );
+					"ID",
+					"Név",
+					"Ország",
+					"Irányítószám",
+					"Város",
+					"Cím 1",
+					"Cím 2",
+					"E-mail",
+					"Adószám",
+					"Számlaszám"
+			);
 
 $I_PARTNERNEWDOC="Új dokumentum érkezett a partnertől";
 $I_SEARCH="Keresés...";
@@ -54,6 +54,7 @@ $I_WORKCAT=">>>";
 $I_DELCAT="Törlés";
 $I_CAT_FIELDS=array("ID","Kód","Név");
 
+$I_DB="db dokumentum";
 $I_DOCTITLE_NEW="Új dokumentum";
 $I_DOCTITLE_CHANGE="Dokumentum adatainak módosítása";
 $I_DOCTITLE_DEL="Dokumentum törlése";
@@ -62,34 +63,34 @@ $I_NEWDOC="+";
 $I_WORKDOC=">>>";
 $I_DELDOC="Törlés";
 $I_DOC_FIELDS=array("ID",
-          "Sorszám",
-          "Érkezés",
-          "Számlaszám",
-          "Partner azonosító",
-          "Összeg",
-          "Pénznem",
-          "Kategória",
-          "Teljesítés dátuma",
-          "Fizetési határidő",
-          "Kifizetés dátuma",
-          "Engedélyezés dátuma",
-          "Telephely",
-          "Bank",
-          "Megjegyzés",
-          "Csatolmány");
+					"Sorszám",
+					"Érkezés",
+					"Számlaszám",
+					"Partner azonosító",
+					"Összeg",
+					"Pénznem",
+					"Kategória",
+					"Teljesítés dátuma",
+					"Fizetési határidő",
+					"Kifizetés dátuma",
+					"Engedélyezés dátuma",
+					"Telephely",
+					"Bank",
+					"Megjegyzés",
+					"Csatolmány");
 $I_DOCFROMPARTNER="Partner:";
 $I_MONEYTYPE=array("Forint","Euro","Dollár");
 $I_SITE=array("Szolnok","Magyarszecsőd","Dég");
 $I_BANK=array("OTP Bank - huf","OTP Bank - euro","Unicredit - huf","Unicredit - euro","Intensa - euro");
 
 $I_LISTS=array("Lejáró számlák",
-        "Partnerenkénti számlák",
-        "Kategóriánkénti számlák",
-        "Telephelyenkénti számlák",
-        "Átadásra kerülő",
-        "Partnerlista",
-        "Nullás összegű számlák",
-        );
+				"Partnerenkénti számlák",
+				"Kategóriánkénti számlák",
+				"Telephelyenkénti számlák",
+				"Átadásra kerülő",
+				"Partnerlista",
+				"Nullás összegű számlák",
+				);
 $I_GO=">>>";
 
 $I_LISTTABLE_TITLE=array("Sorszám","Számlaszám","Kiállító","Kategória","Határidő","Engedélyezve","Fizetve","Javít");

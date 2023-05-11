@@ -13,7 +13,7 @@ $L_ROOTHOME="Intranet";
 $L_SITEHOME="Raktárkészlet";
 
 # applikáció
-$R_MENU=array("Beszállítók","Cikk kategória","Cikktörzs","Raktárak","Költséghely, felhasználó","Bevételezés","Kiadás","Lekérdezések","Keresés");
+$R_MENU=array("Beszállítók","Cikk kategória","Cikktörzs","Raktárak","Költséghely, felhasználó","Bevételezés","Kiadás","Lekérdezések","Leltár","Keresés");
 
 $R_SEARCH_TEXT="Tárolt elem keresése";
 $R_PRIVACYTITLE="Adatvédelmi tájékoztató";
@@ -33,13 +33,15 @@ $R_LISTS=array("Bevételezések",
 				"Raktárkészlet",
 				"Havi kiadási mennyiségek",
 				"Havi kiadás költséghelyként",
-				"Termékek minimum készlet alatt"
+				"Termékek minimum készlet alatt",
+				"Leltári korrekciók"
 				);
 $R_DOWNLOAD="Letöltés";
 $R_DOWNLOADTEXT="A letöltés előkészítve.";
 
 $R_TOOMANYROW="Túl sok találat, pontosítsa a keresést.";
 $R_NOITEM="Nincs találat, pontosítsa a keresést.";
+$R_DB="db cikk a raktárban";
 
 $R_PARTNER_TITLE_NEW="Új partner";
 $R_PARTNER_TITLE_CHANGE="Partneradatok módosítása";
@@ -105,13 +107,14 @@ $R_SELECT="Kiválaszt";
 $R_I_TEXT="Kiválasztott cikk: ";
 $R_P_TEXT="Kiválasztott beszállító: ";
 $R_R_TEXT="Kiválasztott raktár: ";
+$R_S_TEXT="A raktárban található mennyiség";
 
 $R_IN_STAGE=array("Első lépés: beszállító kiválasztása.","Második lépés: cikk kiválasztása.","Harmadik lépés: cikkadatok megadása.");
 $R_IN_FIELDS=array("ID","Dátum","Beszállító","Cikk","Mennyiség","Egységár","Érték","Bizonylat","Megjegyzés","Megrendelő","Raktár","Elhelyezés");
 $R_IN_TITLE_NEW="Új cikk bevételezése";
 $R_IN_NEWITEM="Új cikk a beszállítótól";
 $R_IN_RESTART="Bevételezés újrakezdése";
-$R_IN_TABLE_TITLE=array("Dátum","Beszállító","Cikk","Mennyiség","Egységár","Érték","Bizonylat","Megrendelő","Raktár");
+$R_IN_TABLE_TITLE=array("Dátum","Beszállító","Cikk","Mennyiség","Egységár","Érték","Bizonylat","Megjegyzés","Megrendelő","Raktár","Felhasználó");
 
 $R_STR_TITLE="Raktár";
 $R_STR_TABLE_TITLE=array("Kategória","Cikkszám","Cikk","Mennyiség","Mennyiségi egység","Egységár","Utolsó bevétel","Utolsó kiadás","Megjegyzés");
@@ -119,18 +122,24 @@ $R_STR_TABLE_TITLE2=array("Kategória","Cikkszám","Cikk","Mennyiség","Mennyis�
 
 $R_OUT_STAGE=array("Első lépés: raktár kiválasztása.","Második lépés: cikk kiválasztása.","Harmadik lépés: cikkadatok megadása.");
 $R_OUT_FIELDS=array("ID","Dátum","Raktár","Cikk","Mennyiség","Bizonylat","Megjegyzés","Költséghely");
-$R_OUT_FIELDS2=array("ID","Dátum","Cikk","Mennyiség","Bizonylat","Költséghely","Megjegyzés","Raktár");
+$R_OUT_FIELDS2=array("ID","Dátum","Cikk","Mennyiség","Bizonylat","Költséghely","Megjegyzés","Raktár","Felhasználó");
 $R_OUT_TITLE_NEW="Cikk kiadása";
 $R_OUT_NEWITEM="Cikk kiadása a raktárból";
 $R_OUT_RESTART="Kiadás újrakezdése";
 $R_OUT_NOITEM="nincs még cikk a raktárban";
-$R_OUT_TABLE_TITLE=array("Dátum","Cikk","Mennyiség","Bizonylat","Költséghely","Megjegyzés","Raktár");
+$R_OUT_TABLE_TITLE=array("Dátum","Cikk","Mennyiség","Bizonylat","Költséghely","Megjegyzés","Raktár","Felhasználó");
 $R_OUT_TABLE_TITLE_MOUNTH=array("Dátum","Cikk","Egységár","Mennyiség","Bizonylat","Költséghely","Megjegyzés","Raktár");
+$R_MIN_TEXT="Készleten kevesebb mint a megadott minimum.";
+$R_MIN="minimum készlet";
+$R_REAL="raktárban készlet";
 
 $R_SEARCH_TITLE="Cikk keresés";
 $R_SEARCH_LABEL=array("Cikk neve vagy cikkszáma vagy vonalkódja");
 $R_SEARCH_BUTTON="Keresés";
 $R_SEARCH_TABLE_TITLE=array("Cikkszám","Kategória","Név","Vonalkód","Raktár","Mennyiség","Megjegyzés");
 
+$R_LELTITLE="Leltár - készlet korrekció";
+$R_LEL_TABLE_TITLE=array("Kategória","Cikkszám","Cikk","Mennyiség","Mennyiségi egység","Egységár","Mennyiségi eltérés","Tárol");
+$R_LELLIST_TABLE_TITLE=array("Dátum","Kategória","Cikkszám","Cikk","Korrekció","Felhasználó");
 
 ?>

@@ -15,7 +15,7 @@ $MA_SITENAME="Raktar";
 $MA_TITLE="R+";
 $MA_CODENAME="ra";
 $MA_ROOT_HOME="http://192.168.10.249";
-$MA_ROOT_NAME="Intranet";
+$MA_ROOT_NAME="Home";
 $MA_SITE_HOME="";
 $MA_FAVICON="favicon.png";
 
@@ -46,8 +46,10 @@ $MA_APPFILE=array("","$MA_LANGFILE",
 				"rl3.php",
 				"rl4.php",
 				"rl5.php",
+				"rl6.php",
 				"rt.php",
 				"rs.php",
+				"rle.php",
 				"r.php"
 			);
 

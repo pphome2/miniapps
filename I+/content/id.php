@@ -10,7 +10,7 @@
 
 
 function i_doctable(){
-	global $MA_SQL_RESULT,$I_NEWDOC,$I_DOCTABLE_TITLE,$I_PAGEROW,$I_FIRSTYEAR,
+	global $MA_SQL_RESULT,$I_NEWDOC,$I_DOCTABLE_TITLE,$I_PAGEROW,$I_FIRSTYEAR,$I_DB,
 			$I_WORKDOC,$I_SEARCH,$I_FILESTORE,$I_PAGE_RIGHT,$I_PAGE_LEFT,$I_FIRSTYEAR;
 
 	$ptable=true;
@@ -56,7 +56,7 @@ function i_doctable(){
 		echo("<input type=hidden id=page name=page value=$page>");
 		echo("<div class=frow>");
 		echo("<div class=pcol2>");
-		echo("<h3>$year</h3>");
+		echo("<h3>$year ( $odb $I_DB )</h3>");
 		echo("</div>");
 		echo("<div class=pcol1>");
 		echo("<select style=\"width:20%;margin-right:20px;float:right;\" id=year name=year>");
@@ -70,6 +70,37 @@ function i_doctable(){
 		echo("</div>");
 		echo("</div>");
 		echo("</form>");
+		echo("<div class=frow>");
+		echo("<div class=pcol2>");
+		if (($page>0)and($first>0)){
+			echo("<form method=post>");
+			$p=$page-1;
+			echo("<input type=hidden id=page name=page value=\"$p\">");
+			echo("<input type=hidden id=year name=year value=\"$year\">");
+			echo("<input type=submit id=p name=p value=\"$I_PAGE_LEFT\">");
+			echo("</form>");
+		}else{
+			echo("<span style=\"color:transparent;\">?</span>");
+		}
+		echo("</div>");
+		echo("<div class=pcol1>");
+		echo("<div style=\"width:90%;float:middle;\">");
+		echo("<span style=\"color:transparent;\">?</span>");
+		echo("</div>");
+		echo("</div>");
+		echo("<div class=pcol2>");
+		if ((!$last)){
+			$p=$page+1;
+			echo("<form method=post>");
+			echo("<input type=hidden id=page name=page value=\"$p\">");
+			echo("<input type=hidden id=year name=year value=\"$year\">");
+			echo("<input type=submit id=p name=p value=\"$I_PAGE_RIGHT\">");
+			echo("</form>");
+		}else{
+			echo("<span style=\"color:transparent;\">?</span>");
+		}
+		echo("</div>");;
+		echo("</div>");
 		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$I_SEARCH\">");
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");

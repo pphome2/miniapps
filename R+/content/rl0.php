@@ -32,10 +32,10 @@ function r_listin($title=""){
 		if ($d<>""){
 			$w="where dat=\"$d\"";
 		}
-		$dload="";
-		$db=count($R_IN_FIELDS);
+		$dload=";";
+		$db=count($R_IN_TABLE_TITLE);
 		for($i=0;$i<$db;$i++){
-			$dload=$dload.$R_IN_FIELDS[$i].";";
+			$dload=$dload.$R_IN_TABLE_TITLE[$i].";";
 		}
 		$dload=$dload.PHP_EOL;
 		sql_run("select * from r_bev $w order by id;");
@@ -134,6 +134,7 @@ function r_listin($title=""){
 		echo("<th class='df_th'>$R_IN_TABLE_TITLE[6]</th>");
 		echo("<th class='df_th'>$R_IN_TABLE_TITLE[7]</th>");
 		echo("<th class='df_th'>$R_IN_TABLE_TITLE[8]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[9]</th>");
 		echo("</tr>");
 		$db=count($dat);
 		for($i=0;$i<$db;$i++){
@@ -163,6 +164,7 @@ function r_listin($title=""){
 			echo("<td class='df_td'>$r[7]</td>");
 			echo("<td class='df_td'>$r[9]</td>");
 			echo("<td class='df_td'>$r[10]</td>");
+			echo("<td class='df_td'>$r[11]</td>");
 			echo("</tr>");
 		}
 		echo("</table>");
