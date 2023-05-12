@@ -211,6 +211,12 @@ function d_doc(){
 		d_docdata(false);
 	}
 	if ($ptable){
+		if(isset($_POST['year'])){
+			$year=$_POST['year'];
+		}else{
+			$year=date('Y');
+		}
+		$year=d_year($year);
 		if (isset($_POST['page'])){
 			$page=(int)$_POST['page'];
 			$first=$D_PAGEROW*$page;
@@ -219,7 +225,7 @@ function d_doc(){
 			$first=0;
 		}
 		$last=false;
-		if (sql_run("select count(*) from d_doc;")){
+		if (sql_run("select count(*) from d_doc where datum like \"%$year%\";")){
 			$r=$MA_SQL_RESULT[0];
 			$odb=$r[0];
 			$adb=$first+$D_PAGEROW;
@@ -227,12 +233,6 @@ function d_doc(){
 				$last=true;
 			}
 		}
-		if(isset($_POST['year'])){
-			$year=$_POST['year'];
-		}else{
-			$year=date('Y');
-		}
-		$year=d_year($year);
 		echo("<form method=post>");
 		echo("<input type=hidden id=page name=page value=$page>");
 		echo("<div class=frow>");
