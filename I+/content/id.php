@@ -44,7 +44,7 @@ function i_doctable(){
 			$first=0;
 		}
 		$last=false;
-		if (sql_run("select count(*) from ik_doc where id like \"%$year%\";")){
+		if (sql_run("select count(*) from ik_doc where datum like \"%$year%\";")){
 			$r=$MA_SQL_RESULT[0];
 			$odb=$r[0];
 			$adb=$first+$I_PAGEROW;
@@ -114,7 +114,7 @@ function i_doctable(){
 		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[6]</th>");
 		echo("<th class='df_th0'>$I_DOCTABLE_TITLE[7]</th>");
 		echo("</tr>");
-		sql_run("select * from ik_doc where id like \"%$year%\" order by sorsz desc limit $first,$I_PAGEROW;");
+		sql_run("select * from ik_doc where datum like \"%$year%\" order by sorsz desc limit $first,$I_PAGEROW;");
 		$dr=$MA_SQL_RESULT;
 		$db=count($dr);
 		for($i=0;$i<$db;$i++){
