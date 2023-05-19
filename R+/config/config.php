@@ -7,7 +7,19 @@
  #
  #
 
+#
+# NO TOUCH - ne módosítsd
+#
+# use content/config.php and change this variable if need
+# módosítsd a content/config.sys fájlban ezeket a változókat
+#
+# update function overwrite this file - frissítéskor felülíródik ez a fájl
+#
+
 # configuration
+
+$MA_VERSION="20230501";
+$MA_UPDATE_SRC="http://localhost/minisys/miniappframe/public";
 
 # copyright link
 $MA_COPYRIGHT="© ".date("Y").". <a href=https://github.com/pphome2>Github</a>";
@@ -62,6 +74,7 @@ $MA_LIB=array(
 			"lib.php",
 			"libadmin.php",
 			"libview.php",
+			"libsys.php",
 			"libsql.php"
 			);
 
