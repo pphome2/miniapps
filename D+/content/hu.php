@@ -9,11 +9,11 @@
 
 # rendszer
 $L_SITENAME="Dokumentumtár";
-$L_ROOTHOME="Intranet";
+$L_ROOTHOME="Derula Intranet";
 $L_SITEHOME="Dokumentumtár";
 
 # applikáció
-$D_MENU=array("Új dokumentum");
+$D_MENU=array("Új dokumentum","Lekérdezések");
 
 $D_SEARCH_TEXT="Tárolt elem keresése";
 $D_PRIVACYTITLE="Adatvédelmi tájékoztató";
@@ -45,5 +45,15 @@ $D_DB=" db dokumentum van";
 
 $D_DOC_FILETABLE=array("Fájlnév","Választ");
 $D_DOC_NEWFILE="Új dokumentum fájlból";
+
+$D_FILE_SEARCH="Keresés a fájl nevében";
+$D_PARTNER_SEARCH="Keresés a partner nevében";
+
+$D_LISTS=array("Érvényben lévő szerződések");
+
+$D_DOWNLOAD="Letöltés";
+$D_DOWNLOAD_TEXT="Az előkészítés megtörtént.";
+
+$D_DOC_TABLE_FIELDS=array("Érkezés","Partner","Érvénybe lép","Lejár","Leírás","Fájl");
 
 ?>

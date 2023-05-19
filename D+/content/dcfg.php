@@ -30,4 +30,6 @@ $D_PAGEROW=200;
 
 $D_FIRSTYEAR="2021";
 
+$D_LISTCODE=array("0");
+
 ?>

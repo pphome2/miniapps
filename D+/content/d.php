@@ -56,6 +56,9 @@ function d_data(){
 			case $MA_MENUCODE[0]:
 				d_newdoc();
 				break;
+			case $MA_MENUCODE[1]:
+                d_lists();
+                break;
 			default:
 				d_table();
 				break;

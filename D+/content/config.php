@@ -31,6 +31,8 @@ $MA_APPFILE=array("$MA_LANGFILE",
 				"dcfg.php",
 				"dd.php",
 				"dn.php",
+				"dl.php",
+				"dl0.php",
 				"dpar.php",
 				"d.php"
 			);
