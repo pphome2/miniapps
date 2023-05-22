@@ -27,7 +27,6 @@ $MA_LANGFILE="hu.php";
 
 # local app main and css file
 $MA_APPFILE=array("$MA_LANGFILE",
-				"$MA_LANGFILE",
 				"dcfg.php",
 				"dd.php",
 				"dn.php",

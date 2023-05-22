@@ -27,7 +27,7 @@ $MA_LANGFILE="hu.php";
 
 # local app main and css file
 unset($MA_APPFILE);
-$MA_APPFILE=array("","$MA_LANGFILE",
+$MA_APPFILE=array("$MA_LANGFILE",
 				"fcfg.php",
 				"f1.php",
 				"f.php"

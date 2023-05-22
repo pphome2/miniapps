@@ -26,6 +26,9 @@ for ($i=0;$i<count($MA_LIB);$i++){
 }
 
 # local app files
+if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[0]")){
+	include("$MA_CONTENT_DIR/$MA_APPFILE[0]");
+}
 for ($i=0;$i<count($MA_APPFILE);$i++){
 	if (file_exists("$MA_CONTENT_DIR/$MA_APPFILE[$i]")){
 		include("$MA_CONTENT_DIR/$MA_APPFILE[$i]");
