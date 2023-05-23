@@ -1,8 +1,8 @@
 # sql install
 
-create database if not exists demo;
+create database if not exists derula;
 
-use demo;
+use derula;
 
 create table if not exists d_doc (
     id bigint auto_increment primary key,
@@ -22,3 +22,4 @@ create table if not exists d_param (
     ertek varchar(20) charset utf8,
     key name (nev(20))
 ) engine=InnoDB default charset latin1;
+
