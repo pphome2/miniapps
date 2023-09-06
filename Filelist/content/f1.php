@@ -46,7 +46,7 @@ function f_table(){
 		if ($adb>=$fdb){
 			$last=true;
 		}
-		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$I_SEARCH\">");
+		echo("<input type=text id=search onkeyup='searchtable()' placeholder=\"$F_SEARCH\">");
 		echo("<center>");
 		echo("<table class='df_table_full' id=ptable>");
 		echo("<tr class='df_trh'>");
