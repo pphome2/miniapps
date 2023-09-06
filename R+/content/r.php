@@ -44,53 +44,56 @@ function r_print(){
 
 
 function r_data(){
-	global $MA_MENU_FIELD,$MA_MENUCODE;
+  global $MA_MENU_FIELD,$MA_MENUCODE,$MA_USERNAME,$R_AVE,$MA_COPYRIGHT;
 
-	echo("<div class=spaceline></div>");
-	echo("<div class=content>");
-	if (isset($_GET[$MA_MENU_FIELD])){
-		switch ($_GET[$MA_MENU_FIELD]){
-			case $MA_MENUCODE[0]:
-				r_partner();
-				break;
-			case $MA_MENUCODE[1]:
-				r_cat();
-				break;
-			case $MA_MENUCODE[2]:
-				r_iname();
-				break;
-			case $MA_MENUCODE[3]:
-				r_raktar();
-				break;
-			case $MA_MENUCODE[4]:
-				r_kolt();
-				break;
-			case $MA_MENUCODE[5]:
-				r_in();
-				break;
-			case $MA_MENUCODE[6]:
-				r_out();
-				break;
-			case $MA_MENUCODE[7]:
-				r_list();
-				break;
-			case $MA_MENUCODE[8]:
-				r_lel();
-				break;
-			case $MA_MENUCODE[9]:
-				r_search();
-				break;
-			default:
-				r_table();
-				break;
-		}
-	}else{
-		sql_install();
-		#sql_test();
-		r_table();
-	}
-	echo("</div>");
-	echo("<div class=spaceline></div>");
+  $MA_COPYRIGHT=$MA_COPYRIGHT." [ ".$MA_USERNAME." ]";
+  echo("<div class=spaceline></div>");
+  echo("<div class=content>");
+  if (isset($_GET[$MA_MENU_FIELD])){
+    switch ($_GET[$MA_MENU_FIELD]){
+      case $MA_MENUCODE[0]:
+        r_partner();
+        break;
+      case $MA_MENUCODE[1]:
+        r_cat();
+        break;
+      case $MA_MENUCODE[2]:
+        r_iname();
+        break;
+      case $MA_MENUCODE[3]:
+        r_raktar();
+        break;
+      case $MA_MENUCODE[4]:
+        r_kolt();
+        break;
+      case $MA_MENUCODE[5]:
+        r_in();
+        break;
+      case $MA_MENUCODE[6]:
+        r_out();
+        break;
+      case $MA_MENUCODE[7]:
+        r_list();
+        break;
+      case $MA_MENUCODE[8]:
+        r_lel();
+        break;
+      case $MA_MENUCODE[9]:
+        r_search();
+        break;
+      default:
+        echo("<h3>$R_AVE $MA_USERNAME !</h3>");
+        r_table();
+        break;
+    }
+  }else{
+    sql_install();
+    #sql_test();
+    echo("<h3>$R_AVE $MA_USERNAME !</h3>");
+	r_table();
+  }
+  echo("</div>");
+  echo("<div class=spaceline></div>");
 }
 
 function r_view(){

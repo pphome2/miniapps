@@ -135,6 +135,7 @@ function r_listin($title=""){
 		echo("<th class='df_th'>$R_IN_TABLE_TITLE[7]</th>");
 		echo("<th class='df_th'>$R_IN_TABLE_TITLE[8]</th>");
 		echo("<th class='df_th'>$R_IN_TABLE_TITLE[9]</th>");
+		echo("<th class='df_th'>$R_IN_TABLE_TITLE[10]</th>");
 		echo("</tr>");
 		$db=count($dat);
 		for($i=0;$i<$db;$i++){
@@ -162,6 +163,7 @@ function r_listin($title=""){
 			echo("<td class='df_td'>$r[5]</td>");
 			echo("<td class='df_td'>$r[6]</td>");
 			echo("<td class='df_td'>$r[7]</td>");
+			echo("<td class='df_td'>$r[8]</td>");
 			echo("<td class='df_td'>$r[9]</td>");
 			echo("<td class='df_td'>$r[10]</td>");
 			echo("<td class='df_td'>$r[11]</td>");

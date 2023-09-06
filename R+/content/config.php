@@ -57,6 +57,12 @@ $MA_APPCSSFILE=array("r.css");
 $MA_APPJSFILE=array("r.js");
 $MA_APPPRIVACYFILE="$MA_CONTENT_DIR/privacy.txt";
 
+# users
+$MA_USERS_CRED=array(
+					array("admin","e3274be5c857fb42ab72d786e281b4b8"),
+					array("user","5f4dcc3b5aa765d61d8327deb882cf99")
+				);
+
 # SQL
 $MA_SQL_SERVER="localhost";
 $MA_SQL_DB="demo";

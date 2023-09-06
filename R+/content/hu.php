@@ -12,6 +12,8 @@ $L_SITENAME="Raktár";
 $L_ROOTHOME="Intranet";
 $L_SITEHOME="Raktárkészlet";
 
+$R_AVE="Jó munkát";
+
 # applikáció
 $R_MENU=array("Beszállítók","Cikk kategória","Cikktörzs","Raktárak","Költséghely, felhasználó","Bevételezés","Kiadás","Lekérdezések","Leltár","Keresés");
 
