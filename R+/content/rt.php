@@ -19,12 +19,20 @@ function r_table(){
 		}else{
 			$store=r_storeage();
 		}
-		if(sql_run("select * from r_raktar where id=$store;")){
-			$rd=$MA_SQL_RESULT[0];
-			$storen=$rd[1];
-		}else{
-			$storen="";
-		}
+		if(sql_run("select * from r_raktar where id=$store $wh;")){
+          if (count($MA_SQL_RESULT)>0){
+              $rd=$MA_SQL_RESULT[0];
+              $storen=$rd[1];
+          }else{
+              if(sql_run("select * from r_raktar;")){
+                $rd=$MA_SQL_RESULT[0];
+                $store=$rd[0];
+                $storen=$rd[1];
+              }else{
+                $storen="";
+              }
+          }
+        }
 		$page=0;
 		$first=0;
 		if (isset($_POST['page'])){

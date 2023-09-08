@@ -82,7 +82,7 @@ function r_data(){
         r_search();
         break;
       default:
-        echo("<h3>$R_AVE $MA_USERNAME !</h3>");
+        #echo("<h3>$R_AVE $MA_USERNAME !</h3>");
         r_table();
         break;
     }
