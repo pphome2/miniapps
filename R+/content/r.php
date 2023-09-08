@@ -89,7 +89,7 @@ function r_data(){
   }else{
     sql_install();
     #sql_test();
-    echo("<h3>$R_AVE $MA_USERNAME !</h3>");
+    #echo("<h3>$R_AVE $MA_USERNAME !</h3>");
 	r_table();
   }
   echo("</div>");
