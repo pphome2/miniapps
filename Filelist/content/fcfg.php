@@ -8,13 +8,15 @@
  #
 
 
-$F_FILESTORE="Files";
-$F_FILECOUNTLIMIT=500;
-$F_PAGEROW=50;
+$F_FILESTORE="Data";
+$F_FILECOUNTLIMIT=10000;
+$F_PAGEROW=10000;
 
 $F_USER_FILE_RIGHTS=array(
-					  array("user",array("Der","Du"))
-					);
+            array("user",array("*")),
+            array("user2",array("*"))
+          );
 
+$F_SEARCHSTRING="";
 
 ?>

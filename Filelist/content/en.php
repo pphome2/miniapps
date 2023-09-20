@@ -1,7 +1,7 @@
 <?php
 
  #
- # Raktár
+ # Files
  #
  # info: main folder copyright file
  #

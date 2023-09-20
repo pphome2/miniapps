@@ -38,8 +38,8 @@ $MA_APPJSFILE=array("f.js");
 $MA_APPPRIVACYFILE="$MA_CONTENT_DIR/privacy.txt";
 
 $MA_USERS_CRED=array(
-					array("admin","e3274be5c857fb42ab72d786e281b4b8"),
-					array("user","5f4dcc3b5aa765d61d8327deb882cf99")
+					array("user","e3274be5c857fb42ab72d786e281b4b8"),
+					array("user2","5f4dcc3b5aa765d61d8327deb882cf99")
 				);
 
 ?>

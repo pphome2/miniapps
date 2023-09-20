@@ -1,8 +1,8 @@
 # sql install
 
-create database if not exists derula;
+create database if not exists testdb;
 
-use derula;
+use testdb;
 
 create table if not exists d_doc (
     id bigint auto_increment primary key,
