@@ -12,8 +12,8 @@ $GK_PAGEROW=100;
 $GK_SEARCHSTRING="";
 
 $GK_USER_MAIL=array(
-                  array("Derula","peter.peteri@derula.hu"),
-                  array("admin","derulait@derula.hu")
+                  array("demo","x@gmail.com"),
+                  array("admin","x@gmail.com")
               );
 $GK_MAIL_DAY=6;
 

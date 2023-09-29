@@ -9,7 +9,7 @@
 
 # rendszer
 $L_SITENAME="Dokumentumtár";
-$L_ROOTHOME="Derula Intranet";
+$L_ROOTHOME="D Intranet";
 $L_SITEHOME="Dokumentumtár";
 
 # applikáció

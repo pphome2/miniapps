@@ -9,7 +9,7 @@
 
 # rendszer
 $L_SITENAME="Gépjármű nyílvántartás";
-$L_ROOTHOME="Derula Intranet";
+$L_ROOTHOME="Intranet";
 $L_SITEHOME="GK";
 $L_TITLE="Gépjármű nyílvántartás";
 $MA_BUTTON_TEXT="Mehet";

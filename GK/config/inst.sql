@@ -1,8 +1,8 @@
 # sql install
 
-create database if not exists derula;
+create database if not exists demo;
 
-use derula;
+use demo;
 
 create table if not exists gk_data (
     id bigint auto_increment primary key,
