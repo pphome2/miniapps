@@ -22,8 +22,15 @@ function f_table(){
   }
   $dnx=$F_FILESTORE;
   if(isset($ri)){
+      if (isset($_POST['dname'])){
+          $dn=$_POST['dname'];
+          if (is_dir($dn)){
+              $F_FILESTORE=$dn;
+          }
+      }
       echo("<div class=frow>");
       echo("<form id=00 method=post>");
+        echo("<input type=hidden id=dname name=dname value=\"$F_FILESTORE\">");
       echo("<div class=pcol1>");
         echo("<input type=text id=searchn name=searchn placeholder=\"$F_SEARCH\" value=\"\">");
       echo("</div>");
@@ -35,12 +42,6 @@ function f_table(){
       echo("</div>");
         echo("</form>");
       echo("</div>");
-      if (isset($_POST['dname'])){
-          $dn=$_POST['dname'];
-          if (is_dir($dn)){
-              $F_FILESTORE=$dn;
-          }
-      }
       if (isset($_POST['searchn'])){
           $F_SEARCHSTRING=strtoupper($_POST['searchn']);
       }
@@ -135,6 +136,7 @@ function f_table(){
     if (($page>0)and($first>0)){
       echo("<form method=post>");
       $p=$page-1;
+          echo("<input type=hidden id=dname name=dname value=\"$F_FILESTORE\">");
       echo("<input type=hidden id=page name=page value=\"$p\">");
       echo("<input type=submit id=p name=p value=\"$F_PAGE_LEFT\">");
       echo("</form>");
@@ -151,6 +153,7 @@ function f_table(){
     if (($row==$F_PAGEROW)and(!$last)){
       $p=$page+1;
       echo("<form method=post>");
+          echo("<input type=hidden id=dname name=dname value=\"$F_FILESTORE\">");
       echo("<input type=hidden id=page name=page value=\"$p\">");
       echo("<input type=submit id=p name=p value=\"$F_PAGE_RIGHT\">");
       echo("</form>");
