@@ -15,7 +15,7 @@ $GK_USER_MAIL=array(
                   array("demo","x@gmail.com"),
                   array("admin","x@gmail.com")
               );
-$GK_MAIL_DAY=6;
+$GK_MAIL_DAY=array(10,20,30);
 
 $MA_MENUCODE=array("e");
 

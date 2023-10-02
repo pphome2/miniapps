@@ -157,7 +157,7 @@ function gk_alldata($new){
 		echo("</div>");
 		echo("</div>");
 		$i++;
-		echo("<input type=hiddenOQ id=$i name=$i value=\"$MA_USERNAME\">");
+		echo("<input type=hidden id=$i name=$i value=\"$MA_USERNAME\">");
 		echo("<div class=frow><br /></div>");
 		if ($new){
 			echo("<input type=hidden id=id name=id value=\"$d[0]\">");
