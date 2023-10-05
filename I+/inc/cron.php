@@ -8,13 +8,13 @@
  #
 
 # /etc/cron.d/gk fájlba: (# nélkül)
-# 0 0 * * * root php /var/www/html/.../cron.php
+# 0 0 * * * root php /var/www/html/.../inc/cron.php
 
 if (isset($_SERVER['SERVER_NAME'])){
     echo(date("Y. m. d"));
 }else{
 
-    $sdir=realpath(dirname(__FILE__));
+    $sdir=realpath(dirname(__FILE__))."/..";
 
     # load config and language file
     if (!isset($MA_CONFIG_DIR)){
