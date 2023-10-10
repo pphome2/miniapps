@@ -54,7 +54,7 @@ $GK_WORK=">>";
 
 $GK_TITLE_NEW="Új gépjármű";
 $GK_TITLE_CHANGE="Gépjármű módosítás";
-$GK_DEL="Törlés";
+$GK_TITLE_DEL="Törlés";
 
 $GK_MAIL_MSG=array(
                   "Közeli lejárat: Műszaki érvényesség. Hátralévő nap:",
