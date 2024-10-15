@@ -3,10 +3,6 @@
 // admin menu
 
 
-require_once(__DIR__ . '/../core/config.php');
-require_once(__DIR__ . '/../core/lib1.php');
-
-
 // add admin menu
 function register_menu_page(){
   $s1=plugin_dir_path(__FILE__).'/options.php';
@@ -28,10 +24,11 @@ add_action('admin_menu','register_menu_page');
 function register_submenu_page(){
   $s1=plugin_dir_path(__FILE__).'/options.php';
   $s2=plugin_dir_path(__FILE__).'/options2.php';
+  $l=wswdteam_lang('Egyéb beállítások');
   add_submenu_page(
     $s1,
-    'Egyéb beállítások',
-    'Egyéb beállítások',
+    $l,
+    $l,
     'manage_options',
     $s2,
     ''

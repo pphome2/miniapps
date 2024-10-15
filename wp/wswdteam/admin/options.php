@@ -8,27 +8,29 @@ if (isset($_POST['fname'])){
   $table_name=$wpdb->prefix.$wswdteam_table;
   $sql="INSERT INTO $table_name (name,text) VALUES ('$x1','$x2');";
   $r=$wpdb->query($sql);
-  wswdteam_message("Tárolva.");
+  $l=wswdteam_lang('Tárolva');
+  wswdteam_message($l);
 }
 
+echo("<h1>".wswdteam_lang('WSWDTeam beállítások')."</h1>");
+echo("<br />");
+echo(wswdteam_lang('Teszt üzem'));
+echo("<br />");
+echo("<br />");
+echo("<br />");
 ?>
 
-<h1>WSWDTeam beállítások lap</h1>
-<br />
-Teszt üzem.
-<br />
-
-<br /><br /><br />
 <form action="<?php menu_page_url('wswdteam_options.php') ?>" method="post">
-  <label for="fname">Vezetéknév:</label><br>
+  <label for="fname"><?php echo(wswdteam_lang('Vezetéknév')); ?>:</label><br>
   <input type="text" id="fname" name="fname"><br>
-  <label for="lname">Keresztnév:</label><br>
+  <label for="lname"><?php echo(wswdteam_lang('Keresztnév')); ?>:</label><br>
   <input type="text" id="lname" name="lname">
   <br /><br />
-  <input type="submit" value="Mehet">
+  <input type="submit" value="<?php echo(wswdteam_lang('Mehet')); ?>">
 </form>
-<br /><br />
 
 <?php
+echo("<br />");
+echo("<br />");
 ?>
 

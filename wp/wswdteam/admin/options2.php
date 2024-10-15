@@ -11,23 +11,25 @@ if (isset($_POST['fname'])){
   wswdteam_message("Tárolva.");
 }
 
+echo("<h1>".wswdteam_lang('WSWDTeam beállítások')."</h1>");
+echo("<br />");
+echo(wswdteam_lang('Teszt üzem'));
+echo("<br />");
+echo("<br />");
+echo("<br />");
 ?>
 
-<h1>WSWDTeam beállítások lap</h1>
-<br />
-Teszt üzem.
-<br />
-<br /><br /><br />
 <form action="<?php menu_page_url('wswdteam_options.php') ?>" method="post">
-  <label for="fname">E-mail:</label><br>
+  <label for="fname"><?php echo(wswdteam_lang('E-mail')); ?>:</label><br>
   <input type="text" id="fname" name="fname"><br>
-  <label for="lname">Telefon:</label><br>
+  <label for="lname"><?php echo(wswdteam_lang('Telefon')); ?>:</label><br>
   <input type="text" id="lname" name="lname">
   <br /><br />
-  <input type="submit" value="Mehet">
+  <input type="submit" value="<?php echo(wswdteam_lang('Mehet')); ?>">
 </form>
-<br /><br />
 
 <?php
+echo("<br />");
+echo("<br />");
 ?>
 
