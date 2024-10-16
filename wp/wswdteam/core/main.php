@@ -23,7 +23,7 @@ function wswdteam_main_center($atts=[],$content=null,$tag=''){
     $i++;
   }
   $content='<b>shortcoded - '.$tag.'</b> '.$content;
-  $table_name=$wpdb->prefix.$wswdteam_table;
+  $table_name=$wpdb->prefix.$wswdteam_table[0];
  
   $content=$content.'<br /><br />SQL:<br /><br />';
   $sql="SELECT * FROM $table_name;";

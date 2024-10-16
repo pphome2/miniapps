@@ -6,7 +6,7 @@ global $wswdteam_db_version;
 $wswdteam_db_version='1.0';
 
 global $wswdteam_table;
-$wswdteam_table='wswdteam';
+$wswdteam_table=array('wswdteam');
 
 global $WSWDTEAM_MAIN_FILES;
 $WSWDTEAM_MAIN_FILES=array('/core/main.php',

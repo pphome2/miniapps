@@ -15,9 +15,11 @@ if (file_exists(__DIR__.'/core/config.php')){
 }
 
 // adatbázis tisztítása
-$table_name=$wpdb->prefix.$wswdteam_table;
-$sql="DROP TABLE IF EXISTS $table_name;";
-$r=$wpdb->query($sql);
+foreach ($wswdteam_table as $t){
+  $tn=$wpdb->prefix.$t;
+  $sql="DROP TABLE IF EXISTS $n;";
+  $r=$wpdb->query($sql);
+}
 
 ?>
 

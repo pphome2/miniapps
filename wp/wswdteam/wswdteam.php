@@ -46,11 +46,14 @@ if (isset($WSWDTEAM_MAIN_FILES)){
   }
 }
 
+
 // admin mód
 if (is_admin()){
-  if (!require_once(__DIR__.'/admin/admin.php')){
+  if (file_exists(__DIR__.'/admin/admin.php')){
+    include(__DIR__.'/admin/admin.php');
+  }else{
     exit;
-  };
+  }
 }
 
 
@@ -92,10 +95,10 @@ add_action('wp_footer','wswdteam_footer');
 // js script és css betöltése
 function wswdteam_inc(){
   if (file_exists(__DIR__.'/inc/wswdteam.css')){
-    wp_enqueue_style('wswdteam_css',__DIR__.'/inc/wswdteam.css');
+    wp_enqueue_style('wswdteam_css',plugin_dir_url(__FILE__).'inc/wswdteam.css');
   }
   if (file_exists(__DIR__.'/inc/wswdteam.js')){
-    wp_enqueue_script('wswdteam_js',__DIR__.'/inc/wswdteam.js');
+    wp_enqueue_script('wswdteam_js',plugin_dir_url(__FILE__).'inc/wswdteam.js');
   }
 }
 add_action('wp_enqueue_scripts','wswdteam_inc');

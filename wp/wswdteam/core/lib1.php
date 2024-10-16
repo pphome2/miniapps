@@ -47,6 +47,7 @@ function wswdteam_lang($text=''){
   }else{
     $line='.'.$text.'.';
   }
+  $line=strip_tags($line);
   return($line);
 }
 
