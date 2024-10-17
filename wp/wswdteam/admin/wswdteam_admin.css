@@ -1,7 +1,15 @@
 <style>
 
+table {
+  width:99%; !important
+}
+
 label{
   color:red;
+}
+
+tbody>:nth-child(n):hover {
+  background-color: lightgray;
 }
 
 </style>

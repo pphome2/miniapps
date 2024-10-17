@@ -119,7 +119,7 @@ echo("<br />");
 	  <th scope="col" id="tags" class="manage-column"><?php echo(wswdteam_lang('Töröl')); ?></th>
 	</tr>
   </thead>
-  <tbody id="the-list">
+  <tbody id="dblist">
 
 <?php
 
