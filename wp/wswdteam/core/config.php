@@ -1,24 +1,38 @@
 <?php
 
-// configuration
+// alap beállítások
+
+// kilépés ha nem wp-ből lett indítva
+if (!defined('ABSPATH')){
+  exit;
+}
 
 global $wswdteam_db_version;
 $wswdteam_db_version='1.0';
 
+global $wswdteam_plugin_version;
+$wswdteam_plugin_version='1.0';
+
 global $wswdteam_table;
 $wswdteam_table=array('wswdteam');
 
+global $wswdteam_options;
+$wswdteam_options=array('wswdteam_db_version',
+                        'wswdteam_plugin_version'
+                        );
+
 global $WSWDTEAM_MAIN_FILES;
 $WSWDTEAM_MAIN_FILES=array('/core/main.php',
+                           '/core/sql.php',
                            '/core/lib1.php'
                            );
 
 global $wswdteam_locale;
 
+global $wswdteam_pagerow;
+$wswdteam_pagerow=2;
 
 
-// WP load file:
-// plugins_url( 'myscript.js', __FILE__ ); -- full pth of file
 
 // get plugins path:
 // plugins_url()

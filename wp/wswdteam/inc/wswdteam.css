@@ -3,4 +3,11 @@
 .wswdteamdiv{
 }
 
+.autohide {
+  animation: css 0s 3s forwards;
+}
+
+@keyframes css{t {visibility:hidden;display:none;}}
+
+
 /* */

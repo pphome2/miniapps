@@ -1,6 +1,6 @@
 <?php
 
-// uninstall plugin
+// plugin eltávolítás
 
 // ha nem a wp rendszer indította
 if (!defined('WP_UNINSTALL_PLUGIN')){
@@ -14,12 +14,20 @@ if (file_exists(__DIR__.'/core/config.php')){
   exit;
 }
 
+
 // adatbázis tisztítása
 foreach ($wswdteam_table as $t){
   $tn=$wpdb->prefix.$t;
   $sql="DROP TABLE IF EXISTS $n;";
   $r=$wpdb->query($sql);
 }
+
+
+// tárolt változók törlése
+foreach ($wswdteam_options as $o){
+  delete_option($o);
+}
+
 
 ?>
 

@@ -59,7 +59,7 @@ if (is_admin()){
 
 // plugin előkészítés
 function wswdteam_init(){
-  global $locale, $wp_local_package;
+  global $locale, $wp_local_package,$wswdteam_options,$wswdteam_plugin_version;
 
   $loc="";
   if (isset($locale)){
@@ -70,6 +70,16 @@ function wswdteam_init(){
   }
   if (file_exists(__DIR__."/lang/".$loc.".php")){
     include(__DIR__."/lang/".$loc.".php");
+  }
+
+  $ver=get_option($wswdteam_options[1],'0');
+  if ($ver==="0"){
+    add_option($wswdteam_options[1],$wswdteam_plugin_version);
+    wswdteam_setup();
+  }else{
+    if ($ver<>$wswdteam_plugin_version){
+      wswdteam_setup();
+    }
   }
 }
 add_action('init','wswdteam_init');

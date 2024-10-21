@@ -8,8 +8,18 @@ label{
   color:red;
 }
 
+form {
+  display:inline;
+  padding-right:5px;
+}
+
+#button {
+  padding-right:5px;
+}
+
 tbody>:nth-child(n):hover {
   background-color: lightgray;
 }
+
 
 </style>
