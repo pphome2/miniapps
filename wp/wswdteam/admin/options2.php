@@ -84,7 +84,7 @@ function wswdteam_form($w_id="",$w_name="",$w_text=""){
     $page=$_POST['page'];
   }
   ?>
-  <form action="<?php menu_page_url('wswdteam_options.php') ?>" method="post">
+  <form action="<?php menu_page_url(__FILE__) ?>" method="post">
     <label for="name"><?php echo(wswdteam_lang('Vezetéknév')); ?>:</label><br>
     <input type="text" id="name" name="name" value="<?php echo($w_name); ?>"><br>
     <label for="text"><?php echo(wswdteam_lang('Keresztnév')); ?>:</label><br>
@@ -125,7 +125,7 @@ function wswdteam_table(){
   echo($db." - ".$page." - ".$i." - ".$wswdteam_pagerow);
   ?>
   <br />
-  <form action="<?php menu_page_url('wswdteam_options.php') ?>" method="post">
+  <form action="<?php menu_page_url(__FILE__) ?>" method="post">
     <input type="hidden" id="page" name="page" value="<?php echo($page); ?>">
     <input type="submit" class="button" id="new" name="new" value="<?php echo(wswdteam_lang('Új')); ?>">
   </form>
@@ -183,33 +183,7 @@ function wswdteam_table(){
 
   <?php
   echo("<br />");
-  $op=round(($db/$wswdteam_pagerow),0);
-  if (($page<>1)and($op>1)){
-    $i=$page-1;
-    echo("<form action=\"".menu_page_url('wswdteam_options.php')."\" method=\"post\">");
-    echo("<input type=\"hidden\" id=\"page\" name=\"page\" value=\"$i\">");
-    echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\"<<\">");
-    echo("</form>");
-  }
-  for($i=1;$i<=$op;$i++){
-    echo("<form action=\"".menu_page_url('wswdteam_options.php')."\" method=\"post\">");
-    echo("<input type=\"hidden\" id=\"page\" name=\"page\" value=\"$i\">");
-    if ($page==$i){
-      echo("<input type=\"submit\" id=\"x$i\" name=\"x\" class=\"activepage button\" value=\"$i\">");
-      //echo("<script>document.getElementById(\"x$i\").style.color=\"#ff0000\";</script>");
-      echo("<script>document.getElementById(\"x$i\").disabled=true</script>");
-    }else{
-      echo("<input type=\"submit\" id=\"x$i\" name=\"x\" class=\"button\" value=\"$i\">");
-    }
-    echo("</form>");
-  }
-  if (($page<$op)and($op>1)){
-    $i=$page+1;
-    echo("<form action=\"".menu_page_url('wswdteam_options.php')."\" method=\"post\">");
-    echo("<input type=\"hidden\" id=\"page\" name=\"page\" value=\"$i\">");
-    echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\">>\">");
-    echo("</form>");
-  }
+  wswdteam_pager($db,$wswdteam_pagerow,$page,"page");
   echo("<br />");
   echo("<br />");
 }

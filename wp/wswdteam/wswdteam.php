@@ -114,6 +114,20 @@ function wswdteam_inc(){
 add_action('wp_enqueue_scripts','wswdteam_inc');
 
 
+//
+function wswdteam_login_redirect(){
+  return(home_url());
+}
+add_filter('login_redirect', 'wswdteam_login_redirect');
+
+
+// kilépés
+function wswdteam_logout_redirect(){
+    return(home_url());
+}
+add_filter('logout_redirect','wswdteam_logout_redirect');
+
+
 // plugin bekapcsolási feladatok
 function wswdteam_setup(){
   wswdteam_db_init();
