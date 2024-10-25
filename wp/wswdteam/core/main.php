@@ -10,47 +10,42 @@ if (!defined('ABSPATH')){
 
 // shortcode vezérlés
 function wswdteam_main_center($atts=[],$content=null,$tag=''){
-  global $wpdb,$wswdteam_db_version,$wswdteam_table;
+  global $wswdteam_category;
 
   if (!is_user_logged_in()) {
     wp_redirect(wp_login_url());
   }else{
     $cuser=wp_get_current_user();
     $username=$cuser->user_login;
-    $content=$content."---".$username."---";
+    //$content=$content."---".$username."---";
+    // jogok beállítása
+    $ur="";
     $i=0;
-    $content.'<br />';
+    $content=$content."<div class=\"wswdteam_content\">";
     foreach($atts as $k){
       switch($k){
-        case 'egy':
-          $content=$content.wswdteam_1();
+        case '+':
+          $content=$content.wswdteam_1($k,$ur);
           break;
-        case 'kettő':
-          $content=$content.wswdteam_2();
+        case 'open':
+          $content=$content.wswdteam_2($k,$ur);
+          break;
+        case 'list':
+          $content=$content.wswdteam_2($k,$ur);
+          break;
+        case 'help':
+          $content=$content.wswdteam_postlist_view($wswdteam_category[0]);
           break;
       }
       $i++;
     }
-    $content=wswdteam_x($content);
+    //$content=wswdteam_x($content);
+    $content=$content."</div>";
     return $content;
   }
 }
 
-
-function wswdteam_1(){
-  $c='<br />egyes';
-
-  return($c);
-}
-
-
-function wswdteam_2(){
-  $c='<br />kettes';
-
-  return($c);
-}
-
-
+// teszt: sql lekérdezés
 function wswdteam_x($c){
   global $wpdb,$wswdteam_table;
 
@@ -70,6 +65,7 @@ function wswdteam_x($c){
 
   return($c);
 }
+
 
 ?>
 

@@ -3,11 +3,41 @@
 .wswdteamdiv{
 }
 
-.autohide {
-  animation: css 0s 3s forwards;
+a{
+  text-decoration:none;
+}
+.wswdteam_content{
+  max-width:60%;
 }
 
-@keyframes css{t {visibility:hidden;display:none;}}
+.wp-block-post-date, .wp-block-post-author, .wp-block-post-terms{
+  display: none;
+}
+
+.wbutton{
+  background-color:#04AA6D;
+  border:none;
+  color:white;
+  padding:15px 32px;
+  text-align:center;
+  text-decoration:none;
+  display:inline-block;
+  font-size:16px;
+  border-radius:10px;
+}
+
+.wbutton2{
+  width:95%;
+  background-color:#04AA6D;
+  border:none;
+  color:white;
+  padding:15px 32px;
+  ttext-align:center;
+  text-decoration:none;
+  display:inline-block;
+  font-size:16px;
+  border-radius:10px;
+}
 
 
 /* */

@@ -21,16 +21,26 @@ $wswdteam_options=array('wswdteam_db_version',
                         'wswdteam_plugin_version'
                         );
 
-global $WSWDTEAM_MAIN_FILES;
-$WSWDTEAM_MAIN_FILES=array('/core/main.php',
+global $wswdteam_main_files;
+$wswdteam_main_files=array('/core/main.php',
                            '/core/sql.php',
-                           '/core/lib1.php'
+                           '/core/lib1.php',
+                           '/core/lib2.php',
+                           '/core/app1.php',
+                           '/core/app2.php',
+                           '/core/app3.php',
+                           '/core/app4.php'
                            );
+
+global $wswdteam_category;
+$wswdteam_category=array('Leírás',
+                         'Tudásbázis'
+                         );
 
 global $wswdteam_locale;
 
 global $wswdteam_pagerow;
-$wswdteam_pagerow=2;
+$wswdteam_pagerow=20;
 
 
 

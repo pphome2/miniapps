@@ -30,14 +30,16 @@ if (!defined('ABSPATH')){
   exit;
 }
 
+
+
 if (file_exists(__DIR__.'/core/config.php')){
   include(__DIR__.'/core/config.php');
 }else{
   exit;
 }
 
-if (isset($WSWDTEAM_MAIN_FILES)){
-  foreach($WSWDTEAM_MAIN_FILES as $f){
+if (isset($wswdteam_main_files)){
+  foreach($wswdteam_main_files as $f){
     if (file_exists(__DIR__.$f)){
       include(__DIR__.$f);
     }else{
@@ -130,7 +132,14 @@ add_filter('logout_redirect','wswdteam_logout_redirect');
 
 // plugin bekapcsolási feladatok
 function wswdteam_setup(){
+  global $wswdteam_category;
+
   wswdteam_db_init();
+  foreach($wswdteam_category as $cat){
+    if (!category_exists($cat)){
+      wp_create_category($cat);
+    }
+  }
 }
 
 
@@ -146,7 +155,7 @@ function wswdteam_deactivate(){
 register_deactivation_hook(__FILE__,'wswdteam_deactivate' );
 
 
-// shortcode kezelsé[wswdteam] text [/wswdteam]
+// shortcode kezelés [wswdteam] text [/wswdteam]
 function wswdteam_shortcode($atts=[],$content=null,$tag=''){
   $content=wswdteam_main_center($atts,$content,$tag);
   return($content);

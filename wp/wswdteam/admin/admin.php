@@ -10,7 +10,7 @@ if (!defined('ABSPATH')){
 
 // add admin menu
 function register_menu_page(){
-  $s1=plugin_dir_path(__FILE__).'/options1.php';
+  $s1=plugin_dir_path(__FILE__).'/op1.php';
   $s2=plugins_url().'/wswdteam/images/icon.png';
   add_menu_page(
     '',
@@ -27,8 +27,8 @@ add_action('admin_menu','register_menu_page');
 
 // add admin menu
 function register_submenu_page(){
-  $s1=plugin_dir_path(__FILE__).'/options1.php';
-  $s2=plugin_dir_path(__FILE__).'/options2.php';
+  $s1=plugin_dir_path(__FILE__).'/op1.php';
+  $s2=plugin_dir_path(__FILE__).'/op2.php';
   $l=wswdteam_lang('Egyéb beállítások');
   add_submenu_page(
     $s1,

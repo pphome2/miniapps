@@ -1,6 +1,6 @@
 // js
 
-alert('user');
+//alert('user');
 
 function wswdteam_load(){
 }

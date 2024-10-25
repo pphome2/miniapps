@@ -10,72 +10,75 @@ if (!defined('ABSPATH')){
 
 // lapozó
 function wswdteam_pager($db=0,$row=0,$apage=0,$formid=""){
-  echo("<div style=\"width:99%;\"><span style=\"float:right;\">");
-  $op=round(($db/$row),0);
-  if (($apage<>1)and($op>1)){
-    $i=$apage-1;
-    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-    echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"1\">");
-    echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\"".wswdteam_lang("Első")."\">");
-    echo("</form>");
-    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-    echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">");
-    echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\"<<\">");
-    echo("</form>");
-  }
-  $endl=false;
-  $l1=1;
-  $l2=$op;
-  if ($op>9){
-    $l1=$apage-4;
-    $l2=$apage+4;
-    if ($l1<1){
-      $l1=1;
-      $l2=9;
-    }else{
-      if ($l1>1){
-        echo(" <span style=\"padding-right:10px;\">...</span>");
-      }
+  if ($db>$row){
+    echo("<div style=\"width:99%;\"><span style=\"float:right;\">");
+    //$op=round(($db/$row),0);
+    $op=ceil($db/$row);
+    if (($apage<>1)and($op>1)){
+      $i=$apage-1;
+      echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+      echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"1\">");
+      echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\"".wswdteam_lang("Első")."\">");
+      echo("</form>");
+      echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+      echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">");
+      echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\"<<\">");
+      echo("</form>");
     }
-    if ($l2>=$op){
-      $l2=$op;
-      //$l1=$op-9;
-    }else{
-      $endl=true;
-    }
-    if (($l2-$l1)<9){
-      $l1=$l2-8;
-    }
-  }else{
+    $endl=false;
     $l1=1;
     $l2=$op;
-  }
-  for($i=$l1;$i<=$l2;$i++){
-    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-    echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">");
-    if ($apage==$i){
-      echo("<input type=\"submit\" id=\"x$i\" name=\"x\" class=\"activepage button\" value=\"$i\">");
-      echo("<script>document.getElementById(\"x$i\").disabled=true</script>");
+    if ($op>9){
+      $l1=$apage-4;
+      $l2=$apage+4;
+      if ($l1<1){
+        $l1=1;
+        $l2=9;
+      }else{
+        if ($l1>1){
+          echo(" <span style=\"padding-right:10px;\">...</span>");
+        }
+      }
+      if ($l2>=$op){
+        $l2=$op;
+        //$l1=$op-9;
+      }else{
+        $endl=true;
+      }
+      if (($l2-$l1)<9){
+        $l1=$l2-8;
+      }
     }else{
-      echo("<input type=\"submit\" id=\"x$i\" name=\"x\" class=\"button\" value=\"$i\">");
+      $l1=1;
+      $l2=$op;
     }
-    echo("</form>");
+    for($i=$l1;$i<=$l2;$i++){
+      echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+      echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">");
+      if ($apage==$i){
+        echo("<input type=\"submit\" id=\"x$i\" name=\"x\" class=\"activepage button\" value=\"$i\">");
+        echo("<script>document.getElementById(\"x$i\").disabled=true</script>");
+      }else{
+        echo("<input type=\"submit\" id=\"x$i\" name=\"x\" class=\"button\" value=\"$i\">");
+      }
+      echo("</form>");
+    }
+    if ($endl){
+      echo(" <span style=\"padding-right:10px;\">...</span>");
+    }
+    if (($apage<$op)and($op>1)){
+      $i=$apage+1;
+      echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+      echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">");
+      echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\">>\">");
+      echo("</form>");
+      echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+      echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$op\">");
+      echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\"".wswdteam_lang("Utolsó")."\">");
+      echo("</form>");
+    }
+    echo("</span></div>");
   }
-  if ($endl){
-    echo(" <span style=\"padding-right:10px;\">...</span>");
-  }
-  if (($apage<$op)and($op>1)){
-    $i=$apage+1;
-    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-    echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">");
-    echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\">>\">");
-    echo("</form>");
-    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-    echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$op\">");
-    echo("<input type=\"submit\" id=\"x\" name=\"x\" class=\"button\" value=\"".wswdteam_lang("Utolsó")."\">");
-    echo("</form>");
-  }
-  echo("</span></div>");
 }
 
 

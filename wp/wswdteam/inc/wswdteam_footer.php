@@ -1,7 +1,7 @@
 <?php
 
 // lábrész
-echo('LÁB');
+//echo('LÁB');
 
 
 ?>
