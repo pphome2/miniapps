@@ -8,7 +8,7 @@ if (!defined('ABSPATH')){
 }
 
 
-function wswdteam_3($l=""){
+function wswdteam_3($l="",$urole=999){
   $c=$l;
 
   return($c);
@@ -16,4 +16,3 @@ function wswdteam_3($l=""){
 
 
 ?>
-

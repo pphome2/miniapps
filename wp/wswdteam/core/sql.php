@@ -41,6 +41,15 @@ function wswdteam_db_new(){
   ) $charset_collate;";
   $r=$wpdb->query($sql);
 
+  $table_name=$wpdb->prefix.$wswdteam_table[1];
+  $sql="CREATE TABLE IF NOT EXISTS $table_name (
+    id mediumint(9) NOT NULL AUTO_INCREMENT,
+    uname tinytext NOT NULL,
+    urole int NOT NULL,
+    PRIMARY KEY  (id)
+  ) $charset_collate;";
+  $r=$wpdb->query($sql);
+
   add_option($wswdteam_options[0],$wswdteam_db_version);
 }
 
@@ -59,4 +68,3 @@ function wswdteam_db_update(){
 
 
 ?>
-

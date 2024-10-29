@@ -28,6 +28,11 @@ foreach ($wswdteam_options as $o){
   delete_option($o);
 }
 
+// tárolt változók törlése
+foreach ($wswdteam_category as $c){
+  $cid=get_cat_ID($c);
+  wp_delete_category($cid);
+}
+
 
 ?>
-

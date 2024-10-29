@@ -1,6 +1,6 @@
 <?php
 
-// option menu
+// paraméterek beállítása
 
 
 // kilépés ha nem wp-ből lett indítva
@@ -14,11 +14,8 @@ if (file_exists(__DIR__.'/wswdteam_admin.css')){
   include(__DIR__.'/wswdteam_admin.css');
 }
 if (file_exists(__DIR__.'/wswdteam_admin.js')){
-  //include(__DIR__.'/wswdteam_admin.js');
+  include(__DIR__.'/wswdteam_admin.js');
 }
-// vagy html:
-// <script>alert("X");</script>
-// <style>label{text-align:center;color:red;}</style>
 
 
 // adatfeldolgozás
@@ -53,7 +50,8 @@ if (isset($_POST['submit'])){
     $l=wswdteam_lang('Tárolva');
     wswdteam_message($l);
   }
-  wswdteam_table();
+  wswdteam_ptable();
+  wswdteam_pload();
 }else{
   // tábla vagy táblából adat
   if (isset($_POST['m'])){
@@ -65,32 +63,33 @@ if (isset($_POST['submit'])){
     }
     $w_name=$_POST['name'];
     $w_text=$_POST['text'];
-    wswdteam_form($w_id,$w_name,$w_text);
+    wswdteam_pform($w_id,$w_name,$w_text);
   }else{
     if (isset($_POST['new'])){
       // új adat gomb a táblából
-      wswdteam_form();
+      wswdteam_pform();
     }else{
-      wswdteam_table();
+      wswdteam_ptable();
+      wswdteam_pload();
     }
   }
 }
 
 
 // adat form
-function wswdteam_form($w_id="",$w_name="",$w_text=""){
-  wswdteam_pagehead();
-  if (isset($_POST['page'])){
-    $page=$_POST['page'];
+function wswdteam_pform($w_id="",$w_name="",$w_text=""){
+  wswdteam_ppagehead();
+  if (isset($_POST['wpage'])){
+    $page=$_POST['wpage'];
   }
   ?>
   <form action="<?php menu_page_url(__FILE__) ?>" method="post">
-    <label for="name"><?php echo(wswdteam_lang('Vezetéknév')); ?>:</label><br>
+    <label for="name"><?php echo(wswdteam_lang('Paraméter név')); ?>:</label><br>
     <input type="text" id="name" name="name" value="<?php echo($w_name); ?>"><br>
-    <label for="text"><?php echo(wswdteam_lang('Keresztnév')); ?>:</label><br>
+    <label for="text"><?php echo(wswdteam_lang('Érték')); ?>:</label><br>
     <input type="text" id="text" name="text" value="<?php echo($w_text); ?>">
     <input type="hidden" id="id" name="id" value="<?php echo($w_id); ?>">
-    <input type="hidden" id="page" name="page" value="<?php echo($page); ?>">
+    <input type="hidden" id="wpage" name="wpage" value="<?php echo($page); ?>">
     <br /><br />
     <input type="submit" class="button" id="submit" name="submit" value="<?php echo(wswdteam_lang('Mehet')); ?>">
     <input type="submit" class="button" id="x" name="x" value="<?php echo(wswdteam_lang('Mégse')); ?>">
@@ -101,15 +100,15 @@ function wswdteam_form($w_id="",$w_name="",$w_text=""){
 
 
 // adat tábla
-function wswdteam_table(){
+function wswdteam_ptable(){
   global $wpdb,$wswdteam_table,$wswdteam_pagerow;
 
-  wswdteam_pagehead();
+  wswdteam_ppagehead();
   $table_name=$wpdb->prefix.$wswdteam_table[0];
   $sql="select count(*) from $table_name";
   $db=$wpdb->get_var($sql);
-  if (isset($_POST['page'])){
-    $page=$_POST['page'];
+  if (isset($_POST['wpage'])){
+    $page=$_POST['wpage'];
     if ($page<1){
       $page=1;
     }
@@ -122,11 +121,11 @@ function wswdteam_table(){
     $page=1;
   }
   $i=($page-1)*$wswdteam_pagerow;
-  echo($db." - ".$page." - ".$i." - ".$wswdteam_pagerow);
+  //echo($db." - ".$page." - ".$i." - ".$wswdteam_pagerow);
   ?>
   <br />
   <form action="<?php menu_page_url(__FILE__) ?>" method="post">
-    <input type="hidden" id="page" name="page" value="<?php echo($page); ?>">
+    <input type="hidden" id="wpage" name="wpage" value="<?php echo($page); ?>">
     <input type="submit" class="button" id="new" name="new" value="<?php echo(wswdteam_lang('Új')); ?>">
   </form>
   <br />
@@ -135,9 +134,8 @@ function wswdteam_table(){
   <table class="wp-list-table widefat fixed striped table-view-list">
     <thead>
 	  <tr>
-	    <th scope="col" id="title" class="manage-column" style="width:28%;"><?php echo(wswdteam_lang('Vezetéknév')); ?></th>
-	    <th scope="col" id="author" class="manage-column" style="width:28%;"><?php echo(wswdteam_lang('Keresztnév')); ?></th>
-	    <th scope="col" id="categories" class="manage-column" style="width:28%;"><?php echo(wswdteam_lang('Vezetéknév')); ?></th>
+	    <th scope="col" id="title" class="manage-column" style="width:45%;"><?php echo(wswdteam_lang('Paraméter név')); ?></th>
+	    <th scope="col" id="author" class="manage-column" style="width:45%;"><?php echo(wswdteam_lang('Érték')); ?></th>
 	    <th scope="col" id="tags" class="manage-column"><?php echo(wswdteam_lang('Javít/Töröl')); ?></th>
 	  </tr>
     </thead>
@@ -150,18 +148,17 @@ function wswdteam_table(){
 	echo("<tr id=\"post-$i\">");
 	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$t->name</td>");
 	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$t->text</td>");
-	echo("<td class=\"columnn-title\" data-colname=\"c$i\"></td>");
 	echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
 	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
 	echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
 	echo("<input type=\"hidden\" id=\"name\" name=\"name\" value=\"$t->name\">");
 	echo("<input type=\"hidden\" id=\"text\" name=\"text\" value=\"$t->text\">");
-	echo("<input type=\"hidden\" id=\"page\" name=\"page\" value=\"$page\">");
+	echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
     echo("<input type=\"submit\" id=\"m\" name=\"m\" class=\"button\" value=\"+\">");
 	echo("</form>");
 	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
 	echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
-	echo("<input type=\"hidden\" id=\"page\" name=\"page\" value=\"$page\">");
+	echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
     echo("<input type=\"submit\" id=\"del\" name=\"del\" class=\"button\" value=\"-\">");
 	echo("</form>");
 	echo("</td>");
@@ -172,9 +169,8 @@ function wswdteam_table(){
   </tbody>
     <tfoot>
 	  <tr>
-	    <th scope="col" id="title" class="manage-column"><?php echo(wswdteam_lang('Vezetéknév')); ?></th>
-	    <th scope="col" id="author" class="manage-column"><?php echo(wswdteam_lang('Keresztnév')); ?></th>
-    	  <th scope="col" id="categories" class="manage-column"><?php echo(wswdteam_lang('Vezetéknév')); ?></th>
+	    <th scope="col" id="title" class="manage-column"><?php echo(wswdteam_lang('Paraméter név')); ?></th>
+	    <th scope="col" id="author" class="manage-column"><?php echo(wswdteam_lang('Érték')); ?></th>
 	    <th scope="col" id="tags" class="manage-column"><?php echo(wswdteam_lang('Művelet')); ?></th>
 	  </tr>
     </tfoot>
@@ -183,23 +179,102 @@ function wswdteam_table(){
 
   <?php
   echo("<br />");
-  wswdteam_pager($db,$wswdteam_pagerow,$page,"page");
+  wswdteam_pager_admin($db,$wswdteam_pagerow,$page,"wpage");
   echo("<br />");
   echo("<br />");
 }
 
 
 //fejléc
-function wswdteam_pagehead(){
+function wswdteam_ppagehead(){
   echo("<br />");
-  echo("<h1>".wswdteam_lang('WSWDTeam beállítások')."</h1>");
+  echo("<h1>".wswdteam_lang('Egyéb beállítások')."</h1>");
   echo("<br />");
-  echo(wswdteam_lang('Teszt üzem'));
+  echo(wswdteam_lang('Működési paraméterek, alapadatok kezelése'));
   echo("<br />");
+  echo("<br />");
+  echo("<br />");
+  echo("<h2>".wswdteam_lang('Paraméterek')."</h2>");
   echo("<br />");
   echo("<br />");
 }
 
 
-?>
+// bejegyzések betöltése könyvtárból
+function wswdteam_pload(){
+  echo("<br />");
+  echo("<br />");
+  echo("<h2>".wswdteam_lang('Bejegyzés feltöltés')."</h2>");
+  echo("<br />");
+  echo("<br />");
+  echo(wswdteam_lang('A modul txt mappájából a bejegyzések betöltése a kiválasztott kategóriába.'));
+  echo("<br />");
+  echo("<br />");
+  if (isset($_POST['postload'])){
+    $md=dirname(dirname(__FILE__))."/txt/".$_POST['cdir'];
+    $fl=scandir($md);
+    $cid=(int)$_POST['cid'];
+    foreach($fl as $l){
+      $d=$md."/".$l;
+      if ((!is_dir($d))and(!in_array($l,array(".","..")))){
+        $args=array('category'         => $cid,
+	  	            'orderby'          => 'date',
+		            'order'            => 'DESC',
+		            'post_type'        => 'post'
+		            );
+        $posts=get_posts($args);
+        foreach($posts as $p){
+		  setup_postdata($p);
+		  if (($p->post_title===$l)and($p->post_category=$cid)){
+		    wp_delete_post($p->ID);
+		  }
+		}
+	    wp_reset_postdata();
+        $ct=file_get_contents($d);
+        $np=array('post_title'=>$l,
+                  'post_content'=>$ct,
+                  'post_status'=>'publish',
+                  'post_author'=>1,
+                  'post_category'=>array($cid),
+                  'post_date'=>date('Y-m-d h:m:s'),
+                  );
+        $pid=wp_insert_post($np, true);
+        wswdteam_message($l);
+      }
+    }
+  }else{
+    //$l=wp_list_categories(array('orderby' => 'name'));
+    $c=get_categories( array('orderby'=>'name','order'=>'ASC','hide_empty'=>false));
+	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+    echo("<label for=\"cid\">".wswdteam_lang('Kategória').":</label><br>");
+    echo("<select id=\"cid\" name=\"cid\">");
+    foreach($c as $l){
+      echo("<option value=\"$l->term_id\">".$l->name."</option>");
+    }
+    echo("</select><br />");
+    $md=dirname(dirname(__FILE__))."/txt";
+    echo("<label for=\"cdir\">".wswdteam_lang('Mappa').":</label><br>");
+    echo("<select id=\"cdir\" name=\"cdir\">");
+    $fl=scandir($md);
+    foreach($fl as $l){
+      $d=$md."/".$l;
+      if ((is_dir($d))and(!in_array($l,array(".","..")))){
+        echo("<option value=\"$l\">".$l."</option>");
+      }
+    }
+    echo("</select>");
+    echo("<br />");
+    echo("<br />");
+    echo("<input type=\"submit\" id=\"postload\" name=\"postload\" class=\"button\" value=\"".wswdteam_lang('Mehet')."\">");
+	echo("</form>");
+  }
+  echo("<br />");
+  echo("<br />");
+}
 
+
+// új nyelvi elemek kiírása
+wswdteam_lang_newlines();
+
+
+?>

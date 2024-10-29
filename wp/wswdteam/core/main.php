@@ -10,16 +10,23 @@ if (!defined('ABSPATH')){
 
 // shortcode vezérlés
 function wswdteam_main_center($atts=[],$content=null,$tag=''){
-  global $wswdteam_category;
+  global $wswdteam_category,$wswdteam_table,$wpdb;
 
   if (!is_user_logged_in()) {
     wp_redirect(wp_login_url());
   }else{
+    // jogok beállítása
     $cuser=wp_get_current_user();
     $username=$cuser->user_login;
-    //$content=$content."---".$username."---";
-    // jogok beállítása
-    $ur="";
+    $table_name=$wpdb->prefix.$wswdteam_table[1];
+    $sql="SELECT * FROM $table_name WHERE uname='$username';";
+    $res=$wpdb->get_results($sql);
+    if (count($res)<>0){
+      $t=$res[0];
+      $ur=$t->urole;
+    }else{
+     $ur=9999;
+    }
     $i=0;
     $content=$content."<div class=\"wswdteam_content\">";
     foreach($atts as $k){
@@ -35,6 +42,9 @@ function wswdteam_main_center($atts=[],$content=null,$tag=''){
           break;
         case 'help':
           $content=$content.wswdteam_postlist_view($wswdteam_category[0]);
+          break;
+        default:
+            wp_redirect(home_url());
           break;
       }
       $i++;
@@ -68,4 +78,3 @@ function wswdteam_x($c){
 
 
 ?>
-

@@ -1,6 +1,6 @@
 <script>
 
-alert('admin');
+//alert('admin');
 
 function wswdteam_loadx(){
 }

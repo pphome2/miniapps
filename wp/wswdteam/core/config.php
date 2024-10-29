@@ -13,8 +13,13 @@ $wswdteam_db_version='1.0';
 global $wswdteam_plugin_version;
 $wswdteam_plugin_version='1.0';
 
+global $wswdteam_developer_mode;
+$wswdteam_developer_mode=true;
+
 global $wswdteam_table;
-$wswdteam_table=array('wswdteam');
+$wswdteam_table=array('wswdteam',
+                      'wusers'
+                      );
 
 global $wswdteam_options;
 $wswdteam_options=array('wswdteam_db_version',
@@ -42,6 +47,14 @@ global $wswdteam_locale;
 global $wswdteam_pagerow;
 $wswdteam_pagerow=20;
 
+global $wswdteam_user_role_list;
+$wswdteam_user_role_list=array(0 => 'Felhasználó',
+                          1 => 'Szerkesztő',
+                          2 => 'Adminisztrátor'
+                          );
+
+global $wswdteam_user_role;
+$wswdteam_user_role=9999;
 
 
 // get plugins path:
@@ -70,4 +83,3 @@ $wswdteam_pagerow=20;
 // UPLOADS - /wp-content/uploads
 
 ?>
-
