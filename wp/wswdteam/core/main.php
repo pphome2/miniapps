@@ -54,6 +54,55 @@ function wswdteam_main_center($atts=[],$content=null,$tag=''){
     return $content;
   }
 }
+   
+   
+// rendszer ellenőrzés
+function wswdteam_sys_init(){
+  global $wswdteam_plugin_version,$wswdteam_options;
+
+  $ver=get_option($wswdteam_options[1],'0');
+  // nincs adatbázis
+  if ($ver==="0"){
+    // új
+  }else{
+    // frissítés kell
+  }
+  wswdteam_save_param();
+}
+
+// rendszer frissítése
+function wswdteam_sys_upgrade($installed='',$new=''){
+  global $wswdteam_plugin_version,$wswdteam_options,$wswdteam_table,$wpdb,
+         $wswdteam_db_version;
+
+  update_option($wswdteam_options[0],$new);
+}
+
+
+// verziók mint paraméter
+function wswdteam_save_param(){
+  global $wswdteam_plugin_version,$wswdteam_options,$wswdteam_table,$wpdb,
+         $wswdteam_db_version;
+
+  $table_name=$wpdb->prefix.$wswdteam_table[0];
+  $sql="SELECT * FROM $table_name WHERE name='$wswdteam_options[0]';";
+  $r=$wpdb->query($sql);
+  if ($r){
+    $sql="DELETE FROM $table_name WHERE name='$wswdteam_options[0]';";
+    $r=$wpdb->query($sql);
+  }
+  $sql="SELECT * FROM $table_name WHERE name='$wswdteam_options[1]';";
+  $r=$wpdb->query($sql);
+  if ($r){
+    $sql="DELETE FROM $table_name WHERE name='$wswdteam_options[1]';";
+    $r=$wpdb->query($sql);
+  }
+  $sql="INSERT INTO $table_name (name,text) VALUES ('$wswdteam_options[1]','$wswdteam_plugin_version');";
+  $r=$wpdb->query($sql);
+  $sql="INSERT INTO $table_name (name,text) VALUES ('$wswdteam_options[0]','$wswdteam_db_version');";
+  $r=$wpdb->query($sql);
+}
+ 
 
 // teszt: sql lekérdezés
 function wswdteam_x($c){

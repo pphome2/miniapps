@@ -7,25 +7,58 @@ if (!defined('ABSPATH')){
   exit;
 }
 
-global $wswdteam_db_version;
+// verziók
+global $wswdteam_db_version,$wswdteam_plugin_version;
 $wswdteam_db_version='1.0';
-
-global $wswdteam_plugin_version;
 $wswdteam_plugin_version='1.0';
 
+// fejlesztői mód
 global $wswdteam_developer_mode;
 $wswdteam_developer_mode=true;
 
+// sql táblák
 global $wswdteam_table;
 $wswdteam_table=array('wswdteam',
                       'wusers'
                       );
 
+// wp opciók
 global $wswdteam_options;
 $wswdteam_options=array('wswdteam_db_version',
                         'wswdteam_plugin_version'
                         );
 
+// a endszerben használt felhasználói szerepkörök
+global $wswdteam_user_role_list;
+$wswdteam_user_role_list=array(0=>'Felhasználó',
+                               1=>'Szerkesztő',
+                               2=>'Adminisztrátor'
+                               );
+// alapértelmezett felhasználói szerepkör
+global$wswdteam_user_role;
+$wswdteam_user_role=9999;
+
+// a rendszer által használt post kategóriák
+global $wswdteam_category;
+$wswdteam_category=array('Leírás',
+                         'Tudásbázis'
+                         );
+
+// betöltendő funkciók
+global $wswdteam_inc_head,
+       $wswdteam_inc_footer,
+       $wswdteam_inc_css,
+       $wswdteam_inc_js;
+$wswdteam_inc_head='/inc/wswdteam_head.php';
+$wswdteam_inc_footer='/inc/wswdteam_footer.php';
+$wswdteam_inc_css='/inc/wswdteam.css';
+$wswdteam_inc_js='/inc/wswdteam.js';
+
+// admin vezérlő fájl
+global $wswdteam_admin_file;
+$wswdteam_admin_file='/admin/admin.php';
+
+// rendszer fájlok
 global $wswdteam_main_files;
 $wswdteam_main_files=array('/core/main.php',
                            '/core/sql.php',
@@ -37,24 +70,30 @@ $wswdteam_main_files=array('/core/main.php',
                            '/core/app4.php'
                            );
 
-global $wswdteam_category;
-$wswdteam_category=array('Leírás',
-                         'Tudásbázis'
-                         );
+// post könyvtár
+global $wswdteam_dir_post;
+$wswdteam_dir_post='/txt/post';
 
+// page könyvtár
+global $wswdteam_dir_page;
+$wswdteam_dir_page='/txt/page';
+
+// nyelvi könyvtár
+global $wswdteam_dir_lang;
+$wswdteam_dir_lang='/lang';
+
+// lokalizációs kód
 global $wswdteam_locale;
+$wswdteam_locale="hu_HU";
 
+// táblázat egy lapon megjelenő sorai
 global $wswdteam_pagerow;
 $wswdteam_pagerow=20;
 
-global $wswdteam_user_role_list;
-$wswdteam_user_role_list=array(0 => 'Felhasználó',
-                          1 => 'Szerkesztő',
-                          2 => 'Adminisztrátor'
-                          );
+// üzenetek automatikus bezárása
+global $wswdteam_message_autohide;
+$wswdteam_message_autohide=true;
 
-global $wswdteam_user_role;
-$wswdteam_user_role=9999;
 
 
 // get plugins path:

@@ -160,11 +160,12 @@ function wswdteam_pager($db=0,$row=0,$apage=0,$formid=""){
 
 // notice-success – zöld bal keret - is-dismissible - x bezárás
 function wswdteam_message($text="",$autohide=false){
-  if ($autohide){
-    echo("<div id=\"mid\" class=\"notice notice-success autohide\"><p>");
-  }else{
-    echo("<div id=\"mid\" class=\"notice notice-success is-dismissible\"><p>");
+  global $wswdteam_message_autohide;
+
+  if (!$autohide){
+    $autohide=$wswdteam_message_autohide;
   }
+  echo("<div id=\"mid\" class=\"notice notice-success is-dismissible\"><p>");
   echo(_e($text,'wswdteam-dom'));
   echo("</p></div>");
   if ($autohide){
@@ -180,11 +181,12 @@ function wswdteam_message($text="",$autohide=false){
 
 // notice-error – vörös bal keret
 function wswdteam_error($text="",$autohide=false){
-  if ($autohide){
-    echo("<div id=\"mid\" class=\"notice notice-error autohide\"><p>");
-  }else{
-    echo("<div id=\"mid\" class=\"notice notice-error is-dismissible\"><p>");
+  global $wswdteam_message_autohide;
+
+  if (!$autohide){
+    $autohide=$wswdteam_message_autohide;
   }
+  echo("<div id=\"mid\" class=\"notice notice-error is-dismissible\"><p>");
   echo(_e($text,'wswdteam-dom'));
   echo("</p></div>");
   if ($autohide){
@@ -200,11 +202,12 @@ function wswdteam_error($text="",$autohide=false){
 
 // notice-warning– sárga bal keret
 function wswdteam_warning($text="",$autohide=false){
-  if ($autohide){
-    echo("<div id=\"mid\" class=\"notice notice-warning autohide\"><p>");
-  }else{
-    echo("<div id=\"mid\" class=\"notice notice-warning is-dismissible\"><p>");
+  global $wswdteam_message_autohide;
+
+  if (!$autohide){
+    $autohide=$wswdteam_message_autohide;
   }
+  echo("<div id=\"mid\" class=\"notice notice-warning is-dismissible\"><p>");
   echo(_e($text,'wswdteam-dom'));
   echo("</p></div>");
   if ($autohide){
@@ -220,11 +223,12 @@ function wswdteam_warning($text="",$autohide=false){
 
 // notice-success – zöld bal keret
 function wswdteam_success($text="",$autohide=false){
-  if ($autohide){
-    echo("<div id=\"mid\" class=\"notice notice-success autohide\"><p>");
-  }else{
-    echo("<div id=\"mid\" class=\"notice notice-success is-dismissible\"><p>");
+  global $wswdteam_message_autohide;
+
+  if (!$autohide){
+    $autohide=$wswdteam_message_autohide;
   }
+  echo("<div id=\"mid\" class=\"notice notice-success is-dismissible\"><p>");
   echo(_e($text,'wswdteam-dom'));
   echo("</p></div>");
   if ($autohide){
@@ -240,11 +244,12 @@ function wswdteam_success($text="",$autohide=false){
 
 // notice-info – kék bal keret
 function wswdteam_info($text="",$autohide=false){
-  if ($autohide){
-    echo("<div id=\"mid\" class=\"notice notice-info autohide\"><p>");
-  }else{
-    echo("<div id=\"mid\" class=\"notice notice-info is-dismissible\"><p>");
+  global $wswdteam_message_autohide;
+
+  if (!$autohide){
+    $autohide=$wswdteam_message_autohide;
   }
+  echo("<div id=\"mid\" class=\"notice notice-info is-dismissible\"><p>");
   echo(_e($text,'wswdteam-dom'));
   echo("</p></div>");
   if ($autohide){
@@ -260,10 +265,10 @@ function wswdteam_info($text="",$autohide=false){
 
 // fordítás
 function wswdteam_lang($text='',$dot=true){
-  global $WSWDTEAM_LANG_STR,$wswdteam_lang_new;
+  global $wswdteam_lang_str,$wswdteam_lang_new;
 
-  if (isset($WSWDTEAM_LANG_STR)and(isset($WSWDTEAM_LANG_STR[$text]))){
-    $line=$WSWDTEAM_LANG_STR[$text];
+  if (isset($wswdteam_lang_str)and(isset($wswdteam_lang_str[$text]))){
+    $line=$wswdteam_lang_str[$text];
   }else{
     if ($dot){
       $line=$text;

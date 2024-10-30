@@ -20,7 +20,7 @@ function wswdteam_db_init(){
   }else{
     // frissítés kell
     if ($ver<>$wswdteam_db_version){
-      wswdteam_db_update();
+      wswdteam_db_upgrade($ver,$wswdteam_db_version);
     }
   }
 }
@@ -55,7 +55,7 @@ function wswdteam_db_new(){
 
 
 // adatbázis táblák frissítése
-function wswdteam_db_update(){
+function wswdteam_db_upgrade($installed='',$new=''){
   global $wpdb,$wswdteam_db_version,$wswdteam_table,$wswdteam_options;
 
   $charset_collate=$wpdb->get_charset_collate();
@@ -64,6 +64,19 @@ function wswdteam_db_update(){
   //$r=$wpdb->query($sql);
 
   update_option($wswdteam_options[0],$wswdteam_db_version);
+}
+
+
+// adatbázisban sql végrehajtása
+function wswdteam_sql($sql=''){
+  global $wpdb;
+
+  if (!empty($sql)){
+    $r=$wpdb->query($sql);
+  }else{
+    $r="";
+  }
+  retur($r);
 }
 
 

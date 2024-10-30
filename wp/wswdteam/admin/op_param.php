@@ -52,6 +52,7 @@ if (isset($_POST['submit'])){
   }
   wswdteam_ptable();
   wswdteam_pload();
+  wswdteam_pageload();
 }else{
   // tábla vagy táblából adat
   if (isset($_POST['m'])){
@@ -71,6 +72,7 @@ if (isset($_POST['submit'])){
     }else{
       wswdteam_ptable();
       wswdteam_pload();
+      wswdteam_pageload();
     }
   }
 }
@@ -202,25 +204,28 @@ function wswdteam_ppagehead(){
 
 // bejegyzések betöltése könyvtárból
 function wswdteam_pload(){
+  global $wswdteam_dir_post,$wswdteam_locale;
+
   echo("<br />");
   echo("<br />");
-  echo("<h2>".wswdteam_lang('Bejegyzés feltöltés')."</h2>");
   echo("<br />");
+  echo("<h2>".wswdteam_lang('Bejegyzés feltöltés - Frissítés utáni feladat')."</h2>");
   echo("<br />");
   echo(wswdteam_lang('A modul txt mappájából a bejegyzések betöltése a kiválasztott kategóriába.'));
   echo("<br />");
   echo("<br />");
+  $md=dirname(dirname(__FILE__)).$wswdteam_dir_post."/".$wswdteam_locale;
   if (isset($_POST['postload'])){
-    $md=dirname(dirname(__FILE__))."/txt/".$_POST['cdir'];
+    $md=$md."/".$_POST['cdir'];
     $fl=scandir($md);
     $cid=(int)$_POST['cid'];
     foreach($fl as $l){
       $d=$md."/".$l;
       if ((!is_dir($d))and(!in_array($l,array(".","..")))){
-        $args=array('category'         => $cid,
-	  	            'orderby'          => 'date',
-		            'order'            => 'DESC',
-		            'post_type'        => 'post'
+        $args=array('category'=>$cid,
+	  	            'orderby'=>'date',
+		            'order'=>'DESC',
+		            'post_type'=>'post'
 		            );
         $posts=get_posts($args);
         foreach($posts as $p){
@@ -252,7 +257,6 @@ function wswdteam_pload(){
       echo("<option value=\"$l->term_id\">".$l->name."</option>");
     }
     echo("</select><br />");
-    $md=dirname(dirname(__FILE__))."/txt";
     echo("<label for=\"cdir\">".wswdteam_lang('Mappa').":</label><br>");
     echo("<select id=\"cdir\" name=\"cdir\">");
     $fl=scandir($md);
@@ -266,6 +270,78 @@ function wswdteam_pload(){
     echo("<br />");
     echo("<br />");
     echo("<input type=\"submit\" id=\"postload\" name=\"postload\" class=\"button\" value=\"".wswdteam_lang('Mehet')."\">");
+	echo("</form>");
+  }
+  echo("<br />");
+  echo("<br />");
+}
+
+
+
+// lapok betöltése könyvtárból
+function wswdteam_pageload(){
+  global $wswdteam_dir_page,$wswdteam_locale;
+
+  echo("<br />");
+  echo("<br />");
+  echo("<br />");
+  echo("<h2>".wswdteam_lang('Lapok feltöltés - Frissítés utáni feladat')."</h2>");
+  echo("<br />");
+  echo("<br />");
+  echo(wswdteam_lang('A modul txt mappájából a lapk betöltése.'));
+  echo(wswdteam_lang('A feltöltött lapok elérését (a menükben) ellenőrizni kell.'));
+  echo("<br />");
+  echo("<br />");
+  $md=dirname(dirname(__FILE__)).$wswdteam_dir_page."/".$wswdteam_locale;
+  if (isset($_POST['pageload'])){
+    echo("---");
+    $fl=scandir($md);
+    foreach($fl as $l){
+      $d=$md."/".$l;
+      if (!in_array($l,array(".",".."))){
+        $args=array('orderby'=>'date',
+		            'order'=>'DESC',
+		            'post_type'=>'page'
+		            );
+        $posts=get_posts($args);
+        foreach($posts as $p){
+		  setup_postdata($p);
+		  if ($p->post_title===$l){
+		    wp_delete_post($p->ID);
+		  }
+		}
+	    wp_reset_postdata();
+        $ct=file_get_contents($d);
+        $np=array('post_title'=>$l,
+                  'ping_status'=>'close',
+                  'comment_status'=>'close',
+                  'post_content'=>$ct,
+                  'post_status'=>'publish',
+                  'post_type'=>'page',
+                  'post_author'=>1,
+                  'post_date'=>date('Y-m-d h:m:s'),                  
+                  'post_name'=>strtolower(str_replace(' ','-',trim($l)))
+                  );
+        $pid=wp_insert_post($np, true);
+        echo("$l<br />");
+      }
+    }
+  }else{
+    echo("<br />");
+    echo(wswdteam_lang('Feltőlthető lapok').":");
+    echo("<br />");
+    echo("<br />");
+    $fl=scandir($md);
+    foreach($fl as $l){
+      $d=$md."/".$l;
+      if (!in_array($l,array(".",".."))){
+        echo("$l<br />");
+      }
+    }
+    echo("<br />");
+    echo("<br />");
+	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+    echo("<input type=\"submit\" id=\"pageload\" name=\"pageload\" class=\"button\" value=\"".wswdteam_lang('Feltöltés')."\">");
 	echo("</form>");
   }
   echo("<br />");

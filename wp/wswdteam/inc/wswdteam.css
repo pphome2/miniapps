@@ -3,11 +3,20 @@
 .wswdteamdiv{
 }
 
-a{
-  text-decoration:none;
-}
 .wswdteam_content{
   max-width:60%;
+}
+
+a{
+  text-decoration:none;
+  color:green;
+}
+
+li a{
+  border:none;
+  color:green; inherit;
+  text-decoration:none; inherit;
+  cursor:pointer;
 }
 
 .wp-block-post-date, .wp-block-post-author, .wp-block-post-terms{
@@ -63,7 +72,6 @@ a{
 }
 
 .pagerline{
-  wwidth:100%;
   float:right;
 }
 
