@@ -8,6 +8,9 @@ if (!defined('ABSPATH')){
   exit;
 }
 
+// rendszer ellenőrzése
+wswdteam_sys_check();
+
 // admin script betöltés 
 if (file_exists(__DIR__.'/wswdteam_admin.css')){
   include(__DIR__.'/wswdteam_admin.css');

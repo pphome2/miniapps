@@ -66,6 +66,7 @@ function wswdteam_init(){
          $wswdteam_user_role_list,$wswdteam_category,$wswdteam_locale,
          $wswdteam_dir_lang;
 
+  // nyelvi beállítás
   $loc="";
   if (isset($locale)){
     $loc=$locale;
@@ -73,6 +74,7 @@ function wswdteam_init(){
   if (($loc==="")and(isset($wp_local_package))){
     $loc=$wp_local_package;
   }
+  // nyelvi fájl betöltése
   if (file_exists(__DIR__.$wswdteam_dir_lang."/".$loc.".php")){
     include(__DIR__.$wswdteam_dir_lang."/".$loc.".php");
     $wswdteam_locale=$loc;
@@ -81,12 +83,7 @@ function wswdteam_init(){
       include(__DIR__.$wswdteam_dir_lang."/".$wswdteam_locale.".php");
     }
   }
-
-  $ver=get_option($wswdteam_options[1],'0');
-  if ($ver==="0"){
-    add_option($wswdteam_options[1],$wswdteam_plugin_version);
-  }
-  //wswdteam_setup();
+  // rendszerbeállítások fordításai
   $i=0;
   foreach($wswdteam_user_role_list as $ur){
     $wswdteam_user_role_list[$i]=wswdteam_lang($wswdteam_user_role_list[$i]);

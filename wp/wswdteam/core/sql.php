@@ -13,7 +13,6 @@ function wswdteam_db_init(){
   global $wswdteam_db_version,$wswdteam_options;
 
   $ver=get_option($wswdteam_options[0],'0');
-
   //nincs adatbázis
   if ($ver==="0"){
     wswdteam_db_new();
@@ -50,7 +49,7 @@ function wswdteam_db_new(){
   ) $charset_collate;";
   $r=$wpdb->query($sql);
 
-  add_option($wswdteam_options[0],$wswdteam_db_version);
+  add_option($wswdteam_options[1],$wswdteam_db_version);
 }
 
 
@@ -63,7 +62,7 @@ function wswdteam_db_upgrade($installed='',$new=''){
   $sql="";
   //$r=$wpdb->query($sql);
 
-  update_option($wswdteam_options[0],$wswdteam_db_version);
+  update_option($wswdteam_options[1],$wswdteam_db_version);
 }
 
 

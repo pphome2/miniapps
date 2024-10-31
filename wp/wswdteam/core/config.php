@@ -24,8 +24,8 @@ $wswdteam_table=array('wswdteam',
 
 // wp opciók
 global $wswdteam_options;
-$wswdteam_options=array('wswdteam_db_version',
-                        'wswdteam_plugin_version'
+$wswdteam_options=array('wswdteam_plugin_version',
+                        'wswdteam_db_version'
                         );
 
 // a endszerben használt felhasználói szerepkörök

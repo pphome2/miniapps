@@ -228,21 +228,34 @@ function wswdteam_pload(){
 		            'post_type'=>'post'
 		            );
         $posts=get_posts($args);
+        $pid='';
         foreach($posts as $p){
 		  setup_postdata($p);
 		  if (($p->post_title===$l)and($p->post_category=$cid)){
-		    wp_delete_post($p->ID);
+		    //wp_delete_post($p->ID);
+		    $pid=$p->ID;
 		  }
 		}
 	    wp_reset_postdata();
         $ct=file_get_contents($d);
-        $np=array('post_title'=>$l,
-                  'post_content'=>$ct,
-                  'post_status'=>'publish',
-                  'post_author'=>1,
-                  'post_category'=>array($cid),
-                  'post_date'=>date('Y-m-d h:m:s'),
-                  );
+        if ($pid<>''){
+          $np=array('ID'=>$pid,
+                    'post_title'=>$l,
+                    'post_content'=>$ct,
+                    'post_status'=>'publish',
+                    'post_author'=>1,
+                    'post_category'=>array($cid),
+                    'post_date'=>date('Y-m-d h:m:s'),
+                    );
+        }else{
+          $np=array('post_title'=>$l,
+                    'post_content'=>$ct,
+                    'post_status'=>'publish',
+                    'post_author'=>1,
+                    'post_category'=>array($cid),
+                    'post_date'=>date('Y-m-d h:m:s'),
+                    );
+        }
         $pid=wp_insert_post($np, true);
         wswdteam_message($l);
       }
@@ -304,24 +317,40 @@ function wswdteam_pageload(){
 		            'post_type'=>'page'
 		            );
         $posts=get_posts($args);
+        $pid='';
         foreach($posts as $p){
 		  setup_postdata($p);
 		  if ($p->post_title===$l){
-		    wp_delete_post($p->ID);
+		    //wp_delete_post($p->ID);
+		    $pid=$p->ID;
 		  }
 		}
 	    wp_reset_postdata();
         $ct=file_get_contents($d);
-        $np=array('post_title'=>$l,
-                  'ping_status'=>'close',
-                  'comment_status'=>'close',
-                  'post_content'=>$ct,
-                  'post_status'=>'publish',
-                  'post_type'=>'page',
-                  'post_author'=>1,
-                  'post_date'=>date('Y-m-d h:m:s'),                  
-                  'post_name'=>strtolower(str_replace(' ','-',trim($l)))
-                  );
+        if ($pid<>''){
+          $np=array('ID'=>$pid,
+                    'post_title'=>$l,
+                    'ping_status'=>'close',
+                    'comment_status'=>'close',
+                    'post_content'=>$ct,
+                    'post_status'=>'publish',
+                    'post_type'=>'page',
+                    'post_author'=>1,
+                    'post_date'=>date('Y-m-d h:m:s'),                  
+                    'post_name'=>strtolower(str_replace(' ','-',trim($l)))
+                    );
+        }else{
+          $np=array('post_title'=>$l,
+                    'ping_status'=>'close',
+                    'comment_status'=>'close',
+                    'post_content'=>$ct,
+                    'post_status'=>'publish',
+                    'post_type'=>'page',
+                    'post_author'=>1,
+                    'post_date'=>date('Y-m-d h:m:s'),                  
+                    'post_name'=>strtolower(str_replace(' ','-',trim($l)))
+                    );
+        }
         $pid=wp_insert_post($np, true);
         echo("$l<br />");
       }
