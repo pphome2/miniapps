@@ -7,6 +7,9 @@ if (!defined('ABSPATH')){
   exit;
 }
 
+// rendszer ellenőrzése
+wswdteam_sys_check();
+
 
 // admin menü hozzáadása
 function register_menu_page(){
@@ -62,7 +65,7 @@ add_action('admin_menu','register_submenu_page2');
 function wswdteam_remove_options_page(){
   remove_menu_page('wswdteam');
 }
-// add_action( 'admin_menu', 'wswdteam_remove_options_page', 99 );
+add_action('admin_menu','wswdteam_remove_options_page',90);
 
 
 // verzió ellenőrzés és telepítés ha kell
@@ -71,22 +74,22 @@ function wswdteam_sys_check(){
   wswdteam_sys_init();
 }
 
-   
+
 // rendszer ellenőrzés
 function wswdteam_sys_init(){
   global $wswdteam_plugin_version,$wswdteam_options;
 
-  $ver=get_option($wswdteam_options[1],'0');
-  // nincs adatbázis
+  $ver=get_option($wswdteam_options[0],'0');
+  // nincs plugin
   if ($ver==="0"){
     // új
     wswdteam_sys_new($ver,$wswdteam_plugin_version);
-    wswdteam_save_param();
+      wswdteam_save_param($wswdteam_options[0],$wswdteam_plugin_version);
   }else{
     // frissítés kell
     if ($ver<>$wswdteam_plugin_version){
       wswdteam_sys_upgrade($ver,$wswdteam_plugin_version);
-      wswdteam_save_param();
+      wswdteam_save_param($wswdteam_options[0],$wswdteam_plugin_version);
     }
   }
 }
@@ -107,31 +110,6 @@ function wswdteam_sys_upgrade($installed='',$new=''){
   update_option($wswdteam_options[0],$new);
 }
 
-
-// verziók mint paraméter
-function wswdteam_save_param(){
-  global $wswdteam_plugin_version,$wswdteam_options,$wswdteam_table,$wpdb,
-         $wswdteam_db_version;
-
-  $table_name=$wpdb->prefix.$wswdteam_table[0];
-  $sql="SELECT * FROM $table_name WHERE name='$wswdteam_options[0]';";
-  $r=$wpdb->query($sql);
-  if ($r){
-    $sql="UPDATE $table_name SET text='$wswdteam_plugin_version' WHERE name=\'$wswdteam_options[0]\';";
-  }else{
-    $sql="INSERT INTO $table_name (name,text) VALUES ('$wswdteam_options[0]','$wswdteam_plugin_version');";
-  }
-  $r=$wpdb->query($sql);
-  $sql="SELECT * FROM $table_name WHERE name='$wswdteam_options[1]';";
-  $r=$wpdb->query($sql);
-  if ($r){
-    $sql="UPDATE $table_name SET text='$wswdteam_db_version'' WHERE name=\'$wswdteam_options[1]\';";
-    $sql="DELETE FROM $table_name WHERE name='$wswdteam_options[1]';";
-  }else{
-    $sql="INSERT INTO $table_name (name,text) VALUES ('$wswdteam_options[0]','$wswdteam_db_version');";
-  }
-  $r=$wpdb->query($sql);
-}
 
 
 ?>

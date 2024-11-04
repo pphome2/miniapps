@@ -1,0 +1,37 @@
+<style>
+
+table {
+  width:99%; !important
+}
+
+label{
+  ccolor:red;
+}
+
+form {
+  display:inline;
+  padding-right:5px;
+}
+
+#button {
+  padding-right:5px;
+}
+
+tbody>:nth-child(n):hover {
+  background-color: lightgray;
+}
+
+.pagerlineadmin{
+  width:99%;
+}
+
+.pagerlineadmin2{
+  float:right;
+}
+
+.pagerdots{
+  padding-right:10px;
+}
+
+</style>
+

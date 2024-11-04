@@ -8,26 +8,9 @@ if (!defined('ABSPATH')){
 }
 
 
-
-// verziók mint paraméter
-function wswdteam_save_param($name="",$data=""){
-  global $wswdteam_table,$wpdb,$wswdteam_db_version;
-
-  $table_name=$wpdb->prefix.$wswdteam_table[0];
-  $sql="SELECT * FROM $table_name WHERE name='$name';";
-  $r=$wpdb->query($sql);
-  if ($r){
-    $sql="UPDATE $table_name SET text='$data' WHERE name='$name';";
-  }else{
-    $sql="INSERT INTO $table_name (name,text) VALUES ('$name','$data');";
-  }
-  $r=$wpdb->query($sql);
-}
-
-
 // bejegyzések listája
-function wswdteam_postlist($cat=""){
-  global $wswdteam_pagerow;
+function wdhd_postlist($cat=""){
+  global $wdhd_pagerow;
 
   $content="";
   if ($cat<>""){
@@ -47,18 +30,18 @@ function wswdteam_postlist($cat=""){
           if ($page<1){
             $page=1;
           }
-          if ($db<($page*$wswdteam_pagerow)){
-            if ($db<(($page-1)*$wswdteam_pagerow)){
+          if ($db<($page*$wdhd_pagerow)){
+            if ($db<(($page-1)*$wdhd_pagerow)){
               $page=1;
             }
           }
         }else{
           $page=1;
         }
-        $l=($page-1)*$wswdteam_pagerow;
+        $l=($page-1)*$wdhd_pagerow;
         $i=0;
         foreach($posts as $p){
-          if (($i>=$l)and($i<($l+$wswdteam_pagerow))){
+          if (($i>=$l)and($i<($l+$wdhd_pagerow))){
 		    setup_postdata($p);
   	        $content=$content."<a href=\"".get_permalink($p)."\" class=\"wbutton2\">".$p->post_title."</a>";
   		    $content=$content."<br /><br />";
@@ -66,7 +49,7 @@ function wswdteam_postlist($cat=""){
           $i++;
         }
 	    wp_reset_postdata();
-	    $content=$content.wswdteam_pager($db,$wswdteam_pagerow,$page,"wpage");
+	    $content=$content.wdhd_pager($db,$wdhd_pagerow,$page,"wpage");
       }
     }
   }
@@ -75,8 +58,8 @@ function wswdteam_postlist($cat=""){
 
 
 // bejegyzések listája és megjelenítése
-function wswdteam_postlist_view($cat=""){
-  global $wswdteam_pagerow;
+function wdhd_postlist_view($cat=""){
+  global $wdhd_pagerow;
 
   $content="";
   if ($cat<>""){
@@ -84,13 +67,13 @@ function wswdteam_postlist_view($cat=""){
       $pid=$_POST['postid'];
       $p=get_post($pid);
   	  $content=$content."<br />";
-  	  $content=$content."<a href=\"\" class=\"wbutton\">".wswdteam_lang("Vissza")."</a>";
+  	  $content=$content."<a href=\"\" class=\"wbutton\">".wdhd_lang("Vissza")."</a>";
   	  $content=$content."<br /><br />";
   	  $content=$content."<h2>".$p->post_title."</h2>";
   	  $content=$content."<br /><br />";
       $content=$content.$p->post_content;
   	  $content=$content."<br /><br /><br />";
-  	  $content=$content."<a href=\"\" class=\"wbutton\">".wswdteam_lang("Vissza")."</a>";
+  	  $content=$content."<a href=\"\" class=\"wbutton\">".wdhd_lang("Vissza")."</a>";
   	  $content=$content."<br /><br />";
     }else{
       $catid=get_cat_ID($cat);
@@ -107,18 +90,18 @@ function wswdteam_postlist_view($cat=""){
           if ($page<1){
             $page=1;
           }
-          if ($db<($page*$wswdteam_pagerow)){
-            if ($db<(($page-1)*$wswdteam_pagerow)){
+          if ($db<($page*$wdhd_pagerow)){
+            if ($db<(($page-1)*$wdhd_pagerow)){
               $page=1;
             }
           }
         }else{
           $page=1;
         }
-        $l=($page-1)*$wswdteam_pagerow;
+        $l=($page-1)*$wdhd_pagerow;
         $i=0;
         foreach($posts as $p){
-          if (($i>=$l)and($i<($l+$wswdteam_pagerow))){
+          if (($i>=$l)and($i<($l+$wdhd_pagerow))){
 		    setup_postdata($p);
 	        $content=$content."<form action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
             $content=$content."<input type=\"hidden\" id=\"postid\" name=\"postid\" value=\"$p->ID\">";
@@ -130,7 +113,7 @@ function wswdteam_postlist_view($cat=""){
           $i++;
         }
 	    wp_reset_postdata();
-	    $content=$content.wswdteam_pager($db,$wswdteam_pagerow,$page,"wpage");
+	    $content=$content.wdhd_pager($db,$wdhd_pagerow,$page,"wpage");
       }
     }
   }

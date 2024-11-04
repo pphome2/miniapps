@@ -8,12 +8,13 @@ if (!defined('ABSPATH')){
   exit;
 }
 
+
 // admin script betöltés 
-if (file_exists(__DIR__.'/wswdteam_admin.css')){
-  include(__DIR__.'/wswdteam_admin.css');
+if (file_exists(__DIR__.'/wdhd_admin.css')){
+  include(__DIR__.'/wdhd_admin.css');
 }
-if (file_exists(__DIR__.'/wswdteam_admin.js')){
-  include(__DIR__.'/wswdteam_admin.js');
+if (file_exists(__DIR__.'/wdhd_admin.js')){
+  include(__DIR__.'/wdhd_admin.js');
 }
 // vagy html:
 // <script>alert("X");</script>
@@ -21,15 +22,15 @@ if (file_exists(__DIR__.'/wswdteam_admin.js')){
 
 // adatfeldolgozás
 
-wswdteam_upagehead();
+wdhd_upagehead();
 
 
 //fejléc
-function wswdteam_upagehead(){
+function wdhd_upagehead(){
   echo("<br />");
-  echo("<h1>".wswdteam_lang('WSWDTeam rendszer')."</h1>");
+  echo("<h1>".wdhd_lang('wdhd rendszer')."</h1>");
   echo("<br />");
-  echo(wswdteam_lang('Beállítások'));
+  echo(wdhd_lang('Beállítások'));
   echo("<br />");
   echo("<br />");
   echo("<br />");
@@ -37,6 +38,6 @@ function wswdteam_upagehead(){
 
 
 // új nyelvi elemek kiírása
-wswdteam_lang_newlines();
+wdhd_lang_newlines();
 
 ?>

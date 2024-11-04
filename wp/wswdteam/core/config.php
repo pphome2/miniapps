@@ -6,21 +6,17 @@
 if (!defined('ABSPATH')){
   exit;
 }
+global $wpdb;
 
 // verziók
 global $wswdteam_db_version,$wswdteam_plugin_version;
-$wswdteam_db_version='1.0';
 $wswdteam_plugin_version='1.0';
+$wswdteam_db_version='1.0';
 
 // fejlesztői mód
 global $wswdteam_developer_mode;
 $wswdteam_developer_mode=true;
 
-// sql táblák
-global $wswdteam_table;
-$wswdteam_table=array('wswdteam',
-                      'wusers'
-                      );
 
 // wp opciók
 global $wswdteam_options;
@@ -93,6 +89,36 @@ $wswdteam_pagerow=20;
 // üzenetek automatikus bezárása
 global $wswdteam_message_autohide;
 $wswdteam_message_autohide=true;
+
+// sql táblák
+global $wswdteam_table;
+$wswdteam_table=array('wswdteamparam',
+                  'wswdteamuser'
+                 );
+
+// sql táblák létrehozása
+global $wswdteam_sql_install;
+$charset_collate=$wpdb->get_charset_collate();
+$sql0="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wswdteam_table[0]." (
+                          id mediumint(9) NOT NULL AUTO_INCREMENT,
+                          name tinytext NOT NULL,
+                          text text NOT NULL,
+                          PRIMARY KEY  (id)
+                          ) ".$charset_collate.";";
+$sql1="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wswdteam_table[1]." (
+                          id mediumint(9) NOT NULL AUTO_INCREMENT,
+                          uname tinytext NOT NULL,
+                          urole int NOT NULL,
+                          PRIMARY KEY  (id)
+                          ) ".$charset_collate.";";
+$wswdteam_sql_install=array($sql0,
+                        $sql1
+                       );
+
+// sql táblák frissítése
+global $wswdteam_sql_update;
+$wswdteam_sql_update=array("");
+
 
 
 

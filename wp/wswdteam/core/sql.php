@@ -16,10 +16,12 @@ function wswdteam_db_init(){
   //nincs adatbázis
   if ($ver==="0"){
     wswdteam_db_new();
+    wswdteam_save_param($wswdteam_options[1],$wswdteam_db_version);
   }else{
     // frissítés kell
     if ($ver<>$wswdteam_db_version){
       wswdteam_db_upgrade($ver,$wswdteam_db_version);
+      wswdteam_save_param($wswdteam_options[1],$wswdteam_db_version);
     }
   }
 }
@@ -27,27 +29,12 @@ function wswdteam_db_init(){
 
 // adatbázisban táblák létrehozása
 function wswdteam_db_new(){
-  global $wpdb,$wswdteam_db_version,$wswdteam_table,$wswdteam_options;
+  global $wswdteam_sql_install,$wpdb,$wswdteam_db_version,$wswdteam_options;
 
   $charset_collate=$wpdb->get_charset_collate();
-  $table_name=$wpdb->prefix.$wswdteam_table[0];
-  $sql="CREATE TABLE IF NOT EXISTS $table_name (
-    id mediumint(9) NOT NULL AUTO_INCREMENT,
-    name tinytext NOT NULL,
-    text text NOT NULL,
-    url varchar(55) DEFAULT '' NOT NULL,
-    PRIMARY KEY  (id)
-  ) $charset_collate;";
-  $r=$wpdb->query($sql);
-
-  $table_name=$wpdb->prefix.$wswdteam_table[1];
-  $sql="CREATE TABLE IF NOT EXISTS $table_name (
-    id mediumint(9) NOT NULL AUTO_INCREMENT,
-    uname tinytext NOT NULL,
-    urole int NOT NULL,
-    PRIMARY KEY  (id)
-  ) $charset_collate;";
-  $r=$wpdb->query($sql);
+  foreach ($wswdteam_sql_install as $sql){
+    $r=$wpdb->query($sql);
+  }
 
   add_option($wswdteam_options[1],$wswdteam_db_version);
 }
@@ -55,11 +42,11 @@ function wswdteam_db_new(){
 
 // adatbázis táblák frissítése
 function wswdteam_db_upgrade($installed='',$new=''){
-  global $wpdb,$wswdteam_db_version,$wswdteam_table,$wswdteam_options;
+  global $wpdb,$wswdteam_db_version,$wswdteam_sql_update,$wswdteam_options;
 
-  $charset_collate=$wpdb->get_charset_collate();
-  $table_name=$wpdb->prefix.$wswdteam_table[0];
-  $sql="";
+  foreach ($wswdteam_sql_update as $sql){
+    $r=$wpdb->query($sql);
+  }
   //$r=$wpdb->query($sql);
 
   update_option($wswdteam_options[1],$wswdteam_db_version);
