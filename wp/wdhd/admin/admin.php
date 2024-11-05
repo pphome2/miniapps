@@ -7,6 +7,8 @@ if (!defined('ABSPATH')){
   exit;
 }
 
+// rendszer ellenőrzése
+wdhd_sys_check();
 
 // admin menü hozzáadása
 function wdhd_register_menu_page(){
@@ -62,7 +64,7 @@ add_action('admin_menu','wdhd_register_submenu_page2');
 function wdhd_remove_options_page(){
   remove_menu_page('wdhd');
 }
-// add_action( 'admin_menu', 'wdhd_remove_options_page', 99 );
+add_action('admin_menu','wdhd_remove_options_page',90);
 
 
 // verzió ellenőrzés és telepítés ha kell
@@ -76,17 +78,17 @@ function wdhd_sys_check(){
 function wdhd_sys_init(){
   global $wdhd_plugin_version,$wdhd_options;
 
-  $ver=get_option($wdhd_options[1],'0');
-  // nincs adatbázis
+  $ver=get_option($wdhd_options[0],'0');
+  // nincs plugin
   if ($ver==="0"){
     // új
     wdhd_sys_new($ver,$wdhd_plugin_version);
-    wdhd_save_param();
+    wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
   }else{
     // frissítés kell
     if ($ver<>$wdhd_plugin_version){
       wdhd_sys_upgrade($ver,$wdhd_plugin_version);
-      wdhd_save_param();
+      wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
     }
   }
 }
@@ -107,31 +109,6 @@ function wdhd_sys_upgrade($installed='',$new=''){
   update_option($wdhd_options[0],$new);
 }
 
-
-// verziók mint paraméter
-function wdhd_save_param(){
-  global $wdhd_plugin_version,$wdhd_options,$wdhd_table,$wpdb,
-         $wdhd_db_version;
-
-  $table_name=$wpdb->prefix.$wdhd_table[0];
-  $sql="SELECT * FROM $table_name WHERE name='$wdhd_options[0]';";
-  $r=$wpdb->query($sql);
-  if ($r){
-    $sql="UPDATE $table_name SET text='$wdhd_plugin_version' WHERE name=\'$wdhd_options[0]\';";
-  }else{
-    $sql="INSERT INTO $table_name (name,text) VALUES ('$wdhd_options[0]','$wdhd_plugin_version');";
-  }
-  $r=$wpdb->query($sql);
-  $sql="SELECT * FROM $table_name WHERE name='$wdhd_options[1]';";
-  $r=$wpdb->query($sql);
-  if ($r){
-    $sql="UPDATE $table_name SET text='$wdhd_db_version'' WHERE name=\'$wdhd_options[1]\';";
-    $sql="DELETE FROM $table_name WHERE name='$wdhd_options[1]';";
-  }else{
-    $sql="INSERT INTO $table_name (name,text) VALUES ('$wdhd_options[0]','$wdhd_db_version');";
-  }
-  $r=$wpdb->query($sql);
-}
 
 
 ?>

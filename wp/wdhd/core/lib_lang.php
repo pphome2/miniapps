@@ -1,0 +1,44 @@
+<?php
+
+// segéd függvényel
+
+// kilépés ha nem wp-ből lett indítva
+if (!defined('ABSPATH')){
+  exit;
+}
+
+
+// fordítás
+function wdhd_lang($text='',$dot=true){
+  global $wdhd_lang_str,$wdhd_lang_new;
+
+  if (isset($wdhd_lang_str)and(isset($wdhd_lang_str[$text]))){
+    $line=$wdhd_lang_str[$text];
+  }else{
+    if ($dot){
+      $line=$text;
+    }else{
+      $line='.'.$text.'.';
+    }
+    $wdhd_lang_new[$text]=strip_tags($text);
+  }
+  $line=strip_tags($line);
+  return($line);
+}
+
+// új fordítandók kiírása
+function wdhd_lang_newlines(){
+  global $wdhd_lang_new,$wdhd_developer_mode;
+
+  if ($wdhd_developer_mode){
+    if (count($wdhd_lang_new)>0){
+      echo("<br /><br />");
+      foreach($wdhd_lang_new as $l){
+        echo("'".$l."' => '".$l."',<br />");
+      }
+      echo("<br /><br />");
+    }
+  }
+}
+
+?>

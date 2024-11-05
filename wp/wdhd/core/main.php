@@ -32,7 +32,7 @@ function wdhd_main_center($atts=[],$content=null,$tag=''){
     foreach($atts as $k){
       switch($k){
         case '+':
-          $content=$content.wdhd_1($k,$ur);
+          $content=$content.wdhd_new($k,$ur);
           break;
         case 'open':
           $content=$content.wdhd_2($k,$ur);

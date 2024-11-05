@@ -155,7 +155,7 @@ function wdhd_setup(){
 
 // plugin bekapcsolás
 function wdhd_activate(){
-  global $wdhd_category;
+  global $wdhd_category,$wdhd_options;
 
   foreach($wdhd_category as $cat){
     if (!category_exists($cat)){
@@ -164,12 +164,16 @@ function wdhd_activate(){
   }
   wdhd_setup();
 }
-register_activation_hook(__FILE__,'wdhd_activate' );
+register_activation_hook(__FILE__,'wdhd_activate');
 
 // plugin kikapcsolás
 function wdhd_deactivate(){
+global $wdhd_options;
+
+  delete_option($wdhd_options[0]);
+  delete_option($wdhd_options[1]);
 }
-register_deactivation_hook(__FILE__,'wdhd_deactivate' );
+register_deactivation_hook(__FILE__,'wdhd_deactivate');
 
 
 // shortcode kezelés [wdhd] text [/wdhd]

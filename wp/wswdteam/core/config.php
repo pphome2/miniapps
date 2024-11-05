@@ -58,8 +58,11 @@ $wswdteam_admin_file='/admin/admin.php';
 global $wswdteam_main_files;
 $wswdteam_main_files=array('/core/main.php',
                            '/core/sql.php',
-                           '/core/lib1.php',
-                           '/core/lib2.php',
+                           '/core/lib_lang.php',
+                           '/core/lib_msg.php',
+                           '/core/lib_page.php',
+                           '/core/lib_view.php',
+                           '/core/lib_param.php',
                            '/core/app1.php',
                            '/core/app2.php',
                            '/core/app3.php',

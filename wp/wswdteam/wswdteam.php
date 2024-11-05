@@ -149,12 +149,8 @@ add_filter('logout_redirect','wswdteam_logout_redirect');
 
 // plugin bekapcsolási feladatok
 function wswdteam_setup(){
-  global $wswdteam_plugin_version,$wswdteam_db_version,$wswdteam_options;
-
   wswdteam_db_init();
   wswdteam_sys_init();
-  wswdteam_save_param($wswdteam_options[0],$wswdteam_plugin_version);
-  wswdteam_save_param($wswdteam_options[1],$wswdteam_db_version);
 }
 
 // plugin bekapcsolás

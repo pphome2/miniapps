@@ -9,22 +9,6 @@ if (!defined('ABSPATH')){
 
 
 
-// verziók mint paraméter
-function wswdteam_save_param($name="",$data=""){
-  global $wswdteam_table,$wpdb,$wswdteam_db_version;
-
-  $table_name=$wpdb->prefix.$wswdteam_table[0];
-  $sql="SELECT * FROM $table_name WHERE name='$name';";
-  $r=$wpdb->query($sql);
-  if ($r){
-    $sql="UPDATE $table_name SET text='$data' WHERE name='$name';";
-  }else{
-    $sql="INSERT INTO $table_name (name,text) VALUES ('$name','$data');";
-  }
-  $r=$wpdb->query($sql);
-}
-
-
 // bejegyzések listája
 function wswdteam_postlist($cat=""){
   global $wswdteam_pagerow;

@@ -80,5 +80,21 @@ li a{
 }
 
 
+.okmessage {
+  padding:20px;
+  background-color:#04AA6D;
+  color:white;
+  margin-bottom:15px;
+  border-radius:10px;
+}
+
+.errormessage {
+  padding:20px;
+  background-color:#f44336;
+  color:white;
+  margin-bottom:15px;
+  border-radius:10px;
+}
+
 /* */
 

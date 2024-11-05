@@ -23,6 +23,61 @@ li a{
   display: none;
 }
 
+.spaceholder{
+  display:block;
+  max-height:50px;
+  height:50px;
+}
+
+.wtable{
+  width:100%;
+}
+
+tr{
+  margin:20px;
+}
+
+.readonly{
+  pointer-events:none;
+}
+
+.inputlabel{
+  width:30%;
+}
+
+.inputtext{
+  width:100%;
+  padding:10px;
+  margin-right:20px;
+  border-radius:10px;
+  margin-top:10px;
+  font-size:1.1em
+}
+
+.inputtexta{
+  width:100%;
+  padding:10px;
+  margin-right:20px;
+  border-radius:10px;
+  margin-top:10px;
+  font-family:inherit;
+  font-size:inherit;
+  font-size:1.1em
+}
+
+.submitbutton{
+  width:50%;
+  float:right;
+  background-color:#04AA6D;
+  border:none;
+  color:white;
+  padding:15px;
+  text-align:center;
+  text-decoration:none;
+  border-radius:10px;
+  font-size:1.2em;
+}
+
 .wbutton{
   background-color:#04AA6D;
   border:none;
@@ -31,7 +86,7 @@ li a{
   text-align:center;
   text-decoration:none;
   display:inline-block;
-  font-size:16px;
+  font-size:1.2em;
   border-radius:10px;
 }
 
@@ -43,7 +98,7 @@ li a{
   padding:15px 32px;
   text-decoration:none;
   display:inline-block;
-  font-size:16px;
+  font-size:1.2em;
   border-radius:10px;
 }
 
@@ -77,6 +132,22 @@ li a{
 
 .pagerdots{
   padding-right:10px;
+}
+
+.okmessage {
+  padding:20px;
+  background-color:#04AA6D;
+  color:white;
+  margin-bottom:15px;
+  border-radius:10px;
+}
+
+.errormessage {
+  padding:20px;
+  background-color:#f44336;
+  color:white;
+  margin-bottom:15px;
+  border-radius:10px;
 }
 
 
