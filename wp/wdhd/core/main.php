@@ -34,7 +34,7 @@ function wdhd_main_center($atts=[],$content=null,$tag=''){
         case '+':
           $content=$content.wdhd_new($k,$ur);
           break;
-        case 'open':
+        case 'ticket':
           $content=$content.wdhd_2($k,$ur);
           break;
         case 'list':

@@ -19,7 +19,7 @@ function wdhd_action_message($text="",$autohide=false){
     <div id=mid class=\"okmessage\" onclick=\"this.style.display='none';\">
       ".$text."
     </div>";
-  if ($autohide){
+  if (!$autohide){
     $r=$r."
       <script>
         setTimeout(function(){

@@ -18,6 +18,8 @@ if (file_exists(__DIR__.'/wswdteam_admin.js')){
 }
 
 
+echo("<br /><br />");
+
 // adatfeldolgozás
 $table_name=$wpdb->prefix.$wswdteam_table[1];
 
@@ -26,8 +28,13 @@ if (isset($_POST['del'])){
   $w_id=$_POST['id'];
   $sql="DELETE FROM $table_name WHERE id=$w_id;";
   $r=$wpdb->query($sql);
-  $l=wswdteam_lang('Törölve');
-  wswdteam_message($l);
+  if ($r){
+    $l=wdhd_lang('Törölve');
+    wdhd_message($l);
+  }else{
+    $l=wdhd_lang('Hiba történt');
+    wdhd_error($l);
+  }
 }
 
 // form-ból adat
@@ -40,8 +47,13 @@ if (isset($_POST['submit'])){
     $w_id=$_POST['id'];
     $sql="UPDATE $table_name SET uname='$w_uname',urole='$w_urole' WHERE id=$w_id;";
     $r=$wpdb->query($sql);
-    $l=wswdteam_lang('Módosítva');
-    wswdteam_message($l);
+    if ($r){
+      $l=wdhd_lang('Módosítva');
+      wdhd_message($l);
+    }else{
+      $l=wdhd_lang('Hiba történt');
+      wdhd_error($l);
+    }
   }else{
     // új adat
     $w_id="";
@@ -53,8 +65,13 @@ if (isset($_POST['submit'])){
     }else{
       $sql="INSERT INTO $table_name (uname,urole) VALUES ('$w_uname',$w_urole);";
       $r=$wpdb->query($sql);
-      $l=wswdteam_lang('Tárolva');
-      wswdteam_message($l);
+      if ($r){
+        $l=wdhd_lang('Tárolva');
+        wdhd_message($l);
+      }else{
+        $l=wdhd_lang('Hiba történt');
+        wdhd_error($l);
+      }
     }
   }
   wswdteam_utable();
@@ -194,9 +211,9 @@ function wswdteam_utable(){
   </tbody>
     <tfoot>
 	  <tr>
-	    <th scope="col" id="title" class="manage-column"><?php echo(wswdteam_lang('Paraméter név')); ?></th>
-	    <th scope="col" id="author" class="manage-column"><?php echo(wswdteam_lang('Érték')); ?></th>
-	    <th scope="col" id="tags" class="manage-column"><?php echo(wswdteam_lang('Művelet')); ?></th>
+	    <th scope="col" id="title" class="manage-column"><?php echo(wswdteam_lang('Felhasználó')); ?></th>
+	    <th scope="col" id="author" class="manage-column"><?php echo(wswdteam_lang('Jogcsoport')); ?></th>
+	    <th scope="col" id="tags" class="manage-column"><?php echo(wswdteam_lang('Töröl')); ?></th>
 	  </tr>
     </tfoot>
   </table>

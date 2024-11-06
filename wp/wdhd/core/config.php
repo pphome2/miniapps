@@ -62,9 +62,9 @@ $wdhd_main_files=array('/core/main.php',
                            '/core/lib_page.php',
                            '/core/lib_param.php',
                            '/core/app_new.php',
-                           '/core/app1.php',
+                           '/core/app_ticket.php',
                            '/core/app2.php',
-                           '/core/app3.php'
+                           '/core/app1.php'
                            );
 
 // post könyvtár

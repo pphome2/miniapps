@@ -18,6 +18,8 @@ if (file_exists(__DIR__.'/wdhd_admin.js')){
 }
 
 
+echo("<br /><br />");
+
 // adatfeldolgozás
 $table_name=$wpdb->prefix.$wdhd_table[0];
 
@@ -26,8 +28,13 @@ if (isset($_POST['del'])){
   $w_id=$_POST['id'];
   $sql="DELETE FROM $table_name WHERE id=$w_id;";
   $r=$wpdb->query($sql);
-  $l=wdhd_lang('Törölve');
-  wdhd_message($l);
+  if ($r){
+    $l=wdhd_lang('Törölve');
+    wdhd_message($l);
+  }else{
+    $l=wdhd_lang('Hiba történt');
+    wdhd_error($l);
+  }
 }
 
 // form-ból adat
@@ -40,15 +47,25 @@ if (isset($_POST['submit'])){
     $w_id=$_POST['id'];
     $sql="UPDATE $table_name SET name='$w_name',text='$w_text' WHERE id=$w_id;";
     $r=$wpdb->query($sql);
-    $l=wdhd_lang('Módosítva');
-    wdhd_message($l);
+    if ($r){
+      $l=wdhd_lang('Módosítva');
+      wdhd_message($l);
+    }else{
+      $l=wdhd_lang('Hiba történt');
+      wdhd_error($l);
+    }
   }else{
     // új adat
     $w_id="";
     $sql="INSERT INTO $table_name (name,text) VALUES ('$w_name','$w_text');";
     $r=$wpdb->query($sql);
-    $l=wdhd_lang('Tárolva');
-    wdhd_message($l);
+    if ($r){
+      $l=wdhd_lang('Tárolva');
+      wdhd_message($l);
+    }else{
+      $l=wdhd_lang('Hiba történt');
+      wdhd_error($l);
+    }
   }
   wdhd_ptable();
   wdhd_pload();

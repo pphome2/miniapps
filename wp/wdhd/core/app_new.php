@@ -27,10 +27,10 @@ function wdhd_new($l="",$urole=999){
     $x=$wpdb->query($sql);
     if ($x){
       $l=wdhd_lang("Mentés sikerült");
-      $c=wdhd_action_message($l.".");
+      $c=$c.wdhd_action_message($l.".");
     }else{
       $l=wdhd_lang("Mentés nem sikerült");
-      $c=wdhd_action_errormessage($l.".");
+      $c=$c.wdhd_action_errormessage($l.".");
     }
   }else{
     $c="";
@@ -39,30 +39,29 @@ function wdhd_new($l="",$urole=999){
   $c=$c."
       <form action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">
       <table class=wtable>
-        <tr>
+        <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Idő")."</td>
-          <td><input id=fd name=fd class=\"inputtext readonly\"  type=text value=\"".$d."\"></td>
+          <td class=wtd><input id=fd name=fd class=\"inputtext readonly\"  type=text value=\"".$d."\"></td>
         </tr>
-        <tr>
+        <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Név")."</td>
-          <td><input id=fn name=fn class=\"inputtext readonly\"  type=text value=\"".$cuser->user_nicename."\"></td>
+          <td class=wtd><input id=fn name=fn class=\"inputtext readonly\"  type=text value=\"".$cuser->user_nicename."\"></td>
         </tr>
-        <tr>
+        <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("E-mail")."</td>
-          <td><input id=fe name=fe class=\"inputtext readonly\" type=text value=\"".$cuser->user_email."\"></td>
+          <td class=wtd><input id=fe name=fe class=\"inputtext readonly\" type=text value=\"".$cuser->user_email."\"></td>
         </tr>
-        <tr>
+        <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Telefonszám")."</td>
-          <td><input id=ft name=ft class=inputtext type=text value=\"\" placeholder=\"".wdhd_lang("Telefonszám")."\"></td>
+          <td class=wtd><input id=ft name=ft class=inputtext type=text value=\"\" placeholder=\"".wdhd_lang("Telefonszám")."\"></td>
         </tr>
-        <tr>
+        <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Részletes leírás")."</td>
-          <td><textarea id=f0 name=f0 class=inputtexta rows=10 placeholder=\"".wdhd_lang("Részletes leírás")."\"></textarea></td>
+          <td class=wtd><textarea id=f0 name=f0 class=inputtexta rows=10 placeholder=\"".wdhd_lang("Részletes leírás")."\"></textarea></td>
         </tr>
       </table>
       <span class=spaceholder></span>
-  	  <input id=fgo name=fgo type=submit class=\"submitbutton\" value=".wdhd_lang("Mehet").">
-      <span class=spaceholder></span>
+      <input id=fgo name=fgo type=submit class=\"submitbutton\" value=".wdhd_lang("Mehet").">
       </form>
   ";
   return($c);

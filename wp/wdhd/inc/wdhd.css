@@ -1,10 +1,7 @@
 /* css */
 
-.wswdteamdiv{
-}
-
-.wswdteam_content{
-  max-width:60%;
+.wp-block-post-date, .wp-block-post-author, .wp-block-post-terms{
+  display: none;
 }
 
 a{
@@ -19,10 +16,6 @@ li a{
   cursor:pointer;
 }
 
-.wp-block-post-date, .wp-block-post-author, .wp-block-post-terms{
-  display: none;
-}
-
 .spaceholder{
   display:block;
   max-height:50px;
@@ -33,9 +26,12 @@ li a{
   width:100%;
 }
 
-tr{
-  margin:20px;
+.wtr{
 }
+
+.wtd{
+}
+
 
 .readonly{
   pointer-events:none;
@@ -45,19 +41,25 @@ tr{
   width:30%;
 }
 
+.wdhd-content .fullsize{
+  width:100%;
+}
+
 .inputtext{
   width:100%;
-  padding:10px;
-  margin-right:20px;
+  max-width:100%;
+  padding: 10px;
   border-radius:10px;
   margin-top:10px;
+  font-family:inherit;
+  font-size:inherit;
   font-size:1.1em
 }
 
 .inputtexta{
   width:100%;
+  max-width:100%;
   padding:10px;
-  margin-right:20px;
   border-radius:10px;
   margin-top:10px;
   font-family:inherit;
@@ -66,12 +68,13 @@ tr{
 }
 
 .submitbutton{
-  width:50%;
-  float:right;
+  width:100%;
+  max-width:100%;
+  float:left;
   background-color:#04AA6D;
   border:none;
   color:white;
-  padding:15px;
+  padding:20px;
   text-align:center;
   text-decoration:none;
   border-radius:10px;
@@ -135,18 +138,22 @@ tr{
 }
 
 .okmessage {
+  max-width:100%;
   padding:20px;
   background-color:#04AA6D;
   color:white;
-  margin-bottom:15px;
+  margin-bottom:20px;
+  margin-top:20px;
   border-radius:10px;
 }
 
 .errormessage {
+  max-width:100%;
   padding:20px;
   background-color:#f44336;
   color:white;
-  margin-bottom:15px;
+  margin-bottom:20px;
+  margin-top:20px;
   border-radius:10px;
 }
 

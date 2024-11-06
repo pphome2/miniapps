@@ -18,6 +18,8 @@ if (file_exists(__DIR__.'/wswdteam_admin.js')){
 }
 
 
+echo("<br /><br />");
+
 // adatfeldolgozás
 $table_name=$wpdb->prefix.$wswdteam_table[0];
 
@@ -26,8 +28,13 @@ if (isset($_POST['del'])){
   $w_id=$_POST['id'];
   $sql="DELETE FROM $table_name WHERE id=$w_id;";
   $r=$wpdb->query($sql);
-  $l=wswdteam_lang('Törölve');
-  wswdteam_message($l);
+  if ($r){
+    $l=wdhd_lang('Törölve');
+    wdhd_message($l);
+  }else{
+    $l=wdhd_lang('Hiba történt');
+    wdhd_error($l);
+  }
 }
 
 // form-ból adat
@@ -47,8 +54,13 @@ if (isset($_POST['submit'])){
     $w_id="";
     $sql="INSERT INTO $table_name (name,text) VALUES ('$w_name','$w_text');";
     $r=$wpdb->query($sql);
-    $l=wswdteam_lang('Tárolva');
-    wswdteam_message($l);
+    if ($r){
+      $l=wdhd_lang('Tárolva');
+      wdhd_message($l);
+    }else{
+      $l=wdhd_lang('Hiba történt');
+      wdhd_error($l);
+    }
   }
   wswdteam_ptable();
   wswdteam_pload();
