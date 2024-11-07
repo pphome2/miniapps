@@ -10,23 +10,17 @@ if (!defined('ABSPATH')){
 
 // shortcode vezérlés
 function wswdteam_main_center($atts=[],$content=null,$tag=''){
-  global $wswdteam_category,$wswdteam_table,$wpdb;
+  global $wswdteam_category;
 
   if (!is_user_logged_in()) {
     wp_redirect(wp_login_url());
   }else{
-    // jogok beállítása
-    $cuser=wp_get_current_user();
-    $username=$cuser->user_login;
-    $table_name=$wpdb->prefix.$wswdteam_table[1];
-    $sql="SELECT * FROM $table_name WHERE uname='$username';";
-    $res=$wpdb->get_results($sql);
-    if (count($res)<>0){
-      $t=$res[0];
-      $ur=$t->urole;
-    }else{
-     $ur=9999;
-    }
+    // jogosultság ellenőrzése
+    $ur=wdhd_user_right();
+    //if (!in_array($ur,[0])){
+      //$l=wdhd_lang('Nem megfelelő jogosultság');
+      //wdhd_error($l);
+    //}else{
     $i=0;
     $content=$content."<div class=\"wswdteam_content\">";
     foreach($atts as $k){
@@ -47,6 +41,7 @@ function wswdteam_main_center($atts=[],$content=null,$tag=''){
             wp_redirect(home_url());
           break;
       }
+      //}
       $i++;
     }
     //$content=wswdteam_x($content);

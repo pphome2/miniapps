@@ -34,6 +34,10 @@ $wswdteam_user_role_list=array(0=>'Felhasználó',
 global$wswdteam_user_role;
 $wswdteam_user_role=9999;
 
+// alapértelmezett felhasználói szerepkör
+global$wswdteam_user_name;
+$wswdteam_user_name="";
+
 // a rendszer által használt post kategóriák
 global $wswdteam_category;
 $wswdteam_category=array('Leírás',
@@ -63,6 +67,7 @@ $wswdteam_main_files=array('/core/main.php',
                            '/core/lib_page.php',
                            '/core/lib_view.php',
                            '/core/lib_param.php',
+                           '/core/lib_right.php',
                            '/core/app1.php',
                            '/core/app2.php',
                            '/core/app3.php',

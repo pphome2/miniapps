@@ -36,7 +36,7 @@ function wswdteam_pager_admin($db=0,$row=0,$apage=0,$formid=""){
         $l2=9;
       }else{
         if ($l1>1){
-          echo(" <span class=\"pagerdots\">...</span>");
+          echo(" <span class=\"apagerdots\">...</span>");
         }
       }
       if ($l2>=$op){
@@ -64,7 +64,7 @@ function wswdteam_pager_admin($db=0,$row=0,$apage=0,$formid=""){
       echo("</form>");
     }
     if ($endl){
-      echo(" <span style=\"padding-right:10px;\">...</span>");
+      echo(" <span class=\"apagerdots\">...</span>");
     }
     if (($apage<$op)and($op>1)){
       $i=$apage+1;
@@ -83,7 +83,7 @@ function wswdteam_pager_admin($db=0,$row=0,$apage=0,$formid=""){
 
 
 // lapozó felhasználói felületen
-function wswdteam_pager($db=0,$row=0,$apage=0,$formid=""){
+function wswdteam_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
   $content="";
   if ($db>$row){
     $content=$content."<br /><br />";
@@ -103,29 +103,56 @@ function wswdteam_pager($db=0,$row=0,$apage=0,$formid=""){
     $endl=false;
     $l1=1;
     $l2=$op;
-    if ($op>9){
-      $l1=$apage-4;
-      $l2=$apage+4;
-      if ($l1<1){
-        $l1=1;
-        $l2=9;
-      }else{
-        if ($l1>1){
-          $content=$content." <span class=\"pagerdots\">...</span>";
+    if ($little){
+      if ($op>3){
+        $l1=$apage-1;
+        $l2=$apage+1;
+        if ($l1<1){
+          $l1=1;
+          $l2=3;
+        }else{
+          if ($l1>1){
+            $content=$content." <span class=\"pagerdots\">...</span>";
+          }
         }
-      }
-      if ($l2>=$op){
-        $l2=$op;
-        //$l1=$op-9;
+        if ($l2>=$op){
+          $l2=$op;
+          //$l1=$op-9;
+        }else{
+          $endl=true;
+        }
+        if (($l2-$l1)<3){
+          $l1=$l2-2;
+        }
       }else{
-        $endl=true;
-      }
-      if (($l2-$l1)<9){
-        $l1=$l2-8;
+        $l1=1;
+        $l2=$op;
       }
     }else{
-      $l1=1;
-      $l2=$op;
+      if ($op>9){
+        $l1=$apage-4;
+        $l2=$apage+4;
+        if ($l1<1){
+          $l1=1;
+          $l2=9;
+        }else{
+          if ($l1>1){
+            $content=$content." <span class=\"pagerdots\">...</span>";
+          }
+        }
+        if ($l2>=$op){
+          $l2=$op;
+          //$l1=$op-9;
+        }else{
+          $endl=true;
+        }
+        if (($l2-$l1)<9){
+          $l1=$l2-8;
+        }
+      }else{
+        $l1=1;
+        $l2=$op;
+      }
     }
     for($i=$l1;$i<=$l2;$i++){
       $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
@@ -139,7 +166,7 @@ function wswdteam_pager($db=0,$row=0,$apage=0,$formid=""){
       $content=$content."</form>";
     }
     if ($endl){
-      $content=$content." <span style=\"padding-right:10px;\">...</span>";
+      $content=$content." <span class=\"pagerdots\">...</span>";
     }
     if (($apage<$op)and($op>1)){
       $i=$apage+1;

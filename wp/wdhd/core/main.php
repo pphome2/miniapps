@@ -10,23 +10,17 @@ if (!defined('ABSPATH')){
 
 // shortcode vezérlés
 function wdhd_main_center($atts=[],$content=null,$tag=''){
-  global $wdhd_category,$wdhd_table,$wpdb;
+  global $wdhd_category;
 
   if (!is_user_logged_in()) {
     wp_redirect(wp_login_url());
   }else{
-    // jogok beállítása
-    $cuser=wp_get_current_user();
-    $username=$cuser->user_login;
-    $table_name=$wpdb->prefix.$wdhd_table[1];
-    $sql="SELECT * FROM $table_name WHERE uname='$username';";
-    $res=$wpdb->get_results($sql);
-    if (count($res)<>0){
-      $t=$res[0];
-      $ur=$t->urole;
-    }else{
-     $ur=9999;
-    }
+    // jogosultság ellenőrzése
+    $ur=wdhd_user_right();
+    //if (!in_array($ur,[0])){
+      //$l=wdhd_lang('Nem megfelelő jogosultság');
+      //wdhd_error($l);
+    //}else{
     $i=0;
     $content=$content."<div class=\"wdhd_content\">";
     foreach($atts as $k){
@@ -35,7 +29,7 @@ function wdhd_main_center($atts=[],$content=null,$tag=''){
           $content=$content.wdhd_new($k,$ur);
           break;
         case 'ticket':
-          $content=$content.wdhd_2($k,$ur);
+          $content=$content.wdhd_ticket($k,$ur);
           break;
         case 'list':
           $content=$content.wdhd_2($k,$ur);
@@ -49,6 +43,7 @@ function wdhd_main_center($atts=[],$content=null,$tag=''){
       }
       $i++;
     }
+    //}
     //$content=wdhd_x($content);
     $content=$content."</div>";
     return $content;

@@ -26,12 +26,30 @@ li a{
   width:100%;
 }
 
+.secbox{
+  font-size:0.8em;
+  display:none;
+}
+
+.wdhdtable{
+  width:100%;
+}
+.wdhdcell{
+  border:1px solid;
+  border-color:lightgray;
+  padding:5px;
+}
+
 .wtr{
 }
 
 .wtd{
 }
 
+
+.plus{
+  margin-left:20px;
+}
 
 .readonly{
   pointer-events:none;
@@ -134,7 +152,7 @@ li a{
 }
 
 .pagerdots{
-  padding-right:10px;
+  padding:10px;
 }
 
 .okmessage {

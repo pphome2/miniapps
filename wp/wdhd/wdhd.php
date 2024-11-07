@@ -64,7 +64,7 @@ if (is_admin()){
 function wdhd_init(){
   global $locale, $wp_local_package,$wdhd_options,$wdhd_plugin_version,
          $wdhd_user_role_list,$wdhd_category,$wdhd_locale,
-         $wdhd_dir_lang;
+         $wdhd_dir_lang,$wdhd_ticket_type;
 
   // nyelvi beállítás
   $loc="";
@@ -92,6 +92,11 @@ function wdhd_init(){
   $i=0;
   foreach($wdhd_category as $c){
     $wdhd_category[$i]=wdhd_lang($wdhd_category[$i],false);
+    $i++;
+  }
+  $i=0;
+  foreach($wdhd_ticket_type as $c){
+    $wdhd_ticket_type[$i]=wdhd_lang($wdhd_ticket_type[$i],false);
     $i++;
   }
 }

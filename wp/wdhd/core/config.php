@@ -24,13 +24,28 @@ $wdhd_options=array('wdhd_plugin_version',
 
 // a endszerben használt felhasználói szerepkörök
 global $wdhd_user_role_list;
-$wdhd_user_role_list=array(0=>'Felhasználó',
-                           1=>'Szerkesztő',
-                           2=>'Adminisztrátor'
+$wdhd_user_role_list=array(0=>'Adminisztrátor',
+                           1=>'Bejelenntő',
+                           2=>'Szervíz dolgozó',
+                           3=>'Karbantartó',
+                           4=>'Beszerző'
                           );
-// alapértelmezett felhasználói szerepkör
+// aktuális felhasználó
 global$wdhd_user_role;
 $wdhd_user_role=9999;
+
+// alapértelmezett felhasználói szerepkör
+global$wdhd_user_name;
+$wdhd_user_name="";
+
+// a endszerben használt felhasználói szerepkörök
+global $wdhd_ticket_type;
+$wdhd_ticket_type=array(0=>'Bevizsgálás',
+                        1=>'Javítás (TMK)',
+                        2=>'Javítás (villanyszerelő)',
+                        3=>'Beszerzés',
+                        4=>'Egyéb'
+                       );
 
 // a rendszer által használt post kategóriák
 global $wdhd_category;
@@ -61,6 +76,7 @@ $wdhd_main_files=array('/core/main.php',
                            '/core/lib_lang.php',
                            '/core/lib_page.php',
                            '/core/lib_param.php',
+                           '/core/lib_right.php',
                            '/core/app_new.php',
                            '/core/app_ticket.php',
                            '/core/app2.php',
@@ -85,7 +101,7 @@ $wdhd_locale="hu_HU";
 
 // táblázat egy lapon megjelenő sorai
 global $wdhd_pagerow;
-$wdhd_pagerow=20;
+$wdhd_pagerow=1;
 
 // üzenetek automatikus bezárása
 global $wdhd_message_autohide;

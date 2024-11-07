@@ -4,8 +4,16 @@ table {
   width:99%; !important
 }
 
-label{
-  ccolor:red;
+.plus{
+  margin-left:20px;
+}
+
+.wdhd{
+
+}
+
+.inputline{
+  width:80%;
 }
 
 form {
@@ -29,7 +37,7 @@ tbody>:nth-child(n):hover {
   float:right;
 }
 
-.pagerdots{
+.apagerdots{
   padding-right:10px;
 }
 

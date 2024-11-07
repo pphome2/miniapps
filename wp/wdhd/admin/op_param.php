@@ -18,6 +18,15 @@ if (file_exists(__DIR__.'/wdhd_admin.js')){
 }
 
 
+// jogosultság ellenőrzése
+$ur=wdhd_user_right();
+if (!in_array($ur,[0])){
+  $l=wdhd_lang('Nem megfelelő jogosultság');
+  wdhd_error($l);
+  exit;
+}
+
+
 echo("<br /><br />");
 
 // adatfeldolgozás

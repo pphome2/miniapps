@@ -9,6 +9,15 @@ if (!defined('ABSPATH')){
 }
 
 
+// jogosultság ellenőrzése
+$ur=wswdteam_user_right();
+if (!in_array($ur,[0])){
+  $l=wswdteam_lang('Nem megfelelő jogosultság');
+  wswdteam_error($l);
+  exit;
+}
+
+
 // admin script betöltés 
 if (file_exists(__DIR__.'/wswdteam_admin.css')){
   include(__DIR__.'/wswdteam_admin.css');
