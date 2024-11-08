@@ -11,9 +11,12 @@ if (!defined('ABSPATH')){
 function wdhd_ticket($l="",$urole=999){
   global $wpdb,$wdhd_table,$wdhd_pagerow,$wdhd_user_name;
 
-  $c="Felhasználó: $wdhd_user_name<br />";
-  $table_name=$wpdb->prefix.$wdhd_table[2];
+  $l=wdhd_lang("Bejelentkezve");
   $wun=wdhd_user_nicename();
+  $c="$l: <b>$wun</b>.<br /><br />";
+  $l=wdhd_lang("felhasználó bejelentései");
+  $c=$c."<b>$wun</b> $l.<br />";
+  $table_name=$wpdb->prefix.$wdhd_table[2];
   $sql="SELECT COUNT(*) FROM $table_name WHERE t_inname='$wun';";
   $db=$wpdb->get_var($sql);
   if (isset($_POST['wpage'])){
@@ -69,20 +72,22 @@ function wdhd_ticket($l="",$urole=999){
 	  $c=$c."</span>";
 	  $c=$c."</td>";
 	  if ($t->t_endtime<>""){
-	    $state=wdhd_lang("Lezárva")." - ".$t->t_endtime;
+	    $state=wdhd_lang("Lezárva");
+	    $state2=$state;
+	    $state=$state.": ".$t->t_endtime;
 	  }else{
 	    $state=wdhd_lang("Nyitott");
-	  }
-	  $c=$c."<td class=\"wdhdcell\">$state</td>";
-	  if ($t->t_plantime<>""){
+	    if ($t->t_plantime<>""){
 	      $state2=wdhd_lang("Tervezve")." - $t->t_plantime";
-	  }else{
-	    if ($t->t_worker<>""){
-	      $state2=wdhd_lang("Folyamatban");
 	    }else{
-	      $state2=wdhd_lang("Beérkezett");
+	      if ($t->t_worker<>""){
+	        $state2=wdhd_lang("Folyamatban");
+	      }else{
+	        $state2=wdhd_lang("Beérkezett");
+	      }
 	    }
       }
+	  $c=$c."<td class=\"wdhdcell\">$state</td>";
 	  $c=$c."<td class=\"wdhdcell\">$state2</td>";
 	  $c=$c."</tr>";
       $ij++;

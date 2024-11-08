@@ -182,7 +182,7 @@ function wdhd_tform($r){
     <textarea id="t_action" name="t_action" class="inputline"><?php echo($r->t_action); ?></textarea><br><br>
     <span class=spaceholder></span>
     <label for="name"><?php echo(wdhd_lang('Felhasznált eszközök')); ?>:</label><br>
-    <input type="text" id="t_parts" name="t_parts" class="inputline" value="<?php echo($r->t_parts); ?>"><br><br>
+    <textarea id="t_parts" name="t_parts" class="inputline"><?php echo($r->t_parts); ?></textarea><br><br>
     <label for="name"><?php echo(wdhd_lang('Ráfordított munkaóra')); ?>:</label><br>
     <input type="text" id="t_hour" name="t_hour" class="inputline" value="<?php echo($r->t_hour); ?>"><br><br>
     <label for="name"><?php echo(wdhd_lang('Kiszállás (km)')); ?>:</label><br>

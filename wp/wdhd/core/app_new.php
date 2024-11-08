@@ -10,12 +10,14 @@ if (!defined('ABSPATH')){
 
 // új hibajegy felvétele
 function wdhd_new($l="",$urole=999){
-  global $wpdb,$wdhd_table;
+  global $wpdb,$wdhd_table,$wdhd_user_name;
 
+  $li=wdhd_lang("Bejelentkezve");
+  $un=wdhd_user_nicename();
+  $c="$li: <b>$un</b>.<br /><br />";
   $cuser=wp_get_current_user();
   //$username=$cuser->user_login;
   //$c=$cuser->user_nicename." . ".$cuser->user_email;
-  $c="";
   if (isset($_POST['fgo'])){
     $table_name=$wpdb->prefix.$wdhd_table[2];
     $t0=$_POST['fd'];
@@ -33,7 +35,6 @@ function wdhd_new($l="",$urole=999){
       $c=$c.wdhd_action_errormessage($l.".");
     }
   }else{
-    $c="";
   }
   $d=date('Y.m.d. H:m');
   $c=$c."

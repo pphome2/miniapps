@@ -25,7 +25,7 @@ $wdhd_options=array('wdhd_plugin_version',
 // a endszerben használt felhasználói szerepkörök
 global $wdhd_user_role_list;
 $wdhd_user_role_list=array(0=>'Adminisztrátor',
-                           1=>'Bejelenntő',
+                           1=>'Bejelentő',
                            2=>'Szervíz dolgozó',
                            3=>'Karbantartó',
                            4=>'Beszerző'
@@ -79,8 +79,8 @@ $wdhd_main_files=array('/core/main.php',
                            '/core/lib_right.php',
                            '/core/app_new.php',
                            '/core/app_ticket.php',
-                           '/core/app2.php',
-                           '/core/app1.php'
+                           '/core/app_service.php',
+                           '/core/app_help.php'
                            );
 
 // post könyvtár
@@ -101,7 +101,7 @@ $wdhd_locale="hu_HU";
 
 // táblázat egy lapon megjelenő sorai
 global $wdhd_pagerow;
-$wdhd_pagerow=1;
+$wdhd_pagerow=5;
 
 // üzenetek automatikus bezárása
 global $wdhd_message_autohide;

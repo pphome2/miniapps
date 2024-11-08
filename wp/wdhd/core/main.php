@@ -32,7 +32,7 @@ function wdhd_main_center($atts=[],$content=null,$tag=''){
           $content=$content.wdhd_ticket($k,$ur);
           break;
         case 'list':
-          $content=$content.wdhd_2($k,$ur);
+          $content=$content.wdhd_service($k,$ur);
           break;
         case 'help':
           $content=$content.wdhd_postlist_view($wdhd_category[0]);

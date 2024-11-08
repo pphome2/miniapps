@@ -85,6 +85,20 @@ li a{
   font-size:1.1em
 }
 
+.tablebutton{
+  width:100%;
+  max-width:100%;
+  float:left;
+  background-color:#04AA6D;
+  border:none;
+  color:white;
+  padding:2px;
+  text-align:center;
+  text-decoration:none;
+  border-radius:2px;
+  font-size:1em;
+}
+
 .submitbutton{
   width:100%;
   max-width:100%;
