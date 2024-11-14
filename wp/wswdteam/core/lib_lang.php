@@ -15,7 +15,7 @@ function wswdteam_lang($text='',$dot=true){
   if (isset($wswdteam_lang_str)and(isset($wswdteam_lang_str[$text]))){
     $line=$wswdteam_lang_str[$text];
   }else{
-    if ($dot){
+    if (!$dot){
       $line=$text;
     }else{
       $line='.'.$text.'.';

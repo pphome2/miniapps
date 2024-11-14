@@ -25,7 +25,8 @@ if (!in_array($ur,[0])){
   exit;
 }
 
-echo("<br /><br />");
+
+echo("<div class=wdhdspaceholder></div>");
 
 
 // adatfeldolgozás

@@ -20,9 +20,17 @@ if (file_exists(__DIR__.'/wdhd_admin.js')){
 // <script>alert("X");</script>
 // <style>label{text-align:center;color:red;}</style>
 
-// adatfeldolgozás
 
+
+echo("<div class=wdhdspaceholder></div>");
+
+// adatfeldolgozás
+// if (isset($_POST['name'])){}
+
+// fej
 wdhd_upagehead();
+
+// adat
 wdhd_admin_main();
 
 

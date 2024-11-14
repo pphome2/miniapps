@@ -15,7 +15,7 @@ function wdhd_lang($text='',$dot=true){
   if (isset($wdhd_lang_str)and(isset($wdhd_lang_str[$text]))){
     $line=$wdhd_lang_str[$text];
   }else{
-    if ($dot){
+    if (!$dot){
       $line=$text;
     }else{
       $line='.'.$text.'.';

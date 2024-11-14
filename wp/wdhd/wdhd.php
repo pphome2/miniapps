@@ -86,7 +86,7 @@ function wdhd_init(){
   // rendszerbeállítások fordításai
   $i=0;
   foreach($wdhd_user_role_list as $ur){
-    $wdhd_user_role_list[$i]=wdhd_lang($wdhd_user_role_list[$i]);
+    $wdhd_user_role_list[$i]=wdhd_lang($wdhd_user_role_list[$i],false);
     $i++;
   }
   $i=0;

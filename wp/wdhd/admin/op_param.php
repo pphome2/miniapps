@@ -27,7 +27,8 @@ if (!in_array($ur,[0])){
 }
 
 
-echo("<br /><br />");
+echo("<div class=wdhdspaceholder></div>");
+
 
 // adatfeldolgozás
 $table_name=$wpdb->prefix.$wdhd_table[0];

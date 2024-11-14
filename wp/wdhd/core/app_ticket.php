@@ -54,15 +54,15 @@ function wdhd_ticket($l="",$urole=999){
 	  $c=$c."<tr id=\"post-$i\">";
 	  $c=$c."<td class=\"wdhdcell\">";
 	  $c=$c."<input type=\"submit\" onclick=\"
-	        if (getElementById('plusdata$i').style.display=='block'){
-	          getElementById('plusdata$i').style.display='none';
+	        if (getElementById('plusdata$ij').style.display=='block'){
+	          getElementById('plusdata$ij').style.display='none';
 	          this.value='+';
 	        }else{
-	        getElementById('plusdata$i').style.display='block';  
+	        getElementById('plusdata$ij').style.display='block';  
 	        this.value='-';
 	        };return false;\" value=\"+\">";
-      $c=$c."<span class=plus>$t->t_time</span>";
-	  $c=$c."<span id=\"plusdata$i\" class=\"secbox\" onclick=\"this.style.display='none';\">";
+      $c=$c."<span class=wdhdplus>$t->t_time</span>";
+	  $c=$c."<span id=\"plusdata$ij\" class=\"wdhdsecbox\" onclick=\"this.style.display='none';\">";
       $c=$c."<b>".wdhd_lang("Típus").":</b> $t->t_intype<br />";
 	  $c=$c."<b>".wdhd_lang("Csoport").":</b> $t->t_indep<br />";
 	  $c=$c."<b>".wdhd_lang("Telefonszám").":</b> $t->t_intel<br />";

@@ -11,7 +11,7 @@ if (!defined('ABSPATH')){
 // lapozó admin felületen
 function wdhd_pager_admin($db=0,$row=0,$apage=0,$formid=""){
   if ($db>$row){
-    echo("<div class=\"pagerlineadmin\"><span class=\"pagerlineadmin2\">");
+    echo("<div class=\"wdhdpagerlineadmin\"><span class=\"wdhdpagerlineadmin2\">");
     //$op=round(($db/$row),0);
     $op=ceil($db/$row);
     if (($apage<>1)and($op>1)){
@@ -36,7 +36,7 @@ function wdhd_pager_admin($db=0,$row=0,$apage=0,$formid=""){
         $l2=9;
       }else{
         if ($l1>1){
-          echo(" <span class=\"apagerdots\">...</span>");
+          echo(" <span class=\"wdhdapagerdots\">...</span>");
         }
       }
       if ($l2>=$op){
@@ -87,17 +87,17 @@ function wdhd_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
   $content="";
   if ($db>$row){
     $content=$content."<br /><br />";
-    $content=$content."<div class=\"pagerline\">";
+    $content=$content."<div class=\"wdhdpagerline\">";
     $op=ceil($db/$row);
     if (($apage<>1)and($op>1)){
       $i=$apage-1;
-      $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+      $content=$content."<form class=\"wdhdpagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"1\">";
-      $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"".wdhd_lang("Első")."\">";
+      $content=$content."<input class=\"wdhdpagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"".wdhd_lang("Első")."\">";
       $content=$content."</form>";
-      $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+      $content=$content."<form class=\"wdhdpagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">";
-      $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"&lt;&lt;\">";
+      $content=$content."<input class=\"wdhdpagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"&lt;&lt;\">";
       $content=$content."</form>";
     }
     $endl=false;
@@ -112,7 +112,7 @@ function wdhd_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
           $l2=3;
         }else{
           if ($l1>1){
-            $content=$content." <span class=\"pagerdots\">...</span>";
+            $content=$content." <span class=\"wdhdpagerdots\">...</span>";
           }
         }
         if ($l2>=$op){
@@ -137,7 +137,7 @@ function wdhd_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
           $l2=9;
         }else{
           if ($l1>1){
-            $content=$content." <span class=\"pagerdots\">...</span>";
+            $content=$content." <span class=\"wdhdpagerdots\">...</span>";
           }
         }
         if ($l2>=$op){
@@ -155,28 +155,28 @@ function wdhd_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
       }
     }
     for($i=$l1;$i<=$l2;$i++){
-      $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+      $content=$content."<form class=\"wdhdpagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">";
       if ($apage==$i){
-        $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x$i\" name=\"x\" value=\"$i\">";
+        $content=$content."<input class=\"wdhdpagerbutton\" type=\"submit\" id=\"x$i\" name=\"x\" value=\"$i\">";
         $content=$content."<script>document.getElementById(\"x$i\").disabled=true</script>";
       }else{
-        $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x$i\" name=\"x\" value=\"$i\">";
+        $content=$content."<input class=\"wdhdpagerbutton\" type=\"submit\" id=\"x$i\" name=\"x\" value=\"$i\">";
       }
       $content=$content."</form>";
     }
     if ($endl){
-      $content=$content." <span class=\"pagerdots\">...</span>";
+      $content=$content." <span class=\"wdhdpagerdots\">...</span>";
     }
     if (($apage<$op)and($op>1)){
       $i=$apage+1;
-      $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+      $content=$content."<form class=\"wdhdpagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">";
-      $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"&gt;&gt;\">";
+      $content=$content."<input class=\"wdhdpagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"&gt;&gt;\">";
       $content=$content."</form>";
-      $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+      $content=$content."<form class=\"wdhdpagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$op\">";
-      $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"".wdhd_lang("Utolsó")."\">";
+      $content=$content."<input class=\"wdhdpagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"".wdhd_lang("Utolsó")."\">";
       $content=$content."</form>";
     }
     $content=$content."</span></div>";

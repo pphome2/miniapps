@@ -94,15 +94,15 @@ function wdhd_service($l="",$urole=999){
 	      $c=$c."<tr id=\"post-$i\">";
 	      $c=$c."<td class=\"wdhdcell\">";
 	      $c=$c."<input type=\"submit\" onclick=\"
-	            if (getElementById('plusdata$i').style.display=='block'){
-	              getElementById('plusdata$i').style.display='none';
+	            if (getElementById('plusdata$ij').style.display=='block'){
+	              getElementById('plusdata$ij').style.display='none';
 	              this.value='+';
 	            }else{
-	            getElementById('plusdata$i').style.display='block';  
+	            getElementById('plusdata$ij').style.display='block';  
 	            this.value='-';
 	            };return false;\" value=\"+\">";
-          $c=$c."<span class=plus>$t->t_time</span>";
-	      $c=$c."<span id=\"plusdata$i\" class=\"secbox\" onclick=\"this.style.display='none';\">";
+          $c=$c."<span class=wdhdplus>$t->t_time</span>";
+	      $c=$c."<span id=\"plusdata$ij\" class=\"wdhdsecbox\" onclick=\"this.style.display='none';\">";
           $c=$c."<b>".wdhd_lang("Típus").":</b> $t->t_intype<br />";
 	      $c=$c."<b>".wdhd_lang("Csoport").":</b> $t->t_indep<br />";
   	      $c=$c."<b>".wdhd_lang("Telefonszám").":</b> $t->t_intel<br />";
@@ -138,7 +138,7 @@ function wdhd_service($l="",$urole=999){
             $c=$c."<form action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
             $c=$c."<input id=id name=id type=hidden value=\"$t->id\">";
             $c=$c."<input id=wpage name=wpage type=hidden value=\"$page\">";
-            $c=$c."<input id=fgo name=fgo type=submit class=\"tablebutton\" value=".wdhd_lang("Lezár").">";
+            $c=$c."<input id=fgo name=fgo type=submit class=\"wdhdtablebutton\" value=".wdhd_lang("Lezár").">";
             $c=$c."</form>";
 	      }
 	      $c=$c."</td>";
@@ -175,73 +175,73 @@ function wdhd_service_form($r,$c,$wun){
       <table class=wtable>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Idő")."</td>
-          <td class=wtd><input id=t_time name=t_time class=\"inputtext\" readonly type=text value=\"$r->t_time\"></td>
+          <td class=wtd><input id=t_time name=t_time class=\"wdhdinputtext\" readonly type=text value=\"$r->t_time\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Típus")."</td>
-          <td class=wtd><input id=t_intype name=t_intype class=\"inputtext\" readonly type=text value=\"$r->t_intype\"></td>
+          <td class=wtd><input id=t_intype name=t_intype class=\"wdhdinputtext\" readonly type=text value=\"$r->t_intype\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Név")."</td>
-          <td class=wtd><input id=t_inname name=t_inname class=\"inputtext\" readonly type=text value=\"$r->t_inname\"></td>
+          <td class=wtd><input id=t_inname name=t_inname class=\"wdhdinputtext\" readonly type=text value=\"$r->t_inname\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Csoport")."</td>
-          <td class=wtd><input id=t_indep name=t_indep class=\"inputtext\" readonly type=text value=\"$r->t_indep\"></td>
+          <td class=wtd><input id=t_indep name=t_indep class=\"wdhdinputtext\" readonly type=text value=\"$r->t_indep\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("E-mail")."</td>
-          <td class=wtd><input id=t_inmail name=t_inmail class=\"inputtext\" readonly type=text value=\"$r->t_inmail\"></td>
+          <td class=wtd><input id=t_inmail name=t_inmail class=\"wdhdinputtext\" readonly type=text value=\"$r->t_inmail\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Telefonszám")."</td>
-          <td class=wtd><input id=t_intel name=t_intel class=inputtext readonly type=text value=\"$r->t_intel\"></td>
+          <td class=wtd><input id=t_intel name=t_intel class=wdhdinputtext readonly type=text value=\"$r->t_intel\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Részletes leírás")."</td>
-          <td class=wtd><textarea id=t_text name=t_text class=inputtexta readonly rows=10 >$r->t_text</textarea></td>
+          <td class=wtd><textarea id=t_text name=t_text class=wdhdinputtexta readonly rows=10 >$r->t_text</textarea></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Tervezett befejezés")."</td>
-          <td class=wtd><input type=\"text\" id=\"t_plantime\" name=\"t_plantime\" class=\"inputtext\" readonly value=\"$pt\"></td>
+          <td class=wtd><input type=\"text\" id=\"t_plantime\" name=\"t_plantime\" class=\"wdhdinputtext\" readonly value=\"$pt\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Kijelölt feladat")."</td>
-          <td class=wtd><input type=\"text\" id=\"t_dep\" name=\"t_dep\" class=\"inputtext\" readonly value=\"$r->t_dep\"></td>
+          <td class=wtd><input type=\"text\" id=\"t_dep\" name=\"t_dep\" class=\"wdhdinputtext\" readonly value=\"$r->t_dep\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Munka kiadva")."</td>
-          <td class=wtd><input type=\"text\" id=\"t_worker\" name=\"t_worker\" class=\"inputtext\" readonly value=\"$r->t_worker\"></td>
+          <td class=wtd><input type=\"text\" id=\"t_worker\" name=\"t_worker\" class=\"wdhdinputtext\" readonly value=\"$r->t_worker\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Elvégzett munka")."</td>
-          <td class=wtd><textarea id=t_action name=t_action class=inputtexta rows=10 placeholder=\"".wdhd_lang("Elvégzett munka")."\">$r->t_action</textarea></td>
+          <td class=wtd><textarea id=t_action name=t_action class=wdhdinputtexta rows=10 placeholder=\"".wdhd_lang("Elvégzett munka")."\">$r->t_action</textarea></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Felhasznált eszközök")."</td>
-          <td class=wtd><textarea id=t_parts name=t_parts class=inputtexta rows=10 placeholder=\"".wdhd_lang("Felhasznált eszközök")."\">$r->t_parts</textarea></td>
+          <td class=wtd><textarea id=t_parts name=t_parts class=wdhdinputtexta rows=10 placeholder=\"".wdhd_lang("Felhasznált eszközök")."\">$r->t_parts</textarea></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Ráfordított munkaóra")."</td>
-          <td class=wtd><input type=\"hour\" id=\"t_hour\" name=\"t_hour\" class=\"inputtext\" value=\"$r->t_hour\"></td>
+          <td class=wtd><input type=\"hour\" id=\"t_hour\" name=\"t_hour\" class=\"wdhdinputtext\" value=\"$r->t_hour\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Kiszállás (km)")."</td>
-          <td class=wtd><input type=\"text\" id=\"t_km\" name=\"t_km\" class=\"inputtext\" value=\"$r->t_km\"></td>
+          <td class=wtd><input type=\"text\" id=\"t_km\" name=\"t_km\" class=\"wdhdinputtext\" value=\"$r->t_km\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Bejelentés lezárva")."</td>
-          <td class=wtd><input type=\"text\" id=\"t_endtime\" name=\"t_endtime\" class=\"inputtext\" readonly value=\"$date\"></td>
+          <td class=wtd><input type=\"text\" id=\"t_endtime\" name=\"t_endtime\" class=\"wdhdinputtext\" readonly value=\"$date\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Bejelentést lezárta")."</td>
-          <td class=wtd><input type=\"text\" id=\"t_enduname\" name=\"t_enduname\" class=\"inputtext\" readonly value=\"$wun\"></td>
+          <td class=wtd><input type=\"text\" id=\"t_enduname\" name=\"t_enduname\" class=\"wdhdinputtext\" readonly value=\"$wun\"></td>
         </tr>
         </table>
         <br /><br />
         <input type=\"hidden\" id=\"id\" name=\"id\" value=\"$r->id\">
         <input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">
-        <input type=\"submit\" class=\"submitbutton\" id=\"close\" name=\"close\" value=\"".wdhd_lang("Lezár")."\">
+        <input type=\"submit\" class=\"wdhdsubmitbutton\" id=\"close\" name=\"close\" value=\"".wdhd_lang("Lezár")."\">
         </form>
         <br /><br />";
   return($c);

@@ -11,7 +11,7 @@ if (!defined('ABSPATH')){
 // lapozó admin felületen
 function wswdteam_pager_admin($db=0,$row=0,$apage=0,$formid=""){
   if ($db>$row){
-    echo("<div class=\"pagerlineadmin\"><span class=\"pagerlineadmin2\">");
+    echo("<div class=\"wswdpagerlineadmin\"><span class=\"wswdpagerlineadmin2\">");
     //$op=round(($db/$row),0);
     $op=ceil($db/$row);
     if (($apage<>1)and($op>1)){
@@ -36,7 +36,7 @@ function wswdteam_pager_admin($db=0,$row=0,$apage=0,$formid=""){
         $l2=9;
       }else{
         if ($l1>1){
-          echo(" <span class=\"apagerdots\">...</span>");
+          echo(" <span class=\"wswdapagerdots\">...</span>");
         }
       }
       if ($l2>=$op){
@@ -56,7 +56,7 @@ function wswdteam_pager_admin($db=0,$row=0,$apage=0,$formid=""){
       echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
       echo("<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">");
       if ($apage==$i){
-        echo("<input type=\"submit\" id=\"x$i\" name=\"x\" class=\"activepage button\" value=\"$i\">");
+        echo("<input type=\"submit\" id=\"x$i\" name=\"x\" class=\"wswdactivepage button\" value=\"$i\">");
         echo("<script>document.getElementById(\"x$i\").disabled=true</script>");
       }else{
         echo("<input type=\"submit\" id=\"x$i\" name=\"x\" class=\"button\" value=\"$i\">");
@@ -91,13 +91,13 @@ function wswdteam_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
     $op=ceil($db/$row);
     if (($apage<>1)and($op>1)){
       $i=$apage-1;
-      $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+      $content=$content."<form class=\"wswdpagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"1\">";
-      $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"".wswdteam_lang("Első")."\">";
+      $content=$content."<input class=\"wswdpagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"".wswdteam_lang("Első")."\">";
       $content=$content."</form>";
       $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">";
-      $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"&lt;&lt;\">";
+      $content=$content."<input class=\"wswdpagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"&lt;&lt;\">";
       $content=$content."</form>";
     }
     $endl=false;
@@ -112,7 +112,7 @@ function wswdteam_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
           $l2=3;
         }else{
           if ($l1>1){
-            $content=$content." <span class=\"pagerdots\">...</span>";
+            $content=$content." <span class=\"wswdpagerdots\">...</span>";
           }
         }
         if ($l2>=$op){
@@ -137,7 +137,7 @@ function wswdteam_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
           $l2=9;
         }else{
           if ($l1>1){
-            $content=$content." <span class=\"pagerdots\">...</span>";
+            $content=$content." <span class=\"wswdpagerdots\">...</span>";
           }
         }
         if ($l2>=$op){
@@ -155,13 +155,13 @@ function wswdteam_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
       }
     }
     for($i=$l1;$i<=$l2;$i++){
-      $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+      $content=$content."<form class=\"wswdpagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">";
       if ($apage==$i){
-        $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x$i\" name=\"x\" value=\"$i\">";
+        $content=$content."<input class=\"wswdpagerbutton\" type=\"submit\" id=\"x$i\" name=\"x\" value=\"$i\">";
         $content=$content."<script>document.getElementById(\"x$i\").disabled=true</script>";
       }else{
-        $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x$i\" name=\"x\" value=\"$i\">";
+        $content=$content."<input class=\"wswdpagerbutton\" type=\"submit\" id=\"x$i\" name=\"x\" value=\"$i\">";
       }
       $content=$content."</form>";
     }
@@ -170,13 +170,13 @@ function wswdteam_pager($db=0,$row=0,$apage=0,$formid="",$little=false){
     }
     if (($apage<$op)and($op>1)){
       $i=$apage+1;
-      $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+      $content=$content."<form class=\"wswdpagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$i\">";
-      $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"&gt;&gt;\">";
+      $content=$content."<input class=\"wswdpagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"&gt;&gt;\">";
       $content=$content."</form>";
-      $content=$content."<form class=\"pagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+      $content=$content."<form class=\"wswdpagerform\" action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
       $content=$content."<input type=\"hidden\" id=\"$formid\" name=\"$formid\" value=\"$op\">";
-      $content=$content."<input class=\"pagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"".wswdteam_lang("Utolsó")."\">";
+      $content=$content."<input class=\"wswdpagerbutton\" type=\"submit\" id=\"x\" name=\"x\" value=\"".wswdteam_lang("Utolsó")."\">";
       $content=$content."</form>";
     }
     $content=$content."</span></disv>";

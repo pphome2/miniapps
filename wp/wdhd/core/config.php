@@ -23,6 +23,7 @@ $wdhd_options=array('wdhd_plugin_version',
                     );
 
 // a endszerben használt felhasználói szerepkörök
+// 0 (nulla) mindíg adminisztrátor
 global $wdhd_user_role_list;
 $wdhd_user_role_list=array(0=>'Adminisztrátor',
                            1=>'Bejelentő',

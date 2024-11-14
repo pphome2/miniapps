@@ -27,7 +27,8 @@ if (file_exists(__DIR__.'/wswdteam_admin.js')){
 }
 
 
-echo("<br /><br />");
+
+echo("<div class=wswdspaceholder></div>");
 
 // adatfeldolgozás
 $table_name=$wpdb->prefix.$wswdteam_table[0];

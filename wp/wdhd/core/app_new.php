@@ -42,27 +42,27 @@ function wdhd_new($l="",$urole=999){
       <table class=wtable>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Idő")."</td>
-          <td class=wtd><input id=fd name=fd class=\"inputtext readonly\"  type=text value=\"".$d."\"></td>
+          <td class=wtd><input id=fd name=fd class=\"wdhdinputtext wdhdreadonly\"  type=text value=\"".$d."\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Név")."</td>
-          <td class=wtd><input id=fn name=fn class=\"inputtext readonly\"  type=text value=\"".$cuser->user_nicename."\"></td>
+          <td class=wtd><input id=fn name=fn class=\"wdhdinputtext wdhdreadonly\"  type=text value=\"".$cuser->user_nicename."\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("E-mail")."</td>
-          <td class=wtd><input id=fe name=fe class=\"inputtext readonly\" type=text value=\"".$cuser->user_email."\"></td>
+          <td class=wtd><input id=fe name=fe class=\"wdhdinputtext wdhdreadonly\" type=text value=\"".$cuser->user_email."\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Telefonszám")."</td>
-          <td class=wtd><input id=ft name=ft class=inputtext type=text value=\"\" placeholder=\"".wdhd_lang("Telefonszám")."\"></td>
+          <td class=wtd><input id=ft name=ft class=wdhdinputtext type=text value=\"\" placeholder=\"".wdhd_lang("Telefonszám")."\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Részletes leírás")."</td>
-          <td class=wtd><textarea id=f0 name=f0 class=inputtexta rows=10 placeholder=\"".wdhd_lang("Részletes leírás")."\"></textarea></td>
+          <td class=wtd><textarea id=f0 name=f0 class=wdhdinputtexta rows=10 placeholder=\"".wdhd_lang("Részletes leírás")."\"></textarea></td>
         </tr>
       </table>
       <span class=spaceholder></span>
-      <input id=fgo name=fgo type=submit class=\"submitbutton\" value=".wdhd_lang("Mehet").">
+      <input id=fgo name=fgo type=submit class=\"wdhdsubmitbutton\" value=".wdhd_lang("Mehet").">
       </form>
   ";
   return($c);

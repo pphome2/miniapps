@@ -21,15 +21,21 @@ tbody>:nth-child(n):hover {
   background-color: lightgray;
 }
 
-.pagerlineadmin{
+.wswdspaceholder{
+  display:block;
+  max-height:2em;
+  height:2em;
+}
+
+.wswdpagerlineadmin{
   width:99%;
 }
 
-.pagerlineadmin2{
+.wswdpagerlineadmin2{
   float:right;
 }
 
-.apagerdots{
+.wswdapagerdots{
   padding-right:10px;
 }
 

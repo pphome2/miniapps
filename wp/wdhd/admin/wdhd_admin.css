@@ -4,15 +4,18 @@ table {
   width:99%; !important
 }
 
-.plus{
+.wdhdplus{
   margin-left:20px;
 }
 
-.wdhd{
 
+.wdhdspaceholder{
+  display:block;
+  max-height:2em;
+  height:2em;
 }
 
-.inputline{
+.wdhdinputline{
   width:80%;
 }
 
@@ -29,15 +32,15 @@ tbody>:nth-child(n):hover {
   background-color: lightgray;
 }
 
-.pagerlineadmin{
+.wdhdpagerlineadmin{
   width:99%;
 }
 
-.pagerlineadmin2{
+.wdhdpagerlineadmin2{
   float:right;
 }
 
-.apagerdots{
+.wdhdapagerdots{
   padding-right:10px;
 }
 

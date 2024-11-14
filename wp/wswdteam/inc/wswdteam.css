@@ -23,7 +23,13 @@ li a{
   display: none;
 }
 
-.wbutton{
+.wswdspaceholder{
+  display:block;
+  max-height:2em;
+  height:2em;
+}
+
+.wswdwbutton{
   background-color:#04AA6D;
   border:none;
   color:white;
@@ -35,7 +41,7 @@ li a{
   border-radius:10px;
 }
 
-.wbutton2{
+.wswdwbutton2{
   width:95%;
   background-color:#04AA6D;
   border:none;
@@ -47,12 +53,12 @@ li a{
   border-radius:10px;
 }
 
-.pagerform{
+.wswdpagerform{
   display:inline-flex;
   margin-left:5px;
 }
 
-.pagerbutton{
+.wswdpagerbutton{
   wwidth:95%;
   background-color:#04AA6D;
   border:none;
@@ -65,22 +71,22 @@ li a{
   cursor:pointer;
 }
 
-.pagerbutton:disabled{
+.wswdpagerbutton:disabled{
   color:black;
   background-color:gray;
   cursor:default;
 }
 
-.pagerline{
+.wswdpagerline{
   float:right;
 }
 
-.pagerdots{
+.wswdpagerdots{
   padding:10px;
 }
 
 
-.okmessage {
+.wswdokmessage {
   padding:20px;
   background-color:#04AA6D;
   color:white;
@@ -88,7 +94,7 @@ li a{
   border-radius:10px;
 }
 
-.errormessage {
+.wswderrormessage {
   padding:20px;
   background-color:#f44336;
   color:white;

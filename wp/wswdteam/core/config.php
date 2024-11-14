@@ -25,10 +25,11 @@ $wswdteam_options=array('wswdteam_plugin_version',
                         );
 
 // a endszerben használt felhasználói szerepkörök
+// 0 (nulla) mindíg adminisztrátor
 global $wswdteam_user_role_list;
-$wswdteam_user_role_list=array(0=>'Felhasználó',
+$wswdteam_user_role_list=array(0=>'Adminisztrátor',
                                1=>'Szerkesztő',
-                               2=>'Adminisztrátor'
+                               2=>'Felhasználó'
                                );
 // alapértelmezett felhasználói szerepkör
 global$wswdteam_user_role;
@@ -101,8 +102,8 @@ $wswdteam_message_autohide=true;
 // sql táblák
 global $wswdteam_table;
 $wswdteam_table=array('wswdteamparam',
-                  'wswdteamuser'
-                 );
+                      'wswdteamuser'
+                     );
 
 // sql táblák létrehozása
 global $wswdteam_sql_install;
@@ -135,9 +136,6 @@ $wswdteam_sql_update=array("");
 // plugin_dir_url()
 // plugin_dir_path()
 // plugin_basename()
-
-// load script or css:
-// wp_enqueue_script() or wp_enqueue_style()
 
 // get wp path:
 // home_url()

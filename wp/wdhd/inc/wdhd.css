@@ -16,17 +16,17 @@ li a{
   cursor:pointer;
 }
 
-.spaceholder{
+.wdhdspaceholder{
   display:block;
-  max-height:50px;
-  height:50px;
+  max-height:2em;
+  height:2em;
 }
 
-.wtable{
+.wdhdtable{
   width:100%;
 }
 
-.secbox{
+.wdhdsecbox{
   font-size:0.8em;
   display:none;
 }
@@ -40,30 +40,24 @@ li a{
   padding:5px;
 }
 
-.wtr{
-}
 
-.wtd{
-}
-
-
-.plus{
+.wdhdplus{
   margin-left:20px;
 }
 
-.readonly{
+.wdhdreadonly{
   pointer-events:none;
 }
 
-.inputlabel{
+.wdhdinputlabel{
   width:30%;
 }
 
-.wdhd-content .fullsize{
+.wdhd-content .wdhdfullsize{
   width:100%;
 }
 
-.inputtext{
+.wdhdinputtext{
   width:100%;
   max-width:100%;
   padding: 10px;
@@ -74,7 +68,7 @@ li a{
   font-size:1.1em
 }
 
-.inputtexta{
+.wdhdinputtexta{
   width:100%;
   max-width:100%;
   padding:10px;
@@ -85,7 +79,7 @@ li a{
   font-size:1.1em
 }
 
-.tablebutton{
+.wdhdtablebutton{
   width:100%;
   max-width:100%;
   float:left;
@@ -99,7 +93,7 @@ li a{
   font-size:1em;
 }
 
-.submitbutton{
+.wdhdsubmitbutton{
   width:100%;
   max-width:100%;
   float:left;
@@ -113,7 +107,7 @@ li a{
   font-size:1.2em;
 }
 
-.wbutton{
+.wdhdwbutton{
   background-color:#04AA6D;
   border:none;
   color:white;
@@ -125,7 +119,7 @@ li a{
   border-radius:10px;
 }
 
-.wbutton2{
+.wdhdwbutton2{
   width:95%;
   background-color:#04AA6D;
   border:none;
@@ -137,12 +131,12 @@ li a{
   border-radius:10px;
 }
 
-.pagerform{
+.wdhdpagerform{
   display:inline-flex;
   margin-left:5px;
 }
 
-.pagerbutton{
+.wdhdpagerbutton{
   wwidth:95%;
   background-color:#04AA6D;
   border:none;
@@ -155,21 +149,21 @@ li a{
   cursor:pointer;
 }
 
-.pagerbutton:disabled{
+.wdhdpagerbutton:disabled{
   color:black;
   background-color:gray;
   cursor:default;
 }
 
-.pagerline{
+.wdhdpagerline{
   float:right;
 }
 
-.pagerdots{
+.wdhdpagerdots{
   padding:10px;
 }
 
-.okmessage {
+.wdhdokmessage {
   max-width:100%;
   padding:20px;
   background-color:#04AA6D;
@@ -179,7 +173,7 @@ li a{
   border-radius:10px;
 }
 
-.errormessage {
+.wdhderrormessage {
   max-width:100%;
   padding:20px;
   background-color:#f44336;

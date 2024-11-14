@@ -43,7 +43,7 @@ function wdhd_postlist($cat=""){
         foreach($posts as $p){
           if (($i>=$l)and($i<($l+$wdhd_pagerow))){
 		    setup_postdata($p);
-  	        $content=$content."<a href=\"".get_permalink($p)."\" class=\"wbutton2\">".$p->post_title."</a>";
+  	        $content=$content."<a href=\"".get_permalink($p)."\" class=\"wdhdwbutton2\">".$p->post_title."</a>";
   		    $content=$content."<br /><br />";
   		  }
           $i++;
@@ -67,13 +67,13 @@ function wdhd_postlist_view($cat=""){
       $pid=$_POST['postid'];
       $p=get_post($pid);
   	  $content=$content."<br />";
-  	  $content=$content."<a href=\"\" class=\"wbutton\">".wdhd_lang("Vissza")."</a>";
+  	  $content=$content."<a href=\"\" class=\"wdhdwbutton\">".wdhd_lang("Vissza")."</a>";
   	  $content=$content."<br /><br />";
   	  $content=$content."<h2>".$p->post_title."</h2>";
   	  $content=$content."<br /><br />";
       $content=$content.$p->post_content;
   	  $content=$content."<br /><br /><br />";
-  	  $content=$content."<a href=\"\" class=\"wbutton\">".wdhd_lang("Vissza")."</a>";
+  	  $content=$content."<a href=\"\" class=\"wdhdwbutton\">".wdhd_lang("Vissza")."</a>";
   	  $content=$content."<br /><br />";
     }else{
       $catid=get_cat_ID($cat);
@@ -106,7 +106,7 @@ function wdhd_postlist_view($cat=""){
 	        $content=$content."<form action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
             $content=$content."<input type=\"hidden\" id=\"postid\" name=\"postid\" value=\"$p->ID\">";
             $content=$content."<input type=\"submit\" id=\"s$i\" name=\"s$i\" value=\"$p->post_title\" style=\"display:none;\">";
-  	        $content=$content."<a href=\"\" class=\"wbutton2\" onclick=\"this.closest('form').submit();return false;\">".$p->post_title."</a>";
+  	        $content=$content."<a href=\"\" class=\"wdhdwbutton2\" onclick=\"this.closest('form').submit();return false;\">".$p->post_title."</a>";
   		    $content=$content."</form>";
   	        $content=$content."<br />";
   	      }

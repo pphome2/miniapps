@@ -19,9 +19,22 @@ if (file_exists(__DIR__.'/wswdteam_admin.js')){
 // <script>alert("X");</script>
 // <style>label{text-align:center;color:red;}</style>
 
-// adatfeldolgozás
 
+
+echo("<div class=wswdspaceholder></div>");
+
+// adatfeldolgozás
+//$table_name=$wpdb->prefix.$wswdteam_table[0];
+// if (isset($_POST['submit'])){}
+
+
+// fejrész
 wswdteam_upagehead();
+
+
+// adattábla
+function wswdteam_datatable(){
+}
 
 
 //fejléc

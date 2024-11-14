@@ -16,7 +16,7 @@ function wswdteam_action_message($text="",$autohide=false){
     $autohide=$wdhd_message_autohide;
   }
   $r="
-    <div id=mid class=\"okmessage\" onclick=\"this.style.display='none';\">
+    <div id=mid class=\"wswdokmessage\" onclick=\"this.style.display='none';\">
       ".$text."
     </div>";
   if ($autohide){
@@ -38,7 +38,7 @@ function wswdteam_action_errormessage($text="",$autohide=false){
     $autohide=$wdhd_message_autohide;
   }
   $r="
-    <div id=mid class=\"errormessage\" onclick=\"this.style.display='none';\">
+    <div id=mid class=\"wswderrormessage\" onclick=\"this.style.display='none';\">
       ".$text."
     </div>";
   if ($autohide){
