@@ -61,7 +61,7 @@ function wdhd_new($l="",$urole=999){
           <td class=wtd><textarea id=f0 name=f0 class=wdhdinputtexta rows=10 placeholder=\"".wdhd_lang("Részletes leírás")."\"></textarea></td>
         </tr>
       </table>
-      <span class=spaceholder></span>
+      <span class=wdhdspaceholder></span>
       <input id=fgo name=fgo type=submit class=\"wdhdsubmitbutton\" value=".wdhd_lang("Mehet").">
       </form>
   ";

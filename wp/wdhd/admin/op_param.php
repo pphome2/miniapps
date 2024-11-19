@@ -219,7 +219,9 @@ function wdhd_ppagehead(){
   echo("<br />");
   echo("<h1>".wdhd_lang('Egyéb beállítások')."</h1>");
   echo("<br />");
-  echo(wdhd_lang('Működési paraméterek, alapadatok kezelése'));
+  echo(wdhd_lang('Működési paraméterek, alapadatok kezelése').'.');
+  echo("<br />");
+  echo(wdhd_lang('A beállítások megváltoztatása hibás működést eredményezhet').'.');
   echo("<br />");
   echo("<br />");
   echo("<br />");
@@ -238,7 +240,7 @@ function wdhd_pload(){
   echo("<br />");
   echo("<h2>".wdhd_lang('Bejegyzés feltöltés - Frissítés utáni feladat')."</h2>");
   echo("<br />");
-  echo(wdhd_lang('A modul txt mappájából a bejegyzések betöltése a kiválasztott kategóriába.'));
+  echo(wdhd_lang('A modul txt mappájából a bejegyzések betöltése a kiválasztott kategóriába').'.');
   echo("<br />");
   echo("<br />");
   $md=dirname(dirname(__FILE__)).$wdhd_dir_post."/".$wdhd_locale;
@@ -284,9 +286,10 @@ function wdhd_pload(){
                     );
         }
         $pid=wp_insert_post($np, true);
-        wdhd_message($l);
       }
     }
+    echo("<br />");
+    wdhd_message("A feltöltés megtörtént");
   }else{
     //$l=wp_list_categories(array('orderby' => 'name'));
     $c=get_categories( array('orderby'=>'name','order'=>'ASC','hide_empty'=>false));
@@ -328,13 +331,13 @@ function wdhd_pageload(){
   echo("<h2>".wdhd_lang('Lapok feltöltés - Frissítés utáni feladat')."</h2>");
   echo("<br />");
   echo("<br />");
-  echo(wdhd_lang('A modul txt mappájából a lapk betöltése.'));
-  echo(wdhd_lang('A feltöltött lapok elérését (a menükben) ellenőrizni kell.'));
+  echo(wdhd_lang('A modul txt mappájából a lapk betöltése').'.');
+  echo("<br />");
+  echo(wdhd_lang('A feltöltött lapok elérését (a menükben) ellenőrizni kell').'.');
   echo("<br />");
   echo("<br />");
   $md=dirname(dirname(__FILE__)).$wdhd_dir_page."/".$wdhd_locale;
   if (isset($_POST['pageload'])){
-    echo("---");
     $fl=scandir($md);
     foreach($fl as $l){
       $d=$md."/".$l;
@@ -382,6 +385,8 @@ function wdhd_pageload(){
         echo("$l<br />");
       }
     }
+    echo("<br />");
+    wdhd_message("A lapok tárolása megtörtént");
   }else{
     echo("<br />");
     echo(wdhd_lang('Feltőlthető lapok').":");

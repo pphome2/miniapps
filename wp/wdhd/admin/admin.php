@@ -14,7 +14,7 @@ wdhd_sys_check();
 function wdhd_register_menu_page(){
   $s1=plugin_dir_path(__FILE__).'/op_main.php';
   $s2=plugins_url().'/wdhd/images/icon.png';
-  $l=wdhd_lang('WD HD',true);
+  $l=wdhd_lang('WD HD',false);
   add_menu_page(
     $l,
     $l,
@@ -32,7 +32,7 @@ add_action('admin_menu','wdhd_register_menu_page');
 function wdhd_register_submenu_page(){
   $s0=plugin_dir_path(__FILE__).'/op_main.php';
   $s1=plugin_dir_path(__FILE__).'/op_ticket.php';
-  $l=wdhd_lang('Hibajegyek');
+  $l=wdhd_lang('Hibajegyek',false);
   add_submenu_page(
     $s0,
     $l,
@@ -48,7 +48,7 @@ add_action('admin_menu','wdhd_register_submenu_page');
 function wdhd_register_submenu_page2(){
   $s0=plugin_dir_path(__FILE__).'/op_main.php';
   $s1=plugin_dir_path(__FILE__).'/op_users.php';
-  $l=wdhd_lang('Felhasználói jogok');
+  $l=wdhd_lang('Felhasználói jogok',false);
   add_submenu_page(
     $s0,
     $l,
@@ -64,7 +64,7 @@ add_action('admin_menu','wdhd_register_submenu_page2');
 function wdhd_register_submenu_page3(){
   $s0=plugin_dir_path(__FILE__).'/op_main.php';
   $s2=plugin_dir_path(__FILE__).'/op_param.php';
-  $l=wdhd_lang('Egyéb beállítások');
+  $l=wdhd_lang('Egyéb beállítások',false);
   add_submenu_page(
     $s0,
     $l,
@@ -85,6 +85,13 @@ add_action('admin_menu','wdhd_remove_options_page',90);
 
 // verzió ellenőrzés és telepítés ha kell
 function wdhd_sys_check(){
+  global $wdhd_developer_mode;
+
+  if ($wdhd_developer_mode){
+    wdhd_save_param("wdhd_developer_mode","true");
+  }else{
+    wdhd_save_param("wdhd_developer_mode","false");
+  }
   wdhd_db_init();
   wdhd_sys_init();
 }

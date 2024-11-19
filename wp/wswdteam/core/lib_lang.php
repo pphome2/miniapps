@@ -10,15 +10,15 @@ if (!defined('ABSPATH')){
 
 // fordítás
 function wswdteam_lang($text='',$dot=true){
-  global $wswdteam_lang_str,$wswdteam_lang_new;
+  global $wswdteam_lang_str,$wswdteam_lang_new,$wswdteam_developer_mode;
 
   if (isset($wswdteam_lang_str)and(isset($wswdteam_lang_str[$text]))){
     $line=$wswdteam_lang_str[$text];
   }else{
-    if (!$dot){
-      $line=$text;
-    }else{
+    if (($dot)and($wswdteam_developer_mode)){
       $line='.'.$text.'.';
+    }else{
+      $line=$text;
     }
     $wswdteam_lang_new[$text]=strip_tags($text);
   }

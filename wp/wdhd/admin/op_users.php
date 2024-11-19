@@ -152,6 +152,11 @@ function wdhd_utable(){
   global $wpdb,$wdhd_table,$wdhd_pagerow,$wdhd_user_role_list;
 
   wdhd_upagehead();
+  echo(wdhd_lang("A rendszer által kezelt jogcsoportok").":<br /><br />");
+  foreach($wdhd_user_role_list as $r){
+    echo("$r<br />");
+  }
+  echo("<div class=\"wdhdspaceholder\"></div>");
   $table_name=$wpdb->prefix.$wdhd_table[1];
   $sql="SELECT COUNT(*) FROM $table_name";
   $db=$wpdb->get_var($sql);
@@ -220,9 +225,9 @@ function wdhd_utable(){
   </tbody>
     <tfoot>
 	  <tr>
-	    <th scope="col" id="title" class="manage-column"><?php echo(wdhd_lang('Paraméter név')); ?></th>
-	    <th scope="col" id="author" class="manage-column"><?php echo(wdhd_lang('Érték')); ?></th>
-	    <th scope="col" id="tags" class="manage-column"><?php echo(wdhd_lang('Művelet')); ?></th>
+	    <th scope="col" id="title" class="manage-column"><?php echo(wdhd_lang('Felhasználó')); ?></th>
+	    <th scope="col" id="author" class="manage-column"><?php echo(wdhd_lang('Jogcsoport')); ?></th>
+	    <th scope="col" id="tags" class="manage-column"><?php echo(wdhd_lang('Töröl')); ?></th>
 	  </tr>
     </tfoot>
   </table>

@@ -152,6 +152,11 @@ function wswdteam_utable(){
   global $wpdb,$wswdteam_table,$wswdteam_pagerow,$wswdteam_user_role_list;
 
   wswdteam_upagehead();
+  echo(wdhd_lang("A rendszer által kezelt jogcsoportok").":<br /><br />");
+  foreach($wswdteam_user_role_list as $r){
+    echo("$r<br />");
+  }
+  echo("<div class=\"wdhdspaceholder\"></div>");
   $table_name=$wpdb->prefix.$wswdteam_table[1];
   $sql="SELECT COUNT(*) FROM $table_name";
   $db=$wpdb->get_var($sql);
