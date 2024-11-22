@@ -38,24 +38,37 @@ wdhd_admin_main();
 function wdhd_admin_main(){
   global $wdhd_options;
 
-  echo("<br />");
-  echo("<br />");
-  echo(wdhd_lang("Rendszer paraméterek").":<br /><br />");
+  echo("<span class=wdhdspaceholder></span>");
+  echo(wdhd_lang("Rendszer paraméterek").":");
+  echo("<span class=wdhdspaceholder></span>");
   $ver=get_option($wdhd_options[0],'0');
   echo($wdhd_options[0]." - ".$ver);
   echo("<br />");
   $ver=get_option($wdhd_options[1],'0');
   echo($wdhd_options[1]." - ".$ver);
-  echo("<br />");
-  echo("<br />");
-  echo(wdhd_lang("Alkalmazás paraméterek").":<br /><br />");
+  echo("<span class=wdhdspaceholder></span>");
+  echo(wdhd_lang("Alkalmazás paraméterek").":");
+  echo("<span class=wdhdspaceholder></span>");
   $ver=wdhd_get_param($wdhd_options[0]);
   echo($wdhd_options[0]." - ".$ver);
   echo("<br />");
   $ver=wdhd_get_param($wdhd_options[1]);
   echo($wdhd_options[1]." - ".$ver);
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wdhdspaceholder></span>");
+  $t=wdhd_get_param("cím");
+  if (isset($_POST['submit'])){
+    wdhd_save_param("cím",$_POST['text']);
+    echo(wdhd_message("Adatok elmentve"));
+    echo($t);
+  }else{
+    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+    echo("<label for=\"text\">".wdhd_lang('Címadatok munkalapra').":</label><br>");
+    echo("<textarea id=text name=text class=wdhdinputtexta rows=10 >$t</textarea>");
+    echo("<br />");
+    echo("<input type=\"submit\" class=\"button\" id=\"submit\" name=\"submit\" value=\"".wdhd_lang('Mehet')."\">");
+    echo("</form>");
+  }
+  echo("<span class=wdhdspaceholder></span>");
 }
 
 
@@ -64,10 +77,8 @@ function wdhd_upagehead(){
   echo("<br />");
   echo("<h1>".wdhd_lang('WD HD helpdesk rendszer')."</h1>");
   echo("<br />");
-  echo(wdhd_lang('Beállítások'));
-  echo("<br />");
-  echo("<br />");
-  echo("<br />");
+  echo("<b>".wdhd_lang('Beállítások')."</b>");
+  echo("<span class=wdhdspaceholder></span>");
 }
 
 

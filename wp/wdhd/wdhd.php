@@ -49,6 +49,17 @@ if (isset($wdhd_main_files)){
   }
 }
 
+// alkalmazásfájlok betöltése
+if (isset($wdhd_content_files)){
+  foreach($wdhd_content_files as $f){
+    if (file_exists(__DIR__.$f)){
+      include(__DIR__.$f);
+    }else{
+      exit;
+    }
+  }
+}
+
 
 // admin mód és admin vezérlés betöltése
 if (is_admin()){

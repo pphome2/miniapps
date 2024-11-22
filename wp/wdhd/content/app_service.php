@@ -9,7 +9,8 @@ if (!defined('ABSPATH')){
 
 
 function wdhd_service($l="",$urole=999){
-  global $wdhd_user_role_list,$wpdb,$wdhd_table,$wdhd_pagerow,$wdhd_user_name;
+  global $wdhd_user_role_list,$wpdb,$wdhd_table,$wdhd_pagerow,$wdhd_user_name,
+         $wdhd_print_page,$wdhd_developer_mode;
 
 
   $table_name=$wpdb->prefix.$wdhd_table[2];
@@ -56,7 +57,7 @@ function wdhd_service($l="",$urole=999){
       }
       $li=wdhd_lang("Kiadott bejelentések");
       $c=$c."<br />$li: <b>$wun</b> ($wdhd_user_role_list[$urole])<br /><br />";
-      $sql="SELECT COUNT(*) FROM $table_name WHERE t_inname='$wun';";
+      $sql="SELECT COUNT(*) FROM $table_name WHERE t_worker='$wun';";
       $db=$wpdb->get_var($sql);
       if (isset($_POST['wpage'])){
         $page=$_POST['wpage'];
@@ -86,7 +87,7 @@ function wdhd_service($l="",$urole=999){
         </thead>
         <tbody id=\"the-list\">
         ";
-      $sql="SELECT * FROM $table_name WHERE t_inname='$wun' ORDER BY id DESC LIMIT $i,$wdhd_pagerow;";
+      $sql="SELECT * FROM $table_name WHERE t_worker='$wun' ORDER BY id DESC LIMIT $i,$wdhd_pagerow;";
       $res=$wpdb->get_results($sql);
       if (count($res)<>0){
         $ij=1;
@@ -117,6 +118,22 @@ function wdhd_service($l="",$urole=999){
 	      $c=$c."<b>".wdhd_lang("Kiszállás (km)").":</b> $t->t_km<br />";
 	      $c=$c."<b>".wdhd_lang("Bejelentés lezárva").":</b> $t->t_endtime<br />";
 	      $c=$c."<b>".wdhd_lang("Bejelentést lezárta").":</b> $t->t_enduname<br />";
+	      if (($t->t_endtime<>"")or($wdhd_developer_mode)){
+	        $fn=plugin_dir_url( __FILE__ ).$wdhd_print_page."?id=".$t->id;
+            $tc=wdhd_get_param("cím");
+            $c=$c."<br /><form id=$ij action=\"".$fn."\" target=\"_blank\" method=\"post\">";
+            $c=$c."<input id=0 name=0 type=hidden value=\"$tc\">";
+            $u=get_user_by('login',$t->t_inname);
+            $ur=$u->description;
+            $c=$c."<input id=1 name=1 type=hidden value=\"".$ur."\">";
+            $i=2;
+            foreach($t as $rf){
+              $c=$c."<input id=$i name=$i type=hidden value=\"$rf\">";
+              $i++;
+            }
+            $c=$c."<input type=submit id=$ij class=\"wdhdtablebutton\" value=".wdhd_lang("Munkalap").">";
+            $c=$c."</form>";
+          }
 	      $c=$c."</span>";
 	      $c=$c."</td>";
 	      if ($t->t_endtime<>""){
@@ -124,11 +141,11 @@ function wdhd_service($l="",$urole=999){
 	        $state2=$state;
 	        $state=$state.": $t->t_endtime";
 	      }else{
-	        $state=wdhd_lang("Nyitott").".";
+	        $state2=wdhd_lang("Nyitott").".";
 	        if ($t->t_plantime<>""){
-	          $state2=wdhd_lang("Tervezve").".";
+	          $state=wdhd_lang("Tervezve").": ".$t->t_plabtime;
 	        }else{
-	          $state2="";
+	          $state=wdhd_lang("Nincs még tervezve").".";
 	        }
 	      }
 	      $c=$c."<td class=\"wdhdcell\">$state</td>";
@@ -138,8 +155,10 @@ function wdhd_service($l="",$urole=999){
             $c=$c."<form action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
             $c=$c."<input id=id name=id type=hidden value=\"$t->id\">";
             $c=$c."<input id=wpage name=wpage type=hidden value=\"$page\">";
-            $c=$c."<input id=fgo name=fgo type=submit class=\"wdhdtablebutton\" value=".wdhd_lang("Lezár").">";
+            $c=$c."<input id=fgo name=fgo type=submit class=\"wdhdtablebutton\" value=\"+\">";
+            #$c=$c."<input id=fgo name=fgo type=submit class=\"wdhdtablebutton\" value=".wdhd_lang("Lezár").">";
             $c=$c."</form>";
+	      }else{
 	      }
 	      $c=$c."</td>";
 	      $c=$c."</tr>";
@@ -203,7 +222,7 @@ function wdhd_service_form($r,$c,$wun){
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Tervezett befejezés")."</td>
-          <td class=wtd><input type=\"text\" id=\"t_plantime\" name=\"t_plantime\" class=\"wdhdinputtext\" readonly value=\"$pt\"></td>
+          <td class=wtd><input type=\"text\" id=\"t_plantime\" name=\"t_plantime\" class=\"wdhdinputtext\" value=\"$pt\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Kijelölt feladat")."</td>
@@ -231,17 +250,34 @@ function wdhd_service_form($r,$c,$wun){
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Bejelentés lezárva")."</td>
-          <td class=wtd><input type=\"text\" id=\"t_endtime\" name=\"t_endtime\" class=\"wdhdinputtext\" readonly value=\"$date\"></td>
+          <td class=wtd><input type=\"text\" id=\"t_endtime\" name=\"t_endtime\" class=\"wdhdinputtext\" readonly value=\"\"></td>
         </tr>
         <tr class=wtr>
           <td class=inputlabel>".wdhd_lang("Bejelentést lezárta")."</td>
-          <td class=wtd><input type=\"text\" id=\"t_enduname\" name=\"t_enduname\" class=\"wdhdinputtext\" readonly value=\"$wun\"></td>
+          <td class=wtd><input type=\"text\" id=\"t_enduname\" name=\"t_enduname\" class=\"wdhdinputtext\" readonly value=\"\"></td>
         </tr>
         </table>
         <br /><br />
         <input type=\"hidden\" id=\"id\" name=\"id\" value=\"$r->id\">
         <input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">
-        <input type=\"submit\" class=\"wdhdsubmitbutton\" id=\"close\" name=\"close\" value=\"".wdhd_lang("Lezár")."\">
+        <table style=\"width:100%\">
+        <tr>
+        <td style=\"width:33%;padding:10px;\">
+        <input type=\"submit\" class=\"wdhdsubmitbutton\" id=\"tclose\" name=\"tclose\" value=\"".wdhd_lang("Lezár")."\"
+          onclick=\"
+          getElementById('t_plantime').readOnly=true;
+          getElementById('t_endtime').value='".date('Y.m.d. H:m')."';
+          getElementById('t_enduname').value='".$wun."';
+          return false;\"
+        >
+        </td>
+        <td style=\"width:33%;padding:10px;\">
+        <input type=\"submit\" class=\"wdhdsubmitbutton\" id=\"close\" name=\"close\" value=\"".wdhd_lang("Mentés")."\">
+        </td>
+        <td style=\"padding:10px\">
+        <input type=\"submit\" class=\"wdhdsubmitbutton\" id=\"end\" name=\"end\" value=\"".wdhd_lang("Mégse")."\">
+        </td></tr>
+        </table>
         </form>
         <br /><br />";
   return($c);

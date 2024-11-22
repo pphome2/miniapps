@@ -6,7 +6,13 @@
 if (!defined('ABSPATH')){
   exit;
 }
-global $wpdb;
+
+
+// alkalmazás változók
+
+
+
+// rendszer változók
 
 // verziók
 global $wswdteam_db_version,$wswdteam_plugin_version;
@@ -68,12 +74,16 @@ $wswdteam_main_files=array('/core/main.php',
                            '/core/lib_page.php',
                            '/core/lib_view.php',
                            '/core/lib_param.php',
-                           '/core/lib_right.php',
-                           '/core/app1.php',
-                           '/core/app2.php',
-                           '/core/app3.php',
-                           '/core/app4.php'
+                           '/core/lib_right.php'
                            );
+
+// alkalmazás fájlok
+global $wswdteam_content_files;
+$wswdteam_content_files=array('/content/app1.php',
+                              '/content/app2.php',
+                              '/content/app3.php',
+                              '/content/app4.php'
+                             );
 
 // post könyvtár
 global $wswdteam_dir_post;

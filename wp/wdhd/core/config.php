@@ -7,6 +7,24 @@ if (!defined('ABSPATH')){
   exit;
 }
 
+// alkalmazás változók
+
+// a endszerben használt felhasználói szerepkörök
+global $wdhd_ticket_type;
+$wdhd_ticket_type=array(0=>'Bevizsgálás',
+                        1=>'Javítás (TMK)',
+                        2=>'Javítás (villanyszerelő)',
+                        3=>'Beszerzés',
+                        4=>'Egyéb'
+                       );
+
+// nyomtatóra munkalap
+global $wdhd_print_page;
+$wdhd_print_page="app_wpage.php";
+
+
+// rendszer vátozók
+
 // verziók
 global $wdhd_db_version,$wdhd_plugin_version;
 $wdhd_plugin_version='1.0';
@@ -39,15 +57,6 @@ $wdhd_user_role=9999;
 global$wdhd_user_name;
 $wdhd_user_name="";
 
-// a endszerben használt felhasználói szerepkörök
-global $wdhd_ticket_type;
-$wdhd_ticket_type=array(0=>'Bevizsgálás',
-                        1=>'Javítás (TMK)',
-                        2=>'Javítás (villanyszerelő)',
-                        3=>'Beszerzés',
-                        4=>'Egyéb'
-                       );
-
 // a rendszer által használt post kategóriák
 global $wdhd_category;
 $wdhd_category=array('Leírás',
@@ -71,17 +80,21 @@ $wdhd_admin_file='/admin/admin.php';
 // rendszer fájlok
 global $wdhd_main_files;
 $wdhd_main_files=array('/core/main.php',
-                           '/core/sql.php',
-                           '/core/lib_view.php',
-                           '/core/lib_msg.php',
-                           '/core/lib_lang.php',
-                           '/core/lib_page.php',
-                           '/core/lib_param.php',
-                           '/core/lib_right.php',
-                           '/core/app_new.php',
-                           '/core/app_ticket.php',
-                           '/core/app_service.php',
-                           '/core/app_help.php'
+                       '/core/sql.php',
+                       '/core/lib_view.php',
+                       '/core/lib_msg.php',
+                       '/core/lib_lang.php',
+                       '/core/lib_page.php',
+                       '/core/lib_param.php',
+                       '/core/lib_right.php'
+                       );
+
+// rendszer fájlok
+global $wdhd_content_files;
+$wdhd_content_files=array( '/content/app_new.php',
+                           '/content/app_ticket.php',
+                           '/content/app_service.php',
+                           '/content/app_help.php'
                            );
 
 // post könyvtár
@@ -107,7 +120,6 @@ $wdhd_pagerow=5;
 // üzenetek automatikus bezárása
 global $wdhd_message_autohide;
 $wdhd_message_autohide=true;
-
 
 // sql táblák
 global $wdhd_table;
