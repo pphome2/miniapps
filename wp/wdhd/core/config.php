@@ -85,6 +85,7 @@ $wdhd_main_files=array('/core/main.php',
                        '/core/lib_msg.php',
                        '/core/lib_lang.php',
                        '/core/lib_page.php',
+                       '/core/lib_backup.php',
                        '/core/lib_param.php',
                        '/core/lib_right.php'
                        );
@@ -96,6 +97,10 @@ $wdhd_content_files=array( '/content/app_new.php',
                            '/content/app_service.php',
                            '/content/app_help.php'
                            );
+
+// mentés letöltés
+global $wdhd_backup_dl;
+$wdhd_backup_dl="lib_backup_dl.php";
 
 // post könyvtár
 global $wdhd_dir_post;

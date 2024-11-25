@@ -274,7 +274,7 @@ function wdhd_pload(){
                     'post_status'=>'publish',
                     'post_author'=>1,
                     'post_category'=>array($cid),
-                    'post_date'=>date('Y-m-d h:m:s'),
+                    'post_date'=>date('Y-m-d h:i:s'),
                     );
         }else{
           $np=array('post_title'=>$l,
@@ -282,7 +282,7 @@ function wdhd_pload(){
                     'post_status'=>'publish',
                     'post_author'=>1,
                     'post_category'=>array($cid),
-                    'post_date'=>date('Y-m-d h:m:s'),
+                    'post_date'=>date('Y-m-d h:i:s'),
                     );
         }
         $pid=wp_insert_post($np, true);
@@ -292,7 +292,7 @@ function wdhd_pload(){
     wdhd_message("A feltöltés megtörtént");
   }else{
     //$l=wp_list_categories(array('orderby' => 'name'));
-    $c=get_categories( array('orderby'=>'name','order'=>'ASC','hide_empty'=>false));
+    $c=get_categories(array('orderby'=>'name','order'=>'ASC','hide_empty'=>false));
 	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
     echo("<label for=\"cid\">".wdhd_lang('Kategória').":</label><br>");
     echo("<select id=\"cid\" name=\"cid\">");
@@ -366,7 +366,7 @@ function wdhd_pageload(){
                     'post_status'=>'publish',
                     'post_type'=>'page',
                     'post_author'=>1,
-                    'post_date'=>date('Y-m-d h:m:s'),                  
+                    'post_date'=>date('Y-m-d h:i:s'),
                     'post_name'=>strtolower(str_replace(' ','-',trim($l)))
                     );
         }else{
@@ -377,7 +377,7 @@ function wdhd_pageload(){
                     'post_status'=>'publish',
                     'post_type'=>'page',
                     'post_author'=>1,
-                    'post_date'=>date('Y-m-d h:m:s'),                  
+                    'post_date'=>date('Y-m-d h:i:s'), 
                     'post_name'=>strtolower(str_replace(' ','-',trim($l)))
                     );
         }

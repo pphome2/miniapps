@@ -73,6 +73,7 @@ $wswdteam_main_files=array('/core/main.php',
                            '/core/lib_msg.php',
                            '/core/lib_page.php',
                            '/core/lib_view.php',
+                           '/core/lib_backup.php',
                            '/core/lib_param.php',
                            '/core/lib_right.php'
                            );
@@ -84,6 +85,10 @@ $wswdteam_content_files=array('/content/app1.php',
                               '/content/app3.php',
                               '/content/app4.php'
                              );
+
+// mentés letöltés
+global $wswdteam_backup_dl;
+$wswdteam_backup_dl="lib_backup_dl.php";
 
 // post könyvtár
 global $wswdteam_dir_post;

@@ -39,7 +39,7 @@ function wdhd_admin_main(){
   global $wdhd_options;
 
   echo("<span class=wdhdspaceholder></span>");
-  echo(wdhd_lang("Rendszer paraméterek").":");
+  echo("<b>".wdhd_lang("Rendszer paraméterek").":</b>");
   echo("<span class=wdhdspaceholder></span>");
   $ver=get_option($wdhd_options[0],'0');
   echo($wdhd_options[0]." - ".$ver);
@@ -47,13 +47,16 @@ function wdhd_admin_main(){
   $ver=get_option($wdhd_options[1],'0');
   echo($wdhd_options[1]." - ".$ver);
   echo("<span class=wdhdspaceholder></span>");
-  echo(wdhd_lang("Alkalmazás paraméterek").":");
+  echo("<b>".wdhd_lang("Alkalmazás paraméterek").":</b>");
   echo("<span class=wdhdspaceholder></span>");
   $ver=wdhd_get_param($wdhd_options[0]);
   echo($wdhd_options[0]." - ".$ver);
   echo("<br />");
   $ver=wdhd_get_param($wdhd_options[1]);
   echo($wdhd_options[1]." - ".$ver);
+  echo("<span class=wdhdspaceholder></span>");
+  echo("<span class=wdhdspaceholder></span>");
+  echo("<b>".wdhd_lang("Alkalmazás adatok").":</b>");
   echo("<span class=wdhdspaceholder></span>");
   $t=wdhd_get_param("cím");
   if (isset($_POST['submit'])){
@@ -69,6 +72,8 @@ function wdhd_admin_main(){
     echo("</form>");
   }
   echo("<span class=wdhdspaceholder></span>");
+  echo("<span class=wdhdspaceholder></span>");
+  wdhd_backup();
 }
 
 

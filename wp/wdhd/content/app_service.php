@@ -119,19 +119,20 @@ function wdhd_service($l="",$urole=999){
 	      $c=$c."<b>".wdhd_lang("Bejelentés lezárva").":</b> $t->t_endtime<br />";
 	      $c=$c."<b>".wdhd_lang("Bejelentést lezárta").":</b> $t->t_enduname<br />";
 	      if (($t->t_endtime<>"")or($wdhd_developer_mode)){
-	        $fn=plugin_dir_url( __FILE__ ).$wdhd_print_page."?id=".$t->id;
-            $tc=wdhd_get_param("cím");
-            $c=$c."<br /><form id=$ij action=\"".$fn."\" target=\"_blank\" method=\"post\">";
-            $c=$c."<input id=0 name=0 type=hidden value=\"$tc\">";
+	        $fn=plugin_dir_url( __FILE__ ).$wdhd_print_page;
             $u=get_user_by('login',$t->t_inname);
             $ur=$u->description;
-            $c=$c."<input id=1 name=1 type=hidden value=\"".$ur."\">";
+            $c=$c."<br /><form id=$ij action=\"".$fn."\" target=\"_blank\" method=\"post\">";
+            $data[0]=wdhd_get_param("cím");
+            $data[1]=$ur;
             $i=2;
-            foreach($t as $rf){
-              $c=$c."<input id=$i name=$i type=hidden value=\"$rf\">";
+            foreach($t as $tt){
+              $data[$i]=$tt;
               $i++;
             }
-            $c=$c."<input type=submit id=$ij class=\"wdhdtablebutton\" value=".wdhd_lang("Munkalap").">";
+            $r=wdhd_workpage($data);
+            $c=$c."<input id=\"0\" name=\"0\" type=hidden value=\"$r\">";
+            $c=$c."<input type=submit id=\"1\" class=\"wdhdtablebutton\" value=\"".wdhd_lang("Munkalap")."\">";
             $c=$c."</form>";
           }
 	      $c=$c."</span>";
@@ -283,5 +284,85 @@ function wdhd_service_form($r,$c,$wun){
   return($c);
 }
 
+
+// munkalap
+function wdhd_workpage($data){
+  $r="";
+
+  $r=$r."<center>";
+  $r=$r."<h1>Munkalap</h1>";
+
+  $r=$r."<span class=wdhdspaceholder></span>";
+  $r=$r."<table style=\"width:60%;border: 2px solid;align:\">";
+  $r=$r."<tr>";
+  $r=$r."<td style=\"padding:1em;width:50%;border: 2px solid;vertical-align:top;\">";
+  $t=explode(PHP_EOL,$data[0]);
+  foreach($t as $tt){
+    $r=$r."$tt <br />";
+  }
+  $r=$r."</td>";
+  $r=$r."<td style=\"padding:1em;width:50%;border: 2px solid;vertical-align:top;\">";
+  $t=explode(PHP_EOL,$data[1]);
+  foreach($t as $tt){
+    $r=$r."$tt <br />";
+  }
+  $r=$r."</td>";
+  $r=$r."</tr>";
+
+  $r=$r."<tr>";
+  $r=$r."<td style=\"padding:1em;width:50%;border: 2px solid;valign:top;vertical-align:top;\">";
+  $r=$r."<b>Bejelentés</b><br /><br />";
+  $r=$r."Bejelentés ideje: ".$data[3]."<br />";
+  $r=$r."Bejelentő: ".$data[5]."<br />";
+  $r=$r."Telefonszám: ".$data[7]."<br />";
+  $r=$r."E-mail: ".$data[8]."<br />";
+  $r=$r."Részletes leírás: <br />".$data[9]."<br />";
+  $r=$r."</td>";
+  $r=$r."<td style=\"padding:1em;width:50%;border: 2px solid;vertical-align:top;vertical-align:top;\">";
+  $r=$r."<b>Elvégzett munka</b><br /><br />";
+  $r=$r."Kijelölt feladat: ".$data[11]."<br />";
+  $r=$r."Elvégzett feladat: <br />".$data[13]."<br />";
+  $r=$r."Felhasznált alkatrészek: ".$data[14]."<br />";
+  $r=$r."Munkaidő (óra): ".$data[15]."<br />";
+  $r=$r."Kiszállás (km): ".$data[16]."<br />";
+  $r=$r."</td>";
+  $r=$r."</tr>";
+
+  #$r=$r."<tr>";
+  #$r=$r."<td style=\"padding:1em;width:50%;border: 1px solid;\">";
+  #foreach($_POST as $k=>$v){
+  #  $r=$r."$k = $v <br />";
+  #}
+  #$r=$r."</td>";
+  #$r=$r."</tr>";
+
+  $r=$r."<tr>";
+  $r=$r."<td style=\"padding:1em;width:50%;border: 2px solid;\">";
+  $r=$r."Munkalap készült: ".date('Y.m.d. H:m');
+  $r=$r."</td>";
+  $r=$r."<td style=\"padding:1em;width:50%;border: 2px solid;\">";
+  $r=$r."Munkavégzés befejezése: ".$data[17]." (".$data[18].")";
+  $r=$r."</td>";
+  $r=$r."</tr>";
+  $r=$r."<tr>";
+  $r=$r."<td style=\"padding:1em;width:50%;border: 2px solid;text-align:center;\">";
+  $r=$r."<br /><br /><br />";
+  $r=$r."____________________________________________<br />";
+  $r=$r."Megrendelő aláírása";
+  $r=$r."</td>";
+  $r=$r."<td style=\"padding:1em;width:50%;border: 2px solid;text-align:center;\">";
+  $r=$r."<br /><br /><br />";
+  $r=$r."____________________________________________<br />";
+  $r=$r."Munkát végzők aláírása";
+  $r=$r."</td>";
+  $r=$r."</tr>";
+  $r=$r."</table>";
+  $r=$r."<span class=wdhdspaceholder></span>";
+
+  $r=$r."</center>";
+
+  $r=htmlentities($r);
+  return($r);
+}
 
 ?>

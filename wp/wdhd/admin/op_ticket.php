@@ -205,7 +205,7 @@ function wdhd_tform($r){
     ?>
     <input type="submit" class="button" id="s" name="s" value="<?php echo(wdhd_lang('Lezár')); ?>"
         onclick="
-          getElementById('t_endtime').value='<?php echo(date('Y.m.d. H:m')); ?>';
+          getElementById('t_endtime').value='<?php echo(date('Y.m.d. H:i')); ?>';
           getElementById('t_enduname').value='<?php echo($wun); ?>';
           getElementById('t_intype').readOnly=true;
           getElementById('t_inname').readOnly=true;
@@ -233,7 +233,7 @@ function wdhd_tformnew(){
   ?>
   <form action="<?php menu_page_url(__FILE__) ?>" method="post">
     <label for="name"><?php echo(wdhd_lang('Érkezési idő')); ?>:</label><br>
-    <input type="text" id="t_time" name="t_time" class="wdhdinputline" value="<?php echo date('Y.m.d. H:m'); ?>" readonly><br><br>
+    <input type="text" id="t_time" name="t_time" class="wdhdinputline" value="<?php echo date('Y.m.d. H:i'); ?>" readonly><br><br>
     <label for="name"><?php echo(wdhd_lang('Típus')); ?>:</label><br>
     <input type="text" id="t_intype" name="t_intype" class="wdhdinputline" value=""><br><br>
     <label for="name"><?php echo(wdhd_lang('Bejelentő')); ?>:</label><br>

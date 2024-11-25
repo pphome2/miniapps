@@ -36,7 +36,7 @@ function wdhd_new($l="",$urole=999){
     }
   }else{
   }
-  $d=date('Y.m.d. H:m');
+  $d=date('Y.m.d. H:i');
   $c=$c."
       <form action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">
       <table class=wtable>
