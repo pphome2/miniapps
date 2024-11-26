@@ -12,7 +12,7 @@ wswdteam_sys_check();
 
 
 // admin menü hozzáadása
-function register_menu_page(){
+function wswdteam_register_menu_page(){
   $s1=plugin_dir_path(__FILE__).'/op_main.php';
   $s2=plugins_url().'/wswdteam/images/icon.png';
   $l=wswdteam_lang('WSWDTeam',false);
@@ -27,10 +27,10 @@ function register_menu_page(){
   );
 }
 //icon: 'dashicons-welcome-widgets-menus',
-add_action('admin_menu','register_menu_page');
+add_action('admin_menu','wswdteam_register_menu_page');
 
 // almenü hozzáadása
-function register_submenu_page(){
+function wswdteam_register_submenu_page(){
   $s0=plugin_dir_path(__FILE__).'/op_main.php';
   $s1=plugin_dir_path(__FILE__).'/op_users.php';
   $l=wswdteam_lang('Felhasználói jogok',false);
@@ -43,10 +43,26 @@ function register_submenu_page(){
     ''
   );
 }
-add_action('admin_menu','register_submenu_page');
+add_action('admin_menu','wswdteam_register_submenu_page');
 
 // almenü hozzáadása
-function register_submenu_page2(){
+function wswdteam_register_submenu_page2(){
+  $s0=plugin_dir_path(__FILE__).'/op_main.php';
+  $s2=plugin_dir_path(__FILE__).'/op_backup.php';
+  $l=wswdteam_lang('Adatmentés',false);
+  add_submenu_page(
+    $s0,
+    $l,
+    $l,
+    'manage_options',
+    $s2,
+    ''
+  );
+}
+add_action('admin_menu','wswdteam_register_submenu_page2');
+
+// almenü hozzáadása
+function wswdteam_register_submenu_page3(){
   $s0=plugin_dir_path(__FILE__).'/op_main.php';
   $s2=plugin_dir_path(__FILE__).'/op_param.php';
   $l=wswdteam_lang('Egyéb beállítások',false);
@@ -59,7 +75,7 @@ function register_submenu_page2(){
     ''
   );
 }
-add_action('admin_menu','register_submenu_page2');
+add_action('admin_menu','wswdteam_register_submenu_page3');
 
 // menü törlése
 function wswdteam_remove_options_page(){

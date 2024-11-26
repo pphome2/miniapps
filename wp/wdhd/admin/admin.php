@@ -63,6 +63,22 @@ add_action('admin_menu','wdhd_register_submenu_page2');
 // almenü hozzáadása
 function wdhd_register_submenu_page3(){
   $s0=plugin_dir_path(__FILE__).'/op_main.php';
+  $s2=plugin_dir_path(__FILE__).'/op_backup.php';
+  $l=wdhd_lang('Adatentés',false);
+  add_submenu_page(
+    $s0,
+    $l,
+    $l,
+    'manage_options',
+    $s2,
+    ''
+  );
+}
+add_action('admin_menu','wdhd_register_submenu_page3');
+
+// almenü hozzáadása
+function wdhd_register_submenu_page4(){
+  $s0=plugin_dir_path(__FILE__).'/op_main.php';
   $s2=plugin_dir_path(__FILE__).'/op_param.php';
   $l=wdhd_lang('Egyéb beállítások',false);
   add_submenu_page(
@@ -74,7 +90,7 @@ function wdhd_register_submenu_page3(){
     ''
   );
 }
-add_action('admin_menu','wdhd_register_submenu_page3');
+add_action('admin_menu','wdhd_register_submenu_page4');
 
 // menü törlése
 function wdhd_remove_options_page(){

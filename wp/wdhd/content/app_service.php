@@ -105,6 +105,7 @@ function wdhd_service($l="",$urole=999){
           $c=$c."<span class=wdhdplus>$t->t_time</span>";
 	      $c=$c."<span id=\"plusdata$ij\" class=\"wdhdsecbox\" onclick=\"this.style.display='none';\">";
           $c=$c."<b>".wdhd_lang("Típus").":</b> $t->t_intype<br />";
+	      $c=$c."<b>".wdhd_lang("Ügyfél").":</b> $t->t_inname<br />";
 	      $c=$c."<b>".wdhd_lang("Csoport").":</b> $t->t_indep<br />";
   	      $c=$c."<b>".wdhd_lang("Telefonszám").":</b> $t->t_intel<br />";
 	      $c=$c."<b>".wdhd_lang("E-mail").":</b> $t->t_inmail<br />";
@@ -121,7 +122,11 @@ function wdhd_service($l="",$urole=999){
 	      if (($t->t_endtime<>"")or($wdhd_developer_mode)){
 	        $fn=plugin_dir_url( __FILE__ ).$wdhd_print_page;
             $u=get_user_by('login',$t->t_inname);
-            $ur=$u->description;
+            if($u){
+              $ur=$u->description;
+            }else{
+              $ur=wdhd_lang("Nincs megadva").".";
+            }
             $c=$c."<br /><form id=$ij action=\"".$fn."\" target=\"_blank\" method=\"post\">";
             $data[0]=wdhd_get_param("cím");
             $data[1]=$ur;
