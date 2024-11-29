@@ -64,7 +64,7 @@ add_action('admin_menu','wdhd_register_submenu_page2');
 function wdhd_register_submenu_page3(){
   $s0=plugin_dir_path(__FILE__).'/op_main.php';
   $s2=plugin_dir_path(__FILE__).'/op_backup.php';
-  $l=wdhd_lang('Adatentés',false);
+  $l=wdhd_lang('Adatmentés',false);
   add_submenu_page(
     $s0,
     $l,
@@ -101,13 +101,6 @@ add_action('admin_menu','wdhd_remove_options_page',90);
 
 // verzió ellenőrzés és telepítés ha kell
 function wdhd_sys_check(){
-  global $wdhd_developer_mode;
-
-  if ($wdhd_developer_mode){
-    wdhd_save_param("wdhd_developer_mode","true");
-  }else{
-    wdhd_save_param("wdhd_developer_mode","false");
-  }
   wdhd_db_init();
   wdhd_sys_init();
 }
@@ -115,7 +108,8 @@ function wdhd_sys_check(){
    
 // rendszer ellenőrzés
 function wdhd_sys_init(){
-  global $wdhd_plugin_version,$wdhd_options;
+  global $wdhd_plugin_version,$wdhd_options,$wdhd_developer_mode;
+
 
   $ver=get_option($wdhd_options[0],'0');
   // nincs plugin
@@ -123,12 +117,28 @@ function wdhd_sys_init(){
     // új
     wdhd_sys_new($ver,$wdhd_plugin_version);
     wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
+    if ($wdhd_developer_mode){
+      wdhd_save_param("wdhd_developer_mode","true");
+    }else{
+      wdhd_save_param("wdhd_developer_mode","false");
+    }
   }else{
     // frissítés kell
     if ($ver<>$wdhd_plugin_version){
       wdhd_sys_upgrade($ver,$wdhd_plugin_version);
       wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
+      if ($wdhd_developer_mode){
+        wdhd_save_param("wdhd_developer_mode","true");
+      }else{
+        wdhd_save_param("wdhd_developer_mode","false");
+      }
     }
+  }
+  $dev=wdhd_get_param("wdhd_developer_mode");
+  if ($dev==="true"){
+    $wdhd_developer_mode=true;
+  }else{
+    $wdhd_developer_mode=false;
   }
 }
 

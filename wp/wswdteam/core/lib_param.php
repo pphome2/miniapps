@@ -33,8 +33,10 @@ function wswdteam_get_param($name=""){
   $table_name=$wpdb->prefix.$wswdteam_table[0];
   $sql="SELECT * FROM $table_name WHERE name='$name';";
   $res=$wpdb->get_results($sql);
-  $t=$res[0];
-  $r=$t->text;
+  if ($res){
+    $t=$res[0];
+    $r=$t->text;
+  }
   return($r);
 }
 

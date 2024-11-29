@@ -78,6 +78,7 @@ function wdhd_backup(){
   }else{
     echo(wdhd_lang("Visszatöltés"));
   }
+  echo("<span class=wdhdspaceholder></span>");
 }
 
 ?>

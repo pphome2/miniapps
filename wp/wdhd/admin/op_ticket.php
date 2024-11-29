@@ -137,37 +137,39 @@ if ($table){
 
 // adat form
 function wdhd_tform($r){
-  global $wdhd_ticket_type,$wdhd_user_name,$wdhd_ticket_type;
+  global $wdhd_ticket_type,$wdhd_user_name,$wdhd_ticket_type,$wdhd_table;
 
   wdhd_tpagehead();
   $page=$_POST['wpage'];
   $wun=wdhd_user_nicename();
   if ($r->t_endtime<>""){
     $readonly="readonly";
+    $uro="readonly";
   }else{
+    $uro="";
     $readonly="";
   }
   ?>
   <form action="<?php menu_page_url(__FILE__) ?>" method="post">
-    <label for="name"><?php echo(wdhd_lang('Érkezési idő')); ?>:</label><br>
-    <input type="text" id="t_time" name="t_time" class="wdhdinputline" value="<?php echo($r->t_time); ?>" readonly><br><br>
-    <label for="name"><?php echo(wdhd_lang('Típus')); ?>:</label><br>
-    <input type="text" id="t_intype" name="t_intype" class="wdhdinputline" value="<?php echo($r->t_intype); ?>" <?php echo($readonly); ?>><br><br>
-    <label for="name"><?php echo(wdhd_lang('Bejelentő')); ?>:</label><br>
-    <input type="text" id="t_inname" name="t_inname" class="wdhdinputline" value="<?php echo($r->t_inname); ?>" <?php echo($readonly); ?>><br><br>
-    <label for="name"><?php echo(wdhd_lang('Csoport')); ?>:</label><br>
-    <input type="text" id="t_indep" name="t_indep" class="wdhdinputline" value="<?php echo($r->t_indep); ?>" <?php echo($readonly); ?>><br><br>
-    <label for="name"><?php echo(wdhd_lang('Telefonszám')); ?>:</label><br>
-    <input type="text" id="t_intel" name="t_intel" class="wdhdinputline" value="<?php echo($r->t_intel); ?>" <?php echo($readonly); ?>><br><br>
-    <label for="name"><?php echo(wdhd_lang('E-mail cím')); ?>:</label><br>
-    <input type="text" id="t_inmail" name="t_inmail" class="wdhdinputline" value="<?php echo($r->t_inmail); ?>" <?php echo($readonly); ?>><br><br>
+    <label for="name"><?php echo(wdhd_lang('Érkezési idő')); ?>:</label><br />
+    <input type="text" id="t_time" name="t_time" class="wdhdinputline" value="<?php echo($r->t_time); ?>" readonly><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Típus')); ?>:</label><br />
+    <input type="text" id="t_intype" name="t_intype" class="wdhdinputline" value="<?php echo($r->t_intype); ?>" <?php echo($readonly); ?>><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Bejelentő')); ?>:</label><br />
+    <input type="text" id="t_inname" name="t_inname" class="wdhdinputline" value="<?php echo($r->t_inname); ?>" <?php echo($uro); ?>><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Csoport')); ?>:</label><br />
+    <input type="text" id="t_indep" name="t_indep" class="wdhdinputline" value="<?php echo($r->t_indep); ?>" <?php echo($readonly); ?>><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Telefonszám')); ?>:</label><br />
+    <input type="text" id="t_intel" name="t_intel" class="wdhdinputline" value="<?php echo($r->t_intel); ?>" <?php echo($readonly); ?>><br /><br />
+    <label for="name"><?php echo(wdhd_lang('E-mail cím')); ?>:</label><br />
+    <input type="text" id="t_inmail" name="t_inmail" class="wdhdinputline" value="<?php echo($r->t_inmail); ?>" <?php echo($readonly); ?>><br /><br />
     <span class=spaceholder></span>
-    <label for="name"><?php echo(wdhd_lang('Leírás')); ?>:</label><br>
-    <textarea id="t_text" name="t_text" class="wdhdinputline" <?php echo($readonly); ?>><?php echo($r->t_text); ?></textarea><br><br>
+    <label for="name"><?php echo(wdhd_lang('Leírás')); ?>:</label><br />
+    <textarea id="t_text" name="t_text" class="wdhdinputline" <?php echo($readonly); ?>><?php echo($r->t_text); ?></textarea><br /><br />
     <span class=wdhdspaceholder></span>
-    <label for="name"><?php echo(wdhd_lang('Tervezett befejezés')); ?>:</label><br>
-    <input type="text" id="t_plantime" name="t_plantime" class="wdhdinputline" value="<?php echo($r->t_plantime); ?>" <?php echo($readonly); ?>><br><br>
-    <label for="name"><?php echo(wdhd_lang('Kijelölt feladat')); ?>:</label><br>
+    <label for="name"><?php echo(wdhd_lang('Tervezett befejezés')); ?>:</label><br />
+    <input type="text" id="t_plantime" name="t_plantime" class="wdhdinputline" value="<?php echo($r->t_plantime); ?>" <?php echo($readonly); ?>><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Kijelölt feladat')); ?>:</label><br />
     <select id="t_dep" name="t_dep" class="wdhdinputline" <?php echo($readonly); ?>>
     <?php
       foreach($wdhd_ticket_type as $t){
@@ -180,22 +182,22 @@ function wdhd_tform($r){
     ?>
     </select>
     <span class=wdhdspaceholder></span>
-    <label for="name"><?php echo(wdhd_lang('Munka kiadva')); ?>:</label><br>
-    <input type="text" id="t_worker" name="t_worker" class="wdhdinputline" value="<?php echo($r->t_worker); ?>"><br><br>
+    <label for="name"><?php echo(wdhd_lang('Munka kiadva')); ?>:</label><br />
+    <input type="text" id="t_worker" name="t_worker" class="wdhdinputline" value="<?php echo($r->t_worker); ?>"><br /><br />
     <span class=spaceholder></span>
-    <label for="name"><?php echo(wdhd_lang('Elvégzett munka')); ?>:</label><br>
-    <textarea id="t_action" name="t_action" class="wdhdinputline"><?php echo($r->t_action); ?></textarea><br><br>
+    <label for="name"><?php echo(wdhd_lang('Elvégzett munka')); ?>:</label><br />
+    <textarea id="t_action" name="t_action" class="wdhdinputline"><?php echo($r->t_action); ?></textarea><br /><br />
     <span class=spaceholder></span>
-    <label for="name"><?php echo(wdhd_lang('Felhasznált eszközök')); ?>:</label><br>
-    <textarea id="t_parts" name="t_parts" class="wdhdinputline"><?php echo($r->t_parts); ?></textarea><br><br>
-    <label for="name"><?php echo(wdhd_lang('Ráfordított munkaóra')); ?>:</label><br>
-    <input type="text" id="t_hour" name="t_hour" class="wdhdinputline" value="<?php echo($r->t_hour); ?>"><br><br>
-    <label for="name"><?php echo(wdhd_lang('Kiszállás (km)')); ?>:</label><br>
-    <input type="text" id="t_km" name="t_km" class="wdhdinputline" value="<?php echo($r->t_km); ?>"><br><br>
-    <label for="name"><?php echo(wdhd_lang('Bejelentés lezárva')); ?>:</label><br>
-    <input type="text" id="t_endtime" name="t_endtime" class="wdhdinputline" value="<?php echo($r->t_endtime); ?>" readonly><br><br>
-    <label for="name"><?php echo(wdhd_lang('Bejelentést lezárta')); ?>:</label><br>
-    <input type="text" id="t_enduname" name="t_enduname" class="wdhdinputline" value="<?php echo($r->t_enduname); ?>" readonly><br><br>
+    <label for="name"><?php echo(wdhd_lang('Felhasznált eszközök')); ?>:</label><br />
+    <textarea id="t_parts" name="t_parts" class="wdhdinputline"><?php echo($r->t_parts); ?></textarea><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Ráfordított munkaóra')); ?>:</label><br />
+    <input type="text" id="t_hour" name="t_hour" class="wdhdinputline" value="<?php echo($r->t_hour); ?>"><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Kiszállás (km)')); ?>:</label><br />
+    <input type="text" id="t_km" name="t_km" class="wdhdinputline" value="<?php echo($r->t_km); ?>"><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Bejelentés lezárva')); ?>:</label><br />
+    <input type="text" id="t_endtime" name="t_endtime" class="wdhdinputline" value="<?php echo($r->t_endtime); ?>" readonly><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Bejelentést lezárta')); ?>:</label><br />
+    <input type="text" id="t_enduname" name="t_enduname" class="wdhdinputline" value="<?php echo($r->t_enduname); ?>" readonly><br /><br />
     
     <input type="hidden" id="id" name="id" value="<?php echo($r->id); ?>">
     <input type="hidden" id="wpage" name="wpage" value="<?php echo($page); ?>">
@@ -226,31 +228,53 @@ function wdhd_tform($r){
 
 // adat form
 function wdhd_tformnew(){
-  global $wdhd_ticket_type;
+  global $wpdb,$wdhd_table,$wdhd_ticket_type;
 
   wdhd_tpagehead();
   $page=$_POST['wpage'];
   ?>
   <form action="<?php menu_page_url(__FILE__) ?>" method="post">
-    <label for="name"><?php echo(wdhd_lang('Érkezési idő')); ?>:</label><br>
-    <input type="text" id="t_time" name="t_time" class="wdhdinputline" value="<?php echo date('Y.m.d. H:i'); ?>" readonly><br><br>
-    <label for="name"><?php echo(wdhd_lang('Típus')); ?>:</label><br>
-    <input type="text" id="t_intype" name="t_intype" class="wdhdinputline" value=""><br><br>
-    <label for="name"><?php echo(wdhd_lang('Bejelentő')); ?>:</label><br>
-    <input type="text" id="t_inname" name="t_inname" class="wdhdinputline" value=""><br><br>
-    <label for="name"><?php echo(wdhd_lang('Csoport')); ?>:</label><br>
-    <input type="text" id="t_indep" name="t_indep" class="wdhdinputline" value=""><br><br>
-    <label for="name"><?php echo(wdhd_lang('Telefonszám')); ?>:</label><br>
-    <input type="text" id="t_intel" name="t_intel" class="wdhdinputline" value=""><br><br>
-    <label for="name"><?php echo(wdhd_lang('E-mail cím')); ?>:</label><br>
-    <input type="text" id="t_inmail" name="t_inmail" class="wdhdinputline" value=""><br><br>
+    <label for="name"><?php echo(wdhd_lang('Érkezési idő')); ?>:</label><br />
+    <input type="text" id="t_time" name="t_time" class="wdhdinputline" value="<?php echo date('Y.m.d. H:i'); ?>" readonly><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Típus')); ?>:</label><br />
+    <input type="text" id="t_intype" name="t_intype" class="wdhdinputline" value=""><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Bejelentő')); ?>:</label><br />
+    <?php
+      $table_name=$wpdb->prefix.$wdhd_table[1];
+      $sql="SELECT * FROM $table_name WHERE urole=1;";
+      $resn=$wpdb->get_results($sql);
+      if ($resn){
+        echo("<select id=\"t_inname\" name=\"t_inname\" class=\"wdhdinputline\">");
+        echo("<option value=\"\"></option>");
+        foreach($resn as $rn){
+          $s=$rn->uname;
+          $sql="SELECT * FROM $wpdb->users WHERE `display_name`='$s';";
+          $resu=$wpdb->get_results($sql);
+          //$resu=get_user_by('display_name',$s);
+          if ($resu){
+            $u=$resu[0];
+            echo("<option value=\"$u->user_login\">$s ($u->user_login)</option>");
+          }
+        }
+        echo("</select>");
+      }else{
+        echo("<input type=\"text\" id=\"t_inname\" name=\"t_inname\" class=\"wdhdinputline\" value=\"\">");
+      }
+    ?>
+    <br /><br />
+    <label for="name"><?php echo(wdhd_lang('Csoport')); ?>:</label><br />
+    <input type="text" id="t_indep" name="t_indep" class="wdhdinputline" value=""><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Telefonszám')); ?>:</label><br />
+    <input type="text" id="t_intel" name="t_intel" class="wdhdinputline" value=""><br /><br />
+    <label for="name"><?php echo(wdhd_lang('E-mail cím')); ?>:</label><br />
+    <input type="text" id="t_inmail" name="t_inmail" class="wdhdinputline" value=""><br /><br />
     <span class=wdhdspaceholder></span>
-    <label for="name"><?php echo(wdhd_lang('Leírás')); ?>:</label><br>
-    <textarea id="t_text" name="t_text" class="wdhdinputline"></textarea><br>
+    <label for="name"><?php echo(wdhd_lang('Leírás')); ?>:</label><br />
+    <textarea id="t_text" name="t_text" class="wdhdinputline"></textarea><br />
     <span class=wdhdspaceholder></span>
-    <label for="name"><?php echo(wdhd_lang('Tervezett befejezés')); ?>:</label><br>
-    <input type="text" id="t_plantime" name="t_plantime" class="wdhdinputline" value=""><br><br>
-    <label for="name"><?php echo(wdhd_lang('Kijelölt feladat')); ?>:</label><br>
+    <label for="name"><?php echo(wdhd_lang('Tervezett befejezés')); ?>:</label><br />
+    <input type="text" id="t_plantime" name="t_plantime" class="wdhdinputline" value=""><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Kijelölt feladat')); ?>:</label><br />
     <select id="t_dep" name="t_dep" class="wdhdinputline">
     <?php
       foreach($wdhd_ticket_type as $t){
@@ -258,23 +282,23 @@ function wdhd_tformnew(){
       }
     ?>
     </select>
-    <br><br>
-    <label for="name"><?php echo(wdhd_lang('Munka kiadva')); ?>:</label><br>
-    <input type="text" id="t_worker" name="t_worker" class="wdhdinputline" value=""><br><br>
+    <br /><br />
+    <label for="name"><?php echo(wdhd_lang('Munka kiadva')); ?>:</label><br />
+    <input type="text" id="t_worker" name="t_worker" class="wdhdinputline" value=""><br /><br />
     <span class=wdhdspaceholder></span>
-    <label for="name"><?php echo(wdhd_lang('Elvégzett munka')); ?>:</label><br>
-    <textarea id="t_action" name="t_action" class="wdhdinputline"></textarea><br><br>
+    <label for="name"><?php echo(wdhd_lang('Elvégzett munka')); ?>:</label><br />
+    <textarea id="t_action" name="t_action" class="wdhdinputline"></textarea><br /><br />
     <span class=wdhdspaceholder></span>
-    <label for="name"><?php echo(wdhd_lang('Felhasznált eszközök')); ?>:</label><br>
-    <input type="text" id="t_parts" name="t_parts" class="wdhdinputline" value=""><br><br>
-    <label for="name"><?php echo(wdhd_lang('Ráfordított munkaóra')); ?>:</label><br>
-    <input type="text" id="t_hour" name="t_hour" class="wdhdinputline" value=""><br><br>
-    <label for="name"><?php echo(wdhd_lang('Kiszállás (km)')); ?>:</label><br>
-    <input type="text" id="t_km" name="t_km" class="wdhdinputline" value=""><br><br>
-    <label for="name"><?php echo(wdhd_lang('Bejelentés lezárva')); ?>:</label><br>
-    <input type="text" id="t_endtime" name="t_endtime" class="wdhdinputline" value="" readonly><br><br>
-    <label for="name"><?php echo(wdhd_lang('Bejelentést lezárta')); ?>:</label><br>
-    <input type="text" id="t_enduname" name="t_enduname" class="wdhdinputline" value="" readonly><br><br>
+    <label for="name"><?php echo(wdhd_lang('Felhasznált eszközök')); ?>:</label><br />
+    <input type="text" id="t_parts" name="t_parts" class="wdhdinputline" value=""><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Ráfordított munkaóra')); ?>:</label><br />
+    <input type="text" id="t_hour" name="t_hour" class="wdhdinputline" value=""><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Kiszállás (km)')); ?>:</label><br />
+    <input type="text" id="t_km" name="t_km" class="wdhdinputline" value=""><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Bejelentés lezárva')); ?>:</label><br />
+    <input type="text" id="t_endtime" name="t_endtime" class="wdhdinputline" value="" readonly><br /><br />
+    <label for="name"><?php echo(wdhd_lang('Bejelentést lezárta')); ?>:</label><br />
+    <input type="text" id="t_enduname" name="t_enduname" class="wdhdinputline" value="" readonly><br /><br />
     
     <input type="hidden" id="wpage" name="wpage" value="<?php echo($page); ?>">
     <br /><br />

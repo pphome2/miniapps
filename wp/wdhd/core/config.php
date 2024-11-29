@@ -32,7 +32,7 @@ $wdhd_db_version='1.2';
 
 // fejlesztői mód
 global $wdhd_developer_mode;
-$wdhd_developer_mode=true;
+$wdhd_developer_mode=false;
 
 // wp opciók
 global $wdhd_options;

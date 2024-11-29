@@ -75,7 +75,7 @@ if (is_admin()){
 function wdhd_init(){
   global $locale, $wp_local_package,$wdhd_options,$wdhd_plugin_version,
          $wdhd_user_role_list,$wdhd_category,$wdhd_locale,
-         $wdhd_dir_lang,$wdhd_ticket_type;
+         $wdhd_dir_lang,$wdhd_ticket_type,$wdhd_developer_mode;
 
   // nyelvi beállítás
   $loc="";
@@ -109,6 +109,12 @@ function wdhd_init(){
   foreach($wdhd_ticket_type as $c){
     $wdhd_ticket_type[$i]=wdhd_lang($wdhd_ticket_type[$i],false);
     $i++;
+  }
+  $dev=wdhd_get_param("wdhd_developer_mode");
+  if ($dev==="true"){
+    $wdhd_developer_mode=true;
+  }else{
+    $wdhd_developer_mode=false;
   }
 }
 add_action('init','wdhd_init');

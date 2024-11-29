@@ -21,7 +21,7 @@ tbody>:nth-child(n):hover {
   background-color: lightgray;
 }
 
-.wswdspaceholder{
+.wswdteamspaceholder{
   display:block;
   max-height:2em;
   height:2em;

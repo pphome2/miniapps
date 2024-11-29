@@ -31,9 +31,34 @@ echo("<div class=wswdspaceholder></div>");
 // fejrész
 wswdteam_upagehead();
 
+//adatok
+wswdteam_datatable();
 
 // adattábla
 function wswdteam_datatable(){
+  global $wswdteam_options;
+
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<b>".wswdteam_lang("Rendszer paraméterek").":</b>");
+  echo("<span class=wswdteamspaceholder></span>");
+  $ver=get_option($wswdteam_options[0],'0');
+  echo($wswdteam_options[0]." - ".$ver);
+  echo("<br />");
+  $ver=get_option($wswdteam_options[1],'0');
+  echo($wswdteam_options[1]." - ".$ver);
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<b>".wswdteam_lang("Alkalmazás paraméterek").":</b>");
+  echo("<span class=wswdteamspaceholder></span>");
+  $ver=wswdteam_get_param($wswdteam_options[0]);
+  echo($wswdteam_options[0]." - ".$ver);
+  echo("<br />");
+  $ver=wswdteam_get_param($wswdteam_options[1]);
+  echo($wswdteam_options[1]." - ".$ver);
+  echo("<br />");
+  $ver=wswdteam_get_param("wswdteam_developer_mode");
+  echo("wswdteam_developer_mode"." - ".$ver);
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 

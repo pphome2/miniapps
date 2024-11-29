@@ -9,7 +9,7 @@ if (!defined('ABSPATH')){
 
 
 // adatmentés
-function wdhd_backup(){
+function wswdteam_backup(){
   global $wpdb,$wswdteam_backup_dl;
 
   if (!isset($_POST['b0'])){

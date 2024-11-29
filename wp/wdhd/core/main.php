@@ -43,35 +43,11 @@ function wdhd_main_center($atts=[],$content=null,$tag=''){
       }
       $i++;
     }
-    //}
-    //$content=wdhd_x($content);
     $content=$content."</div>";
     return $content;
   }
 }
 
-
-
-// teszt: sql lekérdezés
-function wdhd_x($c){
-  global $wpdb,$wdhd_table;
-
-  $table_name=$wpdb->prefix.$wdhd_table[0];
-  $c=$c.'<br /><br />SQL:<br /><br />';
-  $sql="SELECT * FROM $table_name;";
-  $res=$wpdb->get_results($sql);
-  $i=1;
-  foreach($res as $t) {
-    $c=$c."$i - ";
-    $c=$c.$t->name;
-    $c=$c.' - ';
-    $c=$c.$t->text;
-    $c=$c.'<br />';
-    $i++;
-  }
-
-  return($c);
-}
 
 
 ?>

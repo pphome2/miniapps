@@ -21,7 +21,7 @@ $wswdteam_db_version='1.0';
 
 // fejlesztői mód
 global $wswdteam_developer_mode;
-$wswdteam_developer_mode=true;
+$wswdteam_developer_mode=false;
 
 
 // wp opciók

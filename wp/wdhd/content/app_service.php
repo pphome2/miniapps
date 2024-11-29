@@ -106,6 +106,13 @@ function wdhd_service($l="",$urole=999){
 	      $c=$c."<span id=\"plusdata$ij\" class=\"wdhdsecbox\" onclick=\"this.style.display='none';\">";
           $c=$c."<b>".wdhd_lang("Típus").":</b> $t->t_intype<br />";
 	      $c=$c."<b>".wdhd_lang("Ügyfél").":</b> $t->t_inname<br />";
+          $u=get_user_by('login',$t->t_inname);
+          if($u){
+            //$tx=str_replace("\n\n","",$u->description)."";
+            //$c=$c.str_replace("\n","<br />",$tx)."<br />";
+            $c=$c.str_replace("\n","<br />",$u->description)."<br />";
+            $c=$c.$u->user_email."<br />";
+          }
 	      $c=$c."<b>".wdhd_lang("Csoport").":</b> $t->t_indep<br />";
   	      $c=$c."<b>".wdhd_lang("Telefonszám").":</b> $t->t_intel<br />";
 	      $c=$c."<b>".wdhd_lang("E-mail").":</b> $t->t_inmail<br />";

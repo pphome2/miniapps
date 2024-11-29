@@ -39,6 +39,7 @@ function wdhd_admin_main(){
   global $wdhd_options;
 
   echo("<span class=wdhdspaceholder></span>");
+  // paraméterek
   echo("<b>".wdhd_lang("Rendszer paraméterek").":</b>");
   echo("<span class=wdhdspaceholder></span>");
   $ver=get_option($wdhd_options[0],'0');
@@ -54,7 +55,11 @@ function wdhd_admin_main(){
   echo("<br />");
   $ver=wdhd_get_param($wdhd_options[1]);
   echo($wdhd_options[1]." - ".$ver);
+  echo("<br />");
+  $ver=wdhd_get_param("wdhd_developer_mode");
+  echo("wdhd_developer_mode"." - ".$ver);
   echo("<span class=wdhdspaceholder></span>");
+  // alkalmazás
   echo("<span class=wdhdspaceholder></span>");
   echo("<b>".wdhd_lang("Alkalmazás adatok").":</b>");
   echo("<span class=wdhdspaceholder></span>");
