@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	
+	<script type="text/javascript" src="../jq/jquery.js"></script>
+	<script>
+		$(document).ready(function() {
+		db=$('#doboz'); lepkoz=30; szinek=4; szinmost=db.attr("class");
+			function szincsere(){
+				szinmost=db.attr('class');
+				db.removeClass(szinmost);
+				i=szinmost.replace('sz','')*1;
+				if (i < szinek) { i=i+1; } else { i=1; }
+				db.addClass('sz'+i);
+			}
+			$('#jobb').click(function(){
+				db.animate({'left':db.position().left+lepkoz},200);
+			});
+			$('#bal').click(function(){
+				db.animate({'left':db.position().left-lepkoz},200);
+			});
+			$('#fel, #le').click(function(){
+				if ($(this).attr('id')=='fel')
+					{ irany=1; }
+				else
+					{ irany=-1; }
+				db.animate({'top':db.position().top-(lepkoz*irany)},200);
+			});
+			$('#kisebb, #nagyobb').click(function(){
+				if ($(this).attr('id')=='kisebb')
+					{ irany=1; } else { irany=-1; }
+				lepirany=lepkoz*irany;
+				ujmeret=db.width()-lepirany;
+				db.animate({
+					'width':ujmeret,'height':ujmeret,
+					'top':db.position().top+(lepirany/2),
+					'left':db.position().left+(lepirany/2)
+				},200, function(){ szincsere(); });
+			});
+	
+		});
+	</script>
+
+	<style type="text/css">
+		#doboz {
+			width:100px; height:100px;
+			top:200px; left:200px;
+			border:1px solid #000;
+			position:absolute;
+		}
+		button {
+			width:35px; height:35px;
+		}
+		.sz1 { background: red; }
+		.sz2 { background: orange; }
+		.sz3 { background: yellowgreen; }
+		.sz4 { background: aqua; }
+	</style>
+
+</head>
+
+<body>
+
+	<div style="position:absolute; z-index:100;">
+		<table>
+			<tr>
+				<td><button id="kisebb">m-</button></td>
+				<td><button id="fel">F</button></td>
+				<td><button id="nagyobb">m+</button></td>
+			</tr>
+			<tr>
+				<td><button id="bal">B</button></td>
+				<td></td>
+				<td><button id="jobb">J</button></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button id="le">L</button></td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+	<div id="doboz" class="sz1"></div>
+
+</body>
+</html>
+

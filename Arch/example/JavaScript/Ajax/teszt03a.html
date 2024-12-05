@@ -1,0 +1,182 @@
+<html>
+<title>Teszt03-Ajax</title>
+
+
+<style type="text/css">
+
+.body{
+    font-family: helvetica, trebuchet, sans-serif;
+    font-size:12px;
+    padding:0px 0px 0px 0px; 
+    margin:0px 0px 0px 0px;
+    background:#ffffff;
+    }
+
+.bal{
+    position:absolute;
+    padding:0px 0px 0px 0px; 
+    margin:0px 0px 0px 0px;
+    left:0; 
+    top:0; 
+    border:0px solid;
+    width:16%; 
+    }
+
+.jobb{
+    padding:0px 0px 0px 0px;
+    margin:0px 5px 0px 16%;
+    top:0;
+    right:0;
+    border:0px solid;
+    width:auto;
+    }
+
+.doboz{
+    padding:15px 15px 15px 15px; 
+    margin:5px 0px 5px 5px;
+    //text-align:center;
+    left:0; 
+    top:0; 
+    border:5px solid;
+    border-style:outset;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+var xmlHttp=null;
+  
+function ajaxopen(){
+  try{          // Firefox, Opera 8.0+, Safari
+    xmlHttp=new XMLHttpRequest();
+  }
+  catch (e){    // Internet Explorer
+    try{
+      xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e){
+      xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  }                                            
+}
+
+function kiir(){
+  if (xmlHttp.readyState==4){
+    //alert(xmlHttp.responseText);
+    document.getElementById("ido").innerHTML=xmlHttp.responseText;
+  }
+}
+
+function kiir2(){
+  if (xmlHttp.readyState==4){
+    //alert(xmlHttp.responseText);
+    document.getElementById("szoveg").innerHTML=xmlHttp.responseText;
+  }
+}
+
+function szerverido(){
+  ajaxopen();
+  if (xmlHttp==null){
+    alert("AJAX hiba.");  
+  }else{
+    //alert("AJAX ok.");
+    var url="ido.php";
+    
+    xmlHttp.onreadystatechange=function(){
+      kiir();
+    };
+    xmlHttp.open("GET",url,true);
+    xmlHttp.send(null);
+  }
+}
+
+function ajaxteszt(url2){
+  ajaxopen();
+  if (xmlHttp==null){
+    alert("AJAX hiba.");  
+  }else{
+    //alert("AJAX ok.");
+    
+    xmlHttp.onreadystatechange=function(){
+      kiir2();
+    };
+    xmlHttp.open("GET",url2,true);
+    xmlHttp.send(null);
+  }
+}
+
+function valaszto(poz){
+  //alert(poz);
+  switch (poz){
+    case '11':
+      f1.o1.selectedIndex=1;
+      ajaxteszt('teszt031.php');
+      break;
+    case '12':
+      f1.o1.selectedIndex=2;
+      ajaxteszt('teszt032.php');
+      break;
+    case '13':
+      f1.o1.selectedIndex=3;
+      ajaxteszt('teszt033.php');
+      break;
+    case '14':
+      f1.o1.selectedIndex=4;
+      ajaxteszt('teszt034.php');
+      break;
+  }
+}
+
+</script>
+
+<body class=body onLoad="szerverido()">
+
+<div class=bal>
+
+<div class=doboz>
+
+<img src=g1.jpg onClick="valaszto('11')"><br>
+<img src=g2.jpg onClick="valaszto('12')"><br>
+<img src=g3.jpg onClick="valaszto('13')"><br>
+<img src=g4.jpg onClick="valaszto('14')"><br>
+
+</div>
+</div>
+
+<div class=jobb>
+
+<div class=doboz>
+
+<form name=f1>
+Feladat:
+<select name="o1" onChange="valaszto(o1.options[selectedIndex].value)">
+    <option value="00">Válasszon kategóriát.</option>
+  <optgroup label="Menü">
+    <option value="11">Elsõ pont</option>
+    <option value="12">Második pont</option>
+    <option value="13">Harmadik pont</option>
+    <option value="14">Negyedik pont</option>
+  </optgroup>
+</select>
+</form>
+
+<br><br><hr><br>
+
+<span id="szoveg"></span>
+<br><br><hr><br>
+
+<span id=1 onClick="valaszto('11')"> Elsõ pont - </span>
+<span id=1 onClick="valaszto('12')"> Második pont - </span>
+<span id=1 onClick="valaszto('13')"> Harmadik pont - </span>
+<span id=1 onClick="valaszto('14')"> Negyedik pont </span>
+
+<br><br><hr><br>
+
+<p>Szerveridõ: <span id="ido"></span></p> 
+
+</div>
+</div>
+
+</body>
+</html>

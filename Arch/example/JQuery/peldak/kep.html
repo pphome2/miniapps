@@ -1,0 +1,82 @@
+<html>
+<head>
+  <meta http-equiv='Content-Type' content='text/xml; charset=utf-8' />
+  <title>Demo</title>
+
+<script type="text/javascript" src="../jq/jquery.js"></script>
+
+<script type="text/javascript">
+  
+  function ujkep(data2){
+    data='<img class=\'bem2\' src=\''+data2+'\'><br>';
+    //alert(data2);
+    $('.bem').html(data);
+    $('.bem').slideDown('slow');
+  }
+
+  $(document).ready(function(){
+    $('.bem').hide();
+    
+    $('img').click(function(){ 
+      $('.bem').html('');
+      $('.bem').hide();
+      data2=$(this).attr('alt');
+      ujkep(data2);
+    });                        
+    
+    $('.bem').click(function(){
+      $('.bem').hide('slow');
+    });
+  });
+
+</script>
+
+<style type='text/css' media='screen'>
+  .Program {display:block;padding:5px 5px 5px 5px;text-align:center;
+            font-size:14px;font-weight:bold;background-color:teal;color:white;}
+  .Text {display:block;padding:15px 15px 15px 15px;font-size:12px;
+         background-color:white;color:blue;}
+  .Text2 {display:block;padding:15px 15px 15px 15px;
+          text-align:left;font-size:10px;background-color:white;color:black;}
+  .Text3 {display:block;padding:15px 15px 15px 15px;
+          text-align:center;font-size:10px;background-color:white;color:black;}
+  .Border {display:block;border:solid 1px;margin:15px 15px 0px 15px;}
+  .Keret {display:block;border:solid 1px;text-align:center;width:50%;margin:15px 15px 15px 15px;}
+</style>
+
+</head>
+
+<body>
+<div class='Border'>
+  <div class='Program'>
+    <b><i>Demo</i></b>
+  </div>
+
+  <div class='Text2'>
+    <img class='i1' src='kep1.jpg' width=50 id= 'i1' alt='kep1.jpg'>
+    <img class='i2' src='kep2.jpg' width=50 id= 'i2' alt='kep2.jpg'>
+    <img class='i3' src='kep3.jpg' width=50 id= 'i3' alt='kep3.jpg'>
+    <img class='i4' src='kep4.jpg' width=50 id= 'i4' alt='kep4.jpg'>
+    <img class='i5' src='kep5.jpg' width=50 id= 'i5' alt='kep5.jpg'>
+    <img class='i6' src='kep6.jpg' width=50 id= 'i6' alt='kep6.jpg'>
+    <img class='i7' src='kep7.jpg' width=50 id= 'i7' alt='kep7.jpg'>
+    <img class='i8' src='kep8.jpg' width=50 id= 'i8' alt='kep8.jpg'>
+  </div>
+</div>
+                    
+<div class='Border'>
+  <div class='Program'>
+    <b><i>Bemutató</i></b>
+  </div>
+                    
+  <div class='Text3'>
+    <div class='bem' id='bem'> 
+    </div>
+    <div class='bem2' id='bem2'> 
+    </div>
+  </div>
+  
+</div>
+    
+</body>
+</html>

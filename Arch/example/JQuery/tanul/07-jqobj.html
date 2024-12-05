@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	
+	<script type="text/javascript" src="../jq/jquery.min.js"></script>
+	<script>
+	    function letrehoz() {
+		var szamlalo = 0;
+		return {
+		        novel: function() {
+			    szamlalo++;
+			},
+		        kiir: function() {
+			     alert(szamlalo);
+		        }
+		}
+	    }
+
+	    $(document).ready(function() {
+	        var l = letrehoz();
+		l.novel();
+		l.kiir(); // 1
+
+		$("#b1").click(function(){
+		    l.novel();
+		    l.kiir();
+		});
+	    });
+	</script>
+
+	<button id="b1">JQ objektum létrehozása, kezelése</button>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,29 @@
+<html><head>
+<title>Teszt07</title>
+
+<script type="text/javascript" src='js/07.js'>
+</script>
+
+<script type="text/javascript">
+
+uj=window.open("./07-2.html","Új");
+
+check=prompt("Kérem a jelszót : ","");
+if (check!="jelszó") alert("Ez meg mi volt?");
+else alert("Szabad a betekintés");
+
+function befest(){
+  document.all.kek.style.backgroundColor = "lightblue";
+  document.all.kek.style.fontSize = "22pt";
+  document.all.kek.style.padding = "6mm";
+}  
+</script>
+
+</head>
+<body onLoad="indul()">
+Ablakot nyit.<br><br>
+
+<p id="kek">Ez itt a próbaszöveg</p>
+<a href="javascript:befest()">Kék hátteret csinál</a>
+ 
+</body></html>

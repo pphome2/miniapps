@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='hu' xml:lang='hu'>
+
+<head>
+  <meta http-equiv='Content-Type' content='text/xml; charset=utf-8' />
+  <title>Demo</title>
+</head>
+
+<body>
+
+  <br>
+  <a href='http://www.origo.hu'>Link más oldalra - letiltva</a>
+
+  <script src="../jq/jquery.js"></script>
+
+  <script>
+  
+    //window.onload = function(){ alert("welcome"); }      // lap betoltve
+  
+    $(document).ready(function(){      // betoltodott a lap
+      $("a").click(function(event){
+        alert("Nem mehetsz tovább...");
+        event.preventDefault();
+      });
+
+      $.get('jqajax-s.html', function(data) {     // ajax lap betoltese
+        $('.result').html(data);
+	$('#lap1').html(data);
+      });   
+    
+      $.get('jqajax-s.php', function(data) {     // ajax lap betoltese
+        $('#lap2').html(data);
+      });
+    });
+  </script>
+
+  <script>
+
+  </script>
+
+  <br><br>
+  <br><br>
+  Ajax teszt JQuery felhasználásával.
+  <br><br>
+  1. HTML lap bemelése a lapba
+  <br><br>
+  <hr>
+  <br><br>
+  
+<span id='lap1' name='lap1'>
+
+</span>
+
+  <br><br>
+  <hr>                               
+  <br><br>
+  2. PHP script futtatása a szerveren, eredmény beillesztése
+  <br><br>
+  <hr>
+  <br><br>
+  
+<span id='lap2' name='lap2'>
+
+</span>
+
+  <br><br>
+  <hr>
+</body>
+
+</html>

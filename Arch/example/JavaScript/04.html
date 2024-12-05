@@ -1,0 +1,75 @@
+<html><head>
+<title>Teszt04</title>
+
+<script language="JavaScript">
+
+function elagazas(valami) {
+  if (valami=="j"){
+    document.write(valami+": jó<br>");
+  }else{
+    document.write(valami+": nem jó<br>");
+  }
+}
+
+function valasztas(){
+  auto=window.prompt("Mi a kedvenc autómárkája ?","");
+  switch(auto){
+    case "audi":
+      alert("Vigyázzon rá, sokba került !");
+      break;
+    case "lada":
+      alert("Ez ma már nem nagy szám !");
+      break;
+    case "suzuki":
+      alert("Végre egy magyar termék !");
+      break;
+    case "renault":
+      alert("Végre egy jó autó !");
+      break;
+    default:
+      alert("Nincs róla véleményem");
+      break;
+  } 
+  document.write("<br>Az autód: "+auto+".<br><br>");
+}
+  
+function ciklus(){ 
+  var x,i
+
+  document.write("Ciklusok:<br>");
+  document.write("While: számolok 12-ig. ");
+  i=0;
+  while (i<=12){
+    document.write(", "+i);
+    ++i;
+   }
+  document.write("<br>");
+  
+  document.write("For: számolok 12-ig. ");
+  for (i=0;i<=12;i++) {
+    document.write(", "+i);
+  }
+  document.write("<br>");
+
+  document.write("Do while: számolok 12-ig. ");
+  i=0;
+  do {
+    document.write(", "+i);
+    i++;
+  } 
+  while(i<=12);
+  document.write("<br>");
+}
+
+function indul(){
+  elagazas("j");
+  elagazas("k");
+  valasztas();
+  ciklus();
+}
+
+</script>
+
+</head>
+<body onLoad="indul()">
+</body></html>

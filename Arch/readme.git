@@ -1,0 +1,49 @@
+git add *
+git commit -a -m "w"
+git push
+
+
+git rm filename
+	- file delete
+
+git rm dir -r
+	- directory delete recursive
+
+git clone https://github.com/pphome2/docman
+	- copy to local
+
+git add web
+	- add directory
+
+git commit -m "Put to github."
+	- add commit change message
+
+git push origin
+	- put all files
+
+git fetch name
+	- copy remote name project to local
+
+git remote add john http://dev.example.com/n.git
+	- connect to remote project
+
+git pull origin master
+	- sync to remote
+
+git branch -r
+	- list projets branch
+
+
+git fetch origin
+git reset --hard origin/master
+git clean -f -d
+	- reset and clean local with remote
+	
+
+git config --global credential.helper store
+	- remember github username and password
+
+
+Source:
+https://www.atlassian.com/git/tutorials/syncing
+

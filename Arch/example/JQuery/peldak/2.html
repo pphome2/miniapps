@@ -1,0 +1,45 @@
+<html>
+<head>
+  <meta http-equiv='Content-Type' content='text/xml; charset=utf-8' />
+  <title>Demo</title>
+
+<meta charset="iso8859-2">
+
+<script type="text/javascript" src="../jq/jquery.js"></script>
+
+<script type="text/javascript">
+  var szin=1;
+  var szinkod="white";
+  $(document).ready(function(){
+    $("button.1").click(function(){
+      $("p").hide();
+    });
+    $("button.2").click(function(){
+      $("p").show();
+    });
+    $("button.3").click(function(){
+      if (szin==1){
+        szin=2;
+        szinkod="red";
+      }else{         
+        szin=1;
+        szinkod="yellow";
+      }
+      $("p").css("background-color",szinkod);
+    });
+  });
+</script>
+
+</head>
+
+<body>
+  <p>Első sor.</p>
+  <p>Második sor.</p>
+  <p>Harmadik sor.</p>
+  <button class='1'>Eltüntet</button> 
+  <br><br>
+  <button class='2'>Előhoz</button> 
+  <br><br>
+  <button class='3'>Szinez</button>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="1.css">
+	</head>
+
+	<body>
+	
+		<div id="gototop" class="gototop" onclick="gotop()"></div>
+		
+		<div id="header" class="header"></div>
+		<div id="navbar" class="navbar">
+			<a href="#home">Home</a>
+			<a href="#news">News</a>
+			<a href="#contact">Contact</a>
+			<!-- <a href="#contact" style="float:right;border:0px;"><span class="search_icon"></span></a> -->
+			<form class="formclass"><input class="inputsearch" type="text" name="search" placeholder="Search.."></form>
+		</div>
+  
+		
+		
+
+		<div class="bg">
+			<div class="center_div">
+				<h1>Hello World!</h1>
+				<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			</div>
+		</div>
+		
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+		
+		
+		<div class="bg2">
+		
+			<div class="center_div">
+				<h1>Hello World!</h1>
+				<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			</div>
+		</div>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			
+			
+			
+  </div>
+	<script type="text/javascript">
+		window.onscroll = function() {myFunction()};
+
+		var header = document.getElementById('header');
+		var navbar = document.getElementById('navbar');
+		var gototop = document.getElementById('gototop');
+		var pos = 200;
+		var posgototop = 20;
+		var live = false;
+		var livegototop = false;
+
+		function myFunction() {
+			if (window.pageYOffset > pos) {
+				if (!live){
+					navbar.style.display='block';
+					navbar.style.animationName='menu_screen';
+					live = true;
+					//setTimeout(function(){ navbar.style.display='block'; }, 20);
+				}
+			} else {
+				if (live){
+					navbar.style.animationName='menu_noscreen';
+					//navbar.style.display='none';
+					setTimeout(function(){ navbar.style.display='none'; }, 500);
+					live = false;
+				}
+ 			}
+ 			
+			if (window.pageYOffset > posgototop) {
+				if (!livegototop){
+					gototop.style.display='block';
+					gototop.style.animationName='to_top';
+					livegototop = true;
+					//setTimeout(function(){ navbar.style.display='block'; }, 20);
+				}
+			} else {
+				if (livegototop){
+					gototop.style.animationName='to_notop';
+					//navbar.style.display='none';
+					setTimeout(function(){ gototop.style.display='none'; }, 500);
+					livegototop = false;
+				}
+ 			}
+		}
+		
+
+		function gotop() {
+    		document.body.scrollTop = 0; // For Safari
+    		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+		}		
+		
+	</script>
+
+
+	</body>
+</html>

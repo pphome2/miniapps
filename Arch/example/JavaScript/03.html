@@ -1,0 +1,54 @@
+<html><head>
+<title>Teszt03</title>
+
+<script language="JavaScript">
+var szoveg="Négyzetszámok következnek";
+var sz2="";
+var van=(sz2=="")?"nincs":"van";x = new Boolean(false);
+
+alert(szoveg+". Megadott szöveg :"+ van);
+
+function negyzetre_emel() {
+  var MaxSzam=13;
+  var i,x;
+  var sztring=" a négyzeten = ";
+  for(i=1;i<=MaxSzam;++i) {
+    x=i*i;
+    document.write(i+sztring+x+"<br>");
+  }
+}
+  
+function napozo(){
+  napok=new Array("Vasárnap","Hétfõ","Kedd","Szerda","Csütörtök","Péntek","Szombat");
+  document.write("<br><br><table border bgcolor=#CCFFFF><b>");
+  for (i=0; i < napok.length; ++i) {
+    document.write("<tr><td>"+ napok[i]+"</td><tr>");
+  }
+  document.write("</d></table><br><br>");
+  
+  napok.sort();
+  document.write("<br><br><table border bgcolor=#CCFFFF><b>");
+  for (i=0; i < napok.length; ++i) {
+    document.write("<tr><td>"+ napok[i]+"</td><tr>");
+  }
+  document.write("</d></table><br><br>");
+}
+
+function igaze(){
+  igen=new Boolean();
+  valós=new Boolean(1);
+
+  if (igen) document.write("Igen igaz<br>");
+}
+  
+function indul(){
+  negyzetre_emel();
+  napozo();
+  igaze();
+}
+
+</script>
+
+</head>
+<body onLoad="indul()">
+</body></html>

@@ -1,0 +1,360 @@
+Kiválasztó		Példa			Magyarázat
+--------------------------------------------------------------------------------------------------------------
+*			$("*")			Kijelöli az összes elemet.
+#id			$("#utonev")		Kijelöli az id=”utonev” azonosítójú elemet.
+.class			$(".bemutat")		Kijelöli az összes class="bemutat" osztályú elemet.
+element			$("p")			Kijelöli az összes p elemet.
+:first			$("p:first")		Kijelöli az első p elemet.
+:last			$("p:last")		Kijelöli az utolsó p elemet.
+:even			$("tr:even")		Kijelöl minden páros elemet.
+:odd			$("tr:odd")		Kijelöl minden páratlan elemet.
+:eq(index)		$("ul li:eq(3)")	A negyedik lista elemet (az első elem a nulladik).
+:gt(no)			$("ul li:gt(3)")	Kijelöli az negyedik után az összes lista elemet.
+:lt(no)			$("ul li:lt(3)")	A negyedik előtt az összes lista elemet.
+:not(selector)		$("input:not(:empty)")	Kijelöli az összes nem üres input elemet.
+:header			$(":header")		Kijelöli az összes fejléc elemet: h1, h2 ...
+:animated		$(":animated")		Kijelöli az összes animált elemet.
+:contains(text)		$(":contains('Szia')")	Kijelöli az összes elemet, melyben megtalálható a „Szia” karakterlánc.
+:empty			$(":empty")		Kijelöli az összes elemet, aminek nincs gyereke.
+:hidden			$("p:hidden")		Kijelöli az összes rejtett p elemet.
+:visible		$("table:visible")	Kijelöli az összes látható táblázatot.
+s1,s2,s3		$("th,td,.bemutat")	A felsorolásban résztvevő kiválasztók alapján minden elemet.
+[attribute]		$("[href]")		Kijelöli az összes „href” attribútummal rendelkező elemet.
+[attribute=value]	$("[href='ez.htm']")	Kijelöli az összes „href” attribútummal rendelkező elemet, aminek az értéke „ez.htm”.
+[attribute!=value]	$("[href!='ez.htm']")	Kijelöli az összes „href” attribútummal rendelkező elemet, aminek az értéke más mint „ez.htm”.
+[attribute$=value]	$("[href$='.jpg']")	Kijelöli az összes „href” attribútummal rendelkező elemet, ami „.jpg”-re végződik.
+:input			$(":input")		Kijelöli az összes input elemet.
+:text			$(":text")		Kijelöli az összes type=”text” típusú input elemet.
+:password		$(":password")		Kijelöli az összes type=”password” típusú input elemet.
+:radio			$(":radio")		Kijelöli az összes type=”radio” típusú input elemet.
+:checkbox		$(":checkbox")		Kijelöli az összes type=”checkbox” típusú input elemet.
+:submit			$(":submit")		Kijelöli az összes type=”submit” típusú input elemet.
+:reset			$(":reset")		Kijelöli az összes type=”reset” típusú input elemet.
+:button			$(":button")		Kijelöli az összes type=”button” típusú input elemet.
+:image			$(":image")		Kijelöli az összes type=”image” típusú input elemet.
+:file			$(":file")		Kijelöli az összes type=”file” típusú elemet.
+:enabled		$(":enabled")		Kijelöli az összes engedélyezett input elemet.
+:disabled		$(":disabled")		Kijelöli az összes letiltott input elemet.
+:selected		$(":selected")		Kijelöli az összes kiválasztott input elemet.
+:checked		$(":checked")		Kijelöli az összes kipipált input elemet.
+
+
+
+Utasítás		Magyarázat
+--------------------------------------------------------------------------------------------------------------
+.add()			DOM elemeket ad hozzá a kiválasztóban megjelölt elemekhez. A megadott elemeket átváltoztatja a láncolt utasítás elején lévő (kiválasztó által talált) elemmé.
+.andSelf()		A szűréshez hozzáadja a kiválasztóban lévő elemet (önmagát) is.
+.children()		A kiválasztott elem gyermekeit kapjuk meg. Opcionálisan paraméterként megadott szűréssel szűkíthető a találati lista.
+.closest()		A kiválasztó által talált legelső elemtől felfelé indulva végigjárja a DOM fát, és az első találatnál megáll.
+.contents()		Visszaadja a kiválasztó összes gyermekét. Az frame és iframe típusú elemek tartalmának kezelésére alkalmas.
+.each()			A kiválasztó által talált elemekhez ugyanazt a függvényt rendelhetjük. Mindegyik elem esetén lefut a függvény.
+.end()			A művelet láncban leállítja a legutóbbi szűrés műveletet (pl. find()), azért hogy újra a teljes kiválasztóval, a szűrés mentes elemekkel dolgozhassunk.
+.eq()			Leszűkíti a kiválasztó által talált elemek listáját. A találati lista valahányadik elemét adja vissza. Negatív számot megadva, a lista végéről indul a számolás.
+.filter()		Kiszűri a paraméterként megadott elemeket a találati listánkból. Paraméterként kiválasztót, függvényt, elemet, vagy objektumot adhatunk meg.
+.find()			A kiválasztó által talált elemek közt keres. Paraméterként kiválasztót, elemet, vagy objektumot adhatunk meg.
+.first()		A kiválasztó alapján kapott lista első elemét adja meg.
+.has()			Visszaadja azokat az elemeket, amik a paraméterben megadott kiválasztót, vagy DOM elemet tartalmazzák. (Van olyan leszármazottjuk).
+.is()			Feltételek esetén jól alkalmazható. Visszaadja, hogy a kiválasztóban megadott elemek legalább egy tagja rendelkezik-e a paraméterben megadott tulajdonsággal.
+.last()			A kiválasztó alapján kapott lista utolsó elemét adja meg.
+.map()			Feltérképezi a kiválasztó által talált elemek tulajdonságait, és a kapott értékekből új objektum hozható létre. Hasznos AJAX utasítások esetén, amikor az űrlap értékeit egyszerű formában kell továbbítani.
+.next()			A kiválasztó által talált elem után következő szomszéd elemet adja vissza.
+.nextAll()		A kiválasztó után talált, azonos szinten lévő elemeket fűzi össze, hogy műveleteket lehessen végezni velük.
+.nextUntil()		A kiválasztó után talált, azonos szinten lévő elemeket fűzi össze, a paraméterben megadott elemig, hogy műveleteket lehessen végezni velük.
+.not()			Kiszűri a paraméterként megadott elemet a találati listánkból.
+.offsetParent()		Visszaadja a talált elem legközelebbi ősét.
+.parent()		Visszaadja a kiválasztó által talált elemek szülőjét.
+.parents()		Visszaadja a kiválasztó által talált elemek ősét.
+.parentsUntil()		Visszaadja a kiválasztó által talált elemek ősét, a paraméterben megadott elemig (de a paraméterét már nem).
+.prev()			A kiválasztó által talált elem előtt lévő szomszéd elemet adja vissza.
+.prevAll()		A kiválasztó előtt talált, azonos szinten lévő elemeket fűzi össze, hogy műveleteket lehessen végezni velük.
+.prevUntil()		A kiválasztó előtt talált, azonos szinten lévő elemeket fűzi össze, a paraméterben megadott elemig, hogy műveleteket lehessen végezni velük.
+.siblings()		A kiválasztott elem összes szomszédját adja vissza.
+.slice()		Szűkíti a találati listánkat. Paraméterként megadható a kezdeti és a záró sorszám. Ha csak kezdeti értéket adunk meg, akkor a záró érték a lista vége lesz.
+
+
+
+
+Esemény, utasítás		Magyarázat
+--------------------------------------------------------------------------------------------------------------
+bind()				Egy vagy több eseményt rendel hozzá.
+blur()				Előidéz vagy hozzárendel egy funkciót a blur eseményhez. A blur a focus ellentéte.
+change()			Előidéz vagy hozzárendel egy funkciót az eseményhez. Akkor következik be, ha megváltozik az elem tartalma.
+click()				Előidéz vagy hozzárendel egy funkciót a kattintás eseményhez.
+dblclick()			Előidéz vagy hozzárendel egy funkciót a dupla kattintás eseményhez.
+delegate()			Egy vagy több eseményt rendel a kiválasztott elem jelenlegi vagy jövőbeni gyermekeihez.
+die()				Minden eseményt eltávolít, amit a live() paranccsal rendeltünk a kiválasztott elemhez.
+error()				Előidéz vagy hozzárendel egy funkciót az hiba eseményhez. Például ha a beillesztett kép nem található.
+event.currentTarget		A funkción belül visszaadja azt az elemet, amihez az eseményt hozzárendeltük.
+event.delegateTarget		Visszaadja az eseményen belül azt az elemet, amelyre az eseményt meghívtuk.
+event.data			Azt az opcionális adatot kaphatjuk meg, amit a jQuery.fn.bind utasításnak adtunk át.
+event.isDefaultPrevented()	Visszaadja, hogy az event.preventDefault() utasítást meghívtuk-e az eseményünkön belül.
+event.isImmediatePropagationStopped()	Az event.stopImmediatePropagation() utasítást meghívtuk-e az eseményünkön belül.
+event.isPropagationStopped()	Visszaadja, hogy az event.stopPropagation() utasítást meghívtuk-e az eseményünkön belül.
+event.namespace			Az előidézett esemény névterét adja visssza.
+event.pageX			Az egér pozícióját kapjuk vissza a dokumentumunk bal oldalától számítva.
+event.pageY			Az egér pozícióját kapjuk vissza a dokumentumunk tetejétől számítva.
+event.preventDefault()		Kikapcsolja az eseményünk eredeti funkcióját.
+event.relatedTarget		Az eseménybe bevont többi DOM elemet adja vissza.
+event.result			Visszaadja az esemény által utoljára visszakapott értéket.
+event.stopImmediatePropagation()	Megelőzi más eseménykezelők meghívását.
+event.stopPropagation()		Megelőzi, hogy az esemény a DOM szerkezeti fa tetejére kerüljön, illetve hogy a szülők eseménykezelői tudomást szerezzenek az eseményről.
+event.target			Megadja azt a DOM elemet, ami meghívta az eseményt.
+event.timeStamp			Megadja, hogy az esemény meghívásakor mennyi milliszekundum telt el 1970. január 1. óta.
+event.type			Leírja az esemény természetét. Pl.: mouseover, click.
+event.which			Melyik billentyűt vagy gombot nyomtuk meg az esemény alatt.
+focus()				Előidéz vagy hozzárendel egy funkciót az eseményhez. Fókuszt egy beviteli mező kaphat, ha bele lépünk.
+focusin()			Előidéz vagy hozzárendel egy funkciót a fókuszálás eseményhez. Az eseményt olyan szülő elemhez rendelhetjük, aminek van beviteli mező gyermeke.
+focusout()			Előidéz vagy hozzárendel egy funkciót a fókuszvesztés eseményhez. Az eseményt olyan szülő elemhez rendelhetjük, aminek van beviteli mező gyermeke.
+hover()				Egy vagy kettő funkciót rendelhetünk hozzá az eseményhez. Az egér adott elem fölé érkezését és elvételét kezeli.
+keydown()			Előidéz vagy hozzárendel egy funkciót egy adott elemen belül történt billentyű lenyomáshoz.
+keypress()			Előidéz vagy hozzárendel egy funkciót egy adott elemen belül történt billentyű lenyomáshoz és felengedéshez.
+keyup()				Előidéz vagy hozzárendel egy funkciót egy adott elemen belül történt billentyű felengedéshez.
+live()				„Élővé” teszünk az elemhez rendelt eseményt, amit később a die() utasítással inaktívvá tehetünk.
+load()				Előidéz vagy hozzárendel egy funkciót egy adott elemen belül történt betöltéshez. Például mikor a kép betöltődik.
+mousedown()			Előidéz vagy hozzárendel egy funkciót egy adott elemen belül történt egér gomb lenyomáshoz.
+mouseenter()			Előidéz vagy hozzárendel egy funkciót ahhoz, amikor az egérrel egy adott elembe belépünk.
+mouseleave()			Előidéz vagy hozzárendel egy funkciót ahhoz, amikor az egérrel egy adott elemet elhagyunk.
+mousemove()			Előidéz vagy hozzárendel egy funkciót ahhoz, amikor az egeret megmozdítjuk az adott elem felett.
+mouseout()			Előidéz vagy hozzárendel egy funkciót ahhoz, amikor az egérrel egy adott elem fölött voltunk, de már nem vagyunk.
+mouseover()			Előidéz vagy hozzárendel egy funkciót ahhoz, amikor az egérrel egy adott elem fölött vagyunk.
+mouseup()			Előidéz vagy hozzárendel egy funkciót ahhoz, amikor az egér gombját felengedjük.
+off()				Eltávolít egy eseménykezelőt.
+on()				Hozzárendel egy eseményt a kiválasztott elem egy vagy több eseményhez.
+one()				Egy vagy több eseményt rendel a kiválasztott elemhez. Az esemény a kiválasztott elemen csak egyszer fut le.
+$.proxy()			A funkció egész kontextusát lecseréli. A this mutató másképp lesz értelmezve.
+ready()				Egy funkciót rendel ahhoz az eseményhez, amikor a HTML oldal teljesen betöltődött.
+resize()			Előidéz vagy hozzárendel egy funkciót a böngésző ablak átméretezéséhez.
+scroll()			Előidéz vagy hozzárendel egy funkciót a kiválasztott elemben történt görgetéshez.
+select()			Előidéz vagy hozzárendel egy funkciót a beviteli mezőkben történő kijelöléshez.
+submit()			Előidéz vagy hozzárendel egy funkciót az űrlap beküldéshez.
+toggle()			Egy vagy több funkciót rendel egy adott elem fölött történt többszörös kattintáshoz.
+trigger()			Eseményt rendel hozzá egy adott elem egy másik eseményhez.
+triggerHandler()		Egy esemény funkcióit rendel hozzá egy adott elem egy másik eseményhez.
+unbind()			Eltávolítja egy adott elem eseménykezelőit.
+undelegate()			Eltávolítja egy adott elem eseménykezelőit, most vagy a jövőben.
+unload()			Előidéz vagy hozzárendel egy funkciót egy adott elemen belül történt unload() eseményhez. Ez a betöltődés load() esemény ellentettje.
+
+
+
+
+Effektek, utasítás		Magyarázat
+--------------------------------------------------------------------------------------------------------------
+animate()			CSS tulajdonságokkal megadott, egyéni animáció beállítására szolgál.
+clearQueue()			Eltávolítja egy adott elem minden queue() parancsával sorba állított függvényeit. A stop() utasításhoz hasonló, de nem csak animációt állít le.
+delay()				Késleltetést állít be az utasítások láncolatában. Milliszekundumként állítjuk be!
+dequeue()			Egy adott elem következő sorba állított függvényére ugrik.
+fadeIn()			Fokozatosan lejjebb veszi a kiválasztott elem átlátszóságát, a láthatatlantól egészen a láthatóig. A kiválasztott elem megjelenik.
+fadeOut()			Fokozatosan lejjebb veszi a kiválasztott elem átlátszóságát, a láthatótól egészen a láthatatlanig. A kiválasztott elem eltűnik.
+fadeTo()			Fokozatosan változtatja meg a kiválasztott elem átlátszóságát, az átlátszóság jelenlegi mértékétől egy megadott értékig.
+fadeToggle()			A láthatóság és az elrejtés közt kapcsolgat, miközben animálja a kiválasztott elem átlátszóságát.
+$.fx.interval			Egy kiválasztott elem animációjának lépésközét állíthatjuk be. Ezzel az animáció lassabb lesz, és szaggatottabb. Milliszekundumban kell megadni.
+$.fx.off			Globálisan kikapcsol minden animációt. A parancs kiadása után az animációk lépései közt átmenet nélkül történik az új CSS tulajdonság felvétele.
+hide()				Eltűntet egy kiválasztott elemet, animáció nélkül.
+queue()				Visszaadja egy adott elem sorba állított függvényeit.
+show()				Megjelenít egy kiválasztott elemet, animáció nélkül.
+slideDown()			Fokozatosan változtatja meg egy kiválasztott elem magasságát a nullától a teljes méretig, amíg az elem teljesen meg nem jelenik.
+slideToggle()			A láthatóság és az elrejtés közt kapcsolgat, miközben a slideUp() és a slideDown() effektekkel animálja a kiválasztott elem átlátszóságát.
+slideUp()			Fokozatosan változtatja meg egy kiválasztott elem magasságát a teljes mérettől a nulláig, amíg az elem teljesen el nem tűnik.
+stop()				Egy kiválasztott elem minden animációját megállítja.
+toggle()			Egy kiválasztott elem megjelenése show() és eltűnése hide() közt, vagy egyénileg beállított funkciók közt kapcsolgat.
+
+
+
+
+
+Manipuláció, utasítás		Magyarázat
+--------------------------------------------------------------------------------------------------------------
+after()				HTML tartalmat illeszt be a kiválasztott elem után. A beillesztett tartalom szülője megegyezik a kiválasztott elem szülőjével.
+append()			HTML tartalmat illeszt be a kiválasztott elem végére. A beillesztett tartalom szülője a kiválasztott elem lesz.
+appendTo()			Az append() utasítástól csak szintaktikailag tér el. A parancsszó az utasításlánc végére kerül. Így először a tartalmat adjuk meg, és aztán a célt.
+attr()				Beállítja vagy visszaadja egy adott elem argumentumát és értékét.
+before()			HTML tartalmat illeszt be a kiválasztott elem elé.
+clone()				Lemásolja a kiválasztott elmemet. Az appendTo() utasítással együtt használva már létező DOM elemeket többszörözhetünk meg vele.
+detach()			Eltávolítja a kiválasztott elemet, mint a remove() utasítás, de megtartja a hozzá rendelt eseményeket a későbbi visszahelyezés céljából.
+empty()				Eltávolítja a kiválasztott elem tartalmát és az összes gyermekét.
+html()				Beállítja vagy visszaadja a kiválasztott elem HTML tartalmát.
+insertAfter()			Az after() utasítástól csak szintaktikailag tér el. A parancsszó az utasításlánc végére kerül. Így először a tartalmat adjuk meg, és aztán a célt.
+insertBefore()			Az before() utasítástól csak szintaktikailag tér el. A parancsszó az utasításlánc végére kerül. Így először a tartalmat adjuk meg, és aztán a célt.
+prepend()			HTML tartalmat illeszt be a kiválasztott elem elejére. A beillesztett tartalom szülője a kiválasztott elem lesz.
+prependTo()			Az prepend() utasítástól csak szintaktikailag tér el. A parancsszó az utasításlánc végére kerül. Így először a tartalmat adjuk meg, és aztán a célt.
+prop()				Beállítja vagy visszaadja a kiválasztott elem tulajdonságát.
+remove()			Eltávolítja a kiválasztott elemet.
+removeAttr()			Eltávolítja a kiválasztott elem egy attribútumát.
+removeProp()			Eltávolítja a kiválasztott elem egy prop() utasítással megadott tulajdonságát.
+replaceAll()			Az replaceWith() utasítástól csak szintaktikailag tér el. A parancsszó az utasításlánc végére kerül. Így először a tartalmat adjuk meg, és aztán a célt.
+replaceWith()			A kiválasztott elemet kicseréli a megadott HTML tartalommal.
+text()				Beállítja vagy visszaadja a kiválasztott elem szöveges tartalmát.
+unwrap()			Eltávolítja a kiválasztott elem szülőjét. Ezzel a kiválasztott elem kerül a szülő helyébe.
+val()				Beállítja vagy visszaadja a kiválasztott űrlap elem érték (value) attribútumát.
+wrap()				A kiválasztott elemet becsomagolja egy általunk HTML szövegként megadott, másik elembe. A kiválasztott elem új szülőt kap.
+wrapAll()			A kiválasztott összes elemet becsomagolja egy általunk HTML szövegként megadott, másik elembe. A kiválasztott elemek új szülőt kapnak.
+wrapInner()			A kiválasztott elemen belül elhelyezünk egy általunk HTML szövegként megadott, másik elemet. A kiválasztott elem szülője nem változik, az új HTML tag a kiválasztott elem gyermeke lesz.
+
+
+
+
+
+
+
+CSS, utasítás			Magyarázat
+--------------------------------------------------------------------------------------------------------------
+addClass()			Egy vagy több CSS osztályt ad a kiválasztott elemhez.
+css()				Beállítja vagy visszaadja a kiválasztott elem egy vagy több stílus tulajdonságát.
+$.cssHooks			Normalizálja a CSS tulajdonságok neveit, vagy saját CSS nevet hoz létre.
+hasClass()			Visszaadja, hogy a kiválasztott elemhez hozzárendeltük-e a keresett CSS osztályt, vagy sem.
+height()			Visszaadja a kiválasztott elem magasságát. Figyelem! Nem működik megfelelően minden böngészőben! Helyette használjuk beállításra a css({’height’:’100px’}) illetve lekérdezéshez a css(’height’) parancsokat!
+innerHeight()			Visszaadja a kviálasztott elem belső magasságát. Annyival több a height() utasításnál, hogy a padding méretét is hozzá veszi a magassághoz.
+innerWidth()			Visszaadja a kviálasztott elem belső szélességét. Annyival több a width() utasításnál, hogy a padding méretét is hozzá veszi a szélességhez.
+offset()			Visszaadja a kiválasztott elem relatív pozícióját a dokumentum egészéhez képest.
+outerHeight()			Visszaadja a kviálasztott elem külső (teljes) magasságát. Annyival több a height() utasításnál, hogy a border méretét is hozzá veszi a magassághoz. outerHeight(true) parancs esetén pedig a margin méretét is.
+outerWidth()			Visszaadja a kviálasztott elem külső (teljes) szélességét. Annyival több a width() utasításnál, hogy a border méretét is hozzá veszi a szélességhez. outerWidth(true) parancs esetén pedig a margin méretét is.
+position()			Visszaadja a kviálasztott elem relatív pozícióját, annak szülőjéhez képest.
+removeClass()			Eltávolítja a kiválasztott elem egy vagy több stílus osztályát.
+scrollLeft()			Beállítja vagy visszaadja a kiválasztott elem vízszintes görgetősávjának pozícióját.
+scrollTop()			Beállítja vagy visszaadja a kiválasztott elem függőleges görgetősávjának pozícióját.
+toggleClass()			A kiválasztott elem egy vagy több CSS osztálya közt kapcsolgat, hozzáadja és eltávolítja őket.
+width()				Visszaadja a kiválasztott elem szélességét. Figyelem! Nem működik megfelelően minden böngészőben! Helyette használjuk beállításra a css({’width’:’100px’}) illetve lekérdezéshez a css(’width’) parancsokat!
+
+
+
+
+
+AJAX, utasítás			Magyarázat
+--------------------------------------------------------------------------------------------------------------
+$.ajax()			AJAX kérést (lekérdezést) intézünk a szerverhez.
+ajaxComplete()			Meghatároz egy függvényt, ami az AJAX kérés befejezésekor fut le.
+ajaxError()			Meghatároz egy függvényt, ami az AJAX kérés hibás befejezésekor fut le.
+$.ajaxPrefilter()		Az AJAX utasításokat kezeli vagy módosítja az $.ajax() utasítás lefutása előtt.
+ajaxSend()			Meghatároz egy függvényt, ami közvetlenül az AJAX kérés küldése előtt fut le.
+$.ajaxSetup()			Alapbeállításokat adhatunk meg az AJAX lekérdezéseinkhez.
+ajaxStart()			Meghatároz egy függvényt, ami akkor fut le, amikor az első AJAX kérés megkezdődött.
+ajaxStop()			Meghatároz egy függvényt, ami akkor fut le, amikor az összes AJAX kérés befejeződött.
+ajaxSuccess()			Meghatároz egy függvényt, ami akkor fut le, amikor az AJAX kérés sikeres volt.
+$.get()				Adatot tölt le a szerverről, egy AJAX HTTP GET kérés segítségével.
+$.getJSON()			JSON szerkezetű, kódolt adatott tölt le a szerverről, HTTP GET kérés segítségével.
+$.getScript()			Betölt a szerverről, és futtat egy JavaScript fájlt AJAX HTTP GET kérésen keresztül.
+load()				Adatot tölt le a szerverről, és a kapott HTML tartalmat belehelyezi a kiválasztott DOM elembe.
+$.param()			Szabványos formában ad vissza egy tömb vagy objektum típusú változót. Hasznos lehet bármilyen URL formátumú AJAX lekérdezés esetén.) A kimenet formátuma: keresztnev=Sandor&csaladnev=Petofi&kor=27&eyecolor=barna
+$.post()			Adatot tölt le a szerverről, egy AJAX HTTP POST kérés segítségével.
+serialize()			A $.param() utasításhoz hasonlóan szabványos formában (egysoros URL formátumú szövegként) adja vissza egy adott form elemeit.
+serializeArray()		A $.param() utasításhoz hasonlóan szabványos formában (egysoros, név és érték párokat tartalmazó URL formátumú tömbként) adja vissza egy adott form elemeit.
+
+
+
+
+
+
+
+
+Segédutasítások			Magyarázat
+--------------------------------------------------------------------------------------------------------------
+$.boxModel			Elavult! Helyette a $.support eszköz használandó! Megállapítja, hogy a felhasználó böngészője W3C CSS szabvány szerint valósította-e meg a box modellt.
+$.browser			Elavult! Helyette a $.support eszköz használandó! Megállapítja, hogy a felhasználó milyen böngészőben futtatja a weboldalt. Böngésző azonosítás helyett javasolt a képesség detektálás alkalmazása.
+$.contains()			Visszaadja, hogy egy adott DOM elem tartalmazza-e a másik elemet.
+$.extend()			Egyesíti az egy vagy több kiválasztott elem tartalmát, és az első elembe helyezi.
+$.globalEval()			Globálisan lefuttatja a megadott JavaScript kódot.
+$.grep()			Egy tömb elemeit a megadott feltételek szerint kiszűri. Az eredeti tömböt nem módosítja.
+$.inArray()			Egy megadott értéket keres a tömbben, és visszaadja a sorszámát. Ha nincs találat, akkor -1 lesz a kimeneten.
+$.isArray()			Meghatározza, hogy a paraméterként megadott érték tömb típusú-e.
+$.isEmptyObject()		Meghatározza, hogy a paraméterként megadott objektum üres-e.
+$.isFunction()			Meghatározza, hogy a paraméterként megadott érték függvény-e.
+$.isNumeric()			Meghatározza, hogy a paraméterként megadott érték szám-e.
+$.isPlainObject()		Meghatározza, hogy a paraméterként megadott objektum egyszerű-e, vagy sem. (A „{}” karakterekkel, vagy a „new Object” utasítással hoztuk-e létre.)
+$.isWindow()			Meghatározza, hogy a paraméterként megadott változó ablak-e.
+$.isXMLDoc()			Meghatározza, hogy vajon a paraméterként megadott érték XML dokumentum-e.
+$.makeArray()			Átkonvertál egy tömb szerű objektumot egy valódi JavaScript tömbbé.
+$.merge()			Egyesíti (egymás után fűzi) két tömb értékeit, és az elsőben helyezi el az új, összesített tömböt.
+$.noop()			Egy üres funkció. Hasznos lehet a jQuery beépülő fejlesztők számára, ahol opcionális visszahívásokat kell kezelni.
+$.now()				A visszakapott érték a jelenlegi időt adja meg. A (new Date).getTime() kifejezés rövidítése.
+$.parseJSON			Veszi a helyesen formázott JSON szöveget, és átalakítja JavaScript objektummá.
+$.parseXML()			A szöveget XML dokumentummá alakítja.
+$.support			Tulajdonságok gyűjteménye, melyek a különböző böngészők általi különbségeket, hibákat hivatottak kezelni.
+$.trim()			Eltávolítja a szövegből a felesleges szóközöket (whitespace).
+$.unique()			Átrendezi a DOM elemekből épült tömböt, eltávolítva a duplázásokat. Csak DOM elemekből épült tömb esetén működik!
+
+
+
+
+
+
+jQuery.support			Magyarázat
+--------------------------------------------------------------------------------------------------------------
+Példa: if (jQuery.support.opacity) { alert('A böngésző támogatja az átlátszóságot!'); }
+
+ajax				igaz, amennyiben a böngésző támogatja az XHTMLHttpRequest objektumot
+boxModel			igaz, ha a böngésző a W3C CSS Box Model szabvány szerint rajzolja meg a dobozokat. Internet Explorer (IE) 6 és 7 esetén a kimenet hamis.
+changeBubbles			igaz, ha módosításkor a DOM fa a W3C DOM esemény modell] szerint viselkedik. IE esetén a jQuery szimulálja a szabványos viselkedést.
+checkClon			igaz, amennyiben a böngésző megfelelően ellenőrzi a radio gombok és a jelölő négyzetek állapotát.
+checkOn				igaz, ha a jelölő négyzet, a böngésző alapbeállítása miatt be van pipálva.
+cors				igaz, ha a böngésző képes létrehozni XMLHttpRequest objektumot, és ez az objektum rendelkezik withCredentials tulajdonsággal. Ahhoz, hogy engedélyezzük a domain-közi kéréseket a nem támogatott böngészőkben, állítsuk át a jQuery viselkedését ily módon: $.support.cors = true;.	[3]
+cssFloat			igaz, amennyiben a böngésző támogatja a cssFloat tulajdonságot, ahogy az a CSS szabványban elvárható. IE esetén, a kimeneten false értéket kapunk, használjuk a cssFloat helyett a styleFloat parancsot.
+hrefNormalized			igaz, ha a getAttribute() utasítás a linkek href tulajdonságát érintetlenül adja vissza, és nem normalizálja azt. IE 6, 7, 8 esetén a kimenet hamis.
+htmlSerialize			igaz, ha a böngésző képes beilleszteni/normalizálni <link> elemeket, az .innerHTML utasítás segítségével. IE esetén hamis.
+leadingWhitespace		igaz, amennyiben a böngésző az .innerHTML utasítás esetén az eredeti értéket adja vissza, szóközzel indított meghatározás esetén is. IE 6, 7, 8 esetén a kimenet hamis.
+noCloneChecked			igaz, ha a klónozott DOM elemek az eredeti elem .checked tulajdonságának állapotát is felveszik. IE esetén hamis.
+noCloneEvent			igaz, ha a klónozott DOM elemhez rendelt eseményeket is lemásolja a böngésző. IE esetén hamis.
+opacity				igaz, ha a böngésző megfelelően értelmezi az opacity (átlátszóság) tulajdonságot. Jelenleg nem támogatja az IE, helyette használható a filter: alpha(opacity=XX) kifejezés.
+optDisabled			igaz, amennyiben az <option> elemeken belül letiltott <select> elemeket a böngésző automatikusan nem jelöli meg letiltottként.
+optSelected			igaz, ha egy alapértelmezésként kiválasztott <option> elem rendelkezik működőképes <selected> tulajdonsággal
+scriptEval()			igaz, ha a böngésző megfelelően támogatja a <body> elembe ágyazott JavaScript kódok futtatását, azaz a <script> elem használatát
+style				igaz, amennyiben a böngésző megfelelően támogatja a <body> elembe ágyazott stílusok, azaz a <style> elem használatát, ahogy az a DOM Level 2 specifikációja alapján elvárható. Ebben az esetben a .getAttribute(’style’) lekérdezés a megfelelő értéket adja vissza. IE esetén hamis értéket kapunk, ekkor a .cssText használata javasolt.
+submitBubbles			igaz, ha a submit (beküldés) esemény a DOM fa elejére kerül, ahogy az a W3C DOM esemény modell	[14] alapján elvárható. IE esetén hamis, a jQuery szimulálja a megfelelő viselkedést.
+tbody				igaz, amennyiben egy üres <table> elem létezhet <tbody> tag nélkül. A HTML specifikáció	[15] alapján a <tbody> alelemre nincs szükség, így kompatibilis böngészők esetén, a kimeneten „igaz” érték látható. Ha az érték „hamis”, akkor a böngésző beilleszti a hiányzó <tbody> tagot. IE esetén hamis, automatikusan beilleszti a <tbody> elemet, ám az .innerHTML utasítás kimenetén ez nem jelenik meg.
+
+
+
+
+
+Egyéb utasítások		Magyarázat
+--------------------------------------------------------------------------------------------------------------
+data()				Adatot csatol hozzá, vagy olvas be a kiválasztott elemből.
+each()				Meghatároz egy függvényt, ami a jQuery kiválasztó alapján talált elemeken lefut.
+$.hasData()			Meghatározza, hogy az adott elemhez kapcsoltunk-e adatot.
+get()				A kiválasztó alapján talált valahányadik DOM elemet adja meg. Hasonló a működése az eq() kiválasztóhoz.
+index()				Visszaadja, hogy az adott elem hányadik a többi hasonló elem között.
+$.noConflict()			Felszabadítja a jQuery által lefoglalt $ karaktert, és lecseréli egy tetszőleges karakterláncra.
+removeData()			Eltávolítja a korábban eltárolt adatok valamelyikét.
+size()				Visszaadja a jQuery kiválasztó alapján talált elemek mennyiségét. Funkciója megyezik a length utasítással.
+toArray()			Visszaadja a jQuery kiválasztó alapján talált elemeket, tömbbe rendezve.
+
+
+
+
+Késleltetett utasítások		Magyarázat
+--------------------------------------------------------------------------------------------------------------
+deferred.always()		Beállítja a kezelőt arra az esetre, ha a Késleltetés végbement (done()), vagy visszautasítást kapott (fail()).
+deferred.done()			Beállítja a kezelőt arra az esetre, ha a Késleltetés végbement.
+deferred.fail()			Beállítja a kezelőt arra az esetre, ha a Késleltetés visszautasítást kapott.
+deferred.notify()		Meghívja az állapot-visszajelzéseket (done(), fail()) a megadott argumentumokkal.
+deferred.notifyWith()		Meghívja az állapot-visszajelzéseket (done(), fail()) a megadott argumentumokkal, egy adott környezetben.
+deferred.pipe()			Eszköz a Késleltetett utasítások szűrésére és/vagy összeláncolására.
+deferred.progress()		Beállítja a kezelőt arra az esetre, ha a Késleltetés folyamata előre lépett.
+deferred.promise()		Visszaadja a Késleltetett utasítás Promise (ígéret) objektumát.
+deferred.reject()		Visszautasítja a Késleltetést, és meghívja a hiba-visszajelzéseket (fail()) a megadott argumentumokkal.
+deferred.rejectWith()		Visszautasítja a Késleltetést, és meghívja a hiba-visszajelzéseket (fail()) a megadott argumentumokkal, egy adott környezetben.
+deferred.resolve()		Végrehajtja a Késleltetést, és meghívja a kész-visszajelzéseket (done()) a megadott argumentumokkal.
+deferred.resolveWith()		Végrehajtja a Késleltetést, és meghívja a kész-visszajelzéseket (done()) a megadott argumentumokkal, egy adott környezetben.
+deferred.state()		Meghatározza a Késleltetés jelenlegi állapotát.
+deferred.then()			Beállítja a kezelőt arra az esetre, ha a Késleltetés végbement (done()), vagy visszautasítást kapott (fail()).
+$.when()			Visszahívást futtathatunk egy vagy több objektumtól függően. Általában aszinkron Késleltetett eseményeket figyelünk meg vele.
+
+
+
+
+
+Visszahívás utasítások		Magyarázat
+--------------------------------------------------------------------------------------------------------------
+$.Callbacks()			Ez egy több funkciós visszahívási lista objektum, amivel képesek vagyunk kezelni a visszahívási utasításokat.
+callbacks.add()			Hozzáad egy vagy több visszahívási eseményt a visszahívási listához.
+callbacks.disable()		Leállítja és letiltja a visszahívási eseményeket.
+callbacks.empty()		Eltávolítja az összes visszahívást.
+callbacks.fire()		Meghívja az adott visszahívást az adott paraméterek szerint.
+callbacks.fired()		Meghatározza, hogy a visszahívás lefutott-e már legalább egyszer.
+callbacks.fireWith()		Meghívja az adott visszahívást az általunk megadott környezetben, az adott paraméterek szerint.
+callbacks.has()			Meghatározza, hogy a lefutott visszahívás szerepel-e az adott visszahívási listánkban.
+callbacks.lock()		Lezárja a visszahívási listát.
+callbacks.locked()		Visszaadja, hogy a visszahívási listánk le van-e zárva.
+callbacks.remove()		Eltávolít egy vagy több visszahívást a listáról.
+
+
+

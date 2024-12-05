@@ -1,0 +1,188 @@
+<html>
+<head>
+<meta charset="iso8859-2">
+
+<script type="text/javascript" src="../jq/jquery.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var b=0;
+    var l=0;
+    
+    $(".l1").hide();
+    $(".l2").hide();
+    $(".l3").hide();
+    $(".lx1").hide();              
+    $(".lx2").hide();
+    $(".lx3").hide();
+    
+    $(".b1").click(function(){
+      if (b=2){
+        $(".l2").hide("slow");
+      }
+      if (b=3){
+        $(".l3").hide("slow");
+      }
+      if (b!=1){
+        if (b!=0){
+          $(".l1").delay(500);
+        }
+        $(".l1").show("slow");
+        b=1;
+      }
+    });
+    $(".b2").click(function(){
+      if (b=1){
+        $(".l1").hide("slow");
+      }
+      if (b=3){
+        $(".l3").hide("slow");
+      }
+      if (b!=2){
+        if (b!=0){
+          $(".l2").delay(500);
+        }
+        $(".l2").show("slow");
+        b=2;
+      }
+    });
+    $(".b3").click(function(){
+      if (b=1){
+        $(".l1").hide("slow");
+      }
+      if (b=2){
+        $(".l2").hide("slow");
+      }
+      if (b!=3){
+        if (b!=0){
+          $(".l3").delay(500);
+        }
+        $(".l3").show("slow");
+        b=3;
+      }
+    });                  
+    
+    $(".s1").click(function(){
+      if (l=2){
+        $(".lx2").hide("slow");
+      }
+      if (l=3){
+        $(".lx3").hide("slow");
+      }
+      if (l!=1){
+        if (l!=0){
+          $(".lx1").delay(500);
+        }   
+        $(".lx1").show("slow");
+        l=1;
+      }
+    
+    
+    
+      $(".lx1").show("slow");              
+      $(".lx2").hide(2000);
+      $(".lx3").hide(2000);
+    });
+    $(".s2").click(function(){
+      if (l=1){
+        $(".lx1").hide("slow");
+      }
+      if (l=3){
+        $(".lx3").hide("slow");
+      }
+      if (l!=2){
+        if (l!=0){
+          $(".lx2").delay(500);
+        }   
+        $(".lx2").show("slow");
+        l=1;
+      }
+    });
+    $(".s3").click(function(){
+      if (l=1){
+        $(".lx1").hide("slow");
+      }
+      if (l=2){
+        $(".lx2").hide("slow");
+      }
+      if (l!=3){
+        if (l!=0){
+          $(".lx2").delay(500);
+        }   
+        $(".lx2").show("slow");
+        l=1;
+      }
+    });
+  });
+</script>
+
+<style type='text/css' media='screen'>
+  .Program {display:block;padding:5px 5px 5px 5px;text-align:center;
+            font-size:14px;font-weight:bold;background-color:teal;color:white;}
+  .Text {display:block;padding:15px 15px 15px 15px;font-size:12px;
+         background-color:white;color:blue;}
+  .Text2 {display:block;padding:15px 15px 15px 15px;
+          text-align:left;font-size:10px;background-color:white;color:black;}
+  .Text3 {display:block;padding:15px 15px 15px 15px;
+          text-align:center;font-size:10px;background-color:white;color:black;}
+  .Border {display:block;border:solid 1px;margin:15px 15px 0px 15px;}
+  .Keret {display:block;border:solid 1px;text-align:center;width:50%;margin:15px 15px 15px 15px;}
+</style>
+
+</head>
+
+<body>
+<div class='Border'>
+  <div class='Program'>
+    <b><i>Demo</i></b>
+  </div>
+
+  <div class='Text2'>
+    <button class='b1'>Első lap</button> 
+    <button class='b2'>Második lap</button>
+    <button class='b3'>Harmadik lap</button>
+    <div class='Keret'>
+      <div class='l1'>
+      Első lap.
+      </div>                                 
+      <div class='l2'>
+      Második lap.
+      </div>
+      <div class='l3'>
+      Harmadik lap.
+      </div>
+    </div>
+  </div>
+</div>
+                    
+<div class='Border'>
+  <div class='Program'>
+    <b><i>Demo 2</i></b>
+  </div>
+
+  <div class='Text'>
+    <span class='s1'>Első lap</span><br>
+      <div class='lx1'>
+      <div class='Keret'>
+      <div class='Text3'><br><li>Első lap.<br><br><br></div>
+      </div>
+      </div>           
+    <span class='s2'>Második lap</span><br>
+      <div class='lx2'>
+      <div class='Keret'
+      <div class='Text3'><br><li>Második lap.<br><br></div>
+      </div>
+      </div>           
+    <span class='s3'>Harmadik lap</span><br>
+      <div class='lx3'>
+      <div class='Keret'
+      <div class='Text3'><br><li>Harmadik lap.<br><br><br></div>
+      </div>
+      </div>           
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

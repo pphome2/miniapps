@@ -1,0 +1,80 @@
+<html>
+<title>Teszt01-Ajax</title>
+
+<body>
+
+<script type="text/javascript">
+
+var xmlHttp=null;
+  
+function ajaxopen(){
+  try{          // Firefox, Opera 8.0+, Safari
+    xmlHttp=new XMLHttpRequest();
+  }
+  catch (e){    // Internet Explorer
+    try{
+      xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e){
+      xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  }                                            
+}
+
+function kiir(){
+  if (xmlHttp.readyState==4){
+    //alert(xmlHttp.responseText);
+    document.form1.time.value=xmlHttp.responseText;
+  }
+}
+
+function kiir2(){
+  if (xmlHttp.readyState==4){
+    //alert(xmlHttp.responseText);
+    document.getElementById("szoveg").innerHTML=xmlHttp.responseText;
+  }
+}
+
+function szerverido(){
+  ajaxopen();
+  if (xmlHttp==null){
+    alert("AJAX hiba.");  
+  }else{
+    //alert("AJAX ok.");
+    var url="ido.php";
+    
+    xmlHttp.onreadystatechange=function(){
+      kiir();
+    };
+    xmlHttp.open("GET",url,true);
+    xmlHttp.send(null);
+  }
+}
+
+function ajaxteszt(){
+  ajaxopen();
+  if (xmlHttp==null){
+    alert("AJAX hiba.");  
+  }else{
+    //alert("AJAX ok.");
+    var url2="ido2.php";
+    
+    xmlHttp.onreadystatechange=function(){
+      kiir2();
+    };
+    xmlHttp.open("GET",url2,true);
+    xmlHttp.send(null);
+  }
+}
+
+</script>
+
+<form name="form1">
+Név: <input type="text" name="username" onfocus="ajaxteszt();">
+Idõ: <input type="text" name="time" onfocus="szerverido();" readonly>
+</form>
+
+<p>Szerverrõl: <span id="szoveg"></span></p> 
+
+</body>
+</html>

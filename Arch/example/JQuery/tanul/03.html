@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Számológép</title>
+
+	<script type="text/javascript" src="../jq/jquery.min.js"></script>
+
+	<script>
+		a=''; m='';
+		$(document).ready(function() {
+
+			$('.szam').click(function() {
+				if ( a=='0' ){
+					ered=$(this).text();
+				}
+				else {
+					if ( $('#eredmeny').val()=='0') {
+						eloeredmeny='';
+					} else {
+						eloeredmeny=$('#eredmeny').val();
+					}
+					ered=eloeredmeny+$(this).text();
+				}
+				$('#eredmeny').val(ered);
+			});
+	
+			$('.muv').click(function() {
+				a=$('#eredmeny').val();
+				m=$(this).text();
+				$('#eredmeny').val('0');
+			});
+	
+			$('#egyenlo').click(function() {
+				switch (m)
+				{
+				case "*":
+				  $('#eredmeny').val(a*1*$('#eredmeny').val()*1);
+				  break;
+				case "/":
+				  $('#eredmeny').val(a*1/$('#eredmeny').val()*1);
+				  break;
+				case "+":
+				  $('#eredmeny').val(a*1+$('#eredmeny').val()*1);
+				  break;
+				case "-":
+				  $('#eredmeny').val(a*1-$('#eredmeny').val()*1);
+				  break;
+				}
+				a='0';
+			});
+	
+			$('button').bind('mouseenter', function() {
+				$('#leiras').val($(this).attr("leiras"));
+				$(this).css({ 'background':'#3FAB00' });
+			}).bind('mouseleave', function() {
+				$(this).css({ 'background':'' });
+			});
+		});
+	</script>
+
+	<style type="text/css">
+		button {
+			width:100px;
+			height:50px;
+			font-size:18px;
+		}
+
+		input {
+			width:398px;
+			height:50px;
+			padding:5px;
+			font-size:24px;
+			text-align:right;
+		}
+	</style>
+</head>
+
+<body>
+
+	<input id="eredmeny" type="text" value="0"/><br />
+	<button class="szam" type="button" leiras="Hetes">7</button>
+	<button class="szam" type="button" leiras="Nyolcas">8</button>
+	<button class="szam" type="button" leiras="Kilences">9</button>
+	<button class="muv" type="button" leiras="Osztás!">/</button>
+	<br />
+	<button class="szam" type="button" leiras="Négyes">4</button>
+	<button class="szam" type="button" leiras="Ötös">5</button>
+	<button class="szam" type="button" leiras="Hatos">6</button>
+	<button class="muv" type="button" leiras="Szorzás">*</button>
+	<br />
+	<button class="szam" type="button" leiras="Egyes">1</button>
+	<button class="szam" type="button" leiras="Kettes">2</button>
+	<button class="szam" type="button" leiras="Hármas">3</button>
+	<button class="muv" type="button" leiras="Kivonás">-</button>
+	<br />
+	<button class="szam" type="button" leiras="Zéró">0</button>
+	<button class="muv" type="button" leiras="Törlés">C</button>
+	<button id="egyenlo" type="button" leiras="Eredmény">=</button>
+	<button class="muv" type="button" leiras="Összeadás">+</button>
+	<br />
+	<input id="leiras" type="text" value="">
+
+</body>
+</html>
+

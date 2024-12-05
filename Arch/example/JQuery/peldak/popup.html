@@ -1,0 +1,328 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv='Content-Type' content='text/xml; charset=utf-8' />
+  <title>Demo</title>
+
+<script type="text/javascript" src="../jq/jquery.js"></script>
+
+<script type="text/javascript">
+
+  var popupStatus = 0;
+
+  function loadPopup(){
+    //loads popup only if it is disabled
+    if(popupStatus==0){
+      $("#backgroundPopup").css({
+        "opacity": "0.7"
+      });
+      $("#backgroundPopup").fadeIn("slow");
+      $("#popupContact").fadeIn("slow");
+      popupStatus = 1;
+    }
+  }
+
+  //disabling popup with jQuery magic!
+  function disablePopup(){
+    //disables popup only if it is enabled
+    if(popupStatus==1){
+      $("#backgroundPopup").fadeOut("slow");
+      $("#popupContact").fadeOut("slow");
+      popupStatus = 0;
+    }
+  }
+
+  $(document).ready(function(){
+
+    jQuery.fn.center = function () {
+        this.css("position","absolute");
+	this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + 
+                                                $(window).scrollTop()) + "px");
+        this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
+	                                        $(window).scrollLeft()) + "px");
+	return this;
+    }
+
+    //LOADING POPUP
+    //Click the button event!
+    $(".button").click(function(){
+      $("#popupContact").center();
+      loadPopup();
+    });
+  });
+
+
+</script>
+
+<style type='text/css' media='screen'>
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td {
+  border:0pt none;
+  font-family:inherit;
+  font-size:100%;
+  font-style:inherit;
+  font-weight:inherit;
+  margin:0pt;
+  padding:0pt;
+  vertical-align:baseline;
+}
+
+body{
+  background:#fff none repeat scroll 0%;
+  line-height:1;
+  font-size: 12px;
+  font-family:arial,sans-serif;
+  margin:0pt;
+  height:100%;
+}
+
+table {
+  border-collapse:separate;
+  border-spacing:0pt;
+}
+
+caption, th, td {
+  font-weight:normal;
+  text-align:left;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content:"";
+}
+
+blockquote, q {
+  quotes:"" "";
+}
+
+a{
+  cursor: pointer;
+  text-decoration:none;
+}
+
+br.both{
+  clear:both;
+}
+
+#backgroundPopup{
+  display:none;
+  position:fixed;
+  _position:absolute; /* hack for internet explorer 6*/
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#000000;
+  border:1px solid #cecece;
+  z-index:1;
+}
+
+#popupContact{
+  display:none;
+  position:fixed;
+  _position:absolute; /* hack for internet explorer 6*/
+  background:#FFFFFF;
+  border:2px solid #cecece;
+  z-index:2;
+  top:50%;
+  left:50%;
+  padding:15px;
+  font-size:13px;
+}
+
+#popupContact h1{
+  text-align:left;
+  color:#6FA5FD;
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:10px;
+  border-bottom:1px dotted black;
+}
+
+#popupContactClose{
+  font-size:14px;
+  line-height:14px;
+  right:6px;
+  top:4px;
+  position:absolute;
+  color:#6fa5fd;
+  font-weight:700;
+  display:block;
+}
+
+#button{
+  text-align:center;
+  margin:100px;
+}
+
+.Program {display:block;padding:5px 5px 5px 5px;text-align:center;
+            font-size:14px;font-weight:bold;background-color:teal;color:white;}
+.Text {display:block;padding:15px 15px 15px 15px;font-size:12px;
+         background-color:white;color:blue;}
+.Text2 {display:block;padding:15px 15px 15px 15px;
+	  text-align:left;font-size:10px;background-color:white;color:black;}
+.Text3 {display:block;padding:15px 15px 15px 15px;
+          text-align:center;font-size:10px;background-color:white;color:black;}
+.Border {display:block;border:solid 1px;margin:5px;}
+.kKeret {display:block;border:solid 1px;text-align:center;width:50%;margin:15px 15px 15px 15px;}
+</style>
+
+</head>
+
+<body>
+
+  <center> 
+  <div id="button" class="button"><input type="submit" value="Felbukkanó ablak" /></div>
+  </center>  
+
+  <div id="popupContact">
+    <div class='Border'>
+      <div class='Program'>
+        <b><i>Demo</i></b>
+        <a id="popupContactClose" onclick='disablePopup()'>x</a>
+      </div>
+
+      <div class='Text2'>
+        <h1>Íme a felbukkanó ablak!</h1>
+        <p id="contactArea">
+          Here we have a simple but interesting sample of our new stuning and smooth popup. As you can see jQuery and CSS does it easy...
+          <br/><br/>
+          We can use it for popup-forms and more... just experiment!
+          <br/><br/>
+          Press ESCAPE, Click on X (right-top) or Click Out from the popup to close the popup!
+          <br/><br/>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="backgroundPopup"></div>
+
+<div class='Border'>
+  <div class='Program'>
+    <b><i>Demo</i></b>
+  </div>
+
+  <div class='Text2'>
+    <button class='b1'>Első lap</button>
+    <button class='b2'>Második lap</button>
+    <button class='b3'>Harmadik lap</button>
+    <div class='Keret'>
+      <div class='l1'>
+      Első lap.
+      </div>
+      <div class='l2'>
+      Második lap.
+      </div>
+      <div class='l3'>
+      Harmadik lap.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='Border'>
+  <div class='Program'>
+    <b><i>Demo 2</i></b>
+  </div>
+
+  <div class='Text'>
+    <span class='s1'>Első lap</span><br>
+      <div class='lx1'>
+      <div class='Keret'>
+      <div class='Text3'><br><li>Első lap.<br><br><br></div>
+      </div>
+      </div>
+      <span class='s2'>Második lap</span><br>
+      <div class='lx2'>
+      <div class='Keret'
+      <div class='Text3'><br><li>Második lap.<br><br></div>
+      </div>
+      </div>
+      <span class='s3'>Harmadik lap</span><br>
+      <div class='lx3'>
+      <div class='Keret'
+      <div class='Text3'><br><li>Harmadik lap.<br><br><br></div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<center>
+  <div id="button" class="button"><input type="submit" value="Felbukkanó ablak" /></div>
+</center>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<hr />
+</body>
+</html>

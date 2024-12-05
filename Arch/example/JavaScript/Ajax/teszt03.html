@@ -1,0 +1,94 @@
+<html>
+<title>Teszt03-Ajax</title>
+
+<script type="text/javascript">
+
+var xmlHttp=null;
+  
+function ajaxopen(){
+  try{          // Firefox, Opera 8.0+, Safari
+    xmlHttp=new XMLHttpRequest();
+  }
+  catch (e){    // Internet Explorer
+    try{
+      xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e){
+      xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  }                                            
+}
+
+function kiir(){
+  if (xmlHttp.readyState==4){
+    //alert(xmlHttp.responseText);
+    document.getElementById("ido").innerHTML=xmlHttp.responseText;
+  }
+}
+
+function kiir2(){
+  if (xmlHttp.readyState==4){
+    //alert(xmlHttp.responseText);
+    document.getElementById("szoveg").innerHTML=xmlHttp.responseText;
+  }
+}
+
+function szerverido(){
+  ajaxopen();
+  if (xmlHttp==null){
+    alert("AJAX hiba.");  
+  }else{
+    //alert("AJAX ok.");
+    var url="ido.php";
+    
+    xmlHttp.onreadystatechange=function(){
+      kiir();
+    };
+    xmlHttp.open("GET",url,true);
+    xmlHttp.send(null);
+  }
+}
+
+function ajaxteszt(url2){
+  ajaxopen();
+  if (xmlHttp==null){
+    alert("AJAX hiba.");  
+  }else{
+    //alert("AJAX ok.");
+    
+    xmlHttp.onreadystatechange=function(){
+      kiir2();
+    };
+    xmlHttp.open("GET",url2,true);
+    xmlHttp.send(null);
+  }
+}
+
+</script>
+
+<body onLoad="szerverido()">
+
+<table width=90%><tr>
+<td width=25% align=center><img src=g1.jpg onClick="ajaxteszt('teszt031.php')"></td>
+<td width=25% align=center><img src=g2.jpg onClick="ajaxteszt('teszt032.php')"></td>
+<td width=25% align=center><img src=g3.jpg onClick="ajaxteszt('teszt033.php')"></td>
+<td width=25% align=center><img src=g4.jpg onClick="ajaxteszt('teszt034.php')"></td>
+</tr></table>
+
+<br><br><hr><br>
+
+<span id="szoveg"></span>
+
+<br><br><hr><br>
+
+<span id=1 onClick="ajaxteszt('teszt031.php')"> Elsõ pont - </span>
+<span id=1 onClick="ajaxteszt('teszt032.php')"> Második pont - </span>
+<span id=1 onClick="ajaxteszt('teszt033.php')"> Harmadik pont - </span>
+<span id=1 onClick="ajaxteszt('teszt034.php')"> Negyedik pont </span>
+
+<br><br><hr><br>
+
+<p>Szerveridõ: <span id="ido"></span></p> 
+
+</body>
+</html>

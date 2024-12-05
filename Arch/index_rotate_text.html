@@ -1,0 +1,67 @@
+<htnl>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <style type="text/css"> 
+    body{
+      margin: 0;
+      padding: 0;
+    }
+
+    .page {
+      border:none;
+      padding:0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      font-size:4em;
+      font-weight:bold;
+      background-color:grey;
+    }
+    .text {
+      overflow: hidden;
+      height: 70px;
+      padding: 0 70px;
+    }
+    .text-content {
+      margin-top: 0;
+      padding-left: 0;
+      text-align: center;
+      list-style: none;
+      animation: animate 15s infinite;
+    }
+    .content {
+      line-height:80px;
+      margin:0;
+      color:black;
+    }
+    @keyframes animate {
+      0%, 12.66%, 100% {transform: translate3d(0, 0, 0);}
+      16.66%, 29.32% {transform: translate3d(0, -25%, 0);}
+      33.32%,45.98% {transform: translate3d(0, -50%, 0);}
+      49.98%,62.64% {transform: translate3d(0, -75%, 0);}
+      66.64%,79.3% {transform: translate3d(0, -50%, 0);}
+      83.3%,95.96% {transform: translate3d(0, -25%, 0);}
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="text">
+      <ul class="text-content">
+        <li class="content">Debian</li>
+        <li class="content">Fejlesztés</li>
+        <li class="content">Üzemeltetés</li>
+        <li class="content">Szerverek</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+
+</html>

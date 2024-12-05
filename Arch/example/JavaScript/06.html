@@ -1,0 +1,26 @@
+<html><head>
+<title>Teszt05</title>
+
+<script language="JavaScript">
+
+function ma() {
+  most=new Date();
+  document.write(most+"<br>");
+  var ev=most.getYear()+1900;
+  document.write(ev+"<br>");
+  var ho=most.getMonth()+1;
+  document.write(ho+"<br>");
+  var nap=most.getDay();
+  document.write(nap+"<br>");
+}
+
+  
+function indul(){
+  ma();
+}
+
+</script>
+
+</head>
+<body onLoad="indul()">
+</body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	
+	<script type="text/javascript" src="../jq/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			function folyamat(ertek){
+				il=$('input').length;
+				bgpos=Math.round(-1*(1-ertek/il)*$('button').width());
+				$('button').css({'background-position':bgpos});
+				if (il==ertek){
+					$('button').css('border-color','#0f0')
+						.removeAttr('disabled');	
+				} else {
+					$('button').css('border-color','#f00')
+						.attr({'disabled':'disabled'});
+				}
+			}
+			//folyamat($('input:[value!=""]').length);
+			folyamat(0);
+			$('input').keyup(function(){
+				$.ajax({
+					url: "format.php",
+					data: {
+						felhnev:$('[name=felhnev]').val(),
+						email:$('[name=email]').val()
+					},
+					async: false,
+					cache: false,
+					success: function(eredmeny){
+						$('#log').empty();
+						eredobj=$.post(eredmeny);
+						kitoltve=0;
+						$('input').each(function(){
+							if ($(this).val().length>0) {
+								kitoltve=kitoltve+1;
+							}
+						});
+						$.each(eredobj, function(nev, ertek){
+							if (ertek==1) {
+								//kitoltve=kitoltve-1;
+								switch (nev){
+									case 'admin': $('#log').append('<br />Hiba! A felhasználónévben nem lehet ékezet!'); break;
+									case 'email': $('#log').append('<br />Hiba! Az e-mail cím formátuma nem megfelelő!'); break;
+								}
+							}
+						});
+						folyamat(kitoltve);
+						
+					}
+				});
+			});
+
+
+		});
+	</script>
+
+	<style type="text/css">
+		input,button { width:200px; }
+		button {
+			height:40px;
+			background: #bbb url("folyamat.jpg") no-repeat -180px 0px;
+			border-radius:5px;
+			border:2px solid #f00;
+			color:white;
+			margin-top:10px;
+		}
+		#adatok {
+			padding:10px; background:#eee;
+			border:1px solid #000;
+			border-radius:5px;
+			width:335px;
+		}
+		tr td:first-child { padding-right:10px; }
+		</style>
+
+</head>
+<body>
+
+	<div id="adatok">
+	<form>
+	<table>
+		<tr>
+			<td>Teljes név</td>
+			<td><input type="text" name="teljnev" /></td>
+		</tr><tr>
+			<td>E-mail</td>
+			<td><input type="text" name="email" /></td>
+		</tr><tr>
+			<td>Felhasználónév</td>
+			<td><input type="text" name="felhnev" /></td>
+		</tr><tr>
+			<td>Jelszó</td>
+			<td><input type="password" name="jelszo" /></td>
+		</tr><tr>
+			<td>Jelszó emlékeztető</td>
+			<td><input type="text" name="jelszoeml" /></td>
+		</tr><tr>
+			<td></td>
+			<td><button name="bekuld" disabled="disabled">Beküldés</button></td>
+		</tr>
+	</table>
+	</form>
+	<div id="log"></div>
+	</div>
+
+</body>
+</html>
+
+

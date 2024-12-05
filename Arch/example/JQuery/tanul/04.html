@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	<script type="text/javascript" src="../jq/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			i=0;
+			$('.cella').mouseover(function(){
+				i=i+1;
+			}).click(function(){
+				$(this).empty();
+			});
+			$('.a').mouseover(function(){
+				$(this).html($('textarea').val()+i);
+			});
+			$('.b').mouseover(function(){
+				$(this).prepend($('textarea').val()+i);
+			});
+			$('.c').mouseover(function(){
+				$('<span>'+$('textarea').val()+i+' </span>')
+					.appendTo($(this));
+			});
+		});
+	</script>
+
+	<style type="text/css">
+		textarea {
+			width:200px; height:100px;
+		}
+		.cella {
+			width:200px; height:100px;
+			border:1px solid #888;
+			float:left;
+		}
+		.a { background:#fbb; border-color:red; }
+		.b { background:#eee; border-color:white; }
+		.c { background:#bfb; border-color:green; }
+	</style>
+
+</head>
+<body>
+
+<textarea> Szöveg </textarea>
+<div style="clear:both;"></div>
+<div class="cella a"></div>
+<div class="cella a"></div>
+<div style="clear:both;"></div>
+<div class="cella b"></div>
+<div class="cella b"></div>
+<div style="clear:both;"></div>
+<div class="cella c"></div>
+<div class="cella c"></div>
+
+
+
+
+</body>
+</html>
+

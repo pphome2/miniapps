@@ -1,0 +1,80 @@
+<html>
+<title>Teszt02-Ajax</title>
+
+<body>
+
+<script type="text/javascript">
+
+var xmlHttp=null;
+  
+function ajaxopen(){
+  try{          // Firefox, Opera 8.0+, Safari
+    xmlHttp=new XMLHttpRequest();
+  }
+  catch (e){    // Internet Explorer
+    try{
+      xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e){
+      xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  }                                            
+}
+
+function kiir(){
+  if (xmlHttp.readyState==4){
+    //alert(xmlHttp.responseText);
+    str=xmlHttp.responseText;
+    tomb=str.split(";")
+    document.form1.o2.options.length=0;
+    for (var i=0;i<tomb.length;i++){
+      document.form1.o2.options[i]=new Option(tomb[i],tomb[i],false,false);
+    }
+  }
+}
+
+function valaszt(valasztas){
+  document.form1.o1.remove(0);
+  ajaxopen();
+  if (xmlHttp==null){
+    alert("AJAX hiba.");  
+  }else{
+    //alert("AJAX ok.");
+    var url="termek.php?q="+valasztas;
+    
+    xmlHttp.onreadystatechange=function(){
+      kiir();
+    };
+    xmlHttp.open("GET",url,true);
+    xmlHttp.send(null);
+  }
+}
+
+</script>
+
+<form name="form1">
+Termék: 
+<select name="o1" onChange="valaszt(o1.options[selectedIndex].value)">
+    <option value="00">Válasszon kategóriát.</option>
+  <optgroup label="Számítástechnika">
+    <option value="11">Számítógép</option>
+    <option value="12">Nyomtató</option>
+    <option value="13">Monitor</option>
+    <option value="14">Egér</option>
+    <option value="15">Billentyûzet</option>
+    <option value="16">Hangszóró</option>
+  </optgroup>
+  <optgroup label="Irodatechnika">
+    <option value="21">Telefon</option>
+    <option value="22">Fax</option>
+    <option value="23">Fénymásoló</option>
+  </optgroup>
+</select><br><br>
+Gyártó: 
+<select name="o2">
+  <option>Válasszon terméket</option>
+</select>
+</form>
+
+</body>
+</html>

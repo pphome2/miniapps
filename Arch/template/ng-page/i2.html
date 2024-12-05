@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="i2.css">
+</head>
+
+
+<body>
+
+<header>
+<div class=menu>
+<ul class="sidenav">
+	<li><a class="active" href="#home">Home</a></li>
+	<li class="dropdown"><a href="" class="dropbtn">Dropdown</a>
+		<div class="dropdown-content">
+			<a href="#">Link 1</a>
+			<a href="#">Link 2</a>
+			<a href="#">Link 3</a>
+		</div>
+	</li>
+	<li><a href="#news">News</a></li>
+	<li><a href="#contact">Contact</a></li>
+	<li style="float:right;" class="dropdown"><da><i class="search_icon"></i></da>
+    	<div class="dropdown-search">
+      		<form method="get" action=""><input type="text" id="n" name="n" placeholder="Search"></form>
+	    </div>
+	</li>
+</ul>
+</div>
+
+</header>
+
+
+
+<div id="panel_left" class="panel_left">
+	<div id="toprightclose1" onclick="closeit(this,'panel_left','panel_left_close','panel_content1')" class="toprightclose"></div>
+	<div id="panel_content1" class="panel_content">
+		Menu
+	</div>
+</div>
+
+
+<div id ="panel_right" class="panel_right" onclick="openit(this,'toprightclose1','panel_content1')">
+	<div id="toprightclose2" onclick="closeit(this,'panel_right','panel_right_close','panel_content2')" class="toprightclose"></div>
+	<div id="panel_content2" class="panel_content">
+		Menu
+	</div>
+</div>
+
+
+<div id="panel_left_button" class="panel_left_button" onclick="openit('toprightclose1','panel_content1','panel_left')">
+</div>
+
+<div id="panel_right_button" class="panel_right_button" onclick="openit('toprightclose2','panel_content2','panel_right')">
+</div>
+
+
+
+
+
+
+<div class="content">
+			<h1>Lorem ipsum</h1>
+<div class="spaceline100"></div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. 
+			Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, 
+			risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent 
+			scelerisque tortor sed accumsan convallis.</p>
+<div class="spaceline100"></div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. 
+			Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, 
+			risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent 
+			scelerisque tortor sed accumsan convallis.</p>
+<div class="spaceline100"></div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. 
+			Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, 
+			risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent 
+			scelerisque tortor sed accumsan convallis.</p>
+<div class="spaceline100"></div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. 
+			Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, 
+			risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent 
+			scelerisque tortor sed accumsan convallis.</p>
+<div class="spaceline100"></div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. 
+			Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, 
+			risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent 
+			scelerisque tortor sed accumsan convallis.</p>
+<div class="spaceline100"></div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. 
+			Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, 
+			risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent 
+			scelerisque tortor sed accumsan convallis.</p>
+
+
+</div>
+
+
+
+<footer>
+	Copyright
+
+	<div class="row">
+		<div class="column3">
+		<div class="columnspace">
+			<h2>Column</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. 
+			Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, 
+			risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent 
+			scelerisque tortor sed accumsan convallis.</p>
+		</div>
+	</div>
+	<div class="column3">
+		<div class="columnspace">
+			<h2>Column</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. 
+			Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, 
+			risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent 
+			scelerisque tortor sed accumsan convallis.</p>
+		</div>
+	</div>
+	<div class="column3">
+		<div class="columnspace">
+			<h2>Column</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. 
+			Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, 
+			risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent 
+			scelerisque tortor sed accumsan convallis.</p>
+		</div>
+	</div>
+	</div>
+
+</footer>
+
+
+
+<script type="text/javascript">
+
+function openit(closen,cont,panel){
+			document.getElementById(panel).style.display='block';
+	setTimeout(function(){
+			document.getElementById(closen).style.display='block';
+			document.getElementById(cont).style.display='block';
+		}, 2000);
+}
+
+
+function closeit(th,clpanel,clpanel2,cont){
+	th.parentElement.className=clpanel2;
+	th.style.display='none';
+	document.getElementById(cont).style.display='none';
+	setTimeout(function(){th.parentElement.className=clpanel;th.parentElement.style.display='none';}, 2000);
+}
+
+</script>
+
+
+
+</body>
+</html>

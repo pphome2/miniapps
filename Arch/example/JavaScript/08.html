@@ -1,0 +1,52 @@
+<html><head>
+<title>Teszt08</title>
+
+<script language="JavaScript">
+
+var passw="jelszo";
+
+passw=prompt("Kérem a jelszót : ","");
+
+if(passw=="") {
+  alert("Ez meg mi volt? Majd én adok neked jelszót.");
+  passw="jelszó";
+}else{
+  alert("Köszönöm: "+passw+".");
+}
+
+function psetcookie(name,value,expire) {
+  document.cookie=name+"="+escape(value)+"; expires="+expire;
+  alert("Elmentve: "+value);
+}
+
+function pgetcookie(name){
+  var search=name+"=";
+  
+  if (document.cookie.length > 0){
+    offset=document.cookie.indexOf(search);
+    if (offset!=-1){
+      offset+=search.length;
+      end=document.cookie.indexOf(";", offset);
+      if (end==-1) {
+        end=document.cookie.length;
+      }
+      alert("Mentett jelszó: "+unescape(document.cookie.substring(offset, end))+".");
+    }
+  }
+}
+</script>
+<script language="JavaScript">
+    
+
+</script>
+
+</head>
+<body onLoad="indul()">
+
+<script language="JavaScript">
+document.write("Szia "+passw+"!<br><br>");
+</script>
+
+<button onClick="psetcookie('jelszo',passw,10000)">Elmentem a jelszómat</button>
+<button onClick="pgetcookie('jelszo')">Kérem a jelszómat</button>
+</body></html>

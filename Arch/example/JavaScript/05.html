@@ -1,0 +1,111 @@
+<html><head>
+<title>Teszt05</title>
+
+<script language="JavaScript">
+
+var i=0;
+var k="Köszönöm ";
+
+function indul(){
+}
+
+function vizsgal(mezo) {
+  if(mezo=="") {
+    alert("Kérem a név mezõt kitölteni !");
+    document.teszt.bevitel.focus();
+    return false;
+  }else{
+    document.write("<br><br>Szia "+mezo+".<br>");
+    return true;
+  }
+}
+
+function ellenorzes(){
+  for(i=0;i<document.forms[1].elements.length; ++i)
+    if(document.forms[1].elements[i].value == ""){
+      alert("Nincs minden mezõ kitöltve!");
+      document.forms[1].elements[i].focus();
+      return false;
+    }
+  return true; 
+}
+
+</script>
+
+</head>
+<body onLoad="indul()">
+<br><br>
+<form name="teszt">
+
+Név: <input type=text name="bevitel" onBlur="vizsgal(this.value)">
+<br><br>
+
+<textarea rows=8 cols=32 onChange="alert(this.value)">
+Megjegyzés
+</textarea><br><br>
+
+<input size=30 name="kijelez" readonly><br>
+<input type=button value="Utoljára módosítva" 
+onClick="this.form.kijelez.value=document.lastModified">
+
+<br><br>
+Szám: <input size=20 name="ert" value="..."><br>
+<input type=button value="Kétszeri kattintást kérek"
+onDblClick="document.teszt.ert.value=k+i+' db dupla.';i++">
+
+<br><br>
+<input size=30 onFocus="this.value='Itt a nevét adhatja meg'"><br>
+<input size=30 onFocus="this.value='Itt a címet adhatja meg'"><br>
+<input size=30 onFocus="this.value='Itt a hobbit adhatja meg'"><br>
+</form>
+
+<br><br>
+<a href="" onMousedown=
+"window.status='JavaScript nyitólap';alert('Nincs ilyen lap');return true;">
+Kattints rám</a>
+
+<br><br>
+<a href=""
+onMouseout="alert('Maradj')">Ne vidd el az egeret rólam.</a>
+
+<br><br><p id="egerteszt"
+onMouseover="document.getElementById('egerteszt').innerHTML='Rajtam az egér.'";
+onMouseout="document.getElementById('egerteszt').innerHTML='Gyere vissza egér.'">
+Változás <p>
+
+<p id="myP">Csak teszt <b>teszt</b> üzenet.</p>
+<button onclick="alert(document.getElementById('myP').innerHTML);">InnerHTML</button>
+<button onclick="alert(document.getElementById('myP').innerText);">InnerText</button>
+  
+<br><br>
+<form name="teszt2" onReset="valasz=window.confirm('Valóban törli az adatokat ?');
+return valasz;" onSubmit="return ellenorzes()">
+Név: <input size=32><br>
+Hobby: <input size=32><br>
+<input type=reset value="Törlés">
+<input type=submit value="Elküld">
+</form>
+
+<br><br>
+<form name="teszt3">
+<input size=45 value="Akácos út,ha végigmegyek rajtad én.. Jelölj ki..."
+onselect="alert('Nem szabad!')">
+</form>
+
+
+<br><br>
+<form name="teszt4">
+<input name="1" size=100 value="?" onFocus="this.value=navigator.userAgent;">
+
+</form>
+
+
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+  
+
+
+
+</body></html>

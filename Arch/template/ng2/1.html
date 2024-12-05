@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="1.css">
+	</head>
+
+	<body>
+
+		<div id="gototop" class="gototop" onclick="gotop()"></div>
+
+		<div id="header" class="header"></div>
+		<div id="navbar" class="navbar">
+			<div id="hbutton" class="hbutton"></div>
+			<a href="#home">Home</a>
+			<a href="#news">News</a>
+			<a href="#contact">Contact</a>
+			<div id="sbutton" class="sbutton" onclick="search()"></div>
+			<!-- <a href="#contact" style="float:right;border:0px;"><span class="search_icon"></span></a> -->
+				<form id="formclass" class="formclass" action="">
+					<div id="sbutton" class="sbutton" onclick="search()"></div>
+					<input type="submit" id="submit" class="fbutton" value="Keresés">
+					<input id ="inputsearch" class="inputsearch" type="text" name="search" placeholder="">
+				</form>
+		</div>
+
+
+
+
+		<div class="bg">
+			<div class="center_div">
+				<h1>Hello World!</h1>
+				<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			</div>
+		</div>
+
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+
+
+		<div class="bg2">
+
+			<div class="center_div">
+				<h1>Hello World!</h1>
+				<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			</div>
+		</div>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+			<p>This example contains some advanced CSS methods you may not have learned yet. </p>
+
+
+
+  </div>
+	<script type="text/javascript">
+		window.onscroll = function() {myFunction()};
+
+		var header = document.getElementById('header');
+		var navbar = document.getElementById('navbar');
+		var gototop = document.getElementById('gototop');
+		var formclass = document.getElementById('formclass');
+		var sbutton = document.getElementById('sbutton');
+		var inputsearch = document.getElementById('inputsearch');
+
+		formclass.addEventListener("blur", () => outsearch(), true);
+
+		var pos = 200;
+		var posgototop = 20;
+
+		var live = false;
+		var livegototop = false;
+		var livesearch = false;
+
+		function myFunction() {
+			if (livesearch){
+				outsearch();
+			}
+			if (window.pageYOffset > pos) {
+				if (!live){
+					navbar.style.display='block';
+					navbar.style.animationName='menu_screen';
+					live = true;
+				}
+			} else {
+				if (live){
+					navbar.style.animationName='menu_noscreen';
+					formclass.style.display='none';
+					setTimeout(function(){ navbar.style.display='none'; }, 200);
+					live = false;
+				}
+ 			}
+
+			if (window.pageYOffset > posgototop) {
+				if (!livegototop){
+					gototop.style.display='block';
+					gototop.style.animationName='to_top';
+					livegototop = true;
+				}
+			} else {
+				if (livegototop){
+					gototop.style.animationName='to_notop';
+					setTimeout(function(){ gototop.style.display='none'; }, 200);
+					livegototop = false;
+				}
+ 			}
+		}
+
+
+		function search() {
+			if (!livesearch){
+				formclass.style.display='block';
+				formclass.focus();
+				inputsearch.focus();
+				livesearch = true;
+ 			} else {
+				formclass.style.display='none';
+				livesearch = false;
+			}
+		}
+
+		function outsearch() {
+			setTimeout(function(){ formclass.style.display='none';livesearch = false; }, 200);
+		}
+
+
+		function gotop() {
+    		document.body.scrollTop = 0; // For Safari
+    		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+		}
+
+	</script>
+
+
+	</body>
+</html>

@@ -1,0 +1,245 @@
+
+body, html{
+	height: 100%;
+	width:100%;
+	padding:0;
+	margin:0;
+}
+
+@keyframes menu_screen {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@keyframes menu_noscreen {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@keyframes to_top {
+	from {opacity: 0.0;}
+	to {opacity: 0.5;}
+}
+
+@keyframes to_notop {
+	from {opacity: 0.5;}
+	to {opacity: 0.0;}
+}
+
+.gototop {
+	position: absolute;
+	overflow: hidden;
+	display: none;
+	background-color: #333;
+	position:fixed;
+	padding:20px;
+	bottom: 30px;
+	right: 30px;
+	font-size: 1.3em;
+    font-weight: 900;
+    font-variant:small-caps;
+    border-radius: 3px;
+	opacity:0.5;
+	color:white;
+    animation-name: to_top;
+    animation-duration: 0.5s;
+	z-index: 999;
+}
+
+.gototop:before{
+	content: "\2227";
+}
+
+.search_icon{
+	color:white;
+	float:right;
+    transform: rotate(320deg);
+}
+
+.search_icon:hover {
+    bbackground-color: red;
+}
+
+.search_icon:before{
+	ccontent:"\01F50D";
+	content:"\26B2";
+}
+
+.formclass{
+	position:fixed;
+	top:0px;
+	right:0px;
+    float:right;
+    display:none;
+    width:80%;
+    bborder: 1px solid red;
+}
+
+.formclass:focus {
+}
+
+.fbutton{
+    float:right;
+    color: black;
+    background-color: green;
+	text-decoration: none;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+	border: none;
+    outline: none;
+    margin:10px;
+    padding:8px;
+    margin-left:5px;
+	cursor: pointer;
+}
+
+.fbutton:before{
+}
+
+.inputsearch {
+	width:auto;
+    float:right;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    margin-top:13px;
+    color: blue;
+	font-size: 1.3em;
+    transition: width 0.4s ease-in-out;
+}
+
+.inputsearch:focus {
+    outline: none;
+}
+
+.sbutton{
+    float:right;
+    color: white;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 13px 13px;
+	text-decoration: none;
+	font-size: 1.3em;
+}
+
+.sbutton:hover {
+	background: #ddd;
+	color: black;
+}
+
+.sbutton:before{
+	float:right;
+	content:"\26B2";
+	cursor: pointer;
+    transform: rotate(320deg);
+}
+
+.cbutton{
+    float:right;
+    color: white;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 13px 13px;
+	text-decoration: none;
+	font-size: 1.3em;
+}
+
+.cbutton:hover {
+	background: #ddd;
+	color: black;
+}
+
+.cbutton:before{
+	float:right;
+	content:"\26B2";
+	cursor: pointer;
+    transform: rotate(320deg);
+}
+
+.hbutton{
+    float:left;
+    color: white;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 13px 12px 12px 12px;
+	text-decoration: none;
+}
+
+.hbutton:hover {
+	background: #ddd;
+	color: black;
+}
+
+.hbutton:before{
+	float:left;
+	content:"\2302";
+	font-size: 1.5em;
+}
+
+.navbar {
+	ooverflow: hidden;
+	display: none;
+	background-color: #333;
+	position:fixed;
+	top: 0;
+	width: 100%;
+    animation-name: menu_screen;
+    animation-duration: 0.5s;
+	z-index: 999;
+}
+
+.navbar a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 15px 15px;
+	text-decoration: none;
+	font-size: 1.3em;
+}
+
+.navbar a:hover {
+	background: #ddd;
+	color: black;
+	bborder-bottom: 1px solid red;
+}
+
+
+.bg {
+	background-image: url("1.jpeg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 50%;
+	width:100%
+}
+
+.bg2 {
+	background-image: url("2.jpeg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 50%;
+	width:100%
+}
+
+.center_div {
+	position: relative;
+	top:30px;
+	left:30px;
+	width:40%;
+	border: 1px solid gray;
+	margin-left: 15%;
+	margin-right: auto;
+	background-color: #d0f0f6;
+	text-align: left;
+	padding: 15px;
+}
+

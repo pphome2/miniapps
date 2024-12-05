@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+
+<?xml-stylesheet type="text/css" href="1.css"?>
+
+<Telefonkonyv>
+  <Barat sorszam="1">
+    <Nev>Malovics Miklós</Nev>
+    <Cim>2700, Cegléd, Kossuth F. út 12 4/5.</Cim>
+    <Telefonszam>06/20/123-9988</Telefonszam>
+    <E-Mail>hello@pp.hu</E-Mail>
+  </Barat>
+  <Barat sorszam="2">
+    <Nev>Varga Csaba</Nev>
+    <Cim>2700, Cegléd, Szent-Imre herceg út 2..</Cim>
+    <Telefonszam>06/20/123-9988</Telefonszam>
+    <E-Mail>hu@pp.hu</E-Mail>
+  </Barat>
+  <Barat sorszam="3">
+    <Nev>Mikes Béla</Nev>
+    <Cim>2700, Cegléd, Gubovics 1.</Cim>
+    <Telefonszam>06/20/123-9988</Telefonszam>
+    <E-Mail>gu@pp.hu</E-Mail>
+  </Barat>
+  <Barat sorszam="4">
+    <Nev>Kiss József</Nev>
+    <Cim>2700, Cegléd, Miklosi út 234.</Cim>
+    <Telefonszam>06/20/123-9988</Telefonszam>
+    <E-Mail>mi@pp.hu</E-Mail>
+  </Barat>
+</Telefonkonyv>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="i.css">
+</head>
+
+
+<body>
+
+<header>
+<div class=menu>
+<ul class="sidenav">
+  <li><a class="active" href="#home">Home</a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li style="float:right;top:5px;"><div class="search_icon"></div></li>
+</ul>
+</div>
+
+</header>
+
+<div class="content">
+
+<div class="message">
+  <div onclick="this.parentElement.style.display='none'"
+  class="toprightclose"></div>
+  <h3>Error</h3>
+  <p>Error: somethings bad...</p>
+</div>
+
+
+
+<div class="card">
+  <div onclick="this.parentElement.style.display='none'"
+  class="toprightclose"></div>
+  <div class=card-header>
+  <span onclick="var x=document.getElementById('cardbody');if (x.style.display=='none'){x.style.display='block'}else{x.style.display='none'}"
+  class="topleftmenu1"></span>Message</div>
+  <div class="cardbody" id="cardbody">
+  	<p>Message: program do something and inform you...</p>
+  	<div class=card-footer><span class=button_ok></span>: OK, <span class=button_bad></span>: nem</div>
+  </div>
+</div>
+
+
+<div class="row">
+
+<div class="column2">
+<div class="columnspace">
+    <div class="card">
+  		<div onclick="this.parentElement.style.display='none'"
+          class="toprightclose"></div>
+    <div class=card-header>
+  <span onclick="var x=document.getElementById('body1');if (x.style.display=='none'){x.style.display='block'}else{x.style.display='none'}"
+          class="topleftmenu2"></span>1. column
+	</div>
+    <div id="body1">
+	  <p>2 column card simulation.</p>
+      <div class=card-footer><span class=button_next></span>Next</div>
+    </div>
+    </div>
+</div>
+
+
+</div>
+
+
+<div class="column2">
+<div class="columnspace">
+    <div class="card">
+  		<div onclick="this.parentElement.style.display='none'"
+	  class="toprightclose"></div>
+    <div class=card-header>
+  <span onclick="var x=document.getElementById('body2');if (x.style.display=='none'){x.style.display='block'}else{x.style.display='none'}"
+      class="topleftmenu2"></span>2. column
+    </div>
+    <div id=body2>
+      <p>2 column card simulation.</p>
+      <div class=card-footer><span class=button_next></span>Next</div>
+    </div>
+    </div>
+</div>
+</div>
+
+</div>
+
+<table class=mt-table-all>
+	<thead>
+	<tr class=mt-red>
+		<td>Head 1</td>
+		<td>Head 2</td>
+		<td>Head 3</td>
+		<td>Head 4</td>
+	</tr>
+	</thead>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+	</tr>
+</table>
+
+<div class="spaceline100"></div>
+
+
+<div class="row">
+<div class="column1">
+    <div class="card">
+	<div onclick="this.parentElement.style.display='none'"
+	  class="toprightclose"></div>
+   <div class=card-header>
+  <span onclick="var x=document.getElementById('formbody');if (x.style.display=='none'){x.style.display='block'}else{x.style.display='none'}"
+		class="topleftmenu2"></span>Form példa
+   </div>
+   <div id="formbody">
+	<div class="colummnspace">
+		<form id=1 method=post enctype=multipart/form-data>
+		<br />
+		<label for=userpass>Password : </label>
+		<input name=userpass id=userpass type=password placeholder="password"><br /><br />
+		<label for=te>Text :</label>
+		<input name=te id=$i type=text placeholder="some text"><br /><br />
+		<input type=submit id=submitall name=submitall value="Send">
+		</form><br />
+	</div>
+
+
+      <div class=card-footer><span class=button_next></span>Next</div>
+    </div>
+	</div>
+</div>
+</div>
+
+
+<div class="spaceline100"></div>
+
+
+<div style="width:50%;margin:auto;">
+  <img class="mySlides" src="1.jpg" style="margin:auto;width:50%;display:none;">
+  <img class="mySlides" src="2.jpg" style="margin:auto;width:50%;display:none;">
+  <img class="mySlides" src="3.jpg" style="margin:auto;width:50%;display:none;">
+</div>
+
+
+<div class="spaceline100"></div>
+
+
+<div class=card style="width:50%;margin:auto;">
+  <img class="mySlidesX" src="1.jpg" style="margin:auto;width:100%;display:block;">
+  <img class="mySlidesX" src="2.jpg" style="margin:auto;width:100%;display:none;">
+  <img class="mySlidesX" src="3.jpg" style="margin:auto;width:100%;display:none;">
+    <div class="bottomleft" onclick="plusDivs(-1)"><span class="bottomleftmenu"></span></div>
+    <div class="bottomright" onclick="plusDivs(1)"><span class="bottomrightmenu"></span></div>
+    <div class="bottomcenter">
+    	<span class="badge badge-nowhite" onclick="currentDiv(1)">|</span>
+    	<span class="badge badge-nowhite" onclick="currentDiv(2)">|</span>
+    	<span class="badge badge-nowhite" onclick="currentDiv(3)">|</span>
+    </div>
+    <br />
+    <br />
+</div>
+
+
+
+<div class="spaceline100"></div>
+
+
+
+<div  style="text-align:center;">
+<button onclick="document.getElementById('id01').style.display='block'" class="button">Modal message</button>
+</div>
+
+<div id="id01" class="modal">
+    <div class="modal-content">
+		<div class="card">
+  		<div class=card-header>
+  		<span onclick="var x=document.getElementById('id01');if (x.style.display=='none'){x.style.display='block'}else{x.style.display='none'}"
+  			class="toprightclose"></span>Message</div>
+  		<div class="card-body" id="card-body">
+  			<p>Message: program do something and inform you...</p>
+  		</div>
+  			<div class=card-footer2 onclick="document.getElementById('id01').style.display='none'"><span class=button_ok></span>OK</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="spaceline100"></div>
+
+
+
+<div class="row" style="">
+  <div class="column3">
+    <div class="columnspace"><img src="1.jpg" onclick="mopenModal();mcurrentDiv(1)" class="imghover"></div>
+  </div>
+  <div class="column3">
+    <div class="columnspace"><img src="2.jpg" onclick="mopenModal();mcurrentDiv(2)" class="imghover"></div>
+  </div>
+  <div class="column3">
+    <div class="columnspace"><img src="3.jpg" onclick="mopenModal();mcurrentDiv(3)" class="imghover"></div>
+  </div>
+</div>
+
+<div id="myModal" class="modalblack">
+  		<span onclick="var x=document.getElementById('myModal');x.style.display='none'" class="toprightclose"></span>
+ <div class="modal-content-black modalfull">
+  <div class="0" style="max-width:1200px">
+   <img class="slideimg" src="1.jpg">
+   <img class="slideimg" src="2.jpg">
+   <img class="slideimg" src="3.jpg" >
+   <div class="1">
+    <div class="2">
+    	<div class="bottomleft" onclick="mplusDivs(-1)"><span class="bottomleftmenuw"></span></div>
+    	<div class="bottomright" onclick="mplusDivs(1)"><span class="bottomrightmenuw"></span></div>
+    	<p id="caption" style="text-align:center;color:white;text-decoration:bold;">-</p>
+    </div>
+    <div class="spaceline"></div>
+	<div class="row" style="">
+  	<div class="column3">
+   	<div class="columnspace"><img src="1.jpg" onclick="mcurrentDiv(1)" class="imghover mimg lightfull" alt="First picture"></div>
+  	</div>
+  	<div class="column3">
+    	<div class="columnspace"><img src="2.jpg" onclick="mcurrentDiv(2)" class="imghover mimg lightfull" alt="Second picture"></div>
+  	</div>
+  	<div class="column3">
+    	<div class="columnspace"><img src="3.jpg" onclick="mcurrentDiv(3)" class="imghover mimg lightfull" alt="Third picture"></div>
+  	</div>
+  	</div>
+
+   </div> 
+  </div> 
+  
+ </div>
+</div> 
+
+
+
+<div class="spaceline100"></div>
+
+
+  <input class="" type="text" placeholder="Search for names.." id="myInput" onkeyup="myfilter()">
+
+  <table class="mt-table-all" id="myTable">
+  	<thead>
+    <tr class="mt-red">
+      <th style="width:60%;">Name</th>
+      <th style="width:40%;">Country</th>
+    </tr>
+  	</thead>
+    <tr>
+      <td>Alfreds Futterkiste</td>
+      <td>Germany</td>
+    </tr>
+    <tr>
+      <td>Berglunds snabbkop</td>
+      <td>Sweden</td>
+    </tr>
+    <tr>
+      <td>Island Trading</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <td>Koniglich Essen</td>
+      <td>Germany</td>
+    </tr>
+    <tr>
+      <td>Laughing Bacchus Winecellars</td>
+      <td>Canada</td>
+    </tr>
+    <tr>
+      <td>Magazzini Alimentari Riuniti</td>
+      <td>Italy</td>
+    </tr>
+    <tr>
+      <td>North/South</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <td>Paris specialites</td>
+      <td>France</td>
+    </tr>
+  </table>
+
+  <div style="display:none;">
+  <p><strong>Tip:</strong> Remove toUpperCase() if you want to perform a case-sensitive search.</p>
+  <p>Change tr[i].getElementsByTagName('td')[0] to [1] if you want to search for "Country" (index 1) instead of "Name" (index 0).</p>
+  </div>
+
+
+
+<div class="spaceline100"></div>
+
+
+
+<div class="containerbox">
+<div class="card-header-tab">
+  <button id="card1button" class="card-button tablinks active" onclick="opentab(event,'London')">London</button>
+  <button class="card-button tablinks" onclick="opentab(event,'Paris')">Paris</button>
+  <button class="card-button tablinks" onclick="opentab(event,'Tokyo')">Tokyo</button>
+</div>
+
+<div id="London" class="tab">
+  <div onclick="this.parentElement.style.display='none'" class="toprightclose"></div>
+  	<div class="card-body">
+    <h2>London</h2>
+  	 <p>London is the capital city of England.</p>
+	</div>
+  </div>
+
+<div id="Paris" class="tab" style="display:none">
+  <div onclick="this.parentElement.style.display='none'" class="toprightclose"></div>
+  	<div class="card-body">
+  <h2>Paris</h2>
+  <p>Paris is the capital of France.</p> 
+</div>
+</div>
+
+<div id="Tokyo" class="tab" style="display:none">
+  <div onclick="this.parentElement.style.display='none'" class="toprightclose"></div>
+  	<div class="card-body">
+  <h2>Tokyo</h2>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="spaceline100"></div>
+
+
+
+
+<div class="mess-border">
+  <div class="mess-body">
+    <p>London is the most populous city in the United Kingdom,
+    with a metropolitan area of over 9 million inhabitants.</p>
+  </div>
+</div>
+
+
+
+<div class="spaceline100"></div>
+
+
+
+
+<div class="mess-border2">
+  <div class="mess-body">
+    <p>London is the most populous city in the United Kingdom,
+    with a metropolitan area of over 9 million inhabitants.</p>
+  </div>
+</div>
+
+
+<div class="spaceline100"></div>
+
+
+
+<p>Next/Previous buttons:</p>
+<div class="pagination">
+  <a href="#">❮</a>
+  <a href="#">❯</a>
+</div>
+
+
+
+<div class="spaceline100"></div>
+
+<div class="center">
+  <div class="pagination">
+    <a href="#">&laquo;</a>
+    <a href="#">1</a>
+    <a href="#" class="active">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">6</a>
+    <a href="#">&raquo;</a>
+  </div>
+</div>
+
+
+<div class="spaceline100"></div>
+
+
+<div class="container">
+
+<div class="" style="float:left;display:none;" id="sidemenu">
+	<div class="card-header">
+ 		<span onclick="smenu_close()" class="topleftmenu3"></span>
+ 	</div>
+	<div class="card-body">
+      <li class="menuli"><a href="#">Link 1</a></li>
+      <li class="menuli"><a href="#">Link 2</a></li>
+      <li class="menuli"><a href="#">Link 3</a></li>
+    </div>
+	</div>
+</div>
+
+<div id="page">
+	<div class="card-header">
+  		<span id="opensidemenu" onclick="smenu_open()" class="topleftmenu1"></span>
+    	My Page
+	</div>
+	<div class="card-body">
+		Page message...
+	</div>
+	<div class="spaceline100"></div>
+	<div class="spaceline100"></div>
+</div>
+
+
+<div class="spaceline100"></div>
+
+  <h2>Responsive Sidenav Example</h2>
+  <p>This example use media queries to transform the sidenav to a top navigation bar when the screen size is 900px or less.</p>
+  <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
+  <p>You will learn more about media queries and responsive web design later in our CSS Tutorial.</p>
+  <h3>Resize the browser window to see the effect.</h3>
+</div>
+
+
+
+</div>
+
+
+<footer>
+Copyright
+
+<div class="row">
+  <div class="column3">
+  <div class="columnspace">
+    <h2>Column</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+  </div>
+  </div>
+  <div class="column3">
+    <div class="columnspace">
+    <h2>Column</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+  </div>
+  </div>
+  <div class="column3">
+    <div class="columnspace">
+    <h2>Column</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+  </div>
+  </div>
+</div>
+
+
+</footer>
+
+
+
+
+<script>
+
+// auto slideshow
+
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2000);
+}
+
+
+
+// indicator slideshow
+
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlidesX");
+  var dots = document.getElementsByClassName("badge");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" badge-white", " badge-nowhite");
+  }
+  x[slideIndex-1].style.display = "block"; 
+  dots[slideIndex-1].className ="badge badge-white";
+  //alert(dots[slideIndex-1].className+" "+slideIndex);
+}
+
+
+
+
+// modal
+
+function mopenModal() {
+  document.getElementById('myModal').style.display = "block";
+}
+
+function mcloseModal() {
+  document.getElementById('myModal').style.display = "none";
+}
+
+
+
+var mslideIndex = 1;
+
+mshowDivs(mslideIndex);
+
+function mplusDivs(n) {
+  mshowDivs(mslideIndex += n);
+}
+
+function mcurrentDiv(n) {
+  mshowDivs(mslideIndex = n);
+}
+
+function mshowDivs(n) {
+  var ii;
+  var x = document.getElementsByClassName("slideimg");
+  var dots = document.getElementsByClassName("mimg");
+  var captionText = document.getElementById("caption");
+  if (n > x.length) {mslideIndex = 1}
+  if (n < 1) {mslideIndex = x.length}
+  for (ii = 0; ii < x.length; ii++) {
+     x[ii].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" lighthalf", " lightfull");
+  }
+  x[mslideIndex-1].style.display = "block";
+  //dots[mslideIndex-1].className += " lightfull";
+  dots[mslideIndex-1].className = " mimg lighthalf";
+  captionText.innerHTML = dots[mslideIndex-1].alt;
+}
+
+
+
+
+// filter table
+
+function myfilter() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+
+
+
+// tabbed
+
+function opentab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    //document.getElementById(tabName).className += " active";
+    evt.currentTarget.className += " active";
+}
+
+
+
+
+// side menu
+
+
+function smenu_open() {
+  document.getElementById("page").style.marginLeft = "25%";
+  document.getElementById("sidemenu").style.width = "25%";
+  document.getElementById("sidemenu").style.display = "block";
+  document.getElementById("opensidemenu").style.display = 'none';
+}
+function smenu_close() {
+  document.getElementById("page").style.marginLeft = "0%";
+  document.getElementById("sidemenu").style.display = "none";
+  document.getElementById("opensidemenu").style.display = "inline-block";
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>

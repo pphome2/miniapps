@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	
+	
+	<script type="text/javascript" src="../jq/jquery.min.js"></script>
+	<script>
+
+	    $(document).ready(function() {
+		function teddezt(ezzel) {
+		    alert("Saját fg hívás teszt (tipus és argument (tömb)hossz): " + typeof ezzel +", "+ arguments.length);
+		}
+		teddezt(); 			// "undefined", 0
+		teddezt(1); 			// "number", 1
+		teddezt("1", "2", "3"); 	// "string", 3 tömbként kezeli az átadott változókat
+		
+		
+		function teszt() {
+		    alert("Fg hívás, obj átadással: " + this +", "+ arguments.length);
+		}
+		teszt() 				// [object Window], 0
+		teszt.call("masik_dom_elem", [1,2]); 	// "masik_dom_elem", 1 - tömbként továbbítódik
+		teszt.apply("masik_dom_elem", [1,2]); 	// "masik_dom_elem", 2 - elemenként továbbítja a tömböt
+
+		// globális változó
+		var x = 0;
+		(function() {
+		    // privát
+		    var x = 1;
+		    alert("Fg-n belüli változó: " + x); 		// válasz: 1 - ebben a függvényben az értéke
+		})();
+		alert("Globális változó: " + x);		// válasz: 0 - nem látja függvényben lévő azonos nevű változót
+		
+		$("body").click(function(event) {
+		    alert("Obj amire kattintotunk: " + event.target);
+		});				// 
+	    });
+	</script>
+
+	<button>Teszt gomb</button>
+	<p>Teszt szöveg</p>
+	<br />
+	<br />
+	<h1>Teszt h1</h1>
+	<br />
+	<br />
+	<cdiv>Teszt div</div>
+	<br />
+	<br />
+	<span>Teszt span</span>
+	<br />
+	<br />
+
+
+</body>
+</html>
+
+

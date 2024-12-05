@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Színes sakktábla</title>
+	<script type="text/javascript" src="../jq/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			szin=['ures', '00','55','aa','ff'];
+	
+			for (i=1;i<5;i=i+1) {
+				for (j=1;j<5;j=j+1) {
+					ujszin='#'+szin[i]+szin[j]+szin[j];
+					$('#s'+i+'o'+j).css('background-color',ujszin);
+				}
+			}
+	
+			$('.sor1').append('a');
+			$('.sor2').append('b');
+			$('.sor3')
+				.append('c')
+				.css('height',$('.oszlop3').height()+00);
+			$('.sor4')
+				.append('d')
+				.css('top',$('.sor4').position().top+00);
+	
+			$('.oszlop1').append('1');
+			$('.oszlop2').append('2');
+			$('.oszlop3')
+				.append('3')
+				.css('width',$('.oszlop3').width()+0);
+			$('.oszlop4')
+				.append('4')
+				.css('left',$('.oszlop4').position().left+0);
+	
+		});
+	</script>
+	
+	<style type="text/css">
+		div {
+			width:100px;
+			height:100px;
+			position:absolute;
+			border:1px solid #444;
+			color:#bbb;
+			text-align:center;
+			font-size:82px;
+		}
+		.sor1 { top:100px; }
+		.sor2 { top:200px; }
+		.sor3 { top:300px; }
+		.sor4 { top:400px; }
+		.oszlop1 { left:100px; }
+		.oszlop2 { left:200px; }
+		.oszlop3 { left:300px; }
+		.oszlop4 { left:400px; }
+	</style>
+
+</head>
+
+<body>
+
+<div id="s1o1" class="sor1 oszlop1"></div>
+<div id="s1o2" class="sor1 oszlop2"></div>
+<div id="s1o3" class="sor1 oszlop3"></div>
+<div id="s1o4" class="sor1 oszlop4"></div>
+
+<div id="s2o1" class="sor2 oszlop1"></div>
+<div id="s2o2" class="sor2 oszlop2"></div>
+<div id="s2o3" class="sor2 oszlop3"></div>
+<div id="s2o4" class="sor2 oszlop4"></div>
+
+<div id="s3o1" class="sor3 oszlop1"></div>
+<div id="s3o2" class="sor3 oszlop2"></div>
+<div id="s3o3" class="sor3 oszlop3"></div>
+<div id="s3o4" class="sor3 oszlop4"></div>
+
+<div id="s4o1" class="sor4 oszlop1"></div>
+<div id="s4o2" class="sor4 oszlop2"></div>
+<div id="s4o3" class="sor4 oszlop3"></div>
+<div id="s4o4" class="sor4 oszlop4"></div>
+
+</body>
+</html>
+
