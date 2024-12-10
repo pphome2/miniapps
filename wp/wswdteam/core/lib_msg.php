@@ -10,10 +10,10 @@ if (!defined('ABSPATH')){
 
 // üzenet
 function wswdteam_action_message($text="",$autohide=false){
-  global $wdhd_message_autohide;
+  global $wswdteam_message_autohide;
 
   if (!$autohide){
-    $autohide=$wdhd_message_autohide;
+    $autohide=$wswdteam_message_autohide;
   }
   $r="
     <div id=mid class=\"wswdokmessage\" onclick=\"this.style.display='none';\">
@@ -32,10 +32,10 @@ function wswdteam_action_message($text="",$autohide=false){
 
 // üzenet
 function wswdteam_action_errormessage($text="",$autohide=false){
-  global $wdhd_message_autohide;
+  global $wswdteam_message_autohide;
 
   if (!$autohide){
-    $autohide=$wdhd_message_autohide;
+    $autohide=$wswdteam_message_autohide;
   }
   $r="
     <div id=mid class=\"wswderrormessage\" onclick=\"this.style.display='none';\">

@@ -2,7 +2,7 @@
 
 //alert('user');
 
-function wswdteam_load(){
+function wdhd_load(){
 }
 
 //

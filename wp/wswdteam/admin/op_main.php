@@ -21,7 +21,7 @@ if (file_exists(__DIR__.'/wswdteam_admin.js')){
 
 
 
-echo("<div class=wswdspaceholder></div>");
+echo("<span class=wswdteamspaceholder></span>");
 
 // adatfeldolgozás
 //$table_name=$wpdb->prefix.$wswdteam_table[0];
@@ -68,9 +68,8 @@ function wswdteam_upagehead(){
   echo("<h1>".wswdteam_lang('WSWDTeam rendszer')."</h1>");
   echo("<br />");
   echo(wswdteam_lang('Beállítások'));
-  echo("<br />");
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 

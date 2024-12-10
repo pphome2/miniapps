@@ -38,11 +38,11 @@ if (isset($_POST['del'])){
   $sql="DELETE FROM $table_name WHERE id=$w_id;";
   $r=$wpdb->query($sql);
   if ($r){
-    $l=wdhd_lang('Törölve');
-    wdhd_message($l);
+    $l=wswdteam_lang('Törölve');
+    wswdteam_message($l);
   }else{
-    $l=wdhd_lang('Hiba történt');
-    wdhd_error($l);
+    $l=wswdteam_lang('Hiba történt');
+    wswdteam_error($l);
   }
 }
 
@@ -57,11 +57,11 @@ if (isset($_POST['submit'])){
     $sql="UPDATE $table_name SET uname='$w_uname',urole='$w_urole' WHERE id=$w_id;";
     $r=$wpdb->query($sql);
     if ($r){
-      $l=wdhd_lang('Módosítva');
-      wdhd_message($l);
+      $l=wswdteam_lang('Módosítva');
+      wswdteam_message($l);
     }else{
-      $l=wdhd_lang('Hiba történt');
-      wdhd_error($l);
+      $l=wswdteam_lang('Hiba történt');
+      wswdteam_error($l);
     }
   }else{
     // új adat
@@ -75,11 +75,11 @@ if (isset($_POST['submit'])){
       $sql="INSERT INTO $table_name (uname,urole) VALUES ('$w_uname',$w_urole);";
       $r=$wpdb->query($sql);
       if ($r){
-        $l=wdhd_lang('Tárolva');
-        wdhd_message($l);
+        $l=wswdteam_lang('Tárolva');
+        wswdteam_message($l);
       }else{
-        $l=wdhd_lang('Hiba történt');
-        wdhd_error($l);
+        $l=wswdteam_lang('Hiba történt');
+        wswdteam_error($l);
       }
     }
   }
@@ -152,11 +152,11 @@ function wswdteam_utable(){
   global $wpdb,$wswdteam_table,$wswdteam_pagerow,$wswdteam_user_role_list;
 
   wswdteam_upagehead();
-  echo(wdhd_lang("A rendszer által kezelt jogcsoportok").":<br /><br />");
+  echo(wswdteam_lang("A rendszer által kezelt jogcsoportok").":<br /><br />");
   foreach($wswdteam_user_role_list as $r){
     echo("$r<br />");
   }
-  echo("<div class=\"wdhdspaceholder\"></div>");
+  echo("<div class=\"wswdteamspaceholder\"></div>");
   $table_name=$wpdb->prefix.$wswdteam_table[1];
   $sql="SELECT COUNT(*) FROM $table_name";
   $db=$wpdb->get_var($sql);
@@ -236,8 +236,7 @@ function wswdteam_utable(){
   <?php
   echo("<br />");
   wswdteam_pager_admin($db,$wswdteam_pagerow,$page,"wpage");
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 
@@ -247,9 +246,7 @@ function wswdteam_upagehead(){
   echo("<h1>".wswdteam_lang('Felhasználói jogok beállítása')."</h1>");
   echo("<br />");
   echo(wswdteam_lang('Jogosultsági szint rendelése felhasználóhoz.'));
-  echo("<br />");
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 

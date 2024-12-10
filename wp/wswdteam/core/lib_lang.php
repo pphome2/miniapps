@@ -32,11 +32,11 @@ function wswdteam_lang_newlines(){
 
   if ($wswdteam_developer_mode){
     if (count($wswdteam_lang_new)>0){
-      echo("<br /><br />");
+      echo("<span class=wswdteamspaceholder></span>");
       foreach($wswdteam_lang_new as $l){
         echo("'".$l."' => '".$l."',<br />");
       }
-      echo("<br /><br />");
+    echo("<span class=wswdteamspaceholder></span>");
     }
   }
 }

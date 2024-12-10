@@ -16,10 +16,10 @@ function wswdteam_main_center($atts=[],$content=null,$tag=''){
     wp_redirect(wp_login_url());
   }else{
     // jogosultság ellenőrzése
-    $ur=wdhd_user_right();
+    $ur=wswdteam_user_right();
     //if (!in_array($ur,[0])){
-      //$l=wdhd_lang('Nem megfelelő jogosultság');
-      //wdhd_error($l);
+      //$l=wswdteam_lang('Nem megfelelő jogosultság');
+      //wswdteam_error($l);
     //}else{
     $i=0;
     $content=$content."<div class=\"wswdteam_content\">";

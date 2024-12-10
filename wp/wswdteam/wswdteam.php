@@ -70,7 +70,7 @@ if (is_admin()){
   }
 }
 
-
+ 
 // plugin előkészítés
 function wswdteam_init(){
   global $locale, $wp_local_package,$wswdteam_options,$wswdteam_plugin_version,

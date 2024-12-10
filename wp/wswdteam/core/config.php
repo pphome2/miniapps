@@ -12,7 +12,12 @@ if (!defined('ABSPATH')){
 
 
 
+// -----------------
 // rendszer változók
+
+// alkalmazás név
+global $wswdteam_app_name;
+$wswdteam_app_name='wswdteam';
 
 // verziók
 global $wswdteam_db_version,$wswdteam_plugin_version;
@@ -22,7 +27,6 @@ $wswdteam_db_version='1.0';
 // fejlesztői mód
 global $wswdteam_developer_mode;
 $wswdteam_developer_mode=false;
-
 
 // wp opciók
 global $wswdteam_options;
@@ -144,8 +148,6 @@ global $wswdteam_sql_update;
 $wswdteam_sql_update=array("");
 
 
-
-
 // get plugins path:
 // plugins_url()
 // plugin_dir_url()
@@ -166,6 +168,5 @@ $wswdteam_sql_update=array("");
 // WP_CONTENT_URL - full url 
 // WP_PLUGIN_DIR - full path
 // WP_PLUGIN_URL - full url
-// UPLOADS - /wp-content/uploads
 
 ?>

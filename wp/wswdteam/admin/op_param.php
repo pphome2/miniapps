@@ -39,11 +39,11 @@ if (isset($_POST['del'])){
   $sql="DELETE FROM $table_name WHERE id=$w_id;";
   $r=$wpdb->query($sql);
   if ($r){
-    $l=wdhd_lang('Törölve');
-    wdhd_message($l);
+    $l=wswdteam_lang('Törölve');
+    wswdteam_message($l);
   }else{
-    $l=wdhd_lang('Hiba történt');
-    wdhd_error($l);
+    $l=wswdteam_lang('Hiba történt');
+    wswdteam_error($l);
   }
 }
 
@@ -65,16 +65,13 @@ if (isset($_POST['submit'])){
     $sql="INSERT INTO $table_name (name,text) VALUES ('$w_name','$w_text');";
     $r=$wpdb->query($sql);
     if ($r){
-      $l=wdhd_lang('Tárolva');
-      wdhd_message($l);
+      $l=wswdteam_lang('Tárolva');
+      wswdteam_message($l);
     }else{
-      $l=wdhd_lang('Hiba történt');
-      wdhd_error($l);
+      $l=wswdteam_lang('Hiba történt');
+      wswdteam_error($l);
     }
   }
-  wswdteam_ptable();
-  wswdteam_pload();
-  wswdteam_pageload();
 }else{
   // tábla vagy táblából adat
   if (isset($_POST['m'])){
@@ -88,15 +85,28 @@ if (isset($_POST['submit'])){
     $w_text=$_POST['text'];
     wswdteam_pform($w_id,$w_name,$w_text);
   }else{
-    if (isset($_POST['new'])){
-      // új adat gomb a táblából
-      wswdteam_pform();
-    }else{
-      wswdteam_ptable();
-      wswdteam_pload();
-      wswdteam_pageload();
-    }
   }
+}
+
+
+// főbb funkciók
+if (isset($_POST['new'])){
+  // új adat gomb a táblából
+  wswdteam_pform();
+}else{
+  wswdteam_ptable();
+}
+wswdteam_pload();
+wswdteam_pageload();
+wswdteam_admin_backup();
+
+
+function wswdteam_admin_backup(){
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<h2>".wswdteam_lang('Adatmentés - visszaállítás')."</h2>");
+  echo("<span class=wswdteamspaceholder></span>");
+  wswdteam_backup();
 }
 
 
@@ -204,8 +214,7 @@ function wswdteam_ptable(){
   <?php
   echo("<br />");
   wswdteam_pager_admin($db,$wswdteam_pagerow,$page,"wpage");
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 
@@ -217,12 +226,9 @@ function wswdteam_ppagehead(){
   echo(wswdteam_lang('Működési paraméterek, alapadatok kezelése'));
   echo("<br />");
   echo(wswdteam_lang('A beállítások megváltoztatása hibás működést eredményezhet').'.');
-  echo("<br />");
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
   echo("<h2>".wswdteam_lang('Paraméterek')."</h2>");
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 
@@ -230,14 +236,11 @@ function wswdteam_ppagehead(){
 function wswdteam_pload(){
   global $wswdteam_dir_post,$wswdteam_locale;
 
-  echo("<br />");
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
   echo("<h2>".wswdteam_lang('Bejegyzés feltöltés - Frissítés utáni feladat')."</h2>");
   echo("<br />");
   echo(wswdteam_lang('A modul txt mappájából a bejegyzések betöltése a kiválasztott kategóriába'.'.'));
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
   $md=dirname(dirname(__FILE__)).$wswdteam_dir_post."/".$wswdteam_locale;
   if (isset($_POST['postload'])){
     $md=$md."/".$_POST['cdir'];
@@ -304,13 +307,11 @@ function wswdteam_pload(){
       }
     }
     echo("</select>");
-    echo("<br />");
-    echo("<br />");
+    echo("<span class=wswdteamspaceholder></span>");
     echo("<input type=\"submit\" id=\"postload\" name=\"postload\" class=\"button\" value=\"".wswdteam_lang('Mehet')."\">");
 	echo("</form>");
   }
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 
@@ -319,17 +320,13 @@ function wswdteam_pload(){
 function wswdteam_pageload(){
   global $wswdteam_dir_page,$wswdteam_locale;
 
-  echo("<br />");
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
   echo("<h2>".wswdteam_lang('Lapok feltöltés - Frissítés utáni feladat')."</h2>");
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
   echo(wswdteam_lang('A modul txt mappájából a lapk betöltése').'.');
   echo("<br />");
   echo(wswdteam_lang('A feltöltött lapok elérését (a menükben) ellenőrizni kell'.'.'));
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
   $md=dirname(dirname(__FILE__)).$wswdteam_dir_page."/".$wswdteam_locale;
   if (isset($_POST['pageload'])){
     $fl=scandir($md);
@@ -379,12 +376,11 @@ function wswdteam_pageload(){
         echo("$l<br />");
       }
     }
-    wdhd_message("A lapok tárolása megtörtént");
+    wswdteam_message("A lapok tárolása megtörtént");
   }else{
     echo("<br />");
     echo(wswdteam_lang('Feltőlthető lapok').":");
-    echo("<br />");
-    echo("<br />");
+    echo("<span class=wswdteamspaceholder></span>");
     $fl=scandir($md);
     foreach($fl as $l){
       $d=$md."/".$l;
@@ -392,14 +388,12 @@ function wswdteam_pageload(){
         echo("$l<br />");
       }
     }
-    echo("<br />");
-    echo("<br />");
+    echo("<span class=wswdteamspaceholder></span>");
 	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
     echo("<input type=\"submit\" id=\"pageload\" name=\"pageload\" class=\"button\" value=\"".wswdteam_lang('Feltöltés')."\">");
 	echo("</form>");
   }
-  echo("<br />");
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 

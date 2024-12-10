@@ -2,7 +2,7 @@
 
 //alert('admin');
 
-function wswdteam_loadx(){
+function wdhd_loadx(){
 }
 
 </script>

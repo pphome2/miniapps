@@ -23,7 +23,13 @@ global $wdhd_print_page;
 $wdhd_print_page="app_wpage.php";
 
 
+
+// ----------------
 // rendszer vátozók
+
+// alkalmazás név
+global $wdhd_app_name;
+$wdhd_app_name='wdhd';
 
 // verziók
 global $wdhd_db_version,$wdhd_plugin_version;

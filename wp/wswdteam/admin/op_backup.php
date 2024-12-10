@@ -17,7 +17,7 @@ if (file_exists(__DIR__.'/wswdteam_admin.js')){
   include(__DIR__.'/wswdteam_admin.js');
 }
 
-echo("<div class=wdhdspaceholder></div>");
+echo("<span class=wswdteamspaceholder></span>");
 
 // adatfeldolgozás
 // if (isset($_POST['name'])){}
@@ -31,18 +31,19 @@ wswdteam_admin_backup();
 
 // fő admin lap
 function wswdteam_admin_backup(){
-  echo("<span class=wdhdspaceholder></span>");
-  echo("<span class=wdhdspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
   wswdteam_backup();
 }
 
 
 //fejléc
 function wswdteam_upagehead(){
-  echo("<br />");
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
   echo("<h1>".wswdteam_lang('Adatmentés - visszaállítás')."</h1>");
-  echo("<br />");
-  echo("<span class=wdhdspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 
