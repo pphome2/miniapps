@@ -140,6 +140,7 @@ $wdhd_table=array('wdhdparam',
                  );
 
 // sql táblák létrehozása
+global $wpdb;
 global $wdhd_sql_install;
 $charset_collate=$wpdb->get_charset_collate();
 $sql0="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wdhd_table[0]." (

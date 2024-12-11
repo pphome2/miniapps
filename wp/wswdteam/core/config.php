@@ -125,6 +125,7 @@ $wswdteam_table=array('wswdteamparam',
                      );
 
 // sql táblák létrehozása
+global $wpdb;
 global $wswdteam_sql_install;
 $charset_collate=$wpdb->get_charset_collate();
 $sql0="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wswdteam_table[0]." (

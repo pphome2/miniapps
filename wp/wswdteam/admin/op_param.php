@@ -95,10 +95,10 @@ if (isset($_POST['new'])){
   wswdteam_pform();
 }else{
   wswdteam_ptable();
+  wswdteam_pload();
+  wswdteam_pageload();
+  //wswdteam_admin_backup();
 }
-wswdteam_pload();
-wswdteam_pageload();
-wswdteam_admin_backup();
 
 
 function wswdteam_admin_backup(){

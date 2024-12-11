@@ -32,7 +32,6 @@ wswdteam_admin_backup();
 // fő admin lap
 function wswdteam_admin_backup(){
   echo("<span class=wswdteamspaceholder></span>");
-  echo("<span class=wswdteamspaceholder></span>");
   wswdteam_backup();
 }
 
