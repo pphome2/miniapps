@@ -44,6 +44,7 @@ function wdhd_main_center($atts=[],$content=null,$tag=''){
       $i++;
     }
     $content=$content."</div>";
+    $content=$content.wdhd_lang_newlines();
     return $content;
   }
 }

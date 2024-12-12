@@ -252,7 +252,7 @@ function wswdteam_upagehead(){
 
 
 // új nyelvi elemek kiírása
-wswdteam_lang_newlines();
+echo(wswdteam_lang_newlines());
 
 
 

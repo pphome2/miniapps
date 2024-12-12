@@ -1,10 +1,21 @@
 <?php
+//
+// Wordpress WSWDTeam plugin mentésének visszaállítása
+//
+// Új helyre telepítés
+//
+// v1.0
+// WSWDTeam
+//
+
 
 // hibák kiírása
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+// language
+// nyelvi adatok
 $L_TITLE="Install";
 $L_PAGE_ADDRESS="Telepítés";
 $L_PAGE_1="Szükséges adatok megadása";
@@ -14,16 +25,19 @@ $L_SQL_DB="Adatbázis neve";
 $L_SQL_USER="Felhasználónév";
 $L_SQL_PW="Jelszó";
 $L_SQL_GO="Mehet";
-$L_SQL_TABLE_PRE="Adattáblák elő";
+$L_SQL_TABLE_PRE="Adattáblák prefix";
 $L_SQL_PHASE_1="SQL ellenőrzés";
-$L_SQL_PHASE_2="2";
-$L_SQL_PHASE_3="3";
+$L_SQL_PHASE_2="SQL prefix";
+$L_SQL_PHASE_3="SQL domain";
 $L_PHASE_1="Fájl kicsomagolva";
 $L_PHASE_2="Fájl kicsomagolva";
 $L_PHASE_3="Rendrakás. Átmeneti fájlok törölve";
+$L_CONFIG_PHASE_1="Konfiguráció beállítása";
 $L_END="Telepítés befejezve.";
 $L_NEXT="Tovább";
 $L_ERROR="Hiba történt. Hibaüzenet:";
+$L_FILE_ERROR="Adatfájlok nem elérhetőek.";
+
 
 // fej
 echo("<!DOCTYPE html>");
@@ -116,17 +130,17 @@ if ($ok1 and $ok2){
   }else{
     echo("<h2>$L_PAGE_2</h2>");
     echo("<span class=placeholder></span>");
-    inst_files();
+    inst_main();
   }
 }else{
-  echo("$L_ERROR");
+  echo("$L_ERROR $L_FILE_ERROR");
   echo("<span class=placeholder></span>");
 }
 
 
 
 // fájlok feldolgozása
-function inst_files(){
+function inst_main(){
   global $L_END,$L_NEXT,$L_PHASE_1,$L_PHASE_2,$L_PHASE_3,$L_ERROR,
          $sqlsrv,$sqluser,$sqlpw,$sqldb;
 
@@ -136,7 +150,6 @@ function inst_files(){
     $ext=pathinfo($l,PATHINFO_EXTENSION);
     switch($ext){
       case "sql":
-          $fn=$md."/".$l;
           $sqlfile=$md."/".$l;
           if (file_exists($sqlfile)){
             $sqlconn=new mysqli($sqlsrv,$sqluser,$sqlpw,$sqldb);
@@ -146,29 +159,10 @@ function inst_files(){
           echo("<br />");
         break;
       case "gz":
-        try{
-          // decompress
-          $fn=$md."/".$l;
-          $tarfile=$md."/".pathinfo($l,PATHINFO_FILENAME);
-          if (file_exists($tarfile)){
-            unlink($tarfile);
-          }
-          echo("- $L_PHASE_1 (gz).<br />");
-          $p=new PharData($fn);
-          $p->decompress();
-          // kicsomagolás
-          $fn=$md."/".$tarfile.".tar";
-          echo("- $L_PHASE_2 (tar).<br />");
-          $phar=new PharData($tarfile);
-          $phar->extractTo($md,null,true);
-          // törlés
-          echo("- $L_PHASE_3.<br />");
-          if (file_exists($tarfile)){
-            unlink($tarfile);
-          }
-        }catch(Exception $e){
-          echo("$L_ERROR ".$e->getMessage());
-        }
+        $fn=$md."/".$l;
+        $tarfile=$md."/".pathinfo($l,PATHINFO_FILENAME);
+        inst_files($md,$fn,$tarfile);
+        echo("<br />");
         break;
       case "tar":
         try{
@@ -180,18 +174,95 @@ function inst_files(){
         break;
     }
   }
+  //config fájl elkészítése
+  inst_config();
   // láb
   echo("<span class=placeholder></span>");
   echo($L_END);
   echo("<span class=placeholder></span>");
-  $dn=dirname($_SERVER['REQUEST_URI']);
-  //echo($dn."<br /><br />");
+  if ($_SERVER['HTTPS']!="on"){
+    $newurl="http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/";
+  }else{
+    $newurl="https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/";
+  }
   if (file_exists("index.php")){
-      echo("<div class=buttonbox><a href=\"index.php\"><input type=submit value=\"$L_NEXT\"></a></div>");
+    $url=$newurl."index.php";
+    echo("<div class=buttonbox><a href=\"$url\"><input type=submit value=\"$L_NEXT\"></a></div>");
   }else{
     if (file_exists("index.html")){
+      $url=$newurl."index.html";
       echo("<div class=buttonbox><a href=\"index.html\"><input type=submit value=\"$L_NEXT\"></a></div>");
     }
+  }
+}
+
+
+
+//config fájl elkészítése
+function inst_config(){
+  global $L_ERROR,$L_CONFIG_PHASE_1,$sqlsrv,$sqldb,$sqlpre,$sqlpw,$sqluser;
+
+  if (file_exists("wp-config.php")){
+    echo("- $L_CONFIG_PHASE_1.<br />");
+    try{
+      $out="";
+      foreach(file("wp-config.php") as $line){
+        //echo($line."<br />");
+        if (strpos($line,"DB_NAME")<>0){
+          $line="define( 'DB_NAME', '".$sqldb."' );";
+        }
+        if (strpos($line,"DB_USER")<>0){
+          $line="define( 'DB_USER', '".$sqluser."' );";
+        }
+        if (strpos($line,"DB_PASSWORD")<>0){
+          $line="define( 'DB_PASSWORD', '".$sqlpw."' );";
+        }
+        if (strpos($line,"DB_HOST")<>0){
+          $line="define( 'DB_HOST', '".$sqlsrv."' );";
+        }
+        if (strpos($line,"table_prefix")<>0){
+          $line="\$table_prefix = '".$sqlpre."';";
+        }
+        $out=$out.$line;
+      }
+      try{
+        $handle=fopen("wp-config.php",'w+');
+        fwrite($handle,$out);
+        fclose($handle);
+      }catch (Exception $e){
+        echo($e->getMessage());
+      }
+    }catch(Exception $e){
+      echo("$L_ERROR ".$e->getMessage());
+    }
+  }
+}
+
+
+
+// fájl kicsomagolása
+function inst_files($md,$fn,$tarfile){
+  global $L_PHASE_1,$L_PHASE_2,$L_PHASE_3,$L_ERROR;
+
+  try{
+    if (file_exists($tarfile)){
+      unlink($tarfile);
+    }
+    echo("- $L_PHASE_1 (gz).<br />");
+    $p=new PharData($fn);
+    $p->decompress();
+    // kicsomagolás
+    $fn=$md."/".$tarfile.".tar";
+    echo("- $L_PHASE_2 (tar).<br />");
+    $phar=new PharData($tarfile);
+    $phar->extractTo($md,null,true);
+    // törlés
+    echo("- $L_PHASE_3.<br />");
+    if (file_exists($tarfile)){
+       unlink($tarfile);
+    }
+  }catch(Exception $e){
+   echo("$L_ERROR ".$e->getMessage());
   }
 }
 
@@ -206,25 +277,62 @@ function inst_sql($sqlfile="",$sqlconn){
     if ($sqlpre===""){
       $sqlpre=substr($_SERVER['HTTP_HOST'],0,3)."_";
     }
-    $sql="";
-    foreach(file($sqlfile) as $line){
-      $line=str_replace(PHP_EOL,'',$line);
-      $sql=$sql." ".$line;
-      if (substr($line,-1)===";"){
-        //echo("X<br /><br />");
-        // pre csere
-        // domain csere
-        try{
-          if ($r=$sqlconn->query($sql)){
-          }
-        }catch(Exception $e){
-          echo($sql." - ".$e->getMessage()."<br />");
-        }
-        $sql="";
-      }
+    if ($_SERVER['HTTPS']!="on"){
+      $newurl="http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']);
+    }else{
+      $newurl="https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']);
     }
-    echo("- $L_SQL_PHASE_2.<br />");
-    echo("- $L_SQL_PHASE_3.<br />");
+    $oldurl="";
+    $first=true;
+    $oldpre="";
+    $sql="USE $sqldb;";
+    try{
+      if ($r=$sqlconn->query($sql)){
+      }
+      $sql="";
+      foreach(file($sqlfile) as $line){
+        $line=str_replace(PHP_EOL,'',$line);
+        if ($line<>''){
+          $sql=$sql." ".$line;
+          if (substr($line,-1)===";"){
+            //echo("X<br /><br />");
+            // pre csere
+            if ($first){
+              $first=false;
+              // DROP TABLE levétele
+              $l=explode(" ",$sql);
+              $l2=explode("_",$l[5]);
+              $oldpre=$l2[0]."_";
+              //echo($oldpre);
+              echo("- $L_SQL_PHASE_2.<br />");
+            }
+            if (($oldpre<>"")and($sqlpre<>"")){
+              $sql=str_replace($oldpre,$sqlpre,$sql);
+              //echo($oldpre." ".$sqlpre." ".$sql."<br />");
+            }
+            // domain csere
+            if ($oldurl===""){
+              if (strpos($sql,"siteurl")<>0){
+                $oldurl=substr($sql,strpos($sql,"siteurl")+10,strlen($sql));
+                $l3=explode("'",$oldurl);
+                $oldurl=$l3[0];
+                //echo($oldurl."<br />");
+                echo("- $L_SQL_PHASE_3.<br />");
+              }
+            }
+            if (($oldurl<>"")and($newurl<>"")){
+              $sql=str_replace($oldurl,$newurl,$sql);
+              //echo($sql."<br />");
+            }
+            if ($r=$sqlconn->query($sql)){
+            }
+            $sql="";
+          }
+        }
+      }
+    }catch(Exception $e){
+      echo($sql." - ".$e->getMessage()."<br />");
+    }
   }
 }
 

@@ -27,30 +27,32 @@ function wswdteam_backup_files(){
   }else{
     $cl="wswdteamtablebutton";
   }
+  echo("<span class=wswdteamspaceholder></span>");
+  echo(wswdteam_lang("A rendszer fájljainak mentése").".");
+  echo("<span class=wswdteamspaceholder></span>");
   $md=wp_upload_dir();
   $hd=get_home_path();
   $bfileurl=$md['baseurl'].'/'.$wswdteam_app_name.'.tar';
   $bfile=$md['basedir'].'/'.$wswdteam_app_name.'.tar';
-  #echo("$hd - $bfile");
+  if (isset($_POST['file0'])){
+    try {
+      if (file_exists($bfile.".gz")){
+        unlink("$bfile.gz");
+      }
+      $a=new PharData($bfile);
+      $a->buildFromDirectory($hd);
+      $a->compress(Phar::GZ);
+      unlink($bfile);
+      echo("$bfile.gz - ".wswdteam_lang("Fájlmentés elkészült")."<br /><br />");
+    }catch (Exception $e){
+      echo($e->getMessage());
+    }
+  }
   echo("<form id=f10 action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
   echo("<input type=submit id=\"file0\" name=\"file0\" class=\"$cl\" value=\"".wswdteam_lang("Fájlmentés készítése")."\">");
   echo("</form>");
   if (file_exists($bfile.".gz")){
     echo("<a href=\"$bfileurl.gz\" id=\"bdl\" class=\"$cl\">".wswdteam_lang("Fájlmentés letöltése")."</a>");
-  }
-  if (isset($_POST['file0'])){
-    try {
-      $a=new PharData($bfile);
-      #$a->addFile('data.xls');
-      $a->buildFromDirectory($hd);
-      $a->compress(Phar::GZ);
-      unlink($bfile);
-    }
-    catch (Exception $e){
-    }
-    if (file_exists($bfile.".gz")){
-      echo("<a href=\"$bfileurl.gz\" id=\"bdl\" class=\"$cl\">".wswdteam_lang("Fájlmentés letöltése")."</a>");
-    }
   }
 }
 
@@ -71,6 +73,9 @@ function wswdteam_backup_tables(){
   $bfile=$md['basedir'].'/'.$wswdteam_app_name.'.sql';
 
   // adattáblák mentése
+  echo("<span class=wswdteamspaceholder></span>");
+  echo(wswdteam_lang("Teljes rendszer vagy az alkalmazás adattábláinak mentése").".");
+  echo("<span class=wswdteamspaceholder></span>");
   if (isset($_POST['b0'])){
     $err="";
     $tables=array();
@@ -78,27 +83,31 @@ function wswdteam_backup_tables(){
     $res=$wpdb->get_results($sql);
     if($res){
       echo("<span class=wswdteamspaceholder></span>");
-      echo("<b>".wswdteam_lang("Adattábla mentés alatt").":</b>");
+      echo("<b>".wswdteam_lang("Adattáblák mentés alatt").":</b>");
       echo("<span class=wswdteamspaceholder></span>");
       $ret='';
       foreach($res as $table){
-        echo("$table->Tables_in_wdb<br />");
-        $sql="SELECT * FROM $table->Tables_in_wdb";
+        $tn="Tables_in_$wpdb->dbname";
+        $tn=$table->$tn;
+        echo($tn."<br />");
+        $sql="SELECT * FROM $tn;";
         $resx=$wpdb->get_results($sql);
-        $ret=$ret."DROP TABLE ".$table->Tables_in_wdb .";";
-        $sql="SHOW CREATE TABLE ".$table->Tables_in_wdb.";";
+        $ret=$ret."DROP TABLE IF EXISTS $tn;";
+        $sql="SHOW CREATE TABLE $tn;";
         $res2=$wpdb->get_results($sql);
         $r=$res2[0];
         $x="Create Table";
         $ret=$ret."\n\n".$r->$x.";\n\n";
         foreach($resx as $rd){
-          $ret=$ret."INSERT INTO ".$table->Tables_in_wdb." VALUES(";
+          $ret=$ret."INSERT INTO $tn VALUES(";
           $i=0;
           foreach($rd as $rdat){
             if($i>0){
-              $ret=$ret.",".$rdat;
+              //$ret=$ret.",\"".$rdat."\"";
+              $ret=$ret.",'".$rdat."'";
             }else{
-              $ret=$ret.$rdat;
+              //$ret=$ret."\"".$rdat."\"";
+              $ret=$ret."'".$rdat."'";
             }
             $i++;
           }
@@ -107,23 +116,24 @@ function wswdteam_backup_tables(){
         $ret=$ret."\n\n\n";
       }
       $md=wp_upload_dir();
+      try{
       $handle=fopen("$bfile",'w+');
       fwrite($handle,$ret);
       fclose($handle);
+      }catch (Exception $e){
+        echo($e->getMessage());
+      }
       echo("<span class=wswdteamspaceholder></span>");
       echo("<b>".wswdteam_lang("Mentés elkészítés megtörtént").".</b>");
       echo("<br />");
       echo('<br />'.$bfileurl.'<br /><br />');
-      #$ret=htmlentities($ret);
-      #echo("<form id=f0 action=\"".$fn."\" method=\"post\">");
-      #echo("<input id=\"0\" name=\"0\" type=hidden value=\"$ret\">");
-      #echo("<input type=submit id=\"bdl\" class=\"$cl\" value=\"".wswdteam_lang("Mentés letöltése")."\" ");
-      #echo("onclick=\"getElementById('bdl').style.display='none';\">");
-      #echo("</form>");
     }
   }
   echo("<form id=f0 action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-  echo("<input type=submit id=\"b0\" name=\"b0\" class=\"$cl\" value=\"".wswdteam_lang("Adatmentés készítése")."\">");
+  echo("<input type=submit id=\"b0\" name=\"b0\" class=\"$cl\" value=\"".wswdteam_lang("Teljes adatmentés készítése")."\">");
+  echo("</form>");
+  echo("<form id=f0 action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+  echo("<input type=submit id=\"b1\" name=\"b1\" class=\"$cl\" value=\"".wswdteam_lang("Alkalmazás adatmentés készítése")."\">");
   echo("</form>");
   if (file_exists($bfile)){
     echo("<a href=\"$bfileurl\" id=\"bdl\" class=\"$cl\">".wswdteam_lang("Mentés letöltése")."</a>");
@@ -143,6 +153,9 @@ function wswdteam_restore_tables(){
     $cl="wswdteamtablebutton";
   }
   // visszatöltés
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
+  echo(wswdteam_lang("Mentés fájlok feltöltése visszaállításhoz").".");
   echo("<span class=wswdteamspaceholder></span>");
   if (!isset($_POST['res1'])){
     echo("<form id=fres action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
@@ -184,6 +197,8 @@ function wswdteam_delete_bfiles(){
     $cl="wswdteamtablebutton";
   }
   // mentések törlése
+  echo(wswdteam_lang("Korábbi mentések törlése").".");
+  echo("<span class=wswdteamspaceholder></span>");
   if (!isset($_POST['d1'])){
     echo("<form id=fdel action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
     echo("<input type=submit id=\"d1\" name=\"d1\" class=\"$cl\" value=\"".wswdteam_lang("Mentések törlése")."\">");

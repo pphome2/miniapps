@@ -86,7 +86,7 @@ $wdhd_admin_file='/admin/admin.php';
 // rendszer fájlok
 global $wdhd_main_files;
 $wdhd_main_files=array('/core/main.php',
-                       '/core/sql.php',
+                       '/core/lib_sql.php',
                        '/core/lib_view.php',
                        '/core/lib_msg.php',
                        '/core/lib_lang.php',

@@ -72,7 +72,7 @@ $wswdteam_admin_file='/admin/admin.php';
 // rendszer fájlok
 global $wswdteam_main_files;
 $wswdteam_main_files=array('/core/main.php',
-                           '/core/sql.php',
+                           '/core/lib_sql.php',
                            '/core/lib_lang.php',
                            '/core/lib_msg.php',
                            '/core/lib_page.php',

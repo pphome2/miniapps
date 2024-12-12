@@ -95,10 +95,10 @@ if (isset($_POST['new'])){
   wswdteam_pform();
 }else{
   wswdteam_ptable();
-  wswdteam_pload();
-  wswdteam_pageload();
-  //wswdteam_admin_backup();
 }
+wswdteam_pload();
+wswdteam_pageload();
+wswdteam_admin_backup();
 
 
 function wswdteam_admin_backup(){
@@ -398,7 +398,7 @@ function wswdteam_pageload(){
 
 
 // új nyelvi elemek kiírása
-wswdteam_lang_newlines();
+echo(wswdteam_lang_newlines());
 
 
 ?>

@@ -31,15 +31,17 @@ function wdhd_lang($text='',$dot=true){
 function wdhd_lang_newlines(){
   global $wdhd_lang_new,$wdhd_developer_mode;
 
+  $r="";
   if ($wdhd_developer_mode){
     if (count($wdhd_lang_new)>0){
-      echo("<br /><br />");
+      $r="<span class=wdhdspaceholder></span>";
       foreach($wdhd_lang_new as $l){
-        echo("'".$l."' => '".$l."',<br />");
+        $r=$r."'".$l."' => '".$l."',<br />";
       }
-      echo("<br /><br />");
+      $r=$r."<span class=wdhdspaceholder></span>";
     }
   }
+  return($r);
 }
 
 ?>

@@ -444,7 +444,7 @@ function wdhd_tpagehead(){
 
 
 // új nyelvi elemek kiírása
-wdhd_lang_newlines();
+echo(wdhd_lang_newlines());
 
 
 

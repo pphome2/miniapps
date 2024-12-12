@@ -46,6 +46,7 @@ function wswdteam_main_center($atts=[],$content=null,$tag=''){
     }
     //$content=wswdteam_x($content);
     $content=$content."</div>";
+    $content=$content.wswdteam_lang_newlines();
     return $content;
   }
 }

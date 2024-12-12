@@ -30,15 +30,17 @@ function wswdteam_lang($text='',$dot=true){
 function wswdteam_lang_newlines(){
   global $wswdteam_lang_new,$wswdteam_developer_mode;
 
+  $r="";
   if ($wswdteam_developer_mode){
     if (count($wswdteam_lang_new)>0){
-      echo("<span class=wswdteamspaceholder></span>");
+      $r="<span class=wswdteamspaceholder></span>";
       foreach($wswdteam_lang_new as $l){
-        echo("'".$l."' => '".$l."',<br />");
+        $r=$r."'".$l."' => '".$l."',<br />";
       }
-    echo("<span class=wswdteamspaceholder></span>");
+      $r=$r."<span class=wswdteamspaceholder></span>";
     }
   }
+  return($r);
 }
 
 

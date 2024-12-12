@@ -47,6 +47,6 @@ function wdhd_upagehead(){
 
 
 // új nyelvi elemek kiírása
-wdhd_lang_newlines();
+echo(wdhd_lang_newlines());
 
 ?>

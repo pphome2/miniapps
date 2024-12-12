@@ -110,7 +110,7 @@ function wdhd_init(){
     $wdhd_ticket_type[$i]=wdhd_lang($wdhd_ticket_type[$i],false);
     $i++;
   }
-  wdhd_sys_check();
+  //wdhd_sys_check();
   $dev=wdhd_get_param("wdhd_developer_mode");
   if ($dev==="true"){
     $wdhd_developer_mode=true;

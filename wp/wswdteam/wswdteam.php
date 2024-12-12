@@ -105,7 +105,7 @@ function wswdteam_init(){
     $wswdteam_category[$i]=wswdteam_lang($wswdteam_category[$i],false);
     $i++;
   }
-  wswdteam_sys_check();
+  //wswdteam_sys_check();
   $dev=wswdteam_get_param("wswdteam_developer_mode");
   if ($dev==="true"){
     $wswdteam_developer_mode=true;

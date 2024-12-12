@@ -110,31 +110,29 @@ function wdhd_sys_check(){
 function wdhd_sys_init(){
   global $wdhd_plugin_version,$wdhd_options,$wdhd_developer_mode;
 
-
   $ver=get_option($wdhd_options[0],'0');
   // nincs plugin
   if ($ver==="0"){
     // új
     wdhd_sys_new($ver,$wdhd_plugin_version);
     wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
-    if ($wdhd_developer_mode){
-      wdhd_save_param("wdhd_developer_mode","true");
-    }else{
-      wdhd_save_param("wdhd_developer_mode","false");
-    }
   }else{
     // frissítés kell
     if ($ver<>$wdhd_plugin_version){
       wdhd_sys_upgrade($ver,$wdhd_plugin_version);
       wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
-      if ($wdhd_developer_mode){
-        wdhd_save_param("wdhd_developer_mode","true");
-      }else{
-        wdhd_save_param("wdhd_developer_mode","false");
-      }
     }
   }
   $dev=wdhd_get_param("wdhd_developer_mode");
+  if ($dev===""){
+    if ($wdhd_developer_mode){
+      wdhd_save_param("wdhd_developer_mode","true");
+      $dev="true";
+    }else{
+      wdhd_save_param("wdhd_developer_mode","false");
+      $dev="false";
+    }
+  }
   if ($dev==="true"){
     $wdhd_developer_mode=true;
   }else{
