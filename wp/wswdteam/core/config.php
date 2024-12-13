@@ -69,6 +69,11 @@ $wswdteam_inc_js='/inc/wswdteam.js';
 global $wswdteam_admin_file;
 $wswdteam_admin_file='/admin/admin.php';
 
+// telepítőfájl neve
+global $wswdteam_setup_file;
+$wswdteam_setup_file="install.php";
+
+
 // rendszer fájlok
 global $wswdteam_main_files;
 $wswdteam_main_files=array('/core/main.php',

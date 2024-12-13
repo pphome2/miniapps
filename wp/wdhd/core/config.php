@@ -83,6 +83,11 @@ $wdhd_inc_js='/inc/wdhd.js';
 global $wdhd_admin_file;
 $wdhd_admin_file='/admin/admin.php';
 
+// telepítőfájl neve
+global $wdhd_setup_file;
+$wdhd_setup_file="install.php";
+
+
 // rendszer fájlok
 global $wdhd_main_files;
 $wdhd_main_files=array('/core/main.php',

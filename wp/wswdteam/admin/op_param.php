@@ -323,7 +323,7 @@ function wswdteam_pageload(){
   echo("<span class=wswdteamspaceholder></span>");
   echo("<h2>".wswdteam_lang('Lapok feltöltés - Frissítés utáni feladat')."</h2>");
   echo("<span class=wswdteamspaceholder></span>");
-  echo(wswdteam_lang('A modul txt mappájából a lapk betöltése').'.');
+  echo(wswdteam_lang('A modul txt mappájából a lapok betöltése').'.');
   echo("<br />");
   echo(wswdteam_lang('A feltöltött lapok elérését (a menükben) ellenőrizni kell'.'.'));
   echo("<span class=wswdteamspaceholder></span>");
