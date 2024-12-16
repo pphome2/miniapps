@@ -39,5 +39,15 @@ tbody>:nth-child(n):hover {
   padding-right:10px;
 }
 
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+.wswdteamwordspace{
+  margin-left:5px;
+}
+
 </style>
 

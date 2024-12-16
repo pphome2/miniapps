@@ -10,179 +10,149 @@ if (!defined('ABSPATH')){
 
 // adatmentés
 function wdhd_backup(){
+  echo("<span class=wdhdspaceholder></span>");
+  echo("<span class=wdhdspaceholder></span>");
+  echo("<h2>".wdhd_lang("Teljes adat- és fájlmentés")."</h2>");
+  echo("<span class=wdhdspaceholder></span>");
   wdhd_delete_bfiles();
   wdhd_backup_tables();
   wdhd_backup_files();
-  wdhd_restore_tables();
+  wdhd_backup_setup_dl();
+  echo("<span class=wdhdspaceholder></span>");
+  echo("<span class=wdhdspaceholder></span>");
+  //echo("<h2>".wdhd_lang("Mentés feltöltése")."</h2>");
+  //echo("<span class=wdhdspaceholder></span>");
+  //wdhd_restore_tables();
 }
 
 
 
-// fájl mentés
-function wdhd_backup_files(){
-  global $wdhd_app_name;
+// teplepítő letöltése
+function wdhd_backup_setup_dl(){
+  global $wdhd_setup_file;
 
   if (is_admin()){
     $cl="button";
+    $act=menu_page_url(__FILE__);
   }else{
     $cl="wdhdtablebutton";
+    $act=$_SERVER['REQUEST_URI'];
   }
   echo("<span class=wdhdspaceholder></span>");
-  echo(wdhd_lang("A rendszer fájljainak mentése").".");
   echo("<span class=wdhdspaceholder></span>");
-  $md=wp_upload_dir();
-  $hd=get_home_path();
-  $bfileurl=$md['baseurl'].'/'.$wdhd_app_name.'.tar';
-  $bfile=$md['basedir'].'/'.$wdhd_app_name.'.tar';
-  if (isset($_POST['file0'])){
-    try {
-      if (file_exists($bfile.".gz")){
-        unlink("$bfile.gz");
+  echo(wdhd_lang("Telepítő program letöltése. Egy helyen kell lennie a mentésfájlokkal (teljes adatmentés, fájlmentés)."));
+  echo("<span class=wdhdspaceholder></span>");
+  $pd=plugin_dir_url(__FILE__).$wdhd_setup_file;
+  $pdf=plugin_dir_path(__FILE__).$wdhd_setup_file;
+  if (file_exists($pdf)){
+    echo("<a href=\"$pd\" id=\"bdl\" class=\"$cl\" download>".wdhd_lang("Telepítő program letöltése")."</a>");
+  }
+  echo("<span class=wdhdspaceholder></span>");
+}
+
+
+
+// sql fájl betöltése
+function wdhd_inst_sql($sqlfile=""){
+  global $wpdb,$wdhd_developer_mode;
+
+  $ret=false;
+  if (file_exists($sqlfile)){
+    try{
+      $sql="";
+      foreach(file($sqlfile) as $line){
+        $line=str_replace(PHP_EOL,'',$line);
+        if ($line<>''){
+          $sql=$sql." ".$line;
+          if (substr($line,-1)===";"){
+            $r=$wpdb->query($sql);
+            //echo($sql."<br />");
+            $sql="";
+          }
+        }
       }
-      $a=new PharData($bfile);
-      $a->buildFromDirectory($hd);
-      $a->compress(Phar::GZ);
-      unlink($bfile);
-      echo("$bfile.gz - ".wdhd_lang("Fájlmentés elkészült")."<br /><br />");
-    }catch (Exception $e){
-      echo($e->getMessage());
+      $ret=true;
+    }catch(Exception $e){
+      echo($sql." - ".$e->getMessage()."<br />");
     }
   }
-  echo("<form id=f10 action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-  echo("<input type=submit id=\"file0\" name=\"file0\" class=\"$cl\" value=\"".wdhd_lang("Fájlmentés készítése")."\">");
-  echo("</form>");
-  if (file_exists($bfile.".gz")){
-    echo("<a href=\"$bfileurl.gz\" id=\"bdl\" class=\"$cl\">".wdhd_lang("Fájlmentés letöltése")."</a>");
-  }
+  return($ret);
 }
+
 
 
 // adatmentés
-function wdhd_backup_tables(){
-  global $wpdb,$wdhd_backup_dl,$wdhd_app_name;
+function wdhd_backup_apptables(){
+  global $wpdb,$wdhd_backup_dl,$wdhd_app_name,$wdhd_developer_mode,$wdhd_table;
 
   if (is_admin()){
     $cl="button";
+    $act=menu_page_url(__FILE__);
   }else{
     $cl="wdhdtablebutton";
+    $act=$_SERVER['REQUEST_URI'];
   }
-  #$bfileurl=$md['baseurl']."/".date('YmdHms').'.sql';
-  #$bfile=$md['basedir']."/".date('YmdHms').'.sql';
   $md=wp_upload_dir();
-  $bfileurl=$md['baseurl'].'/'.$wdhd_app_name.'.sql';
-  $bfile=$md['basedir'].'/'.$wdhd_app_name.'.sql';
-
+  $dn=$md['basedir']."/".$wdhd_app_name;
+  try{
+    if (!is_dir($dn)){
+      mkdir($dn);
+    }
+  }catch (Exception $e){
+    if ($wdhd_developer_mode){
+      echo($e->getMessage());
+    }
+  }
+  //$bfileurl=$md['baseurl']."/".date('YmdHis').'.sql';
+  $bfile=$md['basedir']."/".$wdhd_app_name."/".current_time('YmdHis').'.sql';
   // adattáblák mentése
   echo("<span class=wdhdspaceholder></span>");
-  echo(wdhd_lang("Teljes rendszer vagy az alkalmazás adattábláinak mentése").".");
+  echo(wdhd_lang("Alkalmazás adattábláinak mentése").".<br />");
   echo("<span class=wdhdspaceholder></span>");
-  if (isset($_POST['b0'])){
+  if (isset($_POST['b1'])){
     $err="";
-    $tables=array();
-    $sql="SHOW TABLES;";
-    $res=$wpdb->get_results($sql);
-    if($res){
-      echo("<span class=wdhdspaceholder></span>");
-      echo("<b>".wdhd_lang("Adattáblák mentés alatt").":</b>");
-      echo("<span class=wdhdspaceholder></span>");
-      $ret='';
-      foreach($res as $table){
-        $tn="Tables_in_$wpdb->dbname";
-        $tn=$table->$tn;
-        echo($tn."<br />");
-        $sql="SELECT * FROM $tn;";
-        $resx=$wpdb->get_results($sql);
-        $ret=$ret."DROP TABLE IF EXISTS $tn;";
-        $sql="SHOW CREATE TABLE $tn;";
-        $res2=$wpdb->get_results($sql);
-        $r=$res2[0];
-        $x="Create Table";
-        $ret=$ret."\n\n".$r->$x.";\n\n";
-        foreach($resx as $rd){
-          $ret=$ret."INSERT INTO $tn VALUES(";
-          $i=0;
-          foreach($rd as $rdat){
-            if($i>0){
-              //$ret=$ret.",\"".$rdat."\"";
-              $ret=$ret.",'".$rdat."'";
-            }else{
-              //$ret=$ret."\"".$rdat."\"";
-              $ret=$ret."'".$rdat."'";
-            }
-            $i++;
+    $ret="";
+    foreach($wdhd_table as $tn){
+      $tn=$wpdb->prefix.$tn;
+      $sql="SELECT * FROM $tn;";
+      $resx=$wpdb->get_results($sql);
+      $ret=$ret."DROP TABLE IF EXISTS $tn;";
+      $sql="SHOW CREATE TABLE $tn;";
+      $res2=$wpdb->get_results($sql);
+      $r=$res2[0];
+      $x="Create Table";
+      $ret=$ret."\n\n".$r->$x.";\n\n";
+      foreach($resx as $rd){
+        $ret=$ret."INSERT INTO $tn VALUES(";
+        $i=0;
+        foreach($rd as $rdat){
+          if($i>0){
+            $ret=$ret.",'".$rdat."'";
+          }else{
+            $ret=$ret."'".$rdat."'";
           }
-          $ret=$ret.");\n";
+          $i++;
         }
-        $ret=$ret."\n\n\n";
+        $ret=$ret.");\n";
       }
-      $md=wp_upload_dir();
-      try{
+      $ret=$ret."\n\n\n";
+    }
+    try{
       $handle=fopen("$bfile",'w+');
       fwrite($handle,$ret);
       fclose($handle);
-      }catch (Exception $e){
+    }catch (Exception $e){
+      echo(wdhd_lang("Hiba történt a mentés közben").".<br />");
+      if ($wdhd_developer_mode){
         echo($e->getMessage());
       }
-      echo("<span class=wdhdspaceholder></span>");
-      echo("<b>".wdhd_lang("Mentés elkészítés megtörtént").".</b>");
-      echo("<br />");
-      echo('<br />'.$bfileurl.'<br /><br />');
     }
+    wdhd_message(wdhd_lang("Mentés elkészítése megtörtént").".");
+    echo("<span class=wdhdspaceholder></span>");
   }
-  echo("<form id=f0 action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-  echo("<input type=submit id=\"b0\" name=\"b0\" class=\"$cl\" value=\"".wdhd_lang("Teljes adatmentés készítése")."\">");
-  echo("</form>");
-  echo("<form id=f0 action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+  echo("<form id=f0 action=\"".$act."\" method=\"post\">");
   echo("<input type=submit id=\"b1\" name=\"b1\" class=\"$cl\" value=\"".wdhd_lang("Alkalmazás adatmentés készítése")."\">");
   echo("</form>");
-  if (file_exists($bfile)){
-    echo("<a href=\"$bfileurl\" id=\"bdl\" class=\"$cl\">".wdhd_lang("Mentés letöltése")."</a>");
-  }
-
-  echo("<span class=wdhdspaceholder></span>");
-}
-
-
-// adat visszatöltés
-function wdhd_restore_tables(){
-  global $wpdb,$wdhd_backup_dl,$wdhd_app_name;
-
-  if (is_admin()){
-    $cl="button";
-  }else{
-    $cl="wdhdtablebutton";
-  }
-  // visszatöltés
-  echo("<span class=wdhdspaceholder></span>");
-  echo("<span class=wdhdspaceholder></span>");
-  echo(wdhd_lang("Mentés fájlok feltöltése visszaállításhoz").".");
-  echo("<span class=wdhdspaceholder></span>");
-  if (!isset($_POST['res1'])){
-    echo("<form id=fres action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-    echo("<input type=submit id=\"res1\" name=\"res1\" class=\"$cl\" value=\"".wdhd_lang("Adattáblák visszatöltése")."\">");
-    echo("</form>");
-  }else{
-    echo("<form id=fres action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-    echo("<input type=\"file\" name=\"file\" id=\"file\">");
-    echo("<input type=submit id=\"res1x\" name=\"res1x\" class=\"$cl\" value=\"".wdhd_lang("Kiválasztott adatmentés feltöltése")."\">");
-    echo("</form>");
-  }
-  if (!isset($_POST['res2'])){
-    echo("<form id=fres action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-    echo("<input type=submit id=\"res2\" name=\"res2\" class=\"$cl\" value=\"".wdhd_lang("Fájlok visszatöltése")."\">");
-    echo("</form>");
-  }else{
-    echo("<form id=fres action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-    echo("<input type=\"file\" name=\"file\" id=\"file\">");
-    echo("<input type=submit id=\"res2x\" name=\"res2x\" class=\"$cl\" value=\"".wdhd_lang("Kiválasztott fájlmentés feltöltése")."\">");
-    echo("</form>");
-  }
-  if (isset($_POST['res1x'])){
-    echo("tábla");
-  }
-  if (isset($_POST['res2x'])){
-    echo("fájl");
-  }
   echo("<span class=wdhdspaceholder></span>");
 }
 
@@ -193,14 +163,16 @@ function wdhd_delete_bfiles(){
 
   if (is_admin()){
     $cl="button";
+    $act=menu_page_url(__FILE__);
   }else{
     $cl="wdhdtablebutton";
+    $act=$_SERVER['REQUEST_URI'];
   }
   // mentések törlése
-  echo(wdhd_lang("Korábbi mentések törlése").".");
+  echo(wdhd_lang("Korábbi teljes mentések törlése").".");
   echo("<span class=wdhdspaceholder></span>");
   if (!isset($_POST['d1'])){
-    echo("<form id=fdel action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+    echo("<form id=fdel action=\"".$act."\" method=\"post\">");
     echo("<input type=submit id=\"d1\" name=\"d1\" class=\"$cl\" value=\"".wdhd_lang("Mentések törlése")."\">");
     echo("</form>");
   }else{
@@ -228,6 +200,211 @@ function wdhd_delete_bfiles(){
   }
   echo("<span class=wdhdspaceholder></span>");
 }
+
+
+// fájl mentés
+function wdhd_backup_files(){
+  global $wdhd_app_name,$wdhd_developer_mode;
+
+  if (is_admin()){
+    $cl="button";
+    $act=menu_page_url(__FILE__);
+  }else{
+    $cl="wdhdtablebutton";
+    $act=$_SERVER['REQUEST_URI'];
+  }
+  echo("<span class=wdhdspaceholder></span>");
+  echo(wdhd_lang("A rendszer fájljainak mentése").".");
+  echo("<span class=wdhdspaceholder></span>");
+  $md=wp_upload_dir();
+  $hd=get_home_path();
+  $bfileurl=$md['baseurl'].'/'.$wdhd_app_name.'.tar';
+  $bfile=$md['basedir'].'/'.$wdhd_app_name.'.tar';
+  if (isset($_POST['file0'])){
+    try {
+      if (file_exists($bfile.".gz")){
+        unlink("$bfile.gz");
+      }
+      $a=new PharData($bfile);
+      $a->buildFromDirectory($hd);
+      $a->compress(Phar::GZ);
+      unlink($bfile);
+      echo("$bfile.gz - ".wdhd_lang("Fájlmentés elkészült")."<br /><br />");
+    }catch (Exception $e){
+      echo(wdhd_lang("Hiba történt a mentés közben").".<br />");
+      if ($wdhd_developer_mode){
+        echo($e->getMessage());
+      }
+    }
+  }
+  echo("<form id=f10 action=\"".$act."\" method=\"post\">");
+  echo("<input type=submit id=\"file0\" name=\"file0\" class=\"$cl\" value=\"".wdhd_lang("Fájlmentés készítése")."\">");
+  echo("</form>");
+  if (file_exists($bfile.".gz")){
+    echo("<a href=\"$bfileurl.gz\" id=\"bdl\" class=\"$cl\">".wdhd_lang("Fájlmentés letöltése")."</a>");
+  }
+}
+
+
+// adatmentés
+function wdhd_backup_tables(){
+  global $wpdb,$wdhd_backup_dl,$wdhd_app_name,$wdhd_developer_mode;
+
+  if (is_admin()){
+    $cl="button";
+    $act=menu_page_url(__FILE__);
+  }else{
+    $cl="wdhdtablebutton";
+    $act=$_SERVER['REQUEST_URI'];
+  }
+  #$bfileurl=$md['baseurl']."/".current_time('YmdHis').'.sql';
+  #$bfile=$md['basedir']."/".current_time('YmdHis').'.sql';
+  $md=wp_upload_dir();
+  $bfileurl=$md['baseurl'].'/'.$wdhd_app_name.'.sql';
+  $bfile=$md['basedir'].'/'.$wdhd_app_name.'.sql';
+
+  // adattáblák mentése
+  echo("<span class=wdhdspaceholder></span>");
+  echo(wdhd_lang("Teljes rendszer adattábláinak mentése").".<br />");
+  echo(wdhd_lang("A mentés adatsérülés esetén a teljes rendszer újratelepítéséhez használható").".<br />");
+  echo(wdhd_lang("Újratelepítés: instal.php segítségével a adat- és fájlmentés használatával").".<br />");
+  echo("<span class=wdhdspaceholder></span>");
+  if (isset($_POST['b0'])){
+    $err="";
+    $tables=array();
+    $sql="SHOW TABLES;";
+    $res=$wpdb->get_results($sql);
+    if($res){
+      echo("<span class=wdhdspaceholder></span>");
+      echo("<b>".wdhd_lang("Adattáblák mentés alatt").":</b>");
+      echo("<span class=wdhdspaceholder></span>");
+      $prefix=$wpdb->prefix;
+      $ret='';
+      foreach($res as $table){
+        $tn="Tables_in_$wpdb->dbname";
+        $tn=$table->$tn;
+        if (strpos("-".$tn,$prefix)<>0){
+          echo($tn."<br />");
+          $sql="SELECT * FROM $tn;";
+          $resx=$wpdb->get_results($sql);
+          $ret=$ret."DROP TABLE IF EXISTS $tn;";
+          $sql="SHOW CREATE TABLE $tn;";
+          $res2=$wpdb->get_results($sql);
+          $r=$res2[0];
+          $x="Create Table";
+          $ret=$ret."\n\n".$r->$x.";\n\n";
+          foreach($resx as $rd){
+            $ret=$ret."INSERT INTO $tn VALUES(";
+            $i=0;
+            foreach($rd as $rdat){
+              if($i>0){
+                $ret=$ret.",'".$rdat."'";
+              }else{
+                $ret=$ret."'".$rdat."'";
+              }
+              $i++;
+            }
+            $ret=$ret.");\n";
+          }
+          $ret=$ret."\n\n\n";
+        }
+      }
+      try{
+        $handle=fopen("$bfile",'w+');
+        fwrite($handle,$ret);
+        fclose($handle);
+      }catch (Exception $e){
+        echo(wdhd_lang("Hiba történt a mentés közben").".<br />");
+        if ($wdhd_developer_mode){
+          echo($e->getMessage());
+        }
+      }
+      echo("<span class=wdhdspaceholder></span>");
+      echo("<b>".wdhd_lang("Mentés elkészítés megtörtént").".</b>");
+      echo("<br />");
+      echo('<br />'.$bfileurl.'<br /><br />');
+    }
+  }
+  echo("<form id=f0 action=\"".$act."\" method=\"post\">");
+  echo("<input type=submit id=\"b0\" name=\"b0\" class=\"$cl\" value=\"".wdhd_lang("Teljes adatmentés készítése")."\">");
+  echo("</form>");
+  if (file_exists($bfile)){
+    echo("<a href=\"$bfileurl\" id=\"bdl\" class=\"$cl\">".wdhd_lang("Mentés letöltése")."</a>");
+  }
+
+  echo("<span class=wdhdspaceholder></span>");
+}
+
+
+// adat visszatöltés
+function wdhd_restore_tables(){
+  global $wpdb,$wdhd_backup_dl,$wdhd_app_name,$wdhd_developer_mode,$wdhd_app_name;
+
+  if (is_admin()){
+    $cl="button";
+    $act=menu_page_url(__FILE__);
+  }else{
+    $cl="wdhdtablebutton";
+    $act=$_SERVER['REQUEST_URI'];
+  }
+  // visszatöltés
+  echo(wdhd_lang("Mentés fájlok feltöltése visszaállításhoz").".<br />");
+  echo(wdhd_lang("A nagy fájlméret miatt ajánlott a tárhely szólgáltató saját funkcióit használni. (FTP, vezérlőpult megoldások.)").".");
+  if (isset($_POST['res1']) or isset($_POST['res2'])){
+    echo("<span class=wdhdspaceholder></span>");
+    $md=wp_upload_dir();
+    //$tdir=$md['baseurl'].'/'.$wdhd_app_name;
+    $tdir=$md['basedir'].'/';
+    //$tfile=$tdir.basename($_FILES['file1']['name']);
+    try{
+      if (isset($_POST['res1'])){
+        $tfile=$tdir."/".$_FILES['file1']['name'];
+        if (file_exists($tfile)){
+          unlink($tfile);
+        }
+        if (move_uploaded_file($_FILES['file1']['tmp_name'],$tfile)){
+          echo(wdhd_lang("A feltöltés megtörtént").".<br />");
+        }
+      }else{
+        $tfile=$tdir."/".$_FILES['file2']['name'];
+        if (file_exists($tfile)){
+          unlink($tfile);
+        }
+        if (move_uploaded_file($_FILES['file2']['tmp_name'],$tfile)){
+          echo(wdhd_lang("A feltöltés megtörtént").".<br />");
+        }
+      }
+    }catch (Exception $e){
+      echo(wdhd_lang("Hiba történt a feltöltés közben").".<br />");
+      if ($wdhd_developer_mode){
+        echo($e->getMessage());
+      }
+    }
+  }
+  echo("<span class=wdhdspaceholder></span>");
+  echo("<form id=fres1 action=\"".$act."\" enctype=\"multipart/form-data\" method=\"post\">");
+  //echo("<input type=\"file\" name=\"file1\" id=\"file1\" onchange=\"alert(document.forms['fres1']['file1'].files[0].name);\">");
+  echo("<label id=\"fres1l\" for=\"file1\" class=\"".$cl."\">".wdhd_lang("Adatmentés kiválasztása")."</label>");
+  echo("<input type=\"file\" name=\"file1\" id=\"file1\" onchange=\"chlabel();\">");
+  echo("<script>");
+  echo("function chlabel(){var v=document.forms['fres1']['file1'].files[0].name;document.getElementById('fres1l').innerHTML=v;}");
+  echo("</script>");
+  echo("<span class=wdhdwordspace></span>");
+  echo("<input type=submit id=\"res1\" name=\"res1\" class=\"$cl\" value=\"".wdhd_lang("Feltöltés")."\">");
+  echo("</form>");
+  echo("<span class=wdhdspaceholder></span>");
+  echo("<form id=fres2 action=\"".$act."\" enctype=\"multipart/form-data\" method=\"post\">");
+  echo("<label id=\"fres2l\" for=\"file2\" class=\"".$cl."\">".wdhd_lang("Fájlmentés kiválasztása")."</label>");
+  echo("<input type=\"file\" name=\"file2\" id=\"file2\" onchange=\"chlabel2();\">");
+  echo("<script>");
+  echo("function chlabel2(){var v=document.forms['fres2']['file2'].files[0].name;document.getElementById('fres2l').innerHTML=v;}");
+  echo("</script>");
+  echo("<span class=wdhdwordspace></span>");
+  echo("<input type=submit id=\"res2\" name=\"res2\" class=\"$cl\" value=\"".wdhd_lang("Feltöltés")."\">");
+  echo("</form>");
+  echo("<span class=wdhdspaceholder></span>");
+}
+
 
 
 ?>

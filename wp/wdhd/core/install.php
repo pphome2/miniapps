@@ -85,6 +85,7 @@ echo("<span class=placeholder></span>");
 
 
 // fájl elérések ellenőrzése
+$allok=true;
 $ok1=false;
 $ok2=false;
 $md=dirname(__FILE__);
@@ -118,6 +119,7 @@ if ($ok1 and $ok2){
       mysqli_close($sqlconn);
     } catch(Exception $e){
       echo("$L_ERROR ".$e->getMessage());
+      $allok=false;
       echo("<span class=placeholder></span>");
     }
   }
@@ -142,7 +144,7 @@ if ($ok1 and $ok2){
 // fájlok feldolgozása
 function inst_main(){
   global $L_END,$L_NEXT,$L_PHASE_1,$L_PHASE_2,$L_PHASE_3,$L_ERROR,
-         $sqlsrv,$sqluser,$sqlpw,$sqldb;
+         $sqlsrv,$sqluser,$sqlpw,$sqldb,$allok;
 
   $md=dirname(__FILE__);
   $fl=scandir($md);
@@ -159,17 +161,18 @@ function inst_main(){
           echo("<br />");
         break;
       case "gz":
-        $fn=$md."/".$l;
+        $fngz=$md."/".$l;
         $tarfile=$md."/".pathinfo($l,PATHINFO_FILENAME);
-        inst_files($md,$fn,$tarfile);
+        inst_files($md,$fngz,$tarfile);
         echo("<br />");
         break;
       case "tar":
         try{
-          $fn=$md."/".$l;
-          unlink($fn);
+          $fntar=$md."/".$l;
+          unlink($fntar);
         }catch(Exception $e){
           echo("$L_ERROR ".$e->getMessage());
+          $allok=false;
         }
         break;
     }
@@ -184,6 +187,21 @@ function inst_main(){
     $newurl="http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/";
   }else{
     $newurl="https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI'])."/";
+  }
+  if($allok){
+    try{
+      if (file_exists($sqlfile)){
+        unlink($sqlfile);
+      }
+      if (file_exists($fngz)){
+        unlink($fngz);
+      }
+      if (file_exists($fntar)){
+        unlink($fntar);
+      }
+    }catch(Exception $e){
+      echo("$L_ERROR ".$e->getMessage());
+    }
   }
   if (file_exists("index.php")){
     $url=$newurl."index.php";
@@ -200,7 +218,7 @@ function inst_main(){
 
 //config fájl elkészítése
 function inst_config(){
-  global $L_ERROR,$L_CONFIG_PHASE_1,$sqlsrv,$sqldb,$sqlpre,$sqlpw,$sqluser;
+  global $L_ERROR,$L_CONFIG_PHASE_1,$sqlsrv,$sqldb,$sqlpre,$sqlpw,$sqluser,$allok;
 
   if (file_exists("wp-config.php")){
     echo("- $L_CONFIG_PHASE_1.<br />");
@@ -209,19 +227,19 @@ function inst_config(){
       foreach(file("wp-config.php") as $line){
         //echo($line."<br />");
         if (strpos($line,"DB_NAME")<>0){
-          $line="define( 'DB_NAME', '".$sqldb."' );";
+          $line="define( 'DB_NAME', '".$sqldb."' );".PHP_EOL;
         }
         if (strpos($line,"DB_USER")<>0){
-          $line="define( 'DB_USER', '".$sqluser."' );";
+          $line="define( 'DB_USER', '".$sqluser."' );".PHP_EOL;
         }
         if (strpos($line,"DB_PASSWORD")<>0){
-          $line="define( 'DB_PASSWORD', '".$sqlpw."' );";
+          $line="define( 'DB_PASSWORD', '".$sqlpw."' );".PHP_EOL;
         }
         if (strpos($line,"DB_HOST")<>0){
-          $line="define( 'DB_HOST', '".$sqlsrv."' );";
+          $line="define( 'DB_HOST', '".$sqlsrv."' );".PHP_EOL;
         }
         if (strpos($line,"table_prefix")<>0){
-          $line="\$table_prefix = '".$sqlpre."';";
+          $line="\$table_prefix = '".$sqlpre."';".PHP_EOL;
         }
         $out=$out.$line;
       }
@@ -231,9 +249,11 @@ function inst_config(){
         fclose($handle);
       }catch (Exception $e){
         echo($e->getMessage());
+        $allok=false;
       }
     }catch(Exception $e){
       echo("$L_ERROR ".$e->getMessage());
+      $allok=false;
     }
   }
 }
@@ -242,7 +262,7 @@ function inst_config(){
 
 // fájl kicsomagolása
 function inst_files($md,$fn,$tarfile){
-  global $L_PHASE_1,$L_PHASE_2,$L_PHASE_3,$L_ERROR;
+  global $L_PHASE_1,$L_PHASE_2,$L_PHASE_3,$L_ERROR,$allok;
 
   try{
     if (file_exists($tarfile)){
@@ -263,6 +283,7 @@ function inst_files($md,$fn,$tarfile){
     }
   }catch(Exception $e){
    echo("$L_ERROR ".$e->getMessage());
+   $allok=false;
   }
 }
 
@@ -332,6 +353,7 @@ function inst_sql($sqlfile="",$sqlconn){
       }
     }catch(Exception $e){
       echo($sql." - ".$e->getMessage()."<br />");
+      $allok=false;
     }
   }
 }
