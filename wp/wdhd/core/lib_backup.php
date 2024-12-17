@@ -19,7 +19,7 @@ function wdhd_backup(){
   wdhd_backup_files();
   wdhd_backup_setup_dl();
   echo("<span class=wdhdspaceholder></span>");
-  echo("<span class=wdhdspaceholder></span>");
+  //echo("<span class=wdhdspaceholder></span>");
   //echo("<h2>".wdhd_lang("Mentés feltöltése")."</h2>");
   //echo("<span class=wdhdspaceholder></span>");
   //wdhd_restore_tables();
@@ -338,8 +338,44 @@ function wdhd_backup_tables(){
 
 // adat visszatöltés
 function wdhd_restore_tables(){
-  global $wpdb,$wdhd_backup_dl,$wdhd_app_name,$wdhd_developer_mode,$wdhd_app_name;
+  global $wpdb,$wdhd_backup_dl,$wdhd_app_name,$wdhd_developer_mode,$wdhd_app_name,
+         $wdhd_setup_file;
 
+  //$htf=ABSPATH.'.htaccess';
+  //$out="";
+  //$fs=false;
+  //try{
+  //  foreach(file($htf) as $line){
+  //    if (strpos($line,"upload_max_filesize")<>0){
+  //      $line="php_value upload_max_filesize 64M".PHP_EOL;
+  //      $fs=true;
+  //    }
+  //    $out=$out.$line;
+  //  }
+  //  if (!$fs){
+  //    $out=$out.PHP_EOL;
+  //    $out=$out."# BEGIN wdhd".PHP_EOL;
+  //    $out=$out."php_value upload_max_filesize 64M".PHP_EOL;
+  //    $out=$out."# END wdhd".PHP_EOL;
+  //    //php_value post_max_size 64M
+  //    //php_value max_execution_time 300
+  //    //php_value max_input_time 300
+  //  }
+  //}catch (Exception $e){
+  //  echo($e->getMessage());
+  //}
+  //try{
+  //  $handle=fopen($htf,'w+');
+  //  fwrite($handle,$out);
+  //  fclose($handle);
+  //}catch (Exception $e){
+  //  echo($e->getMessage());
+ // }
+ //
+ // php.ini-be:
+ // post_max_size = 64M;
+ // upload_max_filesize 64M";
+ //
   if (is_admin()){
     $cl="button";
     $act=menu_page_url(__FILE__);
@@ -350,59 +386,93 @@ function wdhd_restore_tables(){
   // visszatöltés
   echo(wdhd_lang("Mentés fájlok feltöltése visszaállításhoz").".<br />");
   echo(wdhd_lang("A nagy fájlméret miatt ajánlott a tárhely szólgáltató saját funkcióit használni. (FTP, vezérlőpult megoldások.)").".");
-  if (isset($_POST['res1']) or isset($_POST['res2'])){
-    echo("<span class=wdhdspaceholder></span>");
-    $md=wp_upload_dir();
-    //$tdir=$md['baseurl'].'/'.$wdhd_app_name;
-    $tdir=$md['basedir'].'/';
-    //$tfile=$tdir.basename($_FILES['file1']['name']);
-    try{
-      if (isset($_POST['res1'])){
-        $tfile=$tdir."/".$_FILES['file1']['name'];
-        if (file_exists($tfile)){
-          unlink($tfile);
+  $fup=(int)(ini_get('upload_max_filesize'));
+  $pup=(int)(ini_get('post_max_size'));
+  $tdir=get_home_path();
+  if (($fup>=64)and($pup>=8)){
+    if (isset($_POST['res1'])){
+      echo("<span class=wdhdspaceholder></span>");
+      //$md=wp_upload_dir();
+      //$tdir=$md['basedir'].'/';
+      try{
+        if ($_FILES['file1']['name']<>""){
+          $tfile=$tdir."/".$_FILES['file1']['name'];
+          echo($_FILES['file1']['name']);
+          echo("<span class=wdhdspaceholder></span>");
+          $ext=pathinfo($tfile,PATHINFO_EXTENSION);
+          if (in_array($ext,array('sql','gz'))){
+            if (file_exists($tfile)){
+              unlink($tfile);
+            }
+            if (move_uploaded_file($_FILES['file1']['tmp_name'],$tfile)){
+              echo(wdhd_lang("A feltöltés megtörtént").".<br />");
+            }
+          }else{
+            echo(wdhd_lang("Nem megfelelő fájl.Csak *.sql és *.tar.gz tölthető fel").".<br />");
+          }
         }
-        if (move_uploaded_file($_FILES['file1']['tmp_name'],$tfile)){
-          echo(wdhd_lang("A feltöltés megtörtént").".<br />");
-        }
-      }else{
-        $tfile=$tdir."/".$_FILES['file2']['name'];
-        if (file_exists($tfile)){
-          unlink($tfile);
-        }
-        if (move_uploaded_file($_FILES['file2']['tmp_name'],$tfile)){
-          echo(wdhd_lang("A feltöltés megtörtént").".<br />");
+      }catch (Exception $e){
+        echo(wdhd_lang("Hiba történt a feltöltés közben").".<br />");
+        if ($wdhd_developer_mode){
+          echo($e->getMessage());
         }
       }
+    }
+    echo("<span class=wdhdspaceholder></span>");
+    echo("<form id=fres1 action=\"".$act."\" enctype=\"multipart/form-data\" method=\"post\">");
+    echo("<label id=\"fres1l\" for=\"file1\" class=\"".$cl."\">".wdhd_lang("Adatmentés kiválasztása")."</label>");
+    echo("<input type=\"file\" name=\"file1\" id=\"file1\" onchange=\"chlabel();\">");
+    echo("<script>");
+    echo("function chlabel(){var v=document.forms['fres1']['file1'].files[0].name;document.getElementById('fres1l').innerHTML=v;}");
+    echo("</script>");
+    echo("<span class=wdhdwordspace></span>");
+    echo("<input type=submit id=\"res1\" name=\"res1\" class=\"$cl\" value=\"".wdhd_lang("Feltöltés")."\">");
+    echo("</form>");
+    echo("<span class=wdhdspaceholder></span>");
+  }else{
+    echo("<span class=wdhdspaceholder></span>");
+    echo(wdhd_lang("A tárhely feltöltési beállításai miatt nem tölthetőek fel a fájlok").".");
+    echo("<span class=wdhdspaceholder></span>");
+
+  }
+  $ok1=false;
+  $ok2=false;
+  $fl=scandir($tdir);
+  foreach($fl as $l){
+    $ext=pathinfo($l,PATHINFO_EXTENSION);
+    switch($ext){
+      case "sql":
+        $ok1=true;
+        break;
+      case "gz":
+        $ok2=true;
+        break;
+    }
+  }
+  if($ok1 and $ok2){
+    echo("<span class=wdhdspaceholder></span>");
+    $sfile=plugin_dir_path(__FILE__).$wdhd_setup_file;
+    $tfile=$tdir.$wdhd_setup_file;
+    try{
+      if(file_exists($tfile)){
+        unlink($tfile);
+      }
+      copy($sfile,$tfile);
     }catch (Exception $e){
-      echo(wdhd_lang("Hiba történt a feltöltés közben").".<br />");
+      echo(wdhd_lang("Hiba történt a telepítő másolása közben").".<br />");
       if ($wdhd_developer_mode){
         echo($e->getMessage());
       }
+      echo("<span class=wdhdspaceholder></span>");
     }
+    if (file_exists($tfile)){
+      echo(wdhd_lang(".sql és .tar.gz fájl található a fő könyvtárban. Az újratelepítés elindítható."));
+      echo("<span class=wdhdspaceholder></span>");
+      $pd=get_site_url()."/".$wdhd_setup_file;
+      echo("<a href=\"$pd\" id=\"bdl\" class=\"$cl\">".wdhd_lang("Telepítő program indítása")."</a>");
+    }
+    echo("<span class=wdhdspaceholder></span>");
   }
-  echo("<span class=wdhdspaceholder></span>");
-  echo("<form id=fres1 action=\"".$act."\" enctype=\"multipart/form-data\" method=\"post\">");
-  //echo("<input type=\"file\" name=\"file1\" id=\"file1\" onchange=\"alert(document.forms['fres1']['file1'].files[0].name);\">");
-  echo("<label id=\"fres1l\" for=\"file1\" class=\"".$cl."\">".wdhd_lang("Adatmentés kiválasztása")."</label>");
-  echo("<input type=\"file\" name=\"file1\" id=\"file1\" onchange=\"chlabel();\">");
-  echo("<script>");
-  echo("function chlabel(){var v=document.forms['fres1']['file1'].files[0].name;document.getElementById('fres1l').innerHTML=v;}");
-  echo("</script>");
-  echo("<span class=wdhdwordspace></span>");
-  echo("<input type=submit id=\"res1\" name=\"res1\" class=\"$cl\" value=\"".wdhd_lang("Feltöltés")."\">");
-  echo("</form>");
-  echo("<span class=wdhdspaceholder></span>");
-  echo("<form id=fres2 action=\"".$act."\" enctype=\"multipart/form-data\" method=\"post\">");
-  echo("<label id=\"fres2l\" for=\"file2\" class=\"".$cl."\">".wdhd_lang("Fájlmentés kiválasztása")."</label>");
-  echo("<input type=\"file\" name=\"file2\" id=\"file2\" onchange=\"chlabel2();\">");
-  echo("<script>");
-  echo("function chlabel2(){var v=document.forms['fres2']['file2'].files[0].name;document.getElementById('fres2l').innerHTML=v;}");
-  echo("</script>");
-  echo("<span class=wdhdwordspace></span>");
-  echo("<input type=submit id=\"res2\" name=\"res2\" class=\"$cl\" value=\"".wdhd_lang("Feltöltés")."\">");
-  echo("</form>");
-  echo("<span class=wdhdspaceholder></span>");
 }
 
 

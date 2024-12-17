@@ -37,6 +37,8 @@ $L_END="Telepítés befejezve.";
 $L_NEXT="Tovább";
 $L_ERROR="Hiba történt. Hibaüzenet:";
 $L_FILE_ERROR="Adatfájlok nem elérhetőek.";
+$L_WARNING="Figyelem!";
+$L_WARNING_FOUND_CONFIG="A táblázatban szereplő adatok a megtalált wp-config.php fájlból származnak";
 
 
 // fej
@@ -362,22 +364,59 @@ function inst_sql($sqlfile="",$sqlconn){
 
 // adatbekérés
 function inst_form(){
-  global $L_SQL_DB,$L_SQL_GO,$L_SQL_PW,$L_SQL_SRV,$L_SQL_TABLE_PRE,$L_SQL_USER;
+  global $L_SQL_DB,$L_SQL_GO,$L_SQL_PW,$L_SQL_SRV,$L_SQL_TABLE_PRE,$L_SQL_USER,$L_WARNING_FOUND_CONFIG,$L_WARNING;
 
+  $dbname="";
+  $dbuser="";
+  $dbpass="";
+  $dbhost="";
+  $pre="";
+  if (file_exists("wp-config.php")){
+    try{
+      foreach(file("wp-config.php") as $line){
+        if (strpos($line,"DB_NAME")<>0){
+          $a=explode("'",$line);
+          $dbname=$a[3];
+        }
+        if (strpos($line,"DB_USER")<>0){
+          $a=explode("'",$line);
+          $dbuser=$a[3];
+        }
+        if (strpos($line,"DB_PASSWORD")<>0){
+          $a=explode("'",$line);
+          $dbpass=$a[3];
+        }
+        if (strpos($line,"DB_HOST")<>0){
+          $a=explode("'",$line);
+          $dbhost=$a[3];
+        }
+        if (strpos($line,"table_prefix")<>0){
+          $a=explode("'",$line);
+          $pre=$a[1];
+        }
+      }
+    }catch(Exception $e){
+      //echo($sql." - ".$e->getMessage()."<br />");
+    }
+    echo("<b>".$L_WARNING."</b> ");
+    echo($L_WARNING_FOUND_CONFIG.".<br /><br /><br />");
+  }
   echo("<form id=db0 method=\"post\">");
   echo("<label for=\"0\">$L_SQL_SRV:</label><br>");
-  echo("<input type=\"text\" id=\"0\" name=\"0\" placeholder=\"".$L_SQL_SRV."\"><br>");
+  echo("<input type=\"text\" id=\"0\" name=\"0\" placeholder=\"".$L_SQL_SRV."\" value=\"".$dbhost."\"><br>");
   echo("<br />");
   echo("<label for=\"1\">$L_SQL_DB:</label><br>");
-  echo("<input type=\"text\" id=\"1\" name=\"1\" placeholder=\"".$L_SQL_DB."\"><br>");
+  echo("<input type=\"text\" id=\"1\" name=\"1\" placeholder=\"".$L_SQL_DB."\" value=\"".$dbname."\"><br>");
   echo("<br />");
   echo("<label for=\"2\">$L_SQL_USER:</label><br>");
-  echo("<input type=\"text\" id=\"2\" name=\"2\" placeholder=\"".$L_SQL_USER."\"><br>");
+  echo("<input type=\"text\" id=\"2\" name=\"2\" placeholder=\"".$L_SQL_USER."\" value=\"".$dbuser."\"><br>");
   echo("<br />");
   echo("<label for=\"3\">$L_SQL_PW:</label><br>");
-  echo("<input type=\"password\" id=\"3\" name=\"3\" value=\"\"><br>");
+  echo("<input type=\"password\" id=\"3\" name=\"3\" value=\"".$dbpass."\"><br>");
   echo("<br />");
-  $pre=substr($_SERVER['HTTP_HOST'],0,3)."_";
+  if(empty($pre)){
+    $pre=substr($_SERVER['HTTP_HOST'],0,3)."_";
+  }
   echo("<label for=\"4\">$L_SQL_TABLE_PRE:</label><br>");
   echo("<input type=\"text\" id=\"4\" name=\"4\" value=\"".$pre."\"><br>");
   echo("<br /><br />");

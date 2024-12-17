@@ -159,7 +159,7 @@ function wswdteam_backup_apptables(){
 
 // mentések törlése
 function wswdteam_delete_bfiles(){
-  global $wswdteam_app_name;
+  global $wswdteam_app_name,$wswdteam_setup_file;
 
   if (is_admin()){
     $cl="button";
@@ -176,24 +176,62 @@ function wswdteam_delete_bfiles(){
     echo("<input type=submit id=\"d1\" name=\"d1\" class=\"$cl\" value=\"".wswdteam_lang("Mentések törlése")."\">");
     echo("</form>");
   }else{
+    // mentés könyvtár
     $md=wp_upload_dir();
     $bdir=$md['basedir'];
-    $fl=scandir($bdir);
-    foreach($fl as $l){
-      $ext=pathinfo($l,PATHINFO_EXTENSION);
-      switch($ext){
-        case "sql":
-          echo($bdir."/".$l."<br />");
+    try{
+      $fl=scandir($bdir);
+      foreach($fl as $l){
+        $ext=pathinfo($l,PATHINFO_EXTENSION);
+        switch($ext){
+          case "sql":
+            echo($bdir."/".$l."<br />");
+            unlink($bdir."/".$l);
+            break;
+          case "gz":
+            echo($bdir."/".$l."<br />");
+            unlink($bdir."/".$l);
+            break;
+          case "tar":
+            echo($bdir."/".$l."<br />");
+            unlink($bdir."/".$l);
+            break;
+        }
+      }
+    }catch (Exception $e){
+      if ($wswdteam_developer_mode){
+        echo($e->getMessage());
+      }
+    }
+    // főkönyvtár
+    $md=get_home_path();
+    $bdir=$md;
+    try{
+      $fl=scandir($bdir);
+      foreach($fl as $l){
+        $ext=pathinfo($l,PATHINFO_EXTENSION);
+        if ($l===$wswdteam_setup_file){
+          echo($l."<br />");
           unlink($bdir."/".$l);
-          break;
-        case "gz":
-          echo($bdir."/".$l."<br />");
-          unlink($bdir."/".$l);
-          break;
-        case "tar":
-          echo($bdir."/".$l."<br />");
-          unlink($bdir."/".$l);
-          break;
+        }
+        switch($ext){
+          case "sql":
+            echo($l."<br />");
+            unlink($bdir."/".$l);
+            break;
+          case "gz":
+            echo($l."<br />");
+            unlink($bdir."/".$l);
+            break;
+          case "tar":
+            echo($l."<br />");
+            unlink($bdir."/".$l);
+            break;
+        }
+      }
+    }catch (Exception $e){
+      if ($wswdteam_developer_mode){
+        echo($e->getMessage());
       }
     }
     echo(wswdteam_lang("Mentések törölve").".");
@@ -338,38 +376,9 @@ function wswdteam_backup_tables(){
 
 // adat visszatöltés
 function wswdteam_restore_tables(){
-  global $wpdb,$wswdteam_backup_dl,$wswdteam_app_name,$wswdteam_developer_mode,$wswdteam_app_name;
+  global $wpdb,$wswdteam_backup_dl,$wswdteam_app_name,$wswdteam_developer_mode,$wswdteam_app_name,
+         $wswdteam_setup_file;
 
-  $htf=ABSPATH.'.htaccess';
-  $out="";
-  $fs=false;
-  try{
-    foreach(file($htf) as $line){
-      if (strpos($line,"upload_max_filesize")<>0){
-        $line="php_value upload_max_filesize 64M".PHP_EOL;
-        $fs=true;
-      }
-      $out=$out.$line;
-    }
-    if (!$fs){
-      $out=$out.PHP_EOL;
-      $out=$out."# BEGIN WSWDTEAM".PHP_EOL;
-      $out=$out."php_value upload_max_filesize 64M".PHP_EOL;
-      $out=$out."# END WSWDTeam".PHP_EOL;
-      //php_value post_max_size 64M
-      //php_value max_execution_time 300
-      //php_value max_input_time 300
-    }
-  }catch (Exception $e){
-    echo($e->getMessage());
-  }
-  try{
-    $handle=fopen($htf,'w+');
-    fwrite($handle,$out);
-    fclose($handle);
-  }catch (Exception $e){
-    echo($e->getMessage());
-  }
   if (is_admin()){
     $cl="button";
     $act=menu_page_url(__FILE__);
@@ -380,64 +389,93 @@ function wswdteam_restore_tables(){
   // visszatöltés
   echo(wswdteam_lang("Mentés fájlok feltöltése visszaállításhoz").".<br />");
   echo(wswdteam_lang("A nagy fájlméret miatt ajánlott a tárhely szólgáltató saját funkcióit használni. (FTP, vezérlőpult megoldások.)").".");
-  if (isset($_POST['res1']) or isset($_POST['res2'])){
-    echo("<span class=wswdteamspaceholder></span>");
-    $md=wp_upload_dir();
-    //$tdir=$md['baseurl'].'/'.$wswdteam_app_name;
-    $tdir=$md['basedir'].'/';
-    //$tfile=$tdir.basename($_FILES['file1']['name']);
-    try{
-      if (isset($_POST['res1'])){
+  $fup=(int)(ini_get('upload_max_filesize'));
+  $pup=(int)(ini_get('post_max_size'));
+  $tdir=get_home_path();
+  if (($fup>=64)and($pup>=8)){
+    if (isset($_POST['res1'])){
+      echo("<span class=wswdteamspaceholder></span>");
+      //$md=wp_upload_dir();
+      //$tdir=$md['basedir'].'/';
+      try{
         if ($_FILES['file1']['name']<>""){
           $tfile=$tdir."/".$_FILES['file1']['name'];
-          if (file_exists($tfile)){
-            unlink($tfile);
-          }
-          if (move_uploaded_file($_FILES['file1']['tmp_name'],$tfile)){
-            echo(wswdteam_lang("A feltöltés megtörtént").".<br />");
+          echo($_FILES['file1']['name']);
+          echo("<span class=wswdteamspaceholder></span>");
+          $ext=pathinfo($tfile,PATHINFO_EXTENSION);
+          if (in_array($ext,array('sql','gz'))){
+            if (file_exists($tfile)){
+              unlink($tfile);
+            }
+            if (move_uploaded_file($_FILES['file1']['tmp_name'],$tfile)){
+              echo(wswdteam_lang("A feltöltés megtörtént").".<br />");
+            }
+          }else{
+            echo(wswdteam_lang("Nem megfelelő fájl.Csak *.sql és *.tar.gz tölthető fel").".<br />");
           }
         }
-      }else{
-        if ($_FILES['file2']['name']<>""){
-          $tfile=$tdir."/".$_FILES['file2']['name'];
-          echo("www");
-          if (file_exists($tfile)){
-            unlink($tfile);
-          }
-          if (move_uploaded_file($_FILES['file2']['tmp_name'],$tfile)){
-            echo(wswdteam_lang("A feltöltés megtörtént").".<br />");
-          }
+      }catch (Exception $e){
+        echo(wswdteam_lang("Hiba történt a feltöltés közben").".<br />");
+        if ($wswdteam_developer_mode){
+          echo($e->getMessage());
         }
       }
+    }
+    echo("<span class=wswdteamspaceholder></span>");
+    echo("<form id=fres1 action=\"".$act."\" enctype=\"multipart/form-data\" method=\"post\">");
+    echo("<label id=\"fres1l\" for=\"file1\" class=\"".$cl."\">".wswdteam_lang("Adatmentés kiválasztása")."</label>");
+    echo("<input type=\"file\" name=\"file1\" id=\"file1\" onchange=\"chlabel();\">");
+    echo("<script>");
+    echo("function chlabel(){var v=document.forms['fres1']['file1'].files[0].name;document.getElementById('fres1l').innerHTML=v;}");
+    echo("</script>");
+    echo("<span class=wswdteamwordspace></span>");
+    echo("<input type=submit id=\"res1\" name=\"res1\" class=\"$cl\" value=\"".wswdteam_lang("Feltöltés")."\">");
+    echo("</form>");
+    echo("<span class=wswdteamspaceholder></span>");
+  }else{
+    echo("<span class=wswdteamspaceholder></span>");
+    echo(wswdteam_lang("A tárhely feltöltési beállításai miatt nem tölthetőek fel a fájlok").".");
+    echo("<span class=wswdteamspaceholder></span>");
+
+  }
+  $ok1=false;
+  $ok2=false;
+  $fl=scandir($tdir);
+  foreach($fl as $l){
+    $ext=pathinfo($l,PATHINFO_EXTENSION);
+    switch($ext){
+      case "sql":
+        $ok1=true;
+        break;
+      case "gz":
+        $ok2=true;
+        break;
+    }
+  }
+  if($ok1 and $ok2){
+    echo("<span class=wswdteamspaceholder></span>");
+    $sfile=plugin_dir_path(__FILE__).$wswdteam_setup_file;
+    $tfile=$tdir.$wswdteam_setup_file;
+    try{
+      if(file_exists($tfile)){
+        unlink($tfile);
+      }
+      copy($sfile,$tfile);
     }catch (Exception $e){
-      echo(wswdteam_lang("Hiba történt a feltöltés közben").".<br />");
+      echo(wswdteam_lang("Hiba történt a telepítő másolása közben").".<br />");
       if ($wswdteam_developer_mode){
         echo($e->getMessage());
       }
+      echo("<span class=wswdteamspaceholder></span>");
     }
+    if (file_exists($tfile)){
+      echo(wswdteam_lang(".sql és .tar.gz fájl található a fő könyvtárban. Az újratelepítés elindítható."));
+      echo("<span class=wswdteamspaceholder></span>");
+      $pd=get_site_url()."/".$wswdteam_setup_file;
+      echo("<a href=\"$pd\" id=\"bdl\" class=\"$cl\">".wswdteam_lang("Telepítő program indítása")."</a>");
+    }
+    echo("<span class=wswdteamspaceholder></span>");
   }
-  echo("<span class=wswdteamspaceholder></span>");
-  echo("<form id=fres1 action=\"".$act."\" enctype=\"multipart/form-data\" method=\"post\">");
-  //echo("<input type=\"file\" name=\"file1\" id=\"file1\" onchange=\"alert(document.forms['fres1']['file1'].files[0].name);\">");
-  echo("<label id=\"fres1l\" for=\"file1\" class=\"".$cl."\">".wswdteam_lang("Adatmentés kiválasztása")."</label>");
-  echo("<input type=\"file\" name=\"file1\" id=\"file1\" onchange=\"chlabel();\">");
-  echo("<script>");
-  echo("function chlabel(){var v=document.forms['fres1']['file1'].files[0].name;document.getElementById('fres1l').innerHTML=v;}");
-  echo("</script>");
-  echo("<span class=wswdteamwordspace></span>");
-  echo("<input type=submit id=\"res1\" name=\"res1\" class=\"$cl\" value=\"".wswdteam_lang("Feltöltés")."\">");
-  echo("</form>");
-  echo("<span class=wswdteamspaceholder></span>");
-  echo("<form id=fres2 action=\"".$act."\" enctype=\"multipart/form-data\" method=\"post\">");
-  echo("<label id=\"fres2l\" for=\"file2\" class=\"".$cl."\">".wswdteam_lang("Fájlmentés kiválasztása")."</label>");
-  echo("<input type=\"file\" name=\"file2\" id=\"file2\" onchange=\"chlabel2();\">");
-  echo("<script>");
-  echo("function chlabel2(){var v=document.forms['fres2']['file2'].files[0].name;document.getElementById('fres2l').innerHTML=v;}");
-  echo("</script>");
-  echo("<span class=wswdteamwordspace></span>");
-  echo("<input type=submit id=\"res2\" name=\"res2\" class=\"$cl\" value=\"".wswdteam_lang("Feltöltés")."\">");
-  echo("</form>");
-  echo("<span class=wswdteamspaceholder></span>");
 }
 
 

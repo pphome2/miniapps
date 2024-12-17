@@ -1,17 +1,86 @@
 <?php
 
 // magyar nyelvi fájl
-global $wswdteam_lang_str;
-global $wswdteam_lang_new;
+global $wdhd_lang_str;
+global $wdhd_lang_new;
 
-$wswdteam_lang_new=array();
+$wdhd_lang_new=array();
 
-$wswdteam_lang_str=array(
+$wdhd_lang_str=array(
 
-
+'Adminisztrátor' => 'Adminisztrátor',
+'Bejelentő' => 'Bejelentő',
+'Szervíz dolgozó' => 'Szervíz dolgozó',
+'Karbantartó' => 'Karbantartó',
+'Beszerző' => 'Beszerző',
+'Leírás' => 'Leírás',
+'Tudásbázis' => 'Tudásbázis',
+'Bevizsgálás' => 'Bevizsgálás',
+'Javítás (TMK)' => 'Javítás (TMK)',
+'Javítás (villanyszerelő)' => 'Javítás (villanyszerelő)',
+'Beszerzés' => 'Beszerzés',
+'Egyéb' => 'Egyéb',
+'WD HD' => 'WD HD',
+'Hibajegyek' => 'Hibajegyek',
+'Felhasználói jogok' => 'Felhasználói jogok',
+'Adatmentés' => 'Adatmentés',
 'Egyéb beállítások' => 'Egyéb beállítások',
-
-
+'WD HD helpdesk rendszer' => 'WD HD helpdesk rendszer',
+'Beállítások' => 'Beállítások',
+'Rendszer paraméterek' => 'Rendszer paraméterek',
+'Alkalmazás paraméterek' => 'Alkalmazás paraméterek',
+'Alkalmazás adatok' => 'Alkalmazás adatok',
+'Címadatok munkalapra' => 'Címadatok munkalapra',
+'Mehet' => 'Mehet',
+'Bejelentések/feladatok listája' => 'Bejelentések/feladatok listája',
+'Bejelentések kezelése' => 'Bejelentések kezelése',
+'Új' => 'Új',
+'Idő' => 'Idő',
+'Állapot' => 'Állapot',
+'Javít / Töröl' => 'Javít / Töröl',
+'Felhasználói jogok beállítása' => 'Felhasználói jogok beállítása',
+'Jogosultsági szint rendelése felhasználóhoz.' => 'Jogosultsági szint rendelése felhasználóhoz.',
+'A rendszer által kezelt jogcsoportok' => 'A rendszer által kezelt jogcsoportok',
+'Felhasználó' => 'Felhasználó',
+'Jogcsoport' => 'Jogcsoport',
+'Töröl' => 'Töröl',
+'Működési paraméterek, alapadatok kezelése' => 'Működési paraméterek, alapadatok kezelése',
+'A beállítások megváltoztatása hibás működést eredményezhet' => 'A beállítások megváltoztatása hibás működést eredményezhet',
+'Paraméterek' => 'Paraméterek',
+'Paraméter név' => 'Paraméter név',
+'Érték' => 'Érték',
+'Javít/Töröl' => 'Javít/Töröl',
+'Művelet' => 'Művelet',
+'Bejegyzés feltöltés - Frissítés utáni feladat' => 'Bejegyzés feltöltés - Frissítés utáni feladat',
+'A modul txt mappájából a bejegyzések betöltése a kiválasztott kategóriába' => 'A modul txt mappájából a bejegyzések betöltése a kiválasztott kategóriába',
+'Kategória' => 'Kategória',
+'Mappa' => 'Mappa',
+'Lapok feltöltés - Frissítés utáni feladat' => 'Lapok feltöltés - Frissítés utáni feladat',
+'A modul txt mappájából a lapk betöltése' => 'A modul txt mappájából a lapk betöltése',
+'A feltöltött lapok elérését (a menükben) ellenőrizni kell' => 'A feltöltött lapok elérését (a menükben) ellenőrizni kell',
+'Feltőlthető lapok' => 'Feltőlthető lapok',
+'Feltöltés' => 'Feltöltés',
+'Adatmentés - visszaállítás' => 'Adatmentés - visszaállítás',
+'Teljes adat- és fájlmentés' => 'Teljes adat- és fájlmentés',
+'Korábbi teljes mentések törlése' => 'Korábbi teljes mentések törlése',
+'Mentések törlése' => 'Mentések törlése',
+'Teljes rendszer adattábláinak mentése' => 'Teljes rendszer adattábláinak mentése',
+'A mentés adatsérülés esetén a teljes rendszer újratelepítéséhez használható' => 'A mentés adatsérülés esetén a teljes rendszer újratelepítéséhez használható',
+'Újratelepítés: instal.php segítségével a adat- és fájlmentés használatával' => 'Újratelepítés: instal.php segítségével a adat- és fájlmentés használatával',
+'Teljes adatmentés készítése' => 'Teljes adatmentés készítése',
+'A rendszer fájljainak mentése' => 'A rendszer fájljainak mentése',
+'Fájlmentés készítése' => 'Fájlmentés készítése',
+'Telepítő program letöltése. Egy helyen kell lennie a mentésfájlokkal (teljes adatmentés, fájlmentés).' => 'Telepítő program letöltése. Egy helyen kell lennie a mentésfájlokkal (teljes adatmentés, fájlmentés).',
+'Telepítő program letöltése' => 'Telepítő program letöltése',
+'Név' => 'Név',
+'E-mail' => 'E-mail',
+'Telefonszám' => 'Telefonszám',
+'Részletes leírás' => 'Részletes leírás',
+'Bejelentkezve' => 'Bejelentkezve',
+'Kiadott bejelentések' => 'Kiadott bejelentések',
+'Folyamat' => 'Folyamat',
+'Lezár' => 'Lezár',
+'felhasználó bejelentései’ => ‘felhasználó bejelentései’,
 
 
 );
