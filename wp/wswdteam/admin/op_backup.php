@@ -48,6 +48,15 @@ function wswdteam_backup_backuplist(){
 
   $md=wp_upload_dir();
   $dn=$md['basedir']."/".$wswdteam_app_name;
+  if(!is_dir($dn)){
+    try{
+      mkdir($dn);
+    }catch (Exception $e){
+      if ($wswdteam_developer_mode){
+        echo($e->getMessage());
+      }
+    }
+  }
   // fájl törlése
   if (isset($_POST['bdel'])){
     $bdelf=$dn."/".$_POST['file'];
@@ -73,7 +82,7 @@ function wswdteam_backup_backuplist(){
   }
   echo("<span class=wswdteamspaceholder></span>");
   // könyvtár beolvasás
-  $fl=scandir($dn);
+  $fl=scandir($dn,SCANDIR_SORT_DESCENDING);
   $db=count($fl)-2;
   // lapozás
   if (isset($_POST['wpage'])){

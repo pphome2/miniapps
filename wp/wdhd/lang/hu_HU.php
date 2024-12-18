@@ -80,7 +80,7 @@ $wdhd_lang_str=array(
 'Kiadott bejelentések' => 'Kiadott bejelentések',
 'Folyamat' => 'Folyamat',
 'Lezár' => 'Lezár',
-'felhasználó bejelentései’ => ‘felhasználó bejelentései’,
+'felhasználó bejelentései' => 'felhasználó bejelentései',
 
 
 );

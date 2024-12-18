@@ -341,41 +341,6 @@ function wdhd_restore_tables(){
   global $wpdb,$wdhd_backup_dl,$wdhd_app_name,$wdhd_developer_mode,$wdhd_app_name,
          $wdhd_setup_file;
 
-  //$htf=ABSPATH.'.htaccess';
-  //$out="";
-  //$fs=false;
-  //try{
-  //  foreach(file($htf) as $line){
-  //    if (strpos($line,"upload_max_filesize")<>0){
-  //      $line="php_value upload_max_filesize 64M".PHP_EOL;
-  //      $fs=true;
-  //    }
-  //    $out=$out.$line;
-  //  }
-  //  if (!$fs){
-  //    $out=$out.PHP_EOL;
-  //    $out=$out."# BEGIN wdhd".PHP_EOL;
-  //    $out=$out."php_value upload_max_filesize 64M".PHP_EOL;
-  //    $out=$out."# END wdhd".PHP_EOL;
-  //    //php_value post_max_size 64M
-  //    //php_value max_execution_time 300
-  //    //php_value max_input_time 300
-  //  }
-  //}catch (Exception $e){
-  //  echo($e->getMessage());
-  //}
-  //try{
-  //  $handle=fopen($htf,'w+');
-  //  fwrite($handle,$out);
-  //  fclose($handle);
-  //}catch (Exception $e){
-  //  echo($e->getMessage());
- // }
- //
- // php.ini-be:
- // post_max_size = 64M;
- // upload_max_filesize 64M";
- //
   if (is_admin()){
     $cl="button";
     $act=menu_page_url(__FILE__);
