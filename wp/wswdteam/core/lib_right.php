@@ -46,7 +46,7 @@ function wswdteam_user_fullname(){
   $cuser=wp_get_current_user();
   //$r=$cuser->first_name;
   //$r=$r." ".$cuser->last_name;
-  $r=$cuser->display_name
+  $r=$cuser->display_name;
   return($r);
 }
 
