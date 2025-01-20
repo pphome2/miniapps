@@ -53,6 +53,36 @@ function wswdteam_main_center($atts=[],$content=null,$tag=''){
 
 
 
+// mail
+function wswdteam_mail($un=""){
+  $r="";
+  if (isset($_POST['mail'])){
+    $to=wswdteam_get_param("mail");
+    if ($to!=""){
+      $subject="Jelentés ($un)";
+      $body=date("Y.m.d.")." - ".wswdteam_user_fullname();
+      $body=$body.$_POST['mailbody'];
+      $headers=""; //array('Content-Type: text/html; charset=UTF-8');
+      //wp_mail($to,$subject,$body,$headers );
+      $r=$r."<span class=wswdplaceholder></span>".wswdteam_lang("Elküldve").".<span class=wswdplaceholder></span>";
+    }else{
+      $r=$r."<span class=wswdplaceholder></span>".wswdteam_lang("Címzett nem elérhető").".<span class=wswdplaceholder></span>";
+    }
+  }else{
+    $r=$r."
+        <form action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">
+        ".wswdteam_lang("Jelentés küldése")."
+        <span class=wswdspaceholder></span>
+        <textarea id=mailbody name=mailbody rows=20 cols=150 placeholder=\"".wswdteam_lang("Részletes leírás")."\"></textarea>
+        <span class=wswdspaceholder></span>
+        <input id=mail name=mail type=submit class=\"wswdwbutton\" value=\"".wswdteam_lang("Mehet")."\">
+        </form>
+    ";
+  }
+  return($r);
+}
+
+
 // teszt: sql lekérdezés
 function wswdteam_x($c){
   global $wpdb,$wswdteam_table;

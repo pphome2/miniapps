@@ -4,7 +4,7 @@
 
 Fejlesztő: [pphome2](https:/github.com/pphome2)
 
-**Aktuális verzió: 2023.**
+**Aktuális verzió: 2025.**
 
 **Első megjelenés: 2019.**
 
