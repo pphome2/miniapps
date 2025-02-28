@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Képnézegető</title>
   <style>
     body {
@@ -24,18 +24,19 @@
       height: 100vh;
       object-fit: contain;
       transition: opacity 0.5s ease;
-      opacity: 1; /* Alapértelmezett láthatóság */
+      opacity: 1;
     }
     .controls {
-      position: absolute;
+      position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
+      display: flex;
+      gap: 10px;
     }
     button {
       padding: 10px 20px;
-      margin: 0 10px;
       cursor: pointer;
       background-color: rgba(76, 175, 80, 0.8);
       color: white;
@@ -46,24 +47,17 @@
     button:hover {
       background-color: rgba(69, 160, 73, 0.8);
     }
-    .loading {
-      position: absolute;
-      color: white;
-      font-size: 24px;
-      z-index: 20;
-    }
   </style>
 </head>
 
 <body>
   <div class="gallery-container">
-    <div id="loadingMessage" class="loading">Képek betöltése...</div>
     <img id="currentImage" class="gallery-image" src="" alt="Galéria kép">
     <div class="controls">
-      <button onclick="previousImage()">Előző</button>
-      <button onclick="toggleSlideshow()">Diavetítés</button>
-      <button onclick="nextImage()">Következő</button>
-      <button onclick="toggleFullscreen()">Teljes képernyő</button>
+      <button onclick="previousImage()"> << </button>
+      <button onclick="toggleSlideshow()"> > </button>
+      <button onclick="nextImage()"> >> </button>
+      <button onclick="toggleFullscreen()"> + </button>
     </div>
   </div>
 
@@ -83,11 +77,10 @@
         switch($fi['extension']){
           case "jpg":
             echo("\"".$URL."/".$DIR."/".$fn."\",\n");
-          break;
-        }
+            break;
           case "JPG":
             echo("\"".$URL."/".$DIR."/".$fn."\",\n");
-          break;
+            break;
         }
       }
       //echo("\"\"\n");
@@ -98,42 +91,24 @@
     let slideshowInterval = null;
     const imageElement = document.getElementById("currentImage");
     const galleryContainer = document.querySelector(".gallery-container");
-    const loadingMessage = document.getElementById("loadingMessage");
-    let preloadedImages = [];
-    const transitionDuration = 500; // Átmenet időtartama milliszekundumban (0.5s)
+    const transitionDuration = 500;
+    let nextImagePreload = null;
 
-    // Képek előtöltése
-    function preloadImages(imageArray, callback) {
-      let loadedCount = 0;
-      preloadedImages = imageArray.map(src => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-          loadedCount++;
-          if (loadedCount === imageArray.length) {
-            callback();
-          }
-        };
-        img.onerror = () => {
-          console.error(`Hiba a kép betöltésekor: ${src}`);
-          loadedCount++;
-          if (loadedCount === imageArray.length) {
-            callback();
-          }
-        };
-        return img;
-      });
+    // Következő kép előtöltése
+    function preloadNextImage(index) {
+      const nextIndex = (index + 1) % images.length;
+      nextImagePreload = new Image();
+      nextImagePreload.src = images[nextIndex];
     }
 
-    // Kép betöltése és megjelenítése az átmenet után
     function loadImage(index) {
-      // Elhalványítjuk az aktuális képet
       imageElement.style.opacity = 0;
-
-      // Várunk, amíg az átmenet befejeződik, majd betöltjük az új képet
+      preloadNextImage(index); // Előtöltjük a következő képet
       setTimeout(() => {
-          imageElement.src = images[index];
-          imageElement.style.opacity = 1; // Új kép megjelenítése
+      imageElement.src = images[index];
+      }, transitionDuration);
+      setTimeout(() => {
+        imageElement.style.opacity = 1;
       }, transitionDuration);
     }
 
@@ -152,25 +127,40 @@
         clearInterval(slideshowInterval);
         slideshowInterval = null;
       } else {
-        slideshowInterval = setInterval(nextImage, 3000); // 3 másodperc képváltás között
+        slideshowInterval = setInterval(nextImage, 3000);
       }
     }
 
     function toggleFullscreen() {
       if (!document.fullscreenElement) {
-        galleryContainer.requestFullscreen().catch(err => {
-          console.log(`Hiba a teljes képernyőre váltáskor: ${err.message}`);
-        });
+        galleryContainer.requestFullscreen({ navigationUI: "hide" })
+          .catch(err => {
+            console.log(`Hiba a teljes képernyőre váltáskor: ${err.message}`);
+          });
       } else {
         document.exitFullscreen();
       }
     }
 
-    // Inicializálás: képek előtöltése, majd indítás
-    preloadImages(images, () => {
-      loadingMessage.style.display = "none";
-      loadImage(currentIndex); // Első kép betöltése
+    // Kezdeti kép betöltése
+    if (images.length > 0) {
+      loadImage(currentIndex);
+    }
+
+    // Képernyő forgatás kezelése Androidon
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => {
+        imageElement.style.width = '100vw';
+        imageElement.style.height = '100vh';
+      }, 100);
     });
-    </script>
+
+    // Pinch zoom megakadályozása Androidon
+    document.addEventListener('touchmove', function (event) {
+      if (event.scale !== 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+  </script>
 </body>
 </html>
