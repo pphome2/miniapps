@@ -92,6 +92,7 @@
     const imageElement = document.getElementById("currentImage");
     const galleryContainer = document.querySelector(".gallery-container");
     const transitionDuration = 500;
+    const transitionDuration2 = 1000;
     let nextImagePreload = null;
 
     // Következő kép előtöltése
@@ -109,7 +110,7 @@
       }, transitionDuration);
       setTimeout(() => {
         imageElement.style.opacity = 1;
-      }, transitionDuration);
+      }, transitionDuration2);
     }
 
     function nextImage() {
@@ -127,7 +128,7 @@
         clearInterval(slideshowInterval);
         slideshowInterval = null;
       } else {
-        slideshowInterval = setInterval(nextImage, 3000);
+        slideshowInterval = setInterval(nextImage, 6000);
       }
     }
 
