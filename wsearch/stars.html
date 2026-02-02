@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Egyszerű Csillagos Háttér</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.2; }
+      100% { opacity: 0.8; }
+    }
+    .shooting-star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      animation: shoot 3s linear infinite;
+    }
+    @keyframes shoot {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-200px) translateY(200px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function createStars() {
+      const numStars = 100;
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.width = `${Math.random() * 3}px`;
+        star.style.height = star.style.width;
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.animationDuration = `${Math.random() * 2 + 1}s`;
+        document.body.appendChild(star);
+      }
+      
+      // Hullócsillagok
+      setInterval(() => {
+        const shootingStar = document.createElement("div");
+        shootingStar.className = "shooting-star";
+        shootingStar.style.left = `${Math.random() * 100}vw`;
+        shootingStar.style.top = `${Math.random() * 20}vh`;
+        document.body.appendChild(shootingStar);
+        setTimeout(() => shootingStar.remove(), 3000); // Törlés 3 másodperc után
+      }, 2000); // Új hullócsillag 2 másodpercenként
+    }
+    window.onload = createStars;
+  </script>
+</body>
+</html>

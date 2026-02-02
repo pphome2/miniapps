@@ -34,6 +34,10 @@ $wswdteam_options=array('wswdteam_plugin_version',
                         'wswdteam_db_version'
                         );
 
+// lábléc tartalom a programból
+global $status_line;
+$status_line="";
+
 // a endszerben használt felhasználói szerepkörök
 // 0 (nulla) mindíg adminisztrátor
 global $wswdteam_user_role_list;
@@ -42,11 +46,11 @@ $wswdteam_user_role_list=array(0=>'Adminisztrátor',
                                2=>'Felhasználó'
                                );
 // alapértelmezett felhasználói szerepkör
-global$wswdteam_user_role;
+global $wswdteam_user_role;
 $wswdteam_user_role=9999;
 
 // alapértelmezett felhasználói szerepkör
-global$wswdteam_user_name;
+global $wswdteam_user_name;
 $wswdteam_user_name="";
 
 // a rendszer által használt post kategóriák

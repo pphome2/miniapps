@@ -1,0 +1,316 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.search-body {
+    background-color: #000; /* Fekete háttér */
+    color: #fff; /* Fehér szöveg a kontraszt miatt */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Teljes képernyős magasság */
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    mmax-width: 1000px; /* Szélesebb konténer */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.search-main {
+    width: 100%;
+    max-width: 800px; /* Szélesebb keresősáv */
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain; /* A logó arányosan illeszkedik */
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 800px; /* Szélesebb keresősáv */
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 1.2em;
+    border: 1px solid #444;
+    border-radius: 10px;
+    outline: none;
+    background-color: #222;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-bar:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.search-button {
+    padding: 14px 24px;
+    font-size: 1.2em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+.result-body {
+    background-color: #000; /* Fekete háttér */
+    color: #fff; /* Fehér szöveg a kontraszt miatt */
+    padding-left: 10%;
+    padding-right: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-container {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    max-width: 100%;
+}
+
+.result-search-container {
+    display: flex;
+    align-items: center; /* Függőleges középre igazítás */
+    justify-content: center;
+    gap: 15px; /* Logó és keresősáv közötti távolság */
+    width: 100%;
+    max-width: 100%; /* A keresősáv és logó együtt igazodik a szélességhez */
+}
+
+.result-logo {
+    width: 60px; /* Kisebb logó, hogy arányos legyen a keresősávval */
+    height: 50px; /* Fix magasság a keresősávval való egyezéshez */
+    object-fit: contain; /* A logó arányosan illeszkedik */
+}
+
+.result-search-form {
+    flex: 1; /* A keresősáv kitölti a rendelkezésre álló helyet */
+    display: flex;
+    align-items: center;
+}
+
+.result-search-bar {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 1.2em;
+    border: 1px solid #444;
+    border-radius: 10px;
+    outline: none;
+    background-color: #222;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    height: 50px; /* Fix magasság, hogy egyezzen a logóval */
+}
+
+.result-search-bar:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.result-content-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 100%; /* Megegyezik a keresősáv szélességével */
+    gap: 20px; /* Távolság a találatok és a szövegdoboz között */
+}
+
+.results {
+    width: 100%;
+    max-width: 70%; /* Találatok szélessége megegyezik a keresősávéval */
+    text-align: left;
+}
+
+.results h2 {
+    font-size: 1.5em;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.result-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-left: 3px solid #007bff; /* Kék sáv a bal oldalon, DuckDuckGo stílus */
+}
+
+.result-item h3 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+}
+
+.result-item a {
+    color: #1e90ff; /* Kék linkek */
+    text-decoration: none;
+}
+
+.result-item a:hover {
+    text-decoration: underline;
+}
+
+.result-url {
+    color: #aaa; /* Világosszürke URL */
+    font-size: 0.95em;
+    margin-bottom: 5px;
+}
+
+.result-description {
+    color: #ccc; /* Világosszürke leírás */
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.sidebar {
+    flex: 1; /* A szövegdoboz kisebb helyet foglal */
+    max-width: 30%; /* Maximális szélesség a szövegdoboznak */
+}
+
+.info-box {
+    border: 1px solid #444; /* Szürke keret */
+    border-radius: 10px;
+    background-color: #222; /* Sötét háttér */
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.info-box h3 {
+    font-size: 1.2em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.info-box p {
+    font-size: 1em;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    padding-top: 50px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.page-link {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 1em;
+    color: #1e90ff; /* Kék linkek */
+    background-color: #222; /* Sötét háttér a gombokhoz */
+    border: 1px solid #444;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.page-link.active {
+    background-color: #007bff; /* Aktív oldal kiemelése */
+    color: #fff;
+    border-color: #007bff;
+}
+
+.page-link.disabled {
+    color: #666; /* Inaktív gomb színe */
+    background-color: #222;
+    border-color: #444;
+    cursor: not-allowed;
+}
+
+.page-dots {
+    color: #aaa;
+    font-size: 1em;
+    padding: 8px;
+}
+
+
+footer {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.result-footer {
+    padding-top:50px;
+    max-width: 100%;
+}
+
+/* Reszponzív dizájn */
+@media (max-width: 600px) {
+    .search-container {
+        flex-direction: column; /* Mobil nézetben a logó és a keresősáv egymás alá kerül */
+        gap: 10px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 40px; /* Kisebb magasság mobil nézetben */
+    }
+
+    .search-bar {
+        font-size: 1em;
+        padding: 12px 20px;
+        height: 40px; /* Keresősáv magassága mobil nézetben */
+    }
+
+    .results h2 {
+        font-size: 1.3em;
+    }
+
+    .result-item h3 {
+        font-size: 1.2em;
+    }
+}
+

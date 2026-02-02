@@ -1,0 +1,11 @@
+{
+    "version": 1,
+    "settings": {
+        "appearanceTools": true,
+        "layout": {
+            "contentSize": "80%",
+            "wideSize": "90%"
+        }
+    }
+}
+

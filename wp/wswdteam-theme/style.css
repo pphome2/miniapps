@@ -1,0 +1,74 @@
+/*
+Theme Name: Minimal Theme
+Author: WSWDTeam
+Description: Telepíthető, modern blokk-alapú téma functions.php támogatással.
+Version: 1.0
+*/
+
+/* Alap reset és box-model */
+/* * { box-sizing: border-box; } */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body, .wp-site-blocks {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    color: #1a1a1a;
+    background-color: #fcfcfc;
+}
+
+
+/* Header stílusok */
+header {
+    background: #d2d2d2;
+    padding: 1.5rem 5% 0 5%;
+    border-bottom: 1px solid #eaeaea;
+}
+
+header .wp-block-group {
+    justify-content: space-between;
+    align-items: center;
+    max-width: 90%;;
+}
+
+/* Tartalmi rész */
+main {
+    flex: 1 0 auto;
+    margin: 3rem;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Töröljük a felesleges alsó üres helyet a tartalom végéről */
+.wp-block-post-content {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Töröljük a lábléc feletti felesleges margót */
+/* Footer stílusok */
+footer {
+    flex-shrink: 0;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: 2rem 2rem 2rem 2rem;
+    text-align: center;
+}
+
+/* WordPress specifikus igazítások */
+.alignwide { max-width: 100%; }
+.alignfull { width: 100vw; margin-left: calc(50% - 50vw); }
+
+img { max-width: 100%; height: auto; }
+
