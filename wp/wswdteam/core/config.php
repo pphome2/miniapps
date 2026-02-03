@@ -17,12 +17,22 @@ if (!defined('ABSPATH')){
 
 // alkalmazás név
 global $wswdteam_app_name;
-$wswdteam_app_name='wswdteam';
+$wswdteam_app_name='WSWDTeamHD';
+global $wswdteam_author_name;
+$wswdteam_author_name='WSWDTeam';
 
 // verziók
 global $wswdteam_db_version,$wswdteam_plugin_version;
 $wswdteam_plugin_version='1.0';
 $wswdteam_db_version='1.0';
+
+// fejléc és lábléc tartalom a programból
+global $wswdteam_header_title;
+$wswdteam_header_title=$wswdteam_app_name;
+global $wswdteam_credit;
+$wswdteam_credit= $wswdteam_author_name.' '.$wswdteam_plugin_version.' '.date('Y.');
+global $wswdteam_status_line;
+$wswdteam_status_line='';
 
 // fejlesztői mód
 global $wswdteam_developer_mode;
@@ -33,10 +43,6 @@ global $wswdteam_options;
 $wswdteam_options=array('wswdteam_plugin_version',
                         'wswdteam_db_version'
                         );
-
-// lábléc tartalom a programból
-global $status_line;
-$status_line="";
 
 // a endszerben használt felhasználói szerepkörök
 // 0 (nulla) mindíg adminisztrátor
@@ -64,7 +70,7 @@ global $wswdteam_inc_head,
        $wswdteam_inc_footer,
        $wswdteam_inc_css,
        $wswdteam_inc_js;
-$wswdteam_inc_head='/inc/wswdteam_head.php';
+$wswdteam_inc_head='/inc/wswdteam_header.php';
 $wswdteam_inc_footer='/inc/wswdteam_footer.php';
 $wswdteam_inc_css='/inc/wswdteam.css';
 $wswdteam_inc_js='/inc/wswdteam.js';
@@ -156,6 +162,39 @@ $wswdteam_sql_install=array($sql0,
 // sql táblák frissítése
 global $wswdteam_sql_update;
 $wswdteam_sql_update=array("");
+
+// fejrész és lábrész előkészítése
+if (!isset($w_header_title)){
+  global $w_header_title;
+  $w_header_title=$wswdteam_header_title;
+}
+
+if (!isset($w__status_line)){
+  global $w_status_line;
+  $w_status_line=$wswdteam_status_line;
+}
+
+if (!isset($w_credit)){
+  global $ws_credit;
+  $w_credit=$wswdteam_credit;
+}
+
+// applikáció setén
+// fejrész és lábrész előkészítése
+// if (!isset($w_header_title)){
+//   global $w_header_title;
+// }
+// $w_header_title=$wdhd_header_title;
+//
+// if (!isset($w__status_line)){
+//   global $w_status_line;
+// }
+// $w_status_line=$wdhd_status_line;
+//
+// if (!isset($w_credit)){
+//   global $ws_credit;
+// }
+// $w_credit=$wdhd_credit;
 
 
 // get plugins path:

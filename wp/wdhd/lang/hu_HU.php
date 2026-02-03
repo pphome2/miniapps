@@ -81,6 +81,9 @@ $wdhd_lang_str=array(
 'Folyamat' => 'Folyamat',
 'Lezár' => 'Lezár',
 'felhasználó bejelentései' => 'felhasználó bejelentései',
+'Fájlnév' => 'Fájlnév',
+'Mentés ideje' => 'Mentés ideje',
+'Visszaálít/Töröl' => 'Visszaálít/Töröl',
 
 
 );

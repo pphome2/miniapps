@@ -29,12 +29,22 @@ $wdhd_print_page="app_wpage.php";
 
 // alkalmazás név
 global $wdhd_app_name;
-$wdhd_app_name='wdhd';
+$wdhd_app_name='Helpdesk Rendszer';
+global $wdhd_aauthor_name;
+$wdhd_author_name='WSWDTeam-HD';
 
 // verziók
 global $wdhd_db_version,$wdhd_plugin_version;
 $wdhd_plugin_version='1.0';
 $wdhd_db_version='1.2';
+
+// fejléc és lábléc tartalom a programból
+global $wdhd_header_title;
+$wdhd_header_title=$wdhd_app_name;
+global $wdhd_credit;
+$wdhd_credit= $wdhd_author_name.' '.$wdhd_plugin_version.' '.date('Y.');
+global $wdhd_status_line;
+$wdhd_status_line='';
 
 // fejlesztői mód
 global $wdhd_developer_mode;
@@ -74,7 +84,7 @@ global $wdhd_inc_head,
        $wdhd_inc_footer,
        $wdhd_inc_css,
        $wdhd_inc_js;
-$wdhd_inc_head='/inc/wdhd_head.php';
+$wdhd_inc_head='/inc/wdhd_header.php';
 $wdhd_inc_footer='/inc/wdhd_footer.php';
 $wdhd_inc_css='/inc/wdhd.css';
 $wdhd_inc_js='/inc/wdhd.js';
@@ -192,5 +202,21 @@ $wdhd_sql_update=array($sql0,
                         $sql2
                        );
 
+
+// fejrész és lábrész előkészítése
+if (!isset($w_header_title)){
+  global $w_header_title;
+}
+$w_header_title=$wdhd_header_title;
+
+if (!isset($w__status_line)){
+  global $w_status_line;
+}
+$w_status_line=$wdhd_status_line;
+
+if (!isset($w_credit)){
+  global $ws_credit;
+}
+$w_credit=$wdhd_credit;
 
 ?>

@@ -34,19 +34,11 @@ function wdhd_user_right(){
 
 
 // felhasználó neve
-function wswdteam_user_nicename(){
+function wdhd_user_nicename(){
+  global $wdhd_user_name;
+
   $cuser=wp_get_current_user();
   $r=$cuser->user_nicename;
-  return($r);
-}
-
-
-// felhasználó neve
-function wswdteam_user_fullname(){
-  $cuser=wp_get_current_user();
-  //$r=$cuser->first_name;
-  //$r=$r." ".$cuser->last_name;
-  $r=$cuser->display_name;
   return($r);
 }
 

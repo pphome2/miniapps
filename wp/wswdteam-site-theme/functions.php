@@ -3,12 +3,13 @@
  * Minimal Theme funkciók és beállítások
  */
 
-global $status_line;
-if (!isset($status_line)) {
-  $status_line=date('Y.')." "."Minden jog fenntartva";
+
+global $w_status_line;
+if (!isset($w_status_line)) {
+  $w_status_line=date('Y.')." "."Minden jog fenntartva";
 }
-if ($status_line=="") {
-  $status_line=date('Y.')." "."Minden jog fenntartva";
+if ($w_status_line=="") {
+  $w_status_line=date('Y.')." "."Minden jog fenntartva";
 }
 
 function minimal_theme_setup() {
@@ -34,15 +35,25 @@ function minimal_theme_enqueue_styles() {
 }
 
 function footer_shortcode() {
-    global $status_line;
+    global $w_status_line;
 
     $kimenet="";
-    if (isset($status_line)) {
-      $kimenet=$status_line;
+    if (isset($w_status_line)) {
+      $kimenet=$w_status_line;
     }
     return $kimenet;
 }
 add_shortcode('wswdteam_footer','footer_shortcode');
 
+function header_shortcode_title() {
+    global $w_header_title;
+
+    $kimenet='';
+    if (isset($w_header_title)) {
+      $kimenet='<h2 style=text-align:right;>'.$w_header_title.'</h2>';
+    }
+    return $kimenet;
+}
+add_shortcode('wswdteam_title','header_shortcode_title');
 
 ?>

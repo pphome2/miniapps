@@ -21,6 +21,7 @@ function wswdteam_main_center($atts=[],$content=null,$tag=''){
       //$l=wswdteam_lang('Nem megfelelő jogosultság');
       //wswdteam_error($l);
     //}else{
+    $un=wswdteam_user_nicename();
     $i=0;
     $content=$content."<div class=\"wswdteam_content\">";
     foreach($atts as $k){
@@ -50,6 +51,7 @@ function wswdteam_main_center($atts=[],$content=null,$tag=''){
     return $content;
   }
 }
+
 
 
 

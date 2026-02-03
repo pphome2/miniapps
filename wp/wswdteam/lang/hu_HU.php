@@ -67,6 +67,7 @@ $wswdteam_lang_str=array(
 'A rendszer által kezelt jogcsoportok' => 'A rendszer által kezelt jogcsoportok',
 'Jogcsoport' => 'Jogcsoport',
 'Töröl' => 'Töröl',
+'A tárhely feltöltési beállításai miatt nem tölthetőek fel a fájlok' => 'A tárhely feltöltési beállításai miatt nem tölthetőek fel a fájlok',
 
 
 );
