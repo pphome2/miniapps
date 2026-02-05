@@ -1,6 +1,6 @@
 <?php
 
-// segéd függvényel
+// segéd függvények
 
 // kilépés ha nem wp-ből lett indítva
 if (!defined('ABSPATH')){

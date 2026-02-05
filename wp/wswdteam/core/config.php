@@ -86,7 +86,8 @@ $wswdteam_setup_file="install.php";
 
 // rendszer fájlok
 global $wswdteam_main_files;
-$wswdteam_main_files=array('/core/main.php',
+$wswdteam_main_files=array('/core/lib_security.php',
+                           '/core/main.php',
                            '/core/lib_sql.php',
                            '/core/lib_lang.php',
                            '/core/lib_msg.php',

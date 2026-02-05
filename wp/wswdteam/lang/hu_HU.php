@@ -68,6 +68,9 @@ $wswdteam_lang_str=array(
 'Jogcsoport' => 'Jogcsoport',
 'Töröl' => 'Töröl',
 'A tárhely feltöltési beállításai miatt nem tölthetőek fel a fájlok' => 'A tárhely feltöltési beállításai miatt nem tölthetőek fel a fájlok',
+'HIBA' => 'HIBA',
+'Helytelen matematikai válasz' => 'Helytelen matematikai válasz',
+'Biztonsági kérdés' => 'Biztonsági kérdés',
 
 
 );
