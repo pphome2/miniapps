@@ -83,6 +83,43 @@ function footer_shortcode_credit() {
 add_shortcode('wswdteam_footer_credit','footer_shortcode_credit');
 
 
+
+// saját logo a login oldalra
+function ws_login_logo() {
+    global $w_applogo;
+    ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo($w_applogo) ?>);
+            height: 200px;
+            width: 200px;
+            border-radius: 20px 20px 20px 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            bpadding-bottom: 20px;
+        }
+    </style>
+    <?php
+}
+add_action( 'login_enqueue_scripts', 'ws_login_logo' );
+
+// A logó linkjének módosítása a saját oldaladra
+function ws_login_logo_url() {
+    return home_url();
+}
+add_filter( 'login_headerurl', 'ws_login_logo_url' );
+
+
+// favicon csere
+add_filter('get_site_icon_url','wswd_custom_favicon',10,1);
+function wswd_custom_favicon( $url ) {
+    global $w_applogo;
+    // A logó elérési útja a témád mappáján belül
+    //return get_stylesheet_directory_uri().'/assets/images/wswd-favicon.png';
+    return $w_applogo;
+}
+
+
 // blokkok hozzáadása
 require get_template_directory() . '/inc/block-patterns.php';
 

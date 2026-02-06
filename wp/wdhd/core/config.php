@@ -33,10 +33,12 @@ $wdhd_app_name='Helpdesk Rendszer';
 global $wdhd_aauthor_name;
 $wdhd_author_name='WSWDTeam-HD';
 
+
 // verziók
 global $wdhd_db_version,$wdhd_plugin_version;
 $wdhd_plugin_version='1.0';
 $wdhd_db_version='1.2';
+
 
 // fejléc és lábléc tartalom a programból
 global $wdhd_header_title;
@@ -45,6 +47,8 @@ global $wdhd_credit;
 $wdhd_credit= $wdhd_author_name.' '.$wdhd_plugin_version.' '.date('Y.');
 global $wdhd_status_line;
 $wdhd_status_line='';
+global $wdhd_app_logo;
+$wdhd_app_logo=plugin_dir_url(__FILE__).'../img/applogo.png';
 
 // fejlesztői mód
 global $wdhd_developer_mode;
@@ -218,5 +222,10 @@ if (!isset($w_credit)){
   global $ws_credit;
 }
 $w_credit=$wdhd_credit;
+
+if (!isset($w_applogo)){
+  global $w_applogo;
+}
+$w_applogo=$wdhd_app_logo;
 
 ?>

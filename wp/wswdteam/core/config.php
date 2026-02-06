@@ -21,10 +21,12 @@ $wswdteam_app_name='WSWDTeamHD';
 global $wswdteam_author_name;
 $wswdteam_author_name='WSWDTeam';
 
+
 // verziók
 global $wswdteam_db_version,$wswdteam_plugin_version;
 $wswdteam_plugin_version='1.0';
 $wswdteam_db_version='1.0';
+
 
 // fejléc és lábléc tartalom a programból
 global $wswdteam_header_title;
@@ -33,6 +35,9 @@ global $wswdteam_credit;
 $wswdteam_credit= $wswdteam_author_name.' '.$wswdteam_plugin_version.' '.date('Y.');
 global $wswdteam_status_line;
 $wswdteam_status_line='';
+global $wswdteam_app_logo;
+$wswdteam_app_logo=plugin_dir_url(__FILE__).'../img/applogo.png';
+
 
 // fejlesztői mód
 global $wswdteam_developer_mode;
@@ -164,6 +169,7 @@ $wswdteam_sql_install=array($sql0,
 global $wswdteam_sql_update;
 $wswdteam_sql_update=array("");
 
+
 // fejrész és lábrész előkészítése
 if (!isset($w_header_title)){
   global $w_header_title;
@@ -179,6 +185,12 @@ if (!isset($w_credit)){
   global $ws_credit;
   $w_credit=$wswdteam_credit;
 }
+
+if (!isset($w_applogo)){
+  global $w_applogo;
+  $w_applogo=$wswdteam_app_logo;
+}
+
 
 // applikáció setén
 // fejrész és lábrész előkészítése
