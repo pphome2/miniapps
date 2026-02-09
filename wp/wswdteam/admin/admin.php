@@ -93,7 +93,8 @@ function wswdteam_sys_check(){
 
 // rendszer ellenőrzés
 function wswdteam_sys_init(){
-  global $wswdteam_plugin_version,$wswdteam_options,$wswdteam_developer_mode;
+  global $wswdteam_plugin_version,$wswdteam_options,
+          $wswdteam_developer_mode,$wswdteam_maintenance_mode;
 
   $ver=get_option($wswdteam_options[0],'0');
   // nincs plugin
@@ -122,6 +123,21 @@ function wswdteam_sys_init(){
     $wswdteam_developer_mode=true;
   }else{
     $wswdteam_developer_mode=false;
+  }
+  $main=wswdteam_get_param("wswdteam_maintenance_mode");
+  if ($main===""){
+    if ($wswdteam_maintenance_mode){
+      wswdteam_save_param("wswdteam_maintenance_mode","true");
+      $main="true";
+    }else{
+      wswdteam_save_param("wswdteam_maintenance_mode","false");
+      $main="false";
+    }
+  }
+  if ($main==="true"){
+    $wswdteam_maintenance_mode=true;
+  }else{
+    $wswdteam_maintenance_mode=false;
   }
 }
 

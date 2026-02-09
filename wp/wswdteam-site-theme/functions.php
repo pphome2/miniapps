@@ -89,7 +89,7 @@ add_filter('render_block',function($block_content,$block){
     // Csak kép blokkoknál futtatjuk a keresést
     if (isset($block['blockName']) && $block['blockName'] === 'core/image'){
         // Megnézzük, hogy a legenerált HTML-ben benne van-e az alt="ws-logo"
-        if (strpos($block_content,'alt="ws-logo"') !== false){
+        if (strpos($block_content,'id="ws-logo"') !== false){
             $new_image_url=$w_applogo;
             // Kicseréljük az src-t
             $block_content=preg_replace('/src="([^"]*)"/','src="'.$new_image_url.'"',$block_content);

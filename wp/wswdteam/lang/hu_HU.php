@@ -8,6 +8,13 @@ $wswdteam_lang_new=array();
 
 $wswdteam_lang_str=array(
 
+'Karbantartás' => 'Karbantartás',
+'Karbantartás folyamatban' => 'Karbantartás folyamatban',
+'Karbantartási üzemmód bekapcsolása' => 'Karbantartási üzemmód bekapcsolása',
+'Főoldal' => 'Frissítés',
+'Beállítások mentése' => 'Beállítások mentése',
+'Oldalunk jelenleg frissítés alatt áll' => 'Oldalunk jelenleg frissítés alatt áll',
+'Várható befejezés: hamarosan' => 'Várható befejezés: hamarosan',
 'Adatmentés' => 'Adatmentés',
 'Adatmentés - visszaállítás' => 'Adatmentés - visszaállítás',
 'Alkalmazás adatmentés' => 'Alkalmazás adatmentés',

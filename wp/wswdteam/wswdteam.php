@@ -38,6 +38,7 @@ if (file_exists(__DIR__.'/core/config.php')){
   exit;
 }
 
+
 // rendszerfájlok betöltése
 if (isset($wswdteam_main_files)){
   foreach($wswdteam_main_files as $f){
@@ -48,6 +49,33 @@ if (isset($wswdteam_main_files)){
     }
   }
 }
+
+
+// karbantartási mód mentett adat lekérdezése
+$dev=wswdteam_get_param("wswdteam_maintenance_mode");
+if ($dev==="true"){
+  $wswdteam_maintenance_mode=true;
+}else{
+  $wswdteam_maintenance_mode=false;
+}
+
+
+// karbantartási mód
+function wswdteam_maintenance(){
+  global $wswdteam_maintenance_mode,$wswdteam_maintenance_page;
+
+  if ($wswdteam_maintenance_mode && !current_user_can('manage_options')){
+    status_header(503);
+    header('Retry-After: 3600');
+    wp_redirect(plugin_dir_url(__FILE__).$wswdteam_maintenance_page);
+  }
+}
+if ($wswdteam_maintenance_mode){
+  add_action('template_redirect', 'wswdteam_maintenance');
+}
+
+
+
 
 // alkalmazásfájlok betöltése
 if (isset($wswdteam_content_files)){
@@ -70,12 +98,12 @@ if (is_admin()){
   }
 }
 
- 
+
 // plugin előkészítés
 function wswdteam_init(){
   global $locale, $wp_local_package,$wswdteam_options,$wswdteam_plugin_version,
          $wswdteam_user_role_list,$wswdteam_category,$wswdteam_locale,
-         $wswdteam_dir_lang,$wswdteam_developer_mode;
+         $wswdteam_dir_lang,$wswdteam_developer_mode,$wswdteam_maintenance_mode;
 
   // nyelvi beállítás
   $loc="";
@@ -112,6 +140,13 @@ function wswdteam_init(){
   }else{
     $wswdteam_developer_mode=false;
   }
+  //wswdteam_sys_check();
+  $dev=wswdteam_get_param("wswdteam_maintenance_mode");
+  if ($dev==="true"){
+    $wswdteam_maintenance_mode=true;
+  }else{
+    $wswdteam_maintenance_mode=false;
+  }
 }
 add_action('init','wswdteam_init');
 
@@ -126,6 +161,7 @@ function wswdteam_head(){
 }
 add_action('wp_head','wswdteam_head');
 
+
 // lábrész
 function wswdteam_footer(){
   global $wswdteam_inc_footer;
@@ -135,6 +171,7 @@ function wswdteam_footer(){
   }
 }
 add_action('wp_footer','wswdteam_footer');
+
 
 
 // js script és css betöltése
@@ -171,6 +208,7 @@ function wswdteam_setup(){
   wswdteam_sys_init();
 }
 
+
 // plugin bekapcsolás
 function wswdteam_activate(){
   global $wswdteam_category;
@@ -183,6 +221,7 @@ function wswdteam_activate(){
   wswdteam_setup();
 }
 register_activation_hook(__FILE__,'wswdteam_activate' );
+
 
 // plugin kikapcsolás
 function wswdteam_deactivate(){

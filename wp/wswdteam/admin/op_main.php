@@ -31,8 +31,27 @@ echo("<span class=wswdteamspaceholder></span>");
 // fejrész
 wswdteam_upagehead();
 
+// bálllítások érkezése
+wswdteam_postdata();
+
 //adatok
 wswdteam_datatable();
+
+
+function wswdteam_postdata(){
+  global $wswdteam_maintenance_mode;
+
+  if (isset($_POST['submit'])){
+    if (isset($_POST['statusz'])){
+      $wswdteam_maintenance_mode=true;
+      wswdteam_save_param("wswdteam_maintenance_mode","true");
+    } else {
+      $wswdteam_maintenance_mode=false;
+      wswdteam_save_param("wswdteam_maintenance_mode","false");
+    }
+  }
+}
+
 
 // adattábla
 function wswdteam_datatable(){
@@ -57,9 +76,30 @@ function wswdteam_datatable(){
   echo("<br />");
   $ver=wswdteam_get_param("wswdteam_developer_mode");
   echo("wswdteam_developer_mode"." - ".$ver);
+  echo("<br />");
+  $maint=wswdteam_get_param("wswdteam_maintenance_mode");
+  echo("wswdteam_developer_mode"." - ".$maint);
+  echo("<span class=wswdteamspaceholder></span>");
+  echo("<span class=wswdteamspaceholder></span>");
+  echo('<b>'.wswdteam_lang('Beállítások').'</b>');
+  echo("<span class=wswdteamspaceholder></span>");
+  echo('<form action="'.menu_page_url(__FILE__).'" method="post">');
+  echo('<label class="switch">');
+  if ($maint==='true'){
+    $checked='checked';
+  } else {
+    $checked='';
+  }
+  echo('<input type="checkbox" id="statusz" name="statusz" value="1" '.$checked.">");
+  echo('<span>'.wswdteam_lang('Karbantartási üzemmód bekapcsolása').'</span>');
+  echo(' </label>');
+  submit_button(wswdteam_lang('Beállítások mentése'));
+  echo('</form>');
   echo("<span class=wswdteamspaceholder></span>");
   echo("<span class=wswdteamspaceholder></span>");
 }
+
+
 
 
 //fejléc
