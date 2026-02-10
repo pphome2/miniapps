@@ -1,6 +1,0 @@
-<?php
-
-// fejrész
-//echo('FEJ');
-
-?>

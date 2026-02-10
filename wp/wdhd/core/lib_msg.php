@@ -11,151 +11,73 @@ if (!defined('ABSPATH')){
 // üzenet
 function wdhd_action_message($text="",$autohide=false){
   global $wdhd_message_autohide;
-
-  if (!$autohide){
-    $autohide=$wdhd_message_autohide;
+  
+  if (function_exists('wswdteam_action_message')){
+    $text=wdhd_lang($text);
+    wdhd_action_message($text="",$wdhd_message_autohide);
   }
-  $r="
-    <div id=mid class=\"wdhdokmessage\" onclick=\"this.style.display='none';\">
-      ".$text."
-    </div>";
-  if ($autohide){
-    $r=$r."
-      <script>
-        setTimeout(function(){
-          document.getElementById('mid').style.display='none';
-        }, 10000);
-      </script>";
-  }
-  return($r);
 }
 
 // üzenet
 function wdhd_action_errormessage($text="",$autohide=false){
   global $wdhd_message_autohide;
-
-  if (!$autohide){
-    $autohide=$wdhd_message_autohide;
+  
+  if (function_exists('wswdteam_action_errormessage')){
+    $text=wdhd_lang($text);
+    wdhd_action_errormessage($text="",$wdhd_message_autohide);
   }
-  $r="
-    <div id=mid class=\"wdhderrormessage\" onclick=\"this.style.display='none';\">
-      ".$text."
-    </div>";
-  if ($autohide){
-    $r=$r."
-      <script>
-        setTimeout(function(){
-          document.getElementById('mid').style.display='none';
-        }, 10000);
-      </script>";
-  }
-  return($r);
 }
 
 
 // notice-success – zöld bal keret - is-dismissible - x bezárás
 function wdhd_message($text="",$autohide=false){
   global $wdhd_message_autohide;
-
-  if (!$autohide){
-    $autohide=$wdhd_message_autohide;
-  }
-  echo("<div id=\"mid\" class=\"notice notice-success is-dismissible\"><p>");
-  echo(_e($text,'wdhd-dom'));
-  echo("</p></div>");
-  if ($autohide){
-    ?>
-    <script>
-      setTimeout(function(){
-        document.getElementById('mid').style.display='none';
-      }, 10000);
-    </script>
-    <?php
+  
+  if (function_exists('wswdteam_message')){
+    $text=wdhd_lang($text);
+    wdhd_message($text="",$wdhd_message_autohide);
   }
 }
 
 // notice-error – vörös bal keret
 function wdhd_error($text="",$autohide=false){
   global $wdhd_message_autohide;
-
-  if (!$autohide){
-    $autohide=$wdhd_message_autohide;
-  }
-  echo("<div id=\"mid\" class=\"notice notice-error is-dismissible\"><p>");
-  echo(_e($text,'wdhd-dom'));
-  echo("</p></div>");
-  if ($autohide){
-    ?>
-    <script>
-      setTimeout(function(){
-        document.getElementById('mid').style.display='none';
-      }, 10000);
-    </script>
-    <?php
+  
+  if (function_exists('wswdteam_error')){
+    $text=wdhd_lang($text);
+    wdhd_error($text="",$wdhd_message_autohide);
   }
 }
 
 // notice-warning– sárga bal keret
 function wdhd_warning($text="",$autohide=false){
   global $wdhd_message_autohide;
-
-  if (!$autohide){
-    $autohide=$wdhd_message_autohide;
-  }
-  echo("<div id=\"mid\" class=\"notice notice-warning is-dismissible\"><p>");
-  echo(_e($text,'wdhd-dom'));
-  echo("</p></div>");
-  if ($autohide){
-    ?>
-    <script>
-      setTimeout(function(){
-        document.getElementById('mid').style.display='none';
-      }, 10000);
-    </script>
-    <?php
+  
+  if (function_exists('wswdteam_warning')){
+    $text=wdhd_lang($text);
+    wdhd_warning($text="",$wdhd_message_autohide);
   }
 }
 
 // notice-success – zöld bal keret
 function wdhd_success($text="",$autohide=false){
   global $wdhd_message_autohide;
-
-  if (!$autohide){
-    $autohide=$wdhd_message_autohide;
-  }
-  echo("<div id=\"mid\" class=\"notice notice-success is-dismissible\"><p>");
-  echo(_e($text,'wdhd-dom'));
-  echo("</p></div>");
-  if ($autohide){
-    ?>
-    <script>
-      setTimeout(function(){
-        document.getElementById('mid').style.display='none';
-      }, 10000);
-    </script>
-    <?php
+  
+  if (function_exists('wswdteam_success')){
+    $text=wdhd_lang($text);
+    wdhd_success($text="",$wdhd_message_autohide);
   }
 }
 
 // notice-info – kék bal keret
 function wdhd_info($text="",$autohide=false){
   global $wdhd_message_autohide;
-
-  if (!$autohide){
-    $autohide=$wdhd_message_autohide;
-  }
-  echo("<div id=\"mid\" class=\"notice notice-info is-dismissible\"><p>");
-  echo(_e($text,'wdhd-dom'));
-  echo("</p></div>");
-  if ($autohide){
-    ?>
-    <script>
-      setTimeout(function(){
-        document.getElementById('mid').style.display='none';
-      }, 10000);
-    </script>
-    <?php
+  
+  if (function_exists('wswdteam_info')){
+    $text=wdhd_lang($text);
+    wdhd_info($text="",$wdhd_message_autohide);
   }
 }
 
 ?>
+

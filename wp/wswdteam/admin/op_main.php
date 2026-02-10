@@ -42,13 +42,21 @@ function wswdteam_postdata(){
   global $wswdteam_maintenance_mode;
 
   if (isset($_POST['submit'])){
-    if (isset($_POST['statusz'])){
+    if (isset($_POST['maintenance'])){
       $wswdteam_maintenance_mode=true;
       wswdteam_save_param("wswdteam_maintenance_mode","true");
     } else {
       $wswdteam_maintenance_mode=false;
       wswdteam_save_param("wswdteam_maintenance_mode","false");
     }
+    if (isset($_POST['developer'])){
+      $wswdteam_developer_mode=true;
+      wswdteam_save_param("wswdteam_developer_mode","true");
+    } else {
+      $wswdteam_developer_mode=false;
+      wswdteam_save_param("wswdteam_developer_mode","false");
+    }
+    //echo('<script type="text/javascript">location.reload();</script>');
   }
 }
 
@@ -74,23 +82,32 @@ function wswdteam_datatable(){
   $ver=wswdteam_get_param($wswdteam_options[1]);
   echo($wswdteam_options[1]." - ".$ver);
   echo("<br />");
-  $ver=wswdteam_get_param("wswdteam_developer_mode");
-  echo("wswdteam_developer_mode"." - ".$ver);
+  $dev=wswdteam_get_param("wswdteam_developer_mode");
+  echo("wswdteam_developer_mode"." - ".wswdteam_lang($dev));
   echo("<br />");
   $maint=wswdteam_get_param("wswdteam_maintenance_mode");
-  echo("wswdteam_developer_mode"." - ".$maint);
+  echo("wswdteam_maintenance_mode"." - ".wswdteam_lang($maint));
   echo("<span class=wswdteamspaceholder></span>");
   echo("<span class=wswdteamspaceholder></span>");
   echo('<b>'.wswdteam_lang('Beállítások').'</b>');
   echo("<span class=wswdteamspaceholder></span>");
   echo('<form action="'.menu_page_url(__FILE__).'" method="post">');
+  if ($dev==='true'){
+    $checked='checked';
+  } else {
+    $checked='';
+  }
+  echo('<input type="checkbox" id="developer" name="developer" value="1" '.$checked.">");
+  echo('<span>'.wswdteam_lang('Developer üzemmód bekapcsolása').'</span>');
+  echo(' </label>');
+  echo("<span class=wswdteamspaceholder></span>");
   echo('<label class="switch">');
   if ($maint==='true'){
     $checked='checked';
   } else {
     $checked='';
   }
-  echo('<input type="checkbox" id="statusz" name="statusz" value="1" '.$checked.">");
+  echo('<input type="checkbox" id="maintenance" name="maintenance" value="1" '.$checked.">");
   echo('<span>'.wswdteam_lang('Karbantartási üzemmód bekapcsolása').'</span>');
   echo(' </label>');
   submit_button(wswdteam_lang('Beállítások mentése'));

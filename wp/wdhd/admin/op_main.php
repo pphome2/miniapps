@@ -57,7 +57,7 @@ function wdhd_admin_main(){
   echo($wdhd_options[1]." - ".$ver);
   echo("<br />");
   $ver=wdhd_get_param("wdhd_developer_mode");
-  echo("wdhd_developer_mode"." - ".$ver);
+  echo("wdhd_developer_mode"." - ".wdhd_lang($ver));
   echo("<span class=wdhdspaceholder></span>");
   // alkalmazás
   echo("<span class=wdhdspaceholder></span>");

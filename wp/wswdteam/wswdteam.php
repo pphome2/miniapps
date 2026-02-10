@@ -51,13 +51,24 @@ if (isset($wswdteam_main_files)){
 }
 
 
-// karbantartási mód mentett adat lekérdezése
-$dev=wswdteam_get_param("wswdteam_maintenance_mode");
-if ($dev==="true"){
-  $wswdteam_maintenance_mode=true;
-}else{
-  $wswdteam_maintenance_mode=false;
+// karbantartási és fejlesztői mód mentett beállítás lekérdezése
+$maint=wswdteam_get_param("wswdteam_maintenance_mode");
+if ($maint!=""){
+  if ($maint==="true"){
+    $wswdteam_maintenance_mode=true;
+  }else{
+    $wswdteam_maintenance_mode=false;
+  }
 }
+$dev=wswdteam_get_param("wswdteam_developer_mode");
+if ($dev!=""){
+  if ($dev==="true"){
+    $wswdteam_developer_mode=true;
+  }else{
+    $wswdteam_developer_mode=false;
+  }
+}
+
 
 
 // karbantartási mód
@@ -133,7 +144,6 @@ function wswdteam_init(){
     $wswdteam_category[$i]=wswdteam_lang($wswdteam_category[$i],false);
     $i++;
   }
-  //wswdteam_sys_check();
   $dev=wswdteam_get_param("wswdteam_developer_mode");
   if ($dev==="true"){
     $wswdteam_developer_mode=true;
@@ -164,7 +174,7 @@ add_action('wp_head','wswdteam_head');
 
 // lábrész
 function wswdteam_footer(){
-  global $wswdteam_inc_footer;
+  global $wswdteam_inc_footer,$wswdteam_developer_mode;
 
   if (file_exists(__DIR__.$wswdteam_inc_footer)){
     include(__DIR__.$wswdteam_inc_footer);

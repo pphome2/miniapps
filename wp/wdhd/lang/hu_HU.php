@@ -8,6 +8,8 @@ $wdhd_lang_new=array();
 
 $wdhd_lang_str=array(
 
+'false' => 'ki',
+'true' => 'be',
 'Adminisztrátor' => 'Adminisztrátor',
 'Bejelentő' => 'Bejelentő',
 'Szervíz dolgozó' => 'Szervíz dolgozó',

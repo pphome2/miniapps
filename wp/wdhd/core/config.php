@@ -97,10 +97,6 @@ $wdhd_inc_js='/inc/wdhd.js';
 global $wdhd_admin_file;
 $wdhd_admin_file='/admin/admin.php';
 
-// telepítőfájl neve
-global $wdhd_setup_file;
-$wdhd_setup_file="install.php";
-
 
 // rendszer fájlok
 global $wdhd_main_files;
@@ -110,7 +106,6 @@ $wdhd_main_files=array('/core/main.php',
                        '/core/lib_msg.php',
                        '/core/lib_lang.php',
                        '/core/lib_page.php',
-                       '/core/lib_backup.php',
                        '/core/lib_param.php',
                        '/core/lib_right.php'
                        );
@@ -122,10 +117,6 @@ $wdhd_content_files=array( '/content/app_new.php',
                            '/content/app_service.php',
                            '/content/app_help.php'
                            );
-
-// mentés letöltés
-global $wdhd_backup_dl;
-$wdhd_backup_dl="lib_backup_dl.php";
 
 // post könyvtár
 global $wdhd_dir_post;
@@ -145,7 +136,7 @@ $wdhd_locale="hu_HU";
 
 // táblázat egy lapon megjelenő sorai
 global $wdhd_pagerow;
-$wdhd_pagerow=5;
+$wdhd_pagerow=20;
 
 // üzenetek automatikus bezárása
 global $wdhd_message_autohide;
@@ -229,3 +220,4 @@ if (!isset($w_applogo)){
 $w_applogo=$wdhd_app_logo;
 
 ?>
+

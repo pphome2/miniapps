@@ -8,12 +8,8 @@ if (!defined('ABSPATH')){
 }
 
 
-// alkalmazás változók
-
-
-
-// -----------------
 // rendszer változók
+define('WSWDTEAM','wswdteam');
 
 // alkalmazás név
 global $wswdteam_app_name;

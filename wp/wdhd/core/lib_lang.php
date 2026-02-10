@@ -1,10 +1,13 @@
 <?php
 
-// segéd függvényel
+// nyelvi függvényel
 
-// kilépés ha nem wp-ből lett indítva
-if (!defined('ABSPATH')){
-  exit;
+function wdhd_lang2($text){
+  global $wdhd_lang_str;
+
+  if (function_exists('wswdteam_lang_app')){
+    wswdteam_lang_app($text,$wdhd_lang_str);
+  }
 }
 
 
@@ -20,7 +23,6 @@ function wdhd_lang($text='',$dot=true){
     }else{
       $line=$text;
     }
-    $wdhd_lang_new[$text]=strip_tags($text);
   }
   $line=strip_tags($line);
   return($line);
@@ -34,14 +36,17 @@ function wdhd_lang_newlines(){
   $r="";
   if ($wdhd_developer_mode){
     if (count($wdhd_lang_new)>0){
-      $r="<span class=wdhdspaceholder></span>";
+      $r="<span class=wswdteamspaceholder></span>";
       foreach($wdhd_lang_new as $l){
         $r=$r."'".$l."' => '".$l."',<br />";
       }
-      $r=$r."<span class=wdhdspaceholder></span>";
+      $r=$r."<span class=wswdteamspaceholder></span>";
     }
   }
   return($r);
 }
 
+
+
 ?>
+

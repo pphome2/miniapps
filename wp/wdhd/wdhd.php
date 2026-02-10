@@ -4,7 +4,7 @@
  *
  * @package           WDHD plugin
  * @author            WSWDTeam
- * @copyright         2024 WSWDTeam
+ * @copyright         2026 WSWDTeam
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
@@ -31,6 +31,12 @@ if (!defined('ABSPATH')){
 }
 
 
+// kilépés ha nem wp-ből lett indítva
+if (!defined('WSWDTEAM')){
+  //exit;
+}
+
+
 // beállítások, értékek, elérések, könyvtárak
 if (file_exists(__DIR__.'/core/config.php')){
   include(__DIR__.'/core/config.php');
@@ -49,18 +55,6 @@ if (isset($wdhd_main_files)){
   }
 }
 
-// alkalmazásfájlok betöltése
-if (isset($wdhd_content_files)){
-  foreach($wdhd_content_files as $f){
-    if (file_exists(__DIR__.$f)){
-      include(__DIR__.$f);
-    }else{
-      exit;
-    }
-  }
-}
-
-
 // admin mód és admin vezérlés betöltése
 if (is_admin()){
   if (file_exists(__DIR__.$wdhd_admin_file)){
@@ -69,6 +63,64 @@ if (is_admin()){
     exit;
   }
 }
+
+
+// A 'plugins_loaded' eseménynél már minden plugin függvénye elérhető
+add_action('plugins_loaded',function() {
+  if (defined('WSWDTEAM')){
+    wdhd_main();
+  }else{
+    add_action('admin_notices',function(){
+      echo('<div class="error"><p>A "Másik Plugin" szükséges a működéshez!</p></div>');
+    });
+  }
+});
+
+global $exit;
+$exit=false;
+
+// betöltés, ha létezik minden előírt plugin
+function wdhd_main(){
+  global $wdhd_main_files,$wdhd_content_files,$wdhd_admin_file,$exit,
+          $wdhd_dwveloper_mode,$wswdteam_developer_mode;
+
+  // alkalmazásfájlok betöltése
+  if (isset($wdhd_content_files)){
+    foreach($wdhd_content_files as $f){
+      if (file_exists(__DIR__.$f)){
+        include(__DIR__.$f);
+      }else{
+        $exit=true;
+      }
+    }
+  }
+  $dev=wdhd_get_param("wdhd_developer_mode");
+  if (isset($wswdteam_developer_mode)){
+    $wdhd_developer_mode=$wswdteam_developer_mode;
+    $dev='';
+  }
+  if ($dev===''){
+    if ($wdhd_developer_mode){
+      wdhd_save_param("wdhd_developer_mode","true");
+      $dev="true";
+    }else{
+      wdhd_save_param("wdhd_developer_mode","false");
+      $dev="false";
+    }
+  }
+  if ($dev==="true"){
+    $wdhd_developer_mode=true;
+  }else{
+    $wdhd_developer_mode=false;
+  }
+}
+
+
+// kilépés hba esetén
+if ($exit){
+  exit;
+}
+
 
 
 // plugin előkészítés
@@ -111,11 +163,8 @@ function wdhd_init(){
     $i++;
   }
   //wdhd_sys_check();
-  $dev=wdhd_get_param("wdhd_developer_mode");
-  if ($dev==="true"){
-    $wdhd_developer_mode=true;
-  }else{
-    $wdhd_developer_mode=false;
+  if (isset($wswdteam_developer_mode)){
+    $wdhd_developer_mode=$wswdteam_developer_mode;
   }
 }
 add_action('init','wdhd_init');
@@ -208,3 +257,4 @@ add_shortcode('wdhd','wdhd_shortcode');
 
 
 ?>
+

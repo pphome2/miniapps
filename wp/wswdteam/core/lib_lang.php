@@ -20,11 +20,11 @@ function wswdteam_lang($text='',$dot=true){
     }else{
       $line=$text;
     }
-    $wswdteam_lang_new[$text]=strip_tags($text);
   }
   $line=strip_tags($line);
   return($line);
 }
+
 
 // új fordítandók kiírása
 function wswdteam_lang_newlines(){
@@ -41,6 +41,23 @@ function wswdteam_lang_newlines(){
     }
   }
   return($r);
+}
+
+// app fordítás
+function wswdteam_lang_app($text='',$langstr='',$dot=true){
+  global $wswdteam_lang_new,$wswdteam_developer_mode;
+
+  if (isset($langstr)and(isset($langstr[$text]))){
+    $line=$langstr[$text];
+  }else{
+    if (($dot)and($wswdteam_developer_mode)){
+      $line='.'.$text.'.';
+    }else{
+      $line=$text;
+    }
+  }
+  $line=strip_tags($line);
+  return($line);
 }
 
 
