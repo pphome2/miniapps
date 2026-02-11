@@ -6,10 +6,10 @@
 
 global $w_status_line;
 if (!isset($w_status_line)) {
-  $w_status_line=date('Y.')." "."Minden jog fenntartva";
+  $w_status_line=date('Y.');
 }
 if ($w_status_line=="") {
-  $w_status_line=date('Y.')." "."Minden jog fenntartva";
+  $w_status_line=date('Y.');
 }
 
 function minimal_theme_setup() {
@@ -45,12 +45,35 @@ function footer_shortcode() {
 }
 add_shortcode('wswdteam_footer','footer_shortcode');
 
-function header_shortcode_title() {
+function header_shortcode_title(){
     global $w_header_title;
 
     $kimenet='';
-    if (isset($w_header_title)) {
-      $kimenet='<h2 style=text-align:right;>'.$w_header_title.'</h2>';
+    if (isset($w_header_title)){
+      $kimenet='<a href="'.home_url().'" style="
+          text-decoration:none;
+          color:inherit;
+          outline:none;
+          background-color:transparent;
+          cursor:pointer;
+        "><h2 style=text-align:right;>'.$w_header_title.'</h2></a>';
+    }
+    return $kimenet;
+}
+add_shortcode('wswdteam_title','header_shortcode_title');
+
+function header_shortcode_title(){
+    global $w_header_title;
+
+    $kimenet='';
+    if (isset($w_header_title)){
+      $kimenet='<a href="'.home_url().'" style="
+          text-decoration:none;
+          color:inherit;
+          outline:none;
+          background-color:transparent;
+          cursor:pointer;
+        "><h2 style=text-align:right;>'.$w_header_title.'</h2></a>';
     }
     return $kimenet;
 }
@@ -99,6 +122,24 @@ add_filter('render_block',function($block_content,$block){
             // Opcionális: lekerekítés hozzáadása közvetlenül a stílushoz
             $block_content=str_replace('<img ','<img style="height:150px;border-radius:15px;" ',$block_content);
         }
+    }
+    if (strpos($block_content,'id="ws-link"') !== false){
+        $new_url=home_url();
+        // A kész HTML-ben kicseréljük a href értékét
+        // A reguláris kifejezés megkeresi a href="..." részt és lecseréli
+        $block_content=preg_replace('/href="([^"]*)"/','href="'.esc_url($new_url).'"',$block_content,1);
+    }
+    return $block_content;
+}, 10, 2);
+
+// fejléc link kicserélése
+add_filter('render_block',function($block_content,$block){
+    global $w_applogo;
+    if (strpos($block_content,'id="ws-link"') !== false){
+        $new_url=home_url();
+        // A kész HTML-ben kicseréljük a href értékét
+        // A reguláris kifejezés megkeresi a href="..." részt és lecseréli
+        //$block_content=preg_replace('/href="([^"]*)"/','href="'.esc_url($new_url).'"',$block_content,1);
     }
     return $block_content;
 }, 10, 2);

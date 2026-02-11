@@ -31,18 +31,13 @@ if (!defined('ABSPATH')){
 }
 
 
-// kilépés ha nem wp-ből lett indítva
-if (!defined('WSWDTEAM')){
-  //exit;
-}
-
-
 // beállítások, értékek, elérések, könyvtárak
 if (file_exists(__DIR__.'/core/config.php')){
   include(__DIR__.'/core/config.php');
 }else{
   exit;
 }
+
 
 // rendszerfájlok betöltése
 if (isset($wdhd_main_files)){
@@ -65,9 +60,18 @@ if (is_admin()){
 }
 
 
+
+
 // A 'plugins_loaded' eseménynél már minden plugin függvénye elérhető
 add_action('plugins_loaded',function() {
   if (defined('WSWDTEAM')){
+    // admin ellenőrzés, verziók
+    //if (current_user_can('manage_options')){
+    //}
+    if (function_exists('wdhd_sys_init')){
+      wdhd_sys_check();
+    }
+    // alőkészítés
     wdhd_main();
   }else{
     add_action('admin_notices',function(){
@@ -76,8 +80,6 @@ add_action('plugins_loaded',function() {
   }
 });
 
-global $exit;
-$exit=false;
 
 // betöltés, ha létezik minden előírt plugin
 function wdhd_main(){
@@ -90,7 +92,7 @@ function wdhd_main(){
       if (file_exists(__DIR__.$f)){
         include(__DIR__.$f);
       }else{
-        $exit=true;
+        exit;
       }
     }
   }
@@ -113,12 +115,6 @@ function wdhd_main(){
   }else{
     $wdhd_developer_mode=false;
   }
-}
-
-
-// kilépés hba esetén
-if ($exit){
-  exit;
 }
 
 

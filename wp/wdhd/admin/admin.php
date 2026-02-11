@@ -8,7 +8,7 @@ if (!defined('ABSPATH')){
 }
 
 // rendszer ellenőrzése
-wdhd_sys_check();
+//wdhd_sys_check();
 
 
 // verzió ellenőrzés és telepítés ha kell
@@ -35,6 +35,10 @@ function wdhd_sys_init(){
       wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
     }
   }
+  add_action('admin_menu','wdhd_register_menu_page');
+  add_action('admin_menu','wdhd_register_submenu_page');
+  add_action('admin_menu','wdhd_register_submenu_page2');
+  add_action('admin_menu','wdhd_register_submenu_page4');
 }
 
 
@@ -54,7 +58,7 @@ function wdhd_register_menu_page(){
   );
 }
 //icon: 'dashicons-welcome-widgets-menus',
-add_action('admin_menu','wdhd_register_menu_page');
+//add_action('admin_menu','wdhd_register_menu_page');
 
 // almenü hozzáadása
 function wdhd_register_submenu_page(){
@@ -70,7 +74,7 @@ function wdhd_register_submenu_page(){
     ''
   );
 }
-add_action('admin_menu','wdhd_register_submenu_page');
+//add_action('admin_menu','wdhd_register_submenu_page');
 
 // almenü hozzáadása
 function wdhd_register_submenu_page2(){
@@ -86,7 +90,7 @@ function wdhd_register_submenu_page2(){
     ''
   );
 }
-add_action('admin_menu','wdhd_register_submenu_page2');
+//add_action('admin_menu','wdhd_register_submenu_page2');
 
 
 // almenü hozzáadása
@@ -103,7 +107,8 @@ function wdhd_register_submenu_page4(){
     ''
   );
 }
-add_action('admin_menu','wdhd_register_submenu_page4');
+//add_action('admin_menu','wdhd_register_submenu_page4');
+
 
 // menü törlése
 function wdhd_remove_options_page(){

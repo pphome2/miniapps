@@ -10,6 +10,7 @@ $wdhd_lang_str=array(
 
 'false' => 'ki',
 'true' => 'be',
+'Mégse' => 'Mégse',
 'Adminisztrátor' => 'Adminisztrátor',
 'Bejelentő' => 'Bejelentő',
 'Szervíz dolgozó' => 'Szervíz dolgozó',
@@ -86,6 +87,20 @@ $wdhd_lang_str=array(
 'Fájlnév' => 'Fájlnév',
 'Mentés ideje' => 'Mentés ideje',
 'Visszaálít/Töröl' => 'Visszaálít/Töröl',
+'Érkezési idő' => 'Érkezési idő',
+'Típus' => 'Típus',
+'Csoport' => 'Csoport',
+'E-mail cím' => 'E-mail cím',
+'Tervezett befejezés' => 'Tervezett befejezés',
+'Kijelölt feladat' => 'Kijelölt feladat',
+'Munka kiadva' => 'Munka kiadva',
+'Elvégzett munka' => 'Elvégzett munka',
+'Felhasznált eszközök' => 'Felhasznált eszközök',
+'Ráfordított munkaóra' => 'Ráfordított munkaóra',
+'Kiszállás (km)' => 'Kiszállás (km)',
+'Bejelentés lezárva' => 'Bejelentés lezárva',
+'Bejelentést lezárta' => 'Bejelentést lezárta',
+'Jogosultsági szint' => 'Jogosultsági szint',
 
 
 );

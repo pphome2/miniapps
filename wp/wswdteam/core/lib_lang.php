@@ -20,6 +20,7 @@ function wswdteam_lang($text='',$dot=true){
     }else{
       $line=$text;
     }
+    $wswdteam_lang_new[$text]=$text;
   }
   $line=strip_tags($line);
   return($line);
@@ -35,6 +36,7 @@ function wswdteam_lang_newlines(){
     if (count($wswdteam_lang_new)>0){
       $r="<span class=wswdteamspaceholder></span>";
       foreach($wswdteam_lang_new as $l){
+        $l=strip_tags($l);
         $r=$r."'".$l."' => '".$l."',<br />";
       }
       $r=$r."<span class=wswdteamspaceholder></span>";
@@ -42,6 +44,7 @@ function wswdteam_lang_newlines(){
   }
   return($r);
 }
+
 
 // app fordítás
 function wswdteam_lang_app($text='',$langstr='',$dot=true){
@@ -55,10 +58,18 @@ function wswdteam_lang_app($text='',$langstr='',$dot=true){
     }else{
       $line=$text;
     }
+    $wswdteam_lang_new[$text]=$text;
   }
   $line=strip_tags($line);
   return($line);
 }
 
 
+// új fordítandók kiírása
+function wswdteam_lang_newlines_app(){
+  $r=wswdteam_lang_newlines();
+  return($r);
+}
+
 ?>
+

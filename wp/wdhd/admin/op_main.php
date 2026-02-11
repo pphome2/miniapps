@@ -66,13 +66,14 @@ function wdhd_admin_main(){
   $t=wdhd_get_param("cím");
   if (isset($_POST['submit'])){
     wdhd_save_param("cím",$_POST['text']);
-    echo(wdhd_message("Adatok elmentve"));
+    echo(wdhd_message("Adatok elmentve").'<br />');
   }
   echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
   echo("<label for=\"text\">".wdhd_lang('Címadatok munkalapra').":</label><br>");
   echo("<textarea id=text name=text class=wdhdinputtexta rows=10 >$t</textarea>");
-  echo("<br />");
-  echo("<input type=\"submit\" class=\"button\" id=\"submit\" name=\"submit\" value=\"".wdhd_lang('Mehet')."\">");
+  //echo("<br />");
+  //echo("<input type=\"submit\" class=\"button\" id=\"submit\" name=\"submit\" value=\"".wdhd_lang('Mehet')."\">");
+  submit_button();
   echo("</form>");
   echo("<span class=wdhdspaceholder></span>");
   echo("<span class=wdhdspaceholder></span>");

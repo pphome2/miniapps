@@ -161,6 +161,17 @@ function wswdteam_init(){
 add_action('init','wswdteam_init');
 
 
+// user menu a felső fekete sáv letiltása
+add_filter('show_admin_bar',function($show){
+    // Ha a felhasználó NEM tud opciókat kezelni (tehát nem admin), rejtsük el
+    if (!current_user_can('manage_options')){
+        return false;
+    }
+    // Mindenki másnak (adminoknak) maradjon az eredeti beállítás
+    return $show;
+});
+
+
 // fejrész
 function wswdteam_head(){
   global $wswdteam_inc_head;

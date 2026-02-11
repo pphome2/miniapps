@@ -33,6 +33,31 @@ function wswdteam_user_right(){
 }
 
 
+// jogosultság lekérdezése
+function wswdteam_user_right_app($table=""){
+  global $wpdb;
+
+  $cuser=wp_get_current_user();
+  $uname=$cuser->user_login;
+  $table_name=$wpdb->prefix.$table[1];
+  $sql="SELECT * FROM $table_name WHERE uname='$uname';";
+  $res=$wpdb->get_results($sql);
+  if (count($res)<>0){
+    $t=$res[0];
+    $ur=$t->urole;
+  }else{
+    $um=get_userdata(get_current_user_id());
+    $us=$um->roles[0];
+    if ($us==="administrator"){
+      $ur=0;
+    }else{
+      $ur=9999;
+    }
+  }
+  return($ur);
+}
+
+
 // felhasználó neve
 function wswdteam_user_nicename(){
   $cuser=wp_get_current_user();

@@ -78,7 +78,7 @@ function wswdteam_postlist_view($cat=""){
   	  $content=$content."<br /><br />";
     }else{
       $catid=get_cat_ID($cat);
-      $args=array('category'         => $catid,
+      $args=array('category'     => $catid,
 		          'orderby'          => 'date',
 		          'order'            => 'DESC',
 		          'post_type'        => 'post'
@@ -103,18 +103,18 @@ function wswdteam_postlist_view($cat=""){
         $i=0;
         foreach($posts as $p){
           if (($i>=$l)and($i<($l+$wswdteam_pagerow))){
-		    setup_postdata($p);
-	        $content=$content."<form action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
+		        setup_postdata($p);
+	          $content=$content."<form action=\"".$_SERVER['REQUEST_URI']."\" method=\"post\">";
             $content=$content."<input type=\"hidden\" id=\"postid\" name=\"postid\" value=\"$p->ID\">";
             $content=$content."<input type=\"submit\" id=\"s$i\" name=\"s$i\" value=\"$p->post_title\" style=\"display:none;\">";
   	        $content=$content."<a href=\"\" class=\"wswdwbutton2\" onclick=\"this.closest('form').submit();return false;\">".$p->post_title."</a>";
-  		    $content=$content."</form>";
+  		      $content=$content."</form>";
   	        $content=$content."<br />";
   	      }
           $i++;
         }
-	    wp_reset_postdata();
-	    $content=$content.wswdteam_pager($db,$wswdteam_pagerow,$page,"wpage");
+	      wp_reset_postdata();
+	      $content=$content.wswdteam_pager($db,$wswdteam_pagerow,$page,"wpage");
       }
     }
   }

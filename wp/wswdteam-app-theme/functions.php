@@ -49,12 +49,20 @@ function minimal_theme_enqueue_styles() {
     );
 }
 
-function header_shortcode_title() {
+
+function header_shortcode_title(){
     global $w_header_title;
 
     $kimenet='';
-    if (isset($w_header_title)) {
-      $kimenet='<h2>'.$w_header_title.'</h2>';
+    if (isset($w_header_title)){
+      $kimenet='<h2 style=text-align:right;>
+        <a href="'.home_url().'" style="
+          text-decoration:none;
+          color:inherit;
+          outline:none;
+          background-color:transparent;
+          cursor:pointer;
+        ">'.$w_header_title.'</a></h2>';
     }
     return $kimenet;
 }
@@ -76,7 +84,13 @@ function footer_shortcode_credit() {
 
     $kimenet='';
     if (isset($w_credit)) {
-      $kimenet=$w_credit;
+      $kimenet='<a href="'.home_url().'" style="
+          text-decoration:none;
+          color:inherit;
+          outline:none;
+          background-color:transparent;
+          cursor:pointer;
+        ">'.$w_credit.'</a>';
     }
     return $kimenet;
 }
