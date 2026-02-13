@@ -99,16 +99,18 @@ $wswdteam_setup_file="install.php";
 
 // rendszer fájlok
 global $wswdteam_main_files;
-$wswdteam_main_files=array('/core/lib_security.php',
-                           '/core/main.php',
-                           '/core/lib_sql.php',
+$wswdteam_main_files=array('/core/main.php',
+                           '/core/lib_backup.php',
                            '/core/lib_lang.php',
                            '/core/lib_msg.php',
                            '/core/lib_page.php',
-                           '/core/lib_view.php',
-                           '/core/lib_backup.php',
                            '/core/lib_param.php',
-                           '/core/lib_right.php'
+                           '/core/lib_param_table.php',
+                           '/core/lib_right.php',
+                           '/core/lib_security.php',
+                           '/core/lib_sql.php',
+                           '/core/lib_system.php',
+                           '/core/lib_view.php',
                            );
 
 // alkalmazás fájlok

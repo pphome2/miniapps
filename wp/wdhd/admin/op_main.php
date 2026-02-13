@@ -9,18 +9,6 @@ if (!defined('ABSPATH')){
 }
 
 
-// admin script betöltés 
-if (file_exists(__DIR__.'/wdhd_admin.css')){
-  include(__DIR__.'/wdhd_admin.css');
-}
-if (file_exists(__DIR__.'/wdhd_admin.js')){
-  include(__DIR__.'/wdhd_admin.js');
-}
-// vagy html:
-// <script>alert("X");</script>
-// <style>label{text-align:center;color:red;}</style>
-
-
 
 echo("<div class=wdhdspaceholder></div>");
 

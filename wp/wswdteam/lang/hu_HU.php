@@ -81,6 +81,10 @@ $wswdteam_lang_str=array(
 'HIBA' => 'HIBA',
 'Helytelen matematikai válasz' => 'Helytelen matematikai válasz',
 'Biztonsági kérdés' => 'Biztonsági kérdés',
+'Törölve' => 'Törölve',
+'Új paraméter' => 'Új paraméter',
+'Mégse' => 'Mégse',
+
 
 
 );

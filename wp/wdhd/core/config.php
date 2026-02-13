@@ -237,6 +237,10 @@ $wdhd_dir_lang='/lang';
 global $wdhd_locale;
 $wdhd_locale="hu_HU";
 
+// táblázatban megjelenő sorok száma
+global $wdhd_pagerow;
+$wdhd_pagerow=20;
+
 
 //
 // adatbázis beállítás

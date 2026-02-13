@@ -7,6 +7,16 @@ if (!defined('ABSPATH')){
   exit;
 }
 
+
+
+// admin script betöltés 
+if (file_exists(__DIR__.'/wdhd_admin.css')){
+  include(__DIR__.'/wdhd_admin.css');
+}
+if (file_exists(__DIR__.'/wdhd_admin.js')){
+  include(__DIR__.'/wdhd_admin.js');
+}
+
 // rendszer ellenőrzése
 //wdhd_sys_check();
 

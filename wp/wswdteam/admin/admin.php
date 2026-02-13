@@ -7,6 +7,15 @@ if (!defined('ABSPATH')){
   exit;
 }
 
+
+// admin script betöltés 
+if (file_exists(__DIR__.'/wswdteam_admin.css')){
+  include(__DIR__.'/wswdteam_admin.css');
+}
+if (file_exists(__DIR__.'/wswdteam_admin.js')){
+  include(__DIR__.'/wswdteam_admin.js');
+}
+
 // rendszer ellenőrzése
 wswdteam_sys_check();
 

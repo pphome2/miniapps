@@ -61,11 +61,33 @@ function wdhd_user_right(){
 // felhasználó neve
 function wdhd_user_nicename(){
   $r="";
+  if (function_exists('wswdteam_user_nicename')){
+    $r=wswdteam_user_nicename();
+  }
+  return($r);
+}
+
+
+// felhasználó neve
+function wdhd_user_nickname(){
+  $r="";
   if (function_exists('wswdteam_user_nickname')){
     $r=wswdteam_user_nickname();
   }
   return($r);
 }
+
+
+// felhasználó neve
+function wdhd_user_fullname(){
+  $r="";
+  if (function_exists('wswdteam_user_fullname')){
+    $r=wswdteam_user_fullname();
+  }
+  return($r);
+}
+
+
 
 
 

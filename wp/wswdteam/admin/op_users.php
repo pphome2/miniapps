@@ -18,13 +18,6 @@ if (!in_array($ur,[0])){
 }
 
 
-// admin script betöltés 
-if (file_exists(__DIR__.'/wswdteam_admin.css')){
-  include(__DIR__.'/wswdteam_admin.css');
-}
-if (file_exists(__DIR__.'/wswdteam_admin.js')){
-  include(__DIR__.'/wswdteam_admin.js');
-}
 
 
 echo("<div class=wswdspaceholder></div>");

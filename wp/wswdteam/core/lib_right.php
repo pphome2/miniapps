@@ -67,11 +67,25 @@ function wswdteam_user_nicename(){
 
 
 // felhasználó neve
+function wswdteam_user_nicename_app(){
+  $r=wswdteam_user_nicename();
+  return($r);
+}
+
+
+// felhasználó neve
 function wswdteam_user_fullname(){
   $cuser=wp_get_current_user();
   //$r=$cuser->first_name;
   //$r=$r." ".$cuser->last_name;
   $r=$cuser->display_name;
+  return($r);
+}
+
+
+// felhasználó neve
+function wswdteam_user_fullname_app(){
+  $r=wswdteam_user_fullname();
   return($r);
 }
 

@@ -9,19 +9,6 @@ if (!defined('ABSPATH')){
 }
 
 
-// admin script betöltés 
-if (file_exists(__DIR__.'/wswdteam_admin.css')){
-  include(__DIR__.'/wswdteam_admin.css');
-}
-if (file_exists(__DIR__.'/wswdteam_admin.js')){
-  include(__DIR__.'/wswdteam_admin.js');
-}
-
-echo("<span class=wswdteamspaceholder></span>");
-
-// adatfeldolgozás
-// if (isset($_POST['name'])){}
-
 // fej
 wswdteam_upagehead();
 

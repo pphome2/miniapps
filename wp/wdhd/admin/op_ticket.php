@@ -17,15 +17,6 @@ if (!in_array($ur,[0])){
   exit;
 }
 
-// admin script betöltés 
-if (file_exists(__DIR__.'/wdhd_admin.css')){
-  include(__DIR__.'/wdhd_admin.css');
-}
-if (file_exists(__DIR__.'/wdhd_admin.js')){
-  include(__DIR__.'/wdhd_admin.js');
-}
-
-
 echo("<div class=wdhdspaceholder></div>");
 
 // adatfeldolgozás

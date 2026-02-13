@@ -9,14 +9,6 @@ if (!defined('ABSPATH')){
 }
 
 
-// admin script betöltés 
-if (file_exists(__DIR__.'/wdhd_admin.css')){
-  include(__DIR__.'/wdhd_admin.css');
-}
-if (file_exists(__DIR__.'/wdhd_admin.js')){
-  include(__DIR__.'/wdhd_admin.js');
-}
-
 // jogosultság ellenőrzése
 $ur=wdhd_user_right();
 if (!in_array($ur,[0])){

@@ -75,7 +75,7 @@ add_action('plugins_loaded',function() {
     wdhd_main();
   }else{
     add_action('admin_notices',function(){
-      echo('<div class="error"><p>A "Másik Plugin" szükséges a működéshez!</p></div>');
+      echo('<div class="error"><p>A "WSWDTEAM" plugin szükséges a működéshez!</p></div>');
     });
   }
 });
@@ -84,7 +84,8 @@ add_action('plugins_loaded',function() {
 // betöltés, ha létezik minden előírt plugin
 function wdhd_main(){
   global $wdhd_main_files,$wdhd_content_files,$wdhd_admin_file,$exit,
-          $wdhd_dwveloper_mode,$wswdteam_developer_mode;
+          $wdhd_dwveloper_mode,$wswdteam_developer_mode,
+          $wdhd_pagerow,$wswdteam_pagerow;
 
   // alkalmazásfájlok betöltése
   if (isset($wdhd_content_files)){
@@ -115,6 +116,7 @@ function wdhd_main(){
   }else{
     $wdhd_developer_mode=false;
   }
+  $wdhd_pagerow=$wswdteam_pagerow;
 }
 
 
