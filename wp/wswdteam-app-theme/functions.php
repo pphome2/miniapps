@@ -135,7 +135,7 @@ function wswd_custom_favicon( $url ) {
 
 
 // blokkok hozzáadása
-require get_template_directory() . '/inc/block-patterns.php';
+//require get_template_directory() . '/inc/block-patterns.php';
 
 
 ?>

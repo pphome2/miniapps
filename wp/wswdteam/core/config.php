@@ -82,11 +82,15 @@ $wswdteam_category=array('Leírás',
 global $wswdteam_inc_head,
        $wswdteam_inc_footer,
        $wswdteam_inc_css,
-       $wswdteam_inc_js;
+       $wswdteam_inc_js,
+       $wswdteam_inc_admin_css,
+       $wswdteam_inc_admin_js;
 $wswdteam_inc_head='/inc/wswdteam_header.php';
 $wswdteam_inc_footer='/inc/wswdteam_footer.php';
 $wswdteam_inc_css='/inc/wswdteam.css';
 $wswdteam_inc_js='/inc/wswdteam.js';
+$wswdteam_inc_admin_css='/inc/wswdteam_admin.css';
+$wswdteam_inc_admin_js='/inc/wswdteam_admin.js';
 
 // admin vezérlő fájl
 global $wswdteam_admin_file;
@@ -109,6 +113,8 @@ $wswdteam_main_files=array('/core/main.php',
                            '/core/lib_right.php',
                            '/core/lib_security.php',
                            '/core/lib_sql.php',
+                           '/core/lib_sql_setup.php',
+                           '/core/lib_sys_setup.php',
                            '/core/lib_system.php',
                            '/core/lib_view.php',
                            );

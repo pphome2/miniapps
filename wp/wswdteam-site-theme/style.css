@@ -19,7 +19,7 @@ body, .wp-site-blocks {
     flex-direction: column;
     min-height: 100vh;
     font-family: system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
+    lline-height: 1.6;
     margin: 0;
     color: #1a1a1a;
     background-color: #fcfcfc;
@@ -29,14 +29,15 @@ body, .wp-site-blocks {
 /* Header stílusok */
 header {
     background: #d2d2d2;
-    padding: 1.5rem 5% 0 5%;
+    padding: 1rem 5% 0rem 5%;
     border-bottom: 1px solid #eaeaea;
 }
 
 header .wp-block-group {
     justify-content: space-between;
-    align-items: center;
-    max-width: 90%;;
+    align-items: right;
+    max-width: 100%;
+    line-height: 1.6;
 }
 
 /* Tartalmi rész */
@@ -70,5 +71,5 @@ footer {
 .alignwide { max-width: 100%; }
 .alignfull { width: 100vw; margin-left: calc(50% - 50vw); }
 
-img { max-width: 100%; height: auto; }
+img { max-width: 100%; height: auto;padding-top:20px; }
 

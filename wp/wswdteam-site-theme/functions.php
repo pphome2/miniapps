@@ -62,22 +62,6 @@ function header_shortcode_title(){
 }
 add_shortcode('wswdteam_title','header_shortcode_title');
 
-function header_shortcode_title(){
-    global $w_header_title;
-
-    $kimenet='';
-    if (isset($w_header_title)){
-      $kimenet='<a href="'.home_url().'" style="
-          text-decoration:none;
-          color:inherit;
-          outline:none;
-          background-color:transparent;
-          cursor:pointer;
-        "><h2 style=text-align:right;>'.$w_header_title.'</h2></a>';
-    }
-    return $kimenet;
-}
-add_shortcode('wswdteam_title','header_shortcode_title');
 
 
 // saját logo a login oldalra
@@ -110,9 +94,9 @@ add_filter('login_headerurl','ws_login_logo_url');
 add_filter('render_block',function($block_content,$block){
     global $w_applogo;
     // Csak kép blokkoknál futtatjuk a keresést
-    if (isset($block['blockName']) && $block['blockName'] === 'core/image'){
+    //if (isset($block['blockName']) && $block['blockName'] === 'core/image'){
         // Megnézzük, hogy a legenerált HTML-ben benne van-e az alt="ws-logo"
-        if (strpos($block_content,'id="ws-logo"') !== false){
+        if (strpos($block_content,'src="ws-logo"') !== false){
             $new_image_url=$w_applogo;
             // Kicseréljük az src-t
             $block_content=preg_replace('/src="([^"]*)"/','src="'.$new_image_url.'"',$block_content);
@@ -122,8 +106,8 @@ add_filter('render_block',function($block_content,$block){
             // Opcionális: lekerekítés hozzáadása közvetlenül a stílushoz
             $block_content=str_replace('<img ','<img style="height:150px;border-radius:15px;" ',$block_content);
         }
-    }
-    if (strpos($block_content,'id="ws-link"') !== false){
+    //}
+    if (strpos($block_content,'href="ws-link"') !== false){
         $new_url=home_url();
         // A kész HTML-ben kicseréljük a href értékét
         // A reguláris kifejezés megkeresi a href="..." részt és lecseréli
@@ -131,6 +115,7 @@ add_filter('render_block',function($block_content,$block){
     }
     return $block_content;
 }, 10, 2);
+
 
 // fejléc link kicserélése
 add_filter('render_block',function($block_content,$block){

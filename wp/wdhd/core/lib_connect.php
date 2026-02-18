@@ -257,4 +257,3 @@ function wdhd_info($text="",$autohide=false){
 }
 
 ?>
-

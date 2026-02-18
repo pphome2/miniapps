@@ -1,4 +1,6 @@
+<style>
 /* css */
+
 
 .wp-block-post-date, .wp-block-post-author, .wp-block-post-terms{
   display: none;
@@ -184,5 +186,5 @@ li a{
 }
 
 
-/* */
+</style>
 

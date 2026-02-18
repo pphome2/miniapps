@@ -196,11 +196,15 @@ if (!isset($wdhd_category)){
 global $wdhd_inc_head,
        $wdhd_inc_footer,
        $wdhd_inc_css,
-       $wdhd_inc_js;
+       $wdhd_inc_js,
+       $wdhd_inc_admin_css,
+       $wdhd_inc_admin_js;
 $wdhd_inc_head='/inc/wdhd_header.php';
 $wdhd_inc_footer='/inc/wdhd_footer.php';
 $wdhd_inc_css='/inc/wdhd.css';
 $wdhd_inc_js='/inc/wdhd.js';
+$wdhd_inc_admin_css='/inc/wdhd_admin.css';
+$wdhd_inc_admin_js='/inc/wdhd_admin.js';
 
 // admin vezérlő fájl
 global $wdhd_admin_file;
@@ -210,7 +214,8 @@ $wdhd_admin_file='/admin/admin.php';
 global $wdhd_main_files;
 $wdhd_main_files=array('/core/main.php',
                        '/core/lib_connect.php',
-                       '/core/lib_sql_setup.php'
+                       '/core/lib_sql_setup.php',
+                       '/core/lib_sys_setup.php'
                        );
 
 // rendszer fájlok
@@ -313,4 +318,3 @@ if (!isset($w_applogo)){
 $w_applogo=$wdhd_app_logo;
 
 ?>
-

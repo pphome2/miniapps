@@ -65,20 +65,19 @@ if (is_admin()){
 // A 'plugins_loaded' eseménynél már minden plugin függvénye elérhető
 add_action('plugins_loaded',function() {
   if (defined('WSWDTEAM')){
-    // admin ellenőrzés, verziók
-    //if (current_user_can('manage_options')){
-    //}
-    if (function_exists('wdhd_sys_init')){
-      wdhd_sys_check();
-    }
-    // alőkészítés
+    // előkészítés
     wdhd_main();
+    // admin ellenőrzés, verziók
+    if (is_admin()){
+      wdhd_admin_menu();
+    }
   }else{
     add_action('admin_notices',function(){
       echo('<div class="error"><p>A "WSWDTEAM" plugin szükséges a működéshez!</p></div>');
     });
   }
 });
+
 
 
 // betöltés, ha létezik minden előírt plugin
@@ -117,6 +116,9 @@ function wdhd_main(){
     $wdhd_developer_mode=false;
   }
   $wdhd_pagerow=$wswdteam_pagerow;
+
+  // rendszer beállítás
+  wdhd_init();
 }
 
 
@@ -160,12 +162,11 @@ function wdhd_init(){
     $wdhd_ticket_type[$i]=wdhd_lang($wdhd_ticket_type[$i],false);
     $i++;
   }
-  //wdhd_sys_check();
   if (isset($wswdteam_developer_mode)){
     $wdhd_developer_mode=$wswdteam_developer_mode;
   }
 }
-add_action('init','wdhd_init');
+//add_action('init','wdhd_init');
 
 
 // fejrész
@@ -177,6 +178,7 @@ function wdhd_head(){
   }
 }
 add_action('wp_head','wdhd_head');
+
 
 // lábrész
 function wdhd_footer(){
@@ -194,13 +196,30 @@ function wdhd_inc(){
   global $wdhd_inc_css,$wdhd_inc_js;
 
   if (file_exists(__DIR__.$wdhd_inc_css)){
-    wp_enqueue_style('wdhd_css',plugin_dir_url(__FILE__).$wdhd_inc_css);
+    include(__DIR__.$wdhd_inc_css);
   }
   if (file_exists(__DIR__.$wdhd_inc_js)){
-    wp_enqueue_script('wdhd_js',plugin_dir_url(__FILE__).$wdhd_inc_js);
+    include(__DIR__.$wdhd_inc_js);
   }
 }
 add_action('wp_enqueue_scripts','wdhd_inc');
+
+
+// js script és css betöltése
+function wdhd_admin_inc(){
+  global $wdhd_inc_admin_css,$wdhd_inc_admin_js;
+
+  if (is_admin()){
+    // admin script betöltés 
+    if (file_exists(__DIR__.$wdhd_inc_admin_css)){
+      include(__DIR__.$wdhd_inc_admin_css);
+    }
+    if (file_exists(__DIR__.$wdhd_inc_admin_js)){
+      include(__DIR__.$wdhd_inc_admin_js);
+    }
+  }
+}
+add_action('admin_enqueue_scripts','wdhd_admin_inc');
 
 
 //
@@ -217,11 +236,35 @@ function wdhd_logout_redirect(){
 add_filter('logout_redirect','wdhd_logout_redirect');
 
 
+
 // plugin bekapcsolási feladatok
-function wdhd_setup(){
+function wdhd_sys_setup(){
   wdhd_db_init();
   wdhd_sys_init();
 }
+
+
+
+// rendszer ellenőrzés
+function wdhd_sys_init(){
+  global $wdhd_plugin_version,$wdhd_options,$wdhd_developer_mode;
+
+  $ver=get_option($wdhd_options[0],'0');
+  // nincs plugin
+  if ($ver==="0"){
+    // új
+    wdhd_sys_new($ver,$wdhd_plugin_version);
+    wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
+  }else{
+    // frissítés kell
+    if ($ver<>$wdhd_plugin_version){
+      wdhd_sys_upgrade($ver,$wdhd_plugin_version);
+      wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
+    }
+  }
+}
+
+
 
 // plugin bekapcsolás
 function wdhd_activate(){
@@ -232,9 +275,10 @@ function wdhd_activate(){
       wp_create_category($cat);
     }
   }
-  wdhd_setup();
+  wdhd_sys_setup();
 }
 register_activation_hook(__FILE__,'wdhd_activate');
+
 
 // plugin kikapcsolás
 function wdhd_deactivate(){
@@ -255,4 +299,3 @@ add_shortcode('wdhd','wdhd_shortcode');
 
 
 ?>
-

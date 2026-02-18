@@ -54,17 +54,5 @@ function wdhd_db_upgrade($installed='',$new=''){
 }
 
 
-// adatbázisban sql végrehajtása
-function wdhd_sql($sql=''){
-  global $wpdb;
-
-  if (!empty($sql)){
-    $r=$wpdb->query($sql);
-  }else{
-    $r="";
-  }
-  retur($r);
-}
-
 
 ?>

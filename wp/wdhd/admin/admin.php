@@ -9,42 +9,8 @@ if (!defined('ABSPATH')){
 
 
 
-// admin script betöltés 
-if (file_exists(__DIR__.'/wdhd_admin.css')){
-  include(__DIR__.'/wdhd_admin.css');
-}
-if (file_exists(__DIR__.'/wdhd_admin.js')){
-  include(__DIR__.'/wdhd_admin.js');
-}
-
-// rendszer ellenőrzése
-//wdhd_sys_check();
-
-
-// verzió ellenőrzés és telepítés ha kell
-function wdhd_sys_check(){
-  wdhd_db_init();
-  wdhd_sys_init();
-}
-
-   
-// rendszer ellenőrzés
-function wdhd_sys_init(){
-  global $wdhd_plugin_version,$wdhd_options,$wdhd_developer_mode;
-
-  $ver=get_option($wdhd_options[0],'0');
-  // nincs plugin
-  if ($ver==="0"){
-    // új
-    wdhd_sys_new($ver,$wdhd_plugin_version);
-    wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
-  }else{
-    // frissítés kell
-    if ($ver<>$wdhd_plugin_version){
-      wdhd_sys_upgrade($ver,$wdhd_plugin_version);
-      wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
-    }
-  }
+// rendszer admin menu
+function wdhd_admin_menu(){
   add_action('admin_menu','wdhd_register_menu_page');
   add_action('admin_menu','wdhd_register_submenu_page');
   add_action('admin_menu','wdhd_register_submenu_page2');
@@ -126,22 +92,6 @@ function wdhd_remove_options_page(){
 }
 add_action('admin_menu','wdhd_remove_options_page',90);
 
-
-
-// rendszer telepítése
-function wdhd_sys_new($installed='',$new=''){
-  global $wdhd_options;
-
-  update_option($wdhd_options[0],$new);
-}
-
-
-// rendszer frissítése
-function wdhd_sys_upgrade($installed='',$new=''){
-  global $wdhd_options;
-
-  update_option($wdhd_options[0],$new);
-}
 
 
 

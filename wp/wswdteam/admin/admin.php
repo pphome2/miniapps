@@ -8,18 +8,6 @@ if (!defined('ABSPATH')){
 }
 
 
-// admin script betöltés 
-if (file_exists(__DIR__.'/wswdteam_admin.css')){
-  include(__DIR__.'/wswdteam_admin.css');
-}
-if (file_exists(__DIR__.'/wswdteam_admin.js')){
-  include(__DIR__.'/wswdteam_admin.js');
-}
-
-// rendszer ellenőrzése
-wswdteam_sys_check();
-
-
 // admin menü hozzáadása
 function wswdteam_register_menu_page(){
   $s1=plugin_dir_path(__FILE__).'/op_main.php';
@@ -93,13 +81,6 @@ function wswdteam_remove_options_page(){
 add_action('admin_menu','wswdteam_remove_options_page',90);
 
 
-// verzió ellenőrzés és telepítés ha kell
-function wswdteam_sys_check(){
-  wswdteam_db_init();
-  wswdteam_sys_init();
-}
-
-
 // rendszer ellenőrzés
 function wswdteam_sys_init(){
   global $wswdteam_plugin_version,$wswdteam_options,
@@ -118,22 +99,6 @@ function wswdteam_sys_init(){
       wswdteam_save_param($wswdteam_options[0],$wswdteam_plugin_version);
     }
   }
-}
-
-
-// rendszer telepítése
-function wswdteam_sys_new($installed='',$new=''){
-  global $wswdteam_options;
-
-  update_option($wswdteam_options[0],$new);
-}
-
-
-// rendszer frissítése
-function wswdteam_sys_upgrade($installed='',$new=''){
-  global $wswdteam_options;
-
-  update_option($wswdteam_options[0],$new);
 }
 
 
