@@ -162,24 +162,29 @@ function wswdteam_ptable_app($table){
   $res=$wpdb->get_results($sql);
   $i=1;
   foreach($res as $t) {
-	echo("<tr id=\"post-$i\">");
-	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$t->name</td>");
-	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$t->text</td>");
-	echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
-	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
-	echo("<input type=\"hidden\" id=\"name\" name=\"name\" value=\"$t->name\">");
-	echo("<input type=\"hidden\" id=\"text\" name=\"text\" value=\"$t->text\">");
-	echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
+  	echo("<tr id=\"post-$i\">");
+  	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$t->name</td>");
+  	if (in_array($t->text,["true","false"])){
+  	  $tl=wswdteam_lang($t->text);
+  	}else{
+  	  $tl=$t->text;
+  	}
+	  echo("<td class=\"columnn-title\" data-colname=\"c$i\">$tl</td>");
+  	echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
+	  echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+	  echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
+	  echo("<input type=\"hidden\" id=\"name\" name=\"name\" value=\"$t->name\">");
+	  echo("<input type=\"hidden\" id=\"text\" name=\"text\" value=\"$t->text\">");
+	  echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
     echo("<input type=\"submit\" id=\"m\" name=\"m\" class=\"button\" value=\"+\">");
-	echo("</form>");
-	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
-	echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
+  	echo("</form>");
+	  echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+	  echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
+	  echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
     echo("<input type=\"submit\" id=\"del\" name=\"del\" class=\"button\" value=\"-\">");
-	echo("</form>");
-	echo("</td>");
-	echo("</tr>");
+	  echo("</form>");
+	  echo("</td>");
+	  echo("</tr>");
     $i++;
   }
   ?>

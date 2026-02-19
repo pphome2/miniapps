@@ -28,7 +28,7 @@ wswdteam_datatable();
 
 
 function wswdteam_postdata(){
-  global $wswdteam_maintenance_mode;
+  global $wswdteam_maintenance_mode,$wswdteam_developer_mode,$wswdteam_dark_mode;
 
   if (isset($_POST['submit'])){
     if (isset($_POST['maintenance'])){
@@ -45,6 +45,13 @@ function wswdteam_postdata(){
       $wswdteam_developer_mode=false;
       wswdteam_save_param("wswdteam_developer_mode","false");
     }
+    if (isset($_POST['darkmode'])){
+      $wswdteam_darkmode_mode=true;
+      wswdteam_save_param("wswdteam_dark_mode","true");
+    } else {
+      $wswdteam_dark_mode=false;
+      wswdteam_save_param("wswdteam_dark_mode","false");
+    }
     //echo('<script type="text/javascript">location.reload();</script>');
   }
 }
@@ -53,6 +60,14 @@ function wswdteam_postdata(){
 // adattábla
 function wswdteam_datatable(){
   global $wswdteam_options;
+
+  // META TESZT
+  //$t=array("nev"=>"senki","adat"=>"valami");
+  //wswdteam_save_metadata($t);
+  //$t2=wswdteam_get_metadata();
+  //echo($t2["nev"]);
+  //wswdteam_delete_metadata();
+
 
   echo("<span class=wswdteamspaceholder></span>");
   echo("<b>".wswdteam_lang("Rendszer paraméterek").":</b>");
@@ -72,10 +87,22 @@ function wswdteam_datatable(){
   echo($wswdteam_options[1]." - ".$ver);
   echo("<br />");
   $dev=wswdteam_get_param("wswdteam_developer_mode");
-  echo("wswdteam_developer_mode"." - ".wswdteam_lang($dev));
+  if ($dev===""){
+    $dev="false";
+  }
+  echo(wswdteam_lang("wswdteam_developer_mode")." - ".wswdteam_lang($dev));
   echo("<br />");
   $maint=wswdteam_get_param("wswdteam_maintenance_mode");
-  echo("wswdteam_maintenance_mode"." - ".wswdteam_lang($maint));
+  if ($maint===""){
+    $maint="false";
+  }
+  echo(wswdteam_lang("wswdteam_maintenance_mode")." - ".wswdteam_lang($maint));
+  echo("<br />");
+  $dark=wswdteam_get_param("wswdteam_dark_mode");
+  if ($dark===""){
+    $dark="false";
+  }
+  echo(wswdteam_lang("wswdteam_dark_mode")." - ".wswdteam_lang($dark));
   echo("<span class=wswdteamspaceholder></span>");
   echo("<span class=wswdteamspaceholder></span>");
   echo('<b>'.wswdteam_lang('Beállítások').'</b>');
@@ -98,6 +125,15 @@ function wswdteam_datatable(){
   }
   echo('<input type="checkbox" id="maintenance" name="maintenance" value="1" '.$checked.">");
   echo('<span>'.wswdteam_lang('Karbantartási üzemmód bekapcsolása').'</span>');
+  echo(' </label>');
+  echo("<span class=wswdteamspaceholder></span>");
+  if ($dark==='true'){
+    $checked='checked';
+  } else {
+    $checked='';
+  }
+  echo('<input type="checkbox" id="darkmode" name="darkmode" value="1" '.$checked.">");
+  echo('<span>'.wswdteam_lang('Sötét mód kérése a téma sablontól').'</span>');
   echo(' </label>');
   submit_button(wswdteam_lang('Beállítások mentése'));
   echo('</form>');

@@ -44,6 +44,10 @@ if (defined('ABSPATH')){
 global $wswdteam_developer_mode;
 $wswdteam_developer_mode=false;
 
+// sötété mód kérése a témától mód
+global $wswdteam_dark_mode;
+$wswdteam_dark_mode=false;
+
 
 // karbantartási mód
 global $wswdteam_maintenance_mode;
@@ -64,6 +68,7 @@ $wswdteam_user_role_list=array(0=>'Adminisztrátor',
                                1=>'Szerkesztő',
                                2=>'Felhasználó'
                                );
+                               
 // alapértelmezett felhasználói szerepkör
 global $wswdteam_user_role;
 $wswdteam_user_role=9999;
@@ -106,6 +111,7 @@ global $wswdteam_main_files;
 $wswdteam_main_files=array('/core/main.php',
                            '/core/lib_backup.php',
                            '/core/lib_lang.php',
+                           '/core/lib_meta.php',
                            '/core/lib_msg.php',
                            '/core/lib_page.php',
                            '/core/lib_param.php',
@@ -151,6 +157,10 @@ $wswdteam_locale="hu_HU";
 global $wswdteam_pagerow;
 $wswdteam_pagerow=20;
 
+// META neve MINDIG TÖMBÖT KEZELÜNK META-KÉNT
+global $wswdteam_meta_name;
+$wswdteam_meta_name="wswdteam_meta_data";
+
 // üzenetek automatikus bezárása
 global $wswdteam_message_autohide;
 $wswdteam_message_autohide=true;
@@ -189,6 +199,12 @@ if (defined('ABSPATH')){
 }
 
 
+
+//
+// téma támogatás
+//
+// változókban átadva a beállítások, amit az app felülírhat
+
 // fejrész és lábrész előkészítése
 if (!isset($w_header_title)){
   global $w_header_title;
@@ -208,6 +224,11 @@ if (!isset($w_credit)){
 if (!isset($w_applogo)){
   global $w_applogo;
   $w_applogo=$wswdteam_app_logo;
+}
+
+if (!isset($w_darkmode)){
+  global $w_darkmode;
+  $w_darkmode=$wswdteam_dark_mode;
 }
 
 

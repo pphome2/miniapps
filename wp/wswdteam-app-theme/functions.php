@@ -27,6 +27,9 @@ if ($w_credit=="") {
   $w_credit=date('Y.m.d.');
 }
 
+
+
+// beállítások
 function minimal_theme_setup() {
     // Támogatás a fejlécben megjelenő automatikus title tag-hez
     add_theme_support('title-tag');
@@ -36,10 +39,34 @@ function minimal_theme_setup() {
     add_theme_support('align-wide');
     // Saját CSS fájl betöltése a frontend oldalon
     add_action('wp_enqueue_scripts','minimal_theme_enqueue_styles');
+    add_action('wp_enqueue_scripts','minimal_theme_color_styles');
 }
-
 add_action('after_setup_theme','minimal_theme_setup');
 
+
+
+// saját css szín alapján
+function minimal_theme_color_styles(){
+  global $w_darkmode;
+
+  // A CSS fájl regisztrálása és betöltése
+  if ($w_darkmode){
+    $f='/inc/style-dark.css';
+  }else{
+    $f='/inc/style-white.css';
+  }
+  wp_enqueue_style(
+    'color-style',
+    get_template_directory_uri() . $f,
+    array(),
+    '1.0',
+  'all'
+  );
+}
+
+
+
+// css betöltése
 function minimal_theme_enqueue_styles() {
     wp_enqueue_style( 
         'minimal-theme-style',
@@ -50,6 +77,8 @@ function minimal_theme_enqueue_styles() {
 }
 
 
+
+// fej cím
 function header_shortcode_title(){
     global $w_header_title;
 
@@ -68,6 +97,9 @@ function header_shortcode_title(){
 }
 add_shortcode('wswdteam_header_title','header_shortcode_title');
 
+
+
+// láb státusz sor
 function footer_shortcode_statusline() {
     global $w_status_line;
 
@@ -79,6 +111,9 @@ function footer_shortcode_statusline() {
 }
 add_shortcode('wswdteam_footer_statusline','footer_shortcode_statusline');
 
+
+
+// verzió
 function footer_shortcode_credit() {
     global $w_credit;
 

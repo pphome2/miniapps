@@ -5,6 +5,19 @@ Description: Telepíthető, modern blokk-alapú téma functions.php támogatáss
 Version: 1.0
 */
 
+
+/* változók beállítása */
+:root {
+    --headtext: #dedeed;
+    --headbackg: #000000;
+    --foottext: #dedede;
+    --footbackg: #000000;
+    --bodytext: #000000;
+    --bodybackg: #dedede;
+    --bordercolor: #000000;
+}
+
+
 /* Alap reset és box-model */
 /* * { box-sizing: border-box; } */
 
@@ -21,16 +34,17 @@ body, .wp-site-blocks {
     font-family: system-ui, -apple-system, sans-serif;
     line-height: 1.6;
     margin: 0;
-    color: #ffffff;
-    background-color: #000000;
+    color: var(--bodytext);
+    background-color: var(--bodybackg);
 }
 
 
 /* Header stílusok */
 header {
-    background: #d2d2d2;
+    background-color: var(--headbackg);
+    color: var(--headtext);
     padding: 1.5rem 5% 0 5%;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid var(--bordercolor);
 }
 
 header .wp-block-group {
@@ -60,8 +74,8 @@ footer {
     flex-shrink: 0;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
-    background: #d2d2d2;
-    color: #000000;
+    background-color: var(--footbackg);
+    color: var(--foottext);
     padding: 20px 30px 0px 30px;
     text-align: left;
 }

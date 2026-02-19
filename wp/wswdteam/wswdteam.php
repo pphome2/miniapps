@@ -51,25 +51,30 @@ if (isset($wswdteam_main_files)){
 }
 
 
-// karbantartási és fejlesztői mód mentett beállítás lekérdezése
-$maint=wswdteam_get_param("wswdteam_maintenance_mode");
-if ($maint!=""){
-  if ($maint==="true"){
-    $wswdteam_maintenance_mode=true;
-  }else{
-    $wswdteam_maintenance_mode=false;
-  }
-}
+
+// alapállapot beállítása
 $dev=wswdteam_get_param("wswdteam_developer_mode");
-if ($dev!=""){
-  if ($dev==="true"){
-    $wswdteam_developer_mode=true;
-  }else{
-    $wswdteam_developer_mode=false;
-  }
+if ($dev==="true"){
+  $wswdteam_developer_mode=true;
+}else{
+  $wswdteam_developer_mode=false;
 }
-
-
+$dev=wswdteam_get_param("wswdteam_maintenance_mode");
+if ($dev==="true"){
+  $wswdteam_maintenance_mode=true;
+}else{
+  $wswdteam_maintenance_mode=false;
+}
+$dark=wswdteam_get_param("wswdteam_dark_mode");
+if ($dark==="true"){
+  $wswdteam_dark_mode=true;
+  $w_darkmode=true;
+}else{
+  $wswdteam_dark_mode=false;
+  $w_darkmode=false;
+}
+  
+  
 
 // karbantartási mód
 function wswdteam_maintenance(){
@@ -114,7 +119,7 @@ if (is_admin()){
 function wswdteam_init(){
   global $locale, $wp_local_package,$wswdteam_options,$wswdteam_plugin_version,
          $wswdteam_user_role_list,$wswdteam_category,$wswdteam_locale,
-         $wswdteam_dir_lang,$wswdteam_developer_mode,$wswdteam_maintenance_mode;
+         $wswdteam_dir_lang;
 
   // nyelvi beállítás
   $loc="";
@@ -144,20 +149,9 @@ function wswdteam_init(){
     $wswdteam_category[$i]=wswdteam_lang($wswdteam_category[$i],false);
     $i++;
   }
-  $dev=wswdteam_get_param("wswdteam_developer_mode");
-  if ($dev==="true"){
-    $wswdteam_developer_mode=true;
-  }else{
-    $wswdteam_developer_mode=false;
-  }
-  $dev=wswdteam_get_param("wswdteam_maintenance_mode");
-  if ($dev==="true"){
-    $wswdteam_maintenance_mode=true;
-  }else{
-    $wswdteam_maintenance_mode=false;
-  }
 }
 add_action('init','wswdteam_init');
+
 
 
 // user menu a felső fekete sáv letiltása
@@ -171,6 +165,7 @@ add_filter('show_admin_bar',function($show){
 });
 
 
+
 // fejrész
 function wswdteam_head(){
   global $wswdteam_inc_head;
@@ -180,6 +175,7 @@ function wswdteam_head(){
   }
 }
 add_action('wp_head','wswdteam_head');
+
 
 
 // lábrész
@@ -208,6 +204,7 @@ function wswdteam_inc(){
 add_action('wp_enqueue_scripts','wswdteam_inc');
 
 
+
 // js script és css betöltése
 function wswdteam_admin_inc(){
   global $wswdteam_inc_admin_css,$wswdteam_inc_admin_js;
@@ -225,11 +222,13 @@ function wswdteam_admin_inc(){
 add_action('admin_enqueue_scripts','wswdteam_admin_inc');
 
 
-//
+
+// 
 function wswdteam_login_redirect(){
   return(home_url());
 }
 add_filter('login_redirect', 'wswdteam_login_redirect');
+
 
 
 // kilépés
@@ -239,11 +238,13 @@ function wswdteam_logout_redirect(){
 add_filter('logout_redirect','wswdteam_logout_redirect');
 
 
+
 // plugin bekapcsolási feladatok
 function wswdteam_setup(){
   wswdteam_db_init();
   wswdteam_sys_init();
 }
+
 
 
 // plugin bekapcsolás
@@ -260,10 +261,12 @@ function wswdteam_activate(){
 register_activation_hook(__FILE__,'wswdteam_activate' );
 
 
+
 // plugin kikapcsolás
 function wswdteam_deactivate(){
 }
 register_deactivation_hook(__FILE__,'wswdteam_deactivate' );
+
 
 
 // shortcode kezelés [wswdteam] text [/wswdteam]

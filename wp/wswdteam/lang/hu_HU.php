@@ -84,8 +84,11 @@ $wswdteam_lang_str=array(
 'Törölve' => 'Törölve',
 'Új paraméter' => 'Új paraméter',
 'Mégse' => 'Mégse',
-
-
+'wswdteam_developer_mode' => 'wswdteam_developer_mode',
+'wswdteam_maintenance_mode' => 'wswdteam_maintenance_mode',
+'wswdteam_dark_mode' => 'wswdteam_dark_mode',
+'Sötét mód kérése a téma sablontól' => 'Sötét mód kérése a téma sablontól',
+'Vissza' => 'Vissza',
 
 );
 
