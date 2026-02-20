@@ -73,8 +73,8 @@ if ($dark==="true"){
   $wswdteam_dark_mode=false;
   $w_darkmode=false;
 }
-  
-  
+
+
 
 // karbantartási mód
 function wswdteam_maintenance(){
@@ -149,7 +149,7 @@ function wswdteam_init(){
     $wswdteam_category[$i]=wswdteam_lang($wswdteam_category[$i],false);
     $i++;
   }
-  wswdteam_setup();
+  //wswdteam_setup();
   $wswdteam_option_data=wswdteam_get_option($wswdteam_option_name);
 }
 add_action('init','wswdteam_init');
