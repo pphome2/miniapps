@@ -91,12 +91,14 @@ function wswdteam_sys_init(){
   if ($ver==="0"){
     // új
     wswdteam_sys_new($ver,$wswdteam_plugin_version);
-    wswdteam_save_param($wswdteam_options[0],$wswdteam_plugin_version);
+    wswdteam_save_option($wswdteam_plugin_version,$wswdteam_options[0]);
+    //wswdteam_save_param($wswdteam_options[0],$wswdteam_plugin_version);
   }else{
     // frissítés kell
     if ($ver<>$wswdteam_plugin_version){
       wswdteam_sys_upgrade($ver,$wswdteam_plugin_version);
-      wswdteam_save_param($wswdteam_options[0],$wswdteam_plugin_version);
+      wswdteam_save_option($ver,$wswdteam_options[0]);
+      //wswdteam_save_param($wswdteam_options[0],$wswdteam_plugin_version);
     }
   }
 }

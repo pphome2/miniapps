@@ -37,24 +37,24 @@ function wswdteam_pform_app($w_id="",$w_name="",$w_text=""){
 
 
 // adatbeérkezés
-function wswdteam_param_formdata_app($table=array()){
-  global $wpdb;
-
+function wswdteam_param_formdata_app($data,$name=""){
   echo("<div class=wswdspaceholder></div>");
   // adatfeldolgozás
-  $table_name=$wpdb->prefix.$table[0];
+  $data=wswdteam_get_option($name);
   // törlés
   if (isset($_POST['del'])){
     $w_id=$_POST['id'];
-    $sql="DELETE FROM $table_name WHERE id=$w_id;";
-    $r=$wpdb->query($sql);
-    if ($r){
-      $l=wswdteam_lang('Törölve');
-      wswdteam_message($l);
-    }else{
-      $l=wswdteam_lang('Hiba történt');
-      wswdteam_error($l);
+    if (is_array($data)){
+      unset($data[$w_id]);
     }
+    $r=wswdteam_save_option($data,$name);
+     if ($r){
+       $l=wswdteam_lang('Törölve');
+       wswdteam_message($l);
+     }else{
+       $l=wswdteam_lang('Hiba történt');
+       wswdteam_error($l);
+     }
   }
 
   // form-ból adat
@@ -62,25 +62,14 @@ function wswdteam_param_formdata_app($table=array()){
     // mehet gomb után
     $w_name=$_POST['name'];
     $w_text=$_POST['text'];
-    if ((isset($_POST['id']))and($_POST['id']<>"")){
-      // javítás
-      $w_id=$_POST['id'];
-      $sql="UPDATE $table_name SET name='$w_name',text='$w_text' WHERE id=$w_id;";
-      $r=$wpdb->query($sql);
-      $l=wswdteam_lang('Módosítva');
+    $data[$w_name]=$w_text;
+    $r=wswdteam_save_option($data,$name);
+    if ($r){
+      $l=wswdteam_lang('Tárolva');
       wswdteam_message($l);
     }else{
-      // új adat
-      $w_id="";
-      $sql="INSERT INTO $table_name (name,text) VALUES ('$w_name','$w_text');";
-      $r=$wpdb->query($sql);
-      if ($r){
-        $l=wswdteam_lang('Tárolva');
-        wswdteam_message($l);
-      }else{
-        $l=wswdteam_lang('Hiba történt');
-        wswdteam_error($l);
-      }
+      $l=wswdteam_lang('Hiba történt');
+      wswdteam_error($l);
     }
   }else{
     // tábla vagy táblából adat
@@ -93,7 +82,7 @@ function wswdteam_param_formdata_app($table=array()){
       }
       $w_name=$_POST['name'];
       $w_text=$_POST['text'];
-      wswdteam_pform($w_id,$w_name,$w_text);
+      wswdteam_pform_app($w_id,$w_name,$w_text);
     }else{
     }
   }
@@ -117,27 +106,29 @@ function wswdteam_ppagehead_app(){
 
 
 // paraméteradat tábla
-function wswdteam_ptable_app($table){
-  global $wpdb,$wswdteam_pagerow;
+function wswdteam_ptable_app($data,$name=""){
+  global $wswdteam_pagerow;
 
   wswdteam_ppagehead_app();
-  $table_name=$wpdb->prefix.$table[0];
-  $sql="select count(*) from $table_name";
-  $db=$wpdb->get_var($sql);
-  if (isset($_POST['wpage'])){
-    $page=$_POST['wpage'];
-    if ($page<1){
-      $page=1;
-    }
-    if ($db<($page*$wswdteam_pagerow)){
-      if ($db<(($page-1)*$wswdteam_pagerow)){
+  $data=wswdteam_get_option($name);
+  $page=1;
+  if (!$data){
+    $db=count($data);
+    if (isset($_POST['wpage'])){
+      $page=$_POST['wpage'];
+      if ($page<1){
         $page=1;
       }
+      if ($db<($page*$wswdteam_pagerow)){
+        if ($db<(($page-1)*$wswdteam_pagerow)){
+          $page=1;
+        }
+      }
+    }else{
+      $page=1;
     }
-  }else{
-    $page=1;
+    $i=($page-1)*$wswdteam_pagerow;
   }
-  $i=($page-1)*$wswdteam_pagerow;
   //echo($db." - ".$page." - ".$i." - ".$wswdteam_pagerow);
   ?>
   <br />
@@ -158,34 +149,34 @@ function wswdteam_ptable_app($table){
     </thead>
     <tbody id="the-list">
   <?php
-  $sql="SELECT * FROM $table_name limit $i,$wswdteam_pagerow;";
-  $res=$wpdb->get_results($sql);
-  $i=1;
-  foreach($res as $t) {
-  	echo("<tr id=\"post-$i\">");
-  	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$t->name</td>");
-  	if (in_array($t->text,["true","false"])){
-  	  $tl=wswdteam_lang($t->text);
-  	}else{
-  	  $tl=$t->text;
-  	}
-	  echo("<td class=\"columnn-title\" data-colname=\"c$i\">$tl</td>");
-  	echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
-	  echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	  echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
-	  echo("<input type=\"hidden\" id=\"name\" name=\"name\" value=\"$t->name\">");
-	  echo("<input type=\"hidden\" id=\"text\" name=\"text\" value=\"$t->text\">");
-	  echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
-    echo("<input type=\"submit\" id=\"m\" name=\"m\" class=\"button\" value=\"+\">");
-  	echo("</form>");
-	  echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	  echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
-	  echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
-    echo("<input type=\"submit\" id=\"del\" name=\"del\" class=\"button\" value=\"-\">");
-	  echo("</form>");
-	  echo("</td>");
-	  echo("</tr>");
-    $i++;
+  if ($data){
+    $i=1;
+    foreach($data as $s=>$d) {
+    	echo("<tr id=\"post-$i\">");
+    	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$s</td>");
+    	if (in_array($d,["true","false"])){
+    	  $tl=wswdteam_lang($d);
+    	}else{
+    	  $tl=$d;
+    	}
+	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">$d</td>");
+    	echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
+	    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+	    echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$s\">");
+	    echo("<input type=\"hidden\" id=\"name\" name=\"name\" value=\"$s\">");
+	    echo("<input type=\"hidden\" id=\"text\" name=\"text\" value=\"$d\">");
+	    echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
+      echo("<input type=\"submit\" id=\"m\" name=\"m\" class=\"button\" value=\"+\">");
+    	echo("</form>");
+	    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+	    echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$s\">");
+	    echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
+      echo("<input type=\"submit\" id=\"del\" name=\"del\" class=\"button\" value=\"-\">");
+	    echo("</form>");
+	    echo("</td>");
+	    echo("</tr>");
+      $i++;
+    }
   }
   ?>
   </tbody>
@@ -200,8 +191,10 @@ function wswdteam_ptable_app($table){
   </div>
 
   <?php
-  echo("<br />");
-  wswdteam_pager_admin($db,$wswdteam_pagerow,$page,"wpage");
+  if (!$data){
+    echo("<br />");
+    wswdteam_pager_admin($db,$wswdteam_pagerow,$page,"wpage");
+  }
   echo("<span class=wswdteamspaceholder></span>");
 }
 
@@ -375,5 +368,3 @@ function wswdteam_pageload_app($dir="",$loc=""){
 
 
 ?>
-
-

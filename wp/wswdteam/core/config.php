@@ -111,8 +111,8 @@ global $wswdteam_main_files;
 $wswdteam_main_files=array('/core/main.php',
                            '/core/lib_backup.php',
                            '/core/lib_lang.php',
-                           '/core/lib_meta.php',
                            '/core/lib_msg.php',
+                           '/core/lib_opt_meta.php',
                            '/core/lib_page.php',
                            '/core/lib_param.php',
                            '/core/lib_param_table.php',
@@ -127,11 +127,12 @@ $wswdteam_main_files=array('/core/main.php',
 
 // alkalmazás fájlok
 global $wswdteam_content_files;
-$wswdteam_content_files=array('/content/app1.php',
-                              '/content/app2.php',
-                              '/content/app3.php',
-                              '/content/app4.php'
-                             );
+$wswdteam_content_files=array();
+//'/content/app1.php',
+  //                            '/content/app2.php',
+    //                          '/content/app3.php',
+      //                        '/content/app4.php'
+        //                     );
 
 // mentés letöltés
 global $wswdteam_backup_dl;
@@ -158,8 +159,15 @@ global $wswdteam_pagerow;
 $wswdteam_pagerow=20;
 
 // META neve MINDIG TÖMBÖT KEZELÜNK META-KÉNT
+// FELHASZNÁLÓHOZ MENT
 global $wswdteam_meta_name;
 $wswdteam_meta_name="wswdteam_meta_data";
+
+// OPTION neve LEHET MÁS NÉV IS GLOBÁLIS
+global $wswdteam_option_name;
+$wswdteam_option_name="wswdteam_option_data";
+global $wswdteam_option_data;
+$wswdteam_option_data=array($wswdteam_option_name=>'1');
 
 // üzenetek automatikus bezárása
 global $wswdteam_message_autohide;
@@ -167,9 +175,7 @@ $wswdteam_message_autohide=true;
 
 // sql táblák
 global $wswdteam_table;
-$wswdteam_table=array('wswdteamparam',
-                      'wswdteamuser'
-                     );
+$wswdteam_table=array('wswdteamuser');
 
 // kilépés ha nem wp-ből lett indítva
 if (defined('ABSPATH')){
@@ -179,23 +185,15 @@ if (defined('ABSPATH')){
   $charset_collate=$wpdb->get_charset_collate();
   $sql0="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wswdteam_table[0]." (
                             id mediumint(9) NOT NULL AUTO_INCREMENT,
-                            name tinytext NOT NULL,
-                            text text NOT NULL,
-                            PRIMARY KEY  (id)
-                            ) ".$charset_collate.";";
-  $sql1="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wswdteam_table[1]." (
-                            id mediumint(9) NOT NULL AUTO_INCREMENT,
                             uname tinytext NOT NULL,
                             urole int NOT NULL,
                             PRIMARY KEY  (id)
                             ) ".$charset_collate.";";
-  $wswdteam_sql_install=array($sql0,
-                          $sql1
-                         );
+  $wswdteam_sql_install=array($sql0);
 
   // sql táblák frissítése
   global $wswdteam_sql_update;
-  $wswdteam_sql_update=array("");
+  $wswdteam_sql_update=array($sql0);
 }
 
 

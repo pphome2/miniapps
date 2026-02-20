@@ -72,4 +72,3 @@ function wswdteam_lang_newlines_app(){
 }
 
 ?>
-

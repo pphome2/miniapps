@@ -14,7 +14,7 @@ function wswdteam_user_right(){
 
   $cuser=wp_get_current_user();
   $wswdteam_user_name=$cuser->user_login;
-  $table_name=$wpdb->prefix.$wswdteam_table[1];
+  $table_name=$wpdb->prefix.$wswdteam_table[0];
   $sql="SELECT * FROM $table_name WHERE uname='$wswdteam_user_name';";
   $res=$wpdb->get_results($sql);
   if (count($res)<>0){
@@ -39,7 +39,7 @@ function wswdteam_user_right_app($table=""){
 
   $cuser=wp_get_current_user();
   $uname=$cuser->user_login;
-  $table_name=$wpdb->prefix.$table[1];
+  $table_name=$wpdb->prefix.$table[0];
   $sql="SELECT * FROM $table_name WHERE uname='$uname';";
   $res=$wpdb->get_results($sql);
   if (count($res)<>0){

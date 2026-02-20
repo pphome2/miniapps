@@ -3,6 +3,13 @@
  * Minimal Theme funkciók és beállítások
  */
 
+
+// kilépés ha nem wp-ből lett indítva
+if (!defined('ABSPATH')){
+  exit;
+
+
+
 global $wswdteam_status_line;
 if (!isset($w_status_line)) {
   $w_status_line=date('Y.m.d.');

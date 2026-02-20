@@ -23,7 +23,7 @@ if (!in_array($ur,[0])){
 echo("<div class=wswdspaceholder></div>");
 
 // adatfeldolgozás
-$table_name=$wpdb->prefix.$wswdteam_table[1];
+$table_name=$wpdb->prefix.$wswdteam_table[0];
 
 // törlés
 if (isset($_POST['del'])){
@@ -150,7 +150,7 @@ function wswdteam_utable(){
     echo("$r<br />");
   }
   echo("<div class=\"wswdteamspaceholder\"></div>");
-  $table_name=$wpdb->prefix.$wswdteam_table[1];
+  $table_name=$wpdb->prefix.$wswdteam_table[0];
   $sql="SELECT COUNT(*) FROM $table_name";
   $db=$wpdb->get_var($sql);
   if (isset($_POST['wpage'])){

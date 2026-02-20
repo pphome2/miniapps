@@ -28,7 +28,6 @@ function wswdteam_db_upgrade($installed='',$new=''){
   foreach ($wswdteam_sql_update as $sql){
     $r=$wpdb->query($sql);
   }
-  //$r=$wpdb->query($sql);
 
   update_option($wswdteam_options[1],$wswdteam_db_version);
 }

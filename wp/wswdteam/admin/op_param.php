@@ -37,9 +37,9 @@ echo("<div class=wswdspaceholder></div>");
 
 
 function wswdteam_param_formdata(){
-  global $wswdteam_table;
+  global $wswdteam_option_data,$wswdteam_option_name;
 
-  wswdteam_param_formdata_app($wswdteam_table);
+  wswdteam_param_formdata_app($wswdteam_option_data,$wswdteam_option_name);
 }
 
 
@@ -54,9 +54,9 @@ function wswdteam_pform($w_id="",$w_name="",$w_text=""){
 
 // adat tábla
 function wswdteam_ptable(){
-  global $wswdteam_table;
+  global $wswdteam_option_data,$wswdteam_option_name;
 
-  wswdteam_ptable_app($wswdteam_table);
+  wswdteam_ptable_app($wswdteam_option_data,$wswdteam_option_name);
 }
 
 

@@ -33,24 +33,24 @@ function wswdteam_postdata(){
   if (isset($_POST['submit'])){
     if (isset($_POST['maintenance'])){
       $wswdteam_maintenance_mode=true;
-      wswdteam_save_param("wswdteam_maintenance_mode","true");
+      wswdteam_save_param("true","wswdteam_maintenance_mode");
     } else {
       $wswdteam_maintenance_mode=false;
-      wswdteam_save_param("wswdteam_maintenance_mode","false");
+      wswdteam_save_param("false","wswdteam_maintenance_mode");
     }
     if (isset($_POST['developer'])){
       $wswdteam_developer_mode=true;
-      wswdteam_save_param("wswdteam_developer_mode","true");
+      wswdteam_save_param("true","wswdteam_developer_mode");
     } else {
       $wswdteam_developer_mode=false;
-      wswdteam_save_param("wswdteam_developer_mode","false");
+      wswdteam_save_param("false","wswdteam_developer_mode");
     }
     if (isset($_POST['darkmode'])){
       $wswdteam_darkmode_mode=true;
-      wswdteam_save_param("wswdteam_dark_mode","true");
+      wswdteam_save_param("true","wswdteam_dark_mode");
     } else {
       $wswdteam_dark_mode=false;
-      wswdteam_save_param("wswdteam_dark_mode","false");
+      wswdteam_save_param("false","wswdteam_dark_mode");
     }
     //echo('<script type="text/javascript">location.reload();</script>');
   }
@@ -65,9 +65,12 @@ function wswdteam_datatable(){
   //$t=array("nev"=>"senki","adat"=>"valami");
   //wswdteam_save_metadata($t);
   //$t2=wswdteam_get_metadata();
-  //echo($t2["nev"]);
+  //if ($t2){}
+  //  echo($t2["nev"]);
+  //}else{
+  //  echo("HIBA");
+  //}
   //wswdteam_delete_metadata();
-
 
   echo("<span class=wswdteamspaceholder></span>");
   echo("<b>".wswdteam_lang("Rendszer paraméterek").":</b>");
