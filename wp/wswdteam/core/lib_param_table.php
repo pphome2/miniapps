@@ -9,9 +9,12 @@ if (!defined('ABSPATH')){
 }
 
 
+
+
+
 // adat form
-function wswdteam_pform_app($w_id="",$w_name="",$w_text=""){
-  wswdteam_ppagehead_app();
+function wswdteam_param_form_app($w_id="",$w_name="",$w_text=""){
+  wswdteam_param_pagehead_app();
   echo("<br />");
   echo("<h2>".wswdteam_lang('Új paraméter')."</h2>");
   echo("<br />");
@@ -37,8 +40,8 @@ function wswdteam_pform_app($w_id="",$w_name="",$w_text=""){
 
 
 // adatbeérkezés
-function wswdteam_param_formdata_app($data,$name=""){
-  echo("<div class=wswdspaceholder></div>");
+function wswdteam_param_formdata_app($data="",$name=""){
+  echo("<div class=wswdteamspaceholder></div>");
   // adatfeldolgozás
   $data=wswdteam_get_option($name);
   // törlés
@@ -62,14 +65,16 @@ function wswdteam_param_formdata_app($data,$name=""){
     // mehet gomb után
     $w_name=$_POST['name'];
     $w_text=$_POST['text'];
-    $data[$w_name]=$w_text;
-    $r=wswdteam_save_option($data,$name);
-    if ($r){
-      $l=wswdteam_lang('Tárolva');
-      wswdteam_message($l);
-    }else{
-      $l=wswdteam_lang('Hiba történt');
-      wswdteam_error($l);
+    if (isset($data[$w_name])&&($data[$w_name]!=$w_text)){
+      $data[$w_name]=$w_text;
+      $r=wswdteam_save_option($data,$name);
+      if ($r){
+        $l=wswdteam_lang('Tárolva');
+        wswdteam_message($l);
+      }else{
+        $l=wswdteam_lang('Hiba történt');
+        wswdteam_error($l);
+      }
     }
   }else{
     // tábla vagy táblából adat
@@ -82,7 +87,7 @@ function wswdteam_param_formdata_app($data,$name=""){
       }
       $w_name=$_POST['name'];
       $w_text=$_POST['text'];
-      wswdteam_pform_app($w_id,$w_name,$w_text);
+      wswdteam_param_form_app($w_id,$w_name,$w_text);
     }else{
     }
   }
@@ -91,7 +96,7 @@ function wswdteam_param_formdata_app($data,$name=""){
 
 
 //fejléc
-function wswdteam_ppagehead_app(){
+function wswdteam_param_pagehead_app(){
   echo("<br />");
   echo("<h1>".wswdteam_lang('Egyéb beállítások')."</h1>");
   echo("<br />");
@@ -106,10 +111,10 @@ function wswdteam_ppagehead_app(){
 
 
 // paraméteradat tábla
-function wswdteam_ptable_app($data,$name=""){
+function wswdteam_param_table_app($data,$name=""){
   global $wswdteam_pagerow;
 
-  wswdteam_ppagehead_app();
+  wswdteam_param_pagehead_app();
   $data=wswdteam_get_option($name);
   $page=1;
   if (!$data){
@@ -203,7 +208,7 @@ function wswdteam_ptable_app($data,$name=""){
 
 
 // bejegyzések betöltése könyvtárból
-function wswdteam_pload_app($dir="",$loc=""){
+function wswdteam_post_load_app($dir="",$loc=""){
   echo("<span class=wswdteamspaceholder></span>");
   echo("<h2>".wswdteam_lang('Bejegyzés feltöltés - Frissítés utáni feladat')."</h2>");
   echo("<br />");
@@ -286,7 +291,7 @@ function wswdteam_pload_app($dir="",$loc=""){
 
 
 // lapok betöltése könyvtárból
-function wswdteam_pageload_app($dir="",$loc=""){
+function wswdteam_page_load_app($dir="",$loc=""){
   echo("<span class=wswdteamspaceholder></span>");
   echo("<h2>".wswdteam_lang('Lapok feltöltés - Frissítés utáni feladat')."</h2>");
   echo("<span class=wswdteamspaceholder></span>");

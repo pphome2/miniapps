@@ -8,6 +8,7 @@ if (!defined('ABSPATH')){
 }
 
 
+
 // rendszer változók
 define('WSWDTEAM','wswdteam');
 
@@ -122,17 +123,18 @@ $wswdteam_main_files=array('/core/main.php',
                            '/core/lib_sql_setup.php',
                            '/core/lib_sys_setup.php',
                            '/core/lib_system.php',
+                           '/core/lib_users.php',
                            '/core/lib_view.php',
                            );
 
 // alkalmazás fájlok
 global $wswdteam_content_files;
 $wswdteam_content_files=array();
-//'/content/app1.php',
-  //                            '/content/app2.php',
-    //                          '/content/app3.php',
-      //                        '/content/app4.php'
-        //                     );
+//           '/content/app1.php',
+//           '/content/app2.php',
+//           '/content/app3.php',
+//           '/content/app4.php'
+//         );
 
 // mentés letöltés
 global $wswdteam_backup_dl;
@@ -167,7 +169,12 @@ $wswdteam_meta_name="wswdteam_meta_data";
 global $wswdteam_option_name;
 $wswdteam_option_name="wswdteam_option_data";
 global $wswdteam_option_data;
-$wswdteam_option_data=array($wswdteam_option_name=>'1');
+$wswdteam_option_data=array();
+// OPTION neve LEHET MÁS NÉV IS GLOBÁLIS
+global $wswdteam_option_user_name;
+$wswdteam_option_user_name="wswdteam_option_user_data";
+global $wswdteam_option_user_data;
+$wswdteam_option_user_data=array();
 
 // üzenetek automatikus bezárása
 global $wswdteam_message_autohide;
@@ -181,14 +188,13 @@ $wswdteam_table=array('wswdteamuser');
 if (defined('ABSPATH')){
   // sql táblák létrehozása
   global $wpdb;
-  global $wswdteam_sql_install;
   $charset_collate=$wpdb->get_charset_collate();
-  $sql0="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wswdteam_table[0]." (
-                            id mediumint(9) NOT NULL AUTO_INCREMENT,
-                            uname tinytext NOT NULL,
-                            urole int NOT NULL,
-                            PRIMARY KEY  (id)
-                            ) ".$charset_collate.";";
+  
+  // sql utasítás létrehozáshoz vagy frissítéshez
+  $sql0="";
+
+  // sql táblák létrehozása
+  global $wswdteam_sql_install;
   $wswdteam_sql_install=array($sql0);
 
   // sql táblák frissítése

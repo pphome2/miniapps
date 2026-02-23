@@ -31,27 +31,29 @@ function wswdteam_postdata(){
   global $wswdteam_maintenance_mode,$wswdteam_developer_mode,$wswdteam_dark_mode;
 
   if (isset($_POST['submit'])){
+    $param=wswdteam_get_option();
     if (isset($_POST['maintenance'])){
+      $param['wswdteam_maintenance_mode']='true';
       $wswdteam_maintenance_mode=true;
-      wswdteam_save_param("true","wswdteam_maintenance_mode");
-    } else {
+    }else{
+      $param['wswdteam_maintenance_mode']='false';
       $wswdteam_maintenance_mode=false;
-      wswdteam_save_param("false","wswdteam_maintenance_mode");
     }
     if (isset($_POST['developer'])){
+      $param['wswdteam_developer_mode']='true';
       $wswdteam_developer_mode=true;
-      wswdteam_save_param("true","wswdteam_developer_mode");
-    } else {
+    }else{
+      $param['wswdteam_developer_mode']='false';
       $wswdteam_developer_mode=false;
-      wswdteam_save_param("false","wswdteam_developer_mode");
     }
     if (isset($_POST['darkmode'])){
+      $param['wswdteam_dark_mode']='true';
       $wswdteam_darkmode_mode=true;
-      wswdteam_save_param("true","wswdteam_dark_mode");
-    } else {
+    }else{
+      $param['wswdteam_dark_mode']='false';
       $wswdteam_dark_mode=false;
-      wswdteam_save_param("false","wswdteam_dark_mode");
     }
+    wswdteam_save_option($param);
     //echo('<script type="text/javascript">location.reload();</script>');
   }
 }
@@ -82,28 +84,30 @@ function wswdteam_datatable(){
   echo($wswdteam_options[1]." - ".$ver);
   echo("<span class=wswdteamspaceholder></span>");
   echo("<b>".wswdteam_lang("Alkalmazás paraméterek").":</b>");
-  echo("<span class=wswdteamspaceholder></span>");
-  $ver=wswdteam_get_param($wswdteam_options[0]);
-  echo($wswdteam_options[0]." - ".$ver);
   echo("<br />");
-  $ver=wswdteam_get_param($wswdteam_options[1]);
-  echo($wswdteam_options[1]." - ".$ver);
   echo("<br />");
-  $dev=wswdteam_get_param("wswdteam_developer_mode");
-  if ($dev===""){
-    $dev="false";
+  $dev='false';
+  $maint='false';
+  $dark='false';
+  $param=wswdteam_get_option();
+  if (isset($param['wswdteam_developer_mode'])){
+    if ($param['wswdteam_developer_mode']==='true'){
+      $dev='true';
+    }
   }
   echo(wswdteam_lang("wswdteam_developer_mode")." - ".wswdteam_lang($dev));
   echo("<br />");
-  $maint=wswdteam_get_param("wswdteam_maintenance_mode");
-  if ($maint===""){
-    $maint="false";
+  if (isset($param['wswdteam_maintenance_mode'])){
+    if ($param['wswdteam_maintenance_mode']==='true'){
+      $maint='true';
+    }
   }
   echo(wswdteam_lang("wswdteam_maintenance_mode")." - ".wswdteam_lang($maint));
   echo("<br />");
-  $dark=wswdteam_get_param("wswdteam_dark_mode");
-  if ($dark===""){
-    $dark="false";
+  if (isset($param['wswdteam_dark_mode'])){
+    if ($param['wswdteam_dark_mode']==='true'){
+      $dark='true';
+    }
   }
   echo(wswdteam_lang("wswdteam_dark_mode")." - ".wswdteam_lang($dark));
   echo("<span class=wswdteamspaceholder></span>");

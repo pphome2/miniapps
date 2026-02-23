@@ -53,19 +53,32 @@ if (isset($wswdteam_main_files)){
 
 
 // alapállapot beállítása
-$dev=wswdteam_get_param("wswdteam_developer_mode");
+$parameters=wswdteam_get_option();
+if (isset($parameters['wswdteam_developer_mode'])){
+  $dev=$parameters['wswdteam_developer_mode'];
+}else{
+  $dev="";
+}
 if ($dev==="true"){
   $wswdteam_developer_mode=true;
 }else{
   $wswdteam_developer_mode=false;
 }
-$dev=wswdteam_get_param("wswdteam_maintenance_mode");
-if ($dev==="true"){
+if (isset($parameters['wswdteam_maintenance_mode'])){
+  $maint=$parameters['wswdteam_maintenance_mode'];
+}else{
+  $maint="";
+}
+if ($maint==="true"){
   $wswdteam_maintenance_mode=true;
 }else{
   $wswdteam_maintenance_mode=false;
 }
-$dark=wswdteam_get_param("wswdteam_dark_mode");
+if (isset($parameters['wswdteam_dark_mode'])){
+  $dark=$parameters['wswdteam_dark_mode'];
+}else{
+  $dark="";
+}
 if ($dark==="true"){
   $wswdteam_dark_mode=true;
   $w_darkmode=true;

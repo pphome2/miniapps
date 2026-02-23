@@ -21,14 +21,14 @@
 
 
 // OPTION adatok mentése mint a cookie
-function wswdteam_save_option($tomb="",$name=""){
+function wswdteam_save_option($tomb,$name=""){
   global $wswdteam_option_name;
 
   if ($name===""){
     $name=$wswdteam_option_name;
   }
   $v=false;
-  if (($tomb)&&($tomb!="")){
+  if ((isset($tomb))&&(is_array($tomb))){
     $v=update_option($name, $tomb);
   }
   return($v);

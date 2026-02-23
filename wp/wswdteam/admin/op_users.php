@@ -22,224 +22,56 @@ if (!in_array($ur,[0])){
 
 echo("<div class=wswdspaceholder></div>");
 
+
 // adatfeldolgozás
-$table_name=$wpdb->prefix.$wswdteam_table[0];
+wswdteam_user_formdata();
 
-// törlés
-if (isset($_POST['del'])){
-  $w_id=$_POST['id'];
-  $sql="DELETE FROM $table_name WHERE id=$w_id;";
-  $r=$wpdb->query($sql);
-  if ($r){
-    $l=wswdteam_lang('Törölve');
-    wswdteam_message($l);
-  }else{
-    $l=wswdteam_lang('Hiba történt');
-    wswdteam_error($l);
-  }
-}
-
-// form-ból adat
-if (isset($_POST['submit'])){
-  // mehet gomb után
-  $w_uname=$_POST['uname'];
-  $w_urole=$_POST['urole'];
-  if ((isset($_POST['id']))and($_POST['id']<>"")){
-    // javítás
-    $w_id=$_POST['id'];
-    $sql="UPDATE $table_name SET uname='$w_uname',urole='$w_urole' WHERE id=$w_id;";
-    $r=$wpdb->query($sql);
-    if ($r){
-      $l=wswdteam_lang('Módosítva');
-      wswdteam_message($l);
-    }else{
-      $l=wswdteam_lang('Hiba történt');
-      wswdteam_error($l);
-    }
-  }else{
-    // új adat
-    $w_id="";
-    $sql="SELECT * FROM $table_name WHERE uname='$w_uname';";
-    $res=$wpdb->get_results($sql);
-    if (count($res)<>0){
-      $l=wswdteam_lang('A felhasználó már felvéve.');
-      wswdteam_error($l);
-    }else{
-      $sql="INSERT INTO $table_name (uname,urole) VALUES ('$w_uname',$w_urole);";
-      $r=$wpdb->query($sql);
-      if ($r){
-        $l=wswdteam_lang('Tárolva');
-        wswdteam_message($l);
-      }else{
-        $l=wswdteam_lang('Hiba történt');
-        wswdteam_error($l);
-      }
-    }
-  }
-  wswdteam_utable();
+// főbb funkciók
+if (isset($_POST['new'])){
+  // új adat gomb a táblából
+  wswdteam_user_form();
 }else{
-  // tábla vagy táblából adat
-  if (isset($_POST['m'])){
-    // táblából adat javításra
-    if (isset($_POST['id'])){
-      $w_id=$_POST['id'];
-    }else{
-      $w_id="";
-    }
-    $w_uname=$_POST['uname'];
-    $w_urole=$_POST['urole'];
-    wswdteam_uform($w_id,$w_uname,$w_urole);
-  }else{
-    if (isset($_POST['new'])){
-      // új adat gomb a táblából
-      wswdteam_uform();
-    }else{
-      wswdteam_utable();
-    }
+  if (!isset($_POST['m'])){
+    wswdteam_user_table();
   }
 }
+
+
+
+echo("<div class=wswdspaceholder></div>");
+
+
+
+// adat formból, feldolgozás
+function wswdteam_user_formdata(){
+  global $wswdteam_option_user_data,$wswdteam_option_user_name;
+
+  wswdteam_user_formdata_app($wswdteam_option_user_data,$wswdteam_option_user_name);
+}
+
 
 
 // adat form
-function wswdteam_uform($w_id="",$w_uname="",$w_urole=""){
-  global $wswdteam_user_role_list;
+function wswdteam_user_form(){
+  global $wswdteam_option_user_data,$wswdteam_option_user_name;
 
-  wswdteam_upagehead();
-  if (isset($_POST['wpage'])){
-    $page=$_POST['wpage'];
-  }
-  $wusers=get_users(array('echo'=>false));
-  ?>
-  <form action="<?php menu_page_url(__FILE__) ?>" method="post">
-    <label for="uname"><?php echo(wswdteam_lang('Felhasználó')); ?>:</label><br>
-    <select id="uname" name="uname">
-      <?php
-        foreach($wusers as $u){
-          echo("<option value=\"$u->display_name\">".$u->display_name."</option>");
-        }
-      ?>
-    </select><br />
-    <label for="urole"><?php echo(wswdteam_lang('Jogosultsági szint')); ?>:</label><br>
-    <select id="urole" name="urole">
-      <?php
-        $i=0;
-        foreach($wswdteam_user_role_list as $r){
-          echo("<option value=$i>".$r."</option>");
-          $i++;
-        }
-      ?>
-    </select><br />
-    <input type="hidden" id="id" name="id" value="<?php echo($w_id); ?>">
-    <input type="hidden" id="wpage" name="wpage" value="<?php echo($page); ?>">
-    <br /><br />
-    <input type="submit" class="button" id="submit" name="submit" value="<?php echo(wswdteam_lang('Mehet')); ?>">
-    <input type="submit" class="button" id="x" name="x" value="<?php echo(wswdteam_lang('Mégse')); ?>">
-  </form>
-  <br /><br />
-  <?php
+  wswdteam_user_form_app($wswdteam_option_user_data,$wswdteam_option_user_name);
 }
+
 
 
 // adat tábla
-function wswdteam_utable(){
-  global $wpdb,$wswdteam_table,$wswdteam_pagerow,$wswdteam_user_role_list;
+function wswdteam_user_table(){
+  global $wswdteam_option_user_data,$wswdteam_user_role_list,$wswdteam_option_user_name;
 
-  wswdteam_upagehead();
-  echo(wswdteam_lang("A rendszer által kezelt jogcsoportok").":<br /><br />");
-  foreach($wswdteam_user_role_list as $r){
-    echo("$r<br />");
-  }
-  echo("<div class=\"wswdteamspaceholder\"></div>");
-  $table_name=$wpdb->prefix.$wswdteam_table[0];
-  $sql="SELECT COUNT(*) FROM $table_name";
-  $db=$wpdb->get_var($sql);
-  if (isset($_POST['wpage'])){
-    $page=$_POST['wpage'];
-    if ($page<1){
-      $page=1;
-    }
-    if ($db<($page*$wswdteam_pagerow)){
-      if ($db<(($page-1)*$wswdteam_pagerow)){
-        $page=1;
-      }
-    }
-  }else{
-    $page=1;
-  }
-  $i=($page-1)*$wswdteam_pagerow;
-  //echo($db." - ".$page." - ".$i." - ".$wswdteam_pagerow);
-  ?>
-  <br />
-  <form action="<?php menu_page_url(__FILE__) ?>" method="post">
-    <input type="hidden" id="wpage" name="wpage" value="<?php echo($page); ?>">
-    <input type="submit" class="button" id="new" name="new" value="<?php echo(wswdteam_lang('Új')); ?>">
-  </form>
-  <br />
-  <br />
-  <div style="width:99%">
-  <table class="wp-list-table widefat fixed striped table-view-list">
-    <thead>
-	  <tr>
-	    <th scope="col" id="title" class="manage-column" style="width:45%;"><?php echo(wswdteam_lang('Felhasználó')); ?></th>
-	    <th scope="col" id="author" class="manage-column" style="width:45%;"><?php echo(wswdteam_lang('Jogcsoport')); ?></th>
-	    <th scope="col" id="tags" class="manage-column"><?php echo(wswdteam_lang('Töröl')); ?></th>
-	  </tr>
-    </thead>
-    <tbody id="the-list">
-  <?php
-  $sql="SELECT * FROM $table_name limit $i,$wswdteam_pagerow;";
-  $res=$wpdb->get_results($sql);
-  if (count($res)<>0){
-  $i=1;
-  foreach($res as $t) {
-	echo("<tr id=\"post-$i\">");
-	$l=$wswdteam_user_role_list[$t->urole];
-	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$t->uname</td>");
-	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$l</td>");
-	echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
-	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
-	//echo("<input type=\"hidden\" id=\"uname\" name=\"uname\" value=\"$t->uname\">");
-	//echo("<input type=\"hidden\" id=\"urole\" name=\"urole\" value=\"$t->urole\">");
-	//echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
-    //echo("<input type=\"submit\" id=\"m\" name=\"m\" class=\"button\" value=\"+\">");
-	//echo("</form>");
-	echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
-	echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
-    echo("<input type=\"submit\" id=\"del\" name=\"del\" class=\"button\" value=\"-\">");
-	echo("</form>");
-	echo("</td>");
-	echo("</tr>");
-    $i++;
-  }
-  }
-  ?>
-  </tbody>
-    <tfoot>
-	  <tr>
-	    <th scope="col" id="title" class="manage-column"><?php echo(wswdteam_lang('Felhasználó')); ?></th>
-	    <th scope="col" id="author" class="manage-column"><?php echo(wswdteam_lang('Jogcsoport')); ?></th>
-	    <th scope="col" id="tags" class="manage-column"><?php echo(wswdteam_lang('Töröl')); ?></th>
-	  </tr>
-    </tfoot>
-  </table>
-  </div>
-
-  <?php
-  echo("<br />");
-  wswdteam_pager_admin($db,$wswdteam_pagerow,$page,"wpage");
-  echo("<span class=wswdteamspaceholder></span>");
+  wswdteam_user_table_app($wswdteam_option_user_data,$wswdteam_user_role_list,$wswdteam_option_user_name);
 }
 
 
+
 //fejléc
-function wswdteam_upagehead(){
-  echo("<br />");
-  echo("<h1>".wswdteam_lang('Felhasználói jogok beállítása')."</h1>");
-  echo("<br />");
-  echo(wswdteam_lang('Jogosultsági szint rendelése felhasználóhoz.'));
-  echo("<span class=wswdteamspaceholder></span>");
+function wswdteam_user_pagehead(){
+  wswdteam_user_pagehead_app();
 }
 
 

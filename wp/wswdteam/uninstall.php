@@ -27,12 +27,16 @@ foreach ($wswdteam_table as $t){
 foreach ($wswdteam_options as $o){
   delete_option($o);
 }
+delete_option($wswdteam_option_name);
+delete_option($wswdteam_option_user_name);
 
 // tárolt változók törlése
 foreach ($wswdteam_category as $c){
   $cid=get_cat_ID($c);
   wp_delete_category($cid);
 }
+
+
 
 // mentésfájlok törlése
 $md=wp_upload_dir();
