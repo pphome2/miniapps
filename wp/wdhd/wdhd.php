@@ -39,6 +39,7 @@ if (file_exists(__DIR__.'/core/config.php')){
 }
 
 
+
 // rendszerfájlok betöltése
 if (isset($wdhd_main_files)){
   foreach($wdhd_main_files as $f){
@@ -83,8 +84,8 @@ add_action('plugins_loaded',function() {
 // betöltés, ha létezik minden előírt plugin
 function wdhd_main(){
   global $wdhd_main_files,$wdhd_content_files,$wdhd_admin_file,$exit,
-          $wdhd_dwveloper_mode,$wswdteam_developer_mode,
-          $wdhd_pagerow,$wswdteam_pagerow;
+          $wdhd_developer_mode,$wswdteam_developer_mode,
+          $wdhd_pagerow,$wswdteam_pagerow,$wdhd_option_name;
 
   // alkalmazásfájlok betöltése
   if (isset($wdhd_content_files)){
@@ -96,22 +97,8 @@ function wdhd_main(){
       }
     }
   }
-  $dev=wdhd_get_param("wdhd_developer_mode");
   if (isset($wswdteam_developer_mode)){
     $wdhd_developer_mode=$wswdteam_developer_mode;
-    $dev='';
-  }
-  if ($dev===''){
-    if ($wdhd_developer_mode){
-      wdhd_save_param("wdhd_developer_mode","true");
-      $dev="true";
-    }else{
-      wdhd_save_param("wdhd_developer_mode","false");
-      $dev="false";
-    }
-  }
-  if ($dev==="true"){
-    $wdhd_developer_mode=true;
   }else{
     $wdhd_developer_mode=false;
   }
@@ -125,7 +112,8 @@ function wdhd_main(){
 
 // plugin előkészítés
 function wdhd_init(){
-  global $locale, $wp_local_package,$wdhd_options,$wdhd_plugin_version,
+  global $locale, $wp_local_package,$wdhd_options,
+         $wdhd_plugin_version,$wdhd_db_version,$wdhd_option_name,
          $wdhd_user_role_list,$wdhd_category,$wdhd_locale,
          $wdhd_dir_lang,$wdhd_ticket_type,$wdhd_developer_mode;
 
@@ -241,27 +229,6 @@ add_filter('logout_redirect','wdhd_logout_redirect');
 function wdhd_sys_setup(){
   wdhd_db_init();
   wdhd_sys_init();
-}
-
-
-
-// rendszer ellenőrzés
-function wdhd_sys_init(){
-  global $wdhd_plugin_version,$wdhd_options,$wdhd_developer_mode;
-
-  $ver=get_option($wdhd_options[0],'0');
-  // nincs plugin
-  if ($ver==="0"){
-    // új
-    wdhd_sys_new($ver,$wdhd_plugin_version);
-    wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
-  }else{
-    // frissítés kell
-    if ($ver<>$wdhd_plugin_version){
-      wdhd_sys_upgrade($ver,$wdhd_plugin_version);
-      wdhd_save_param($wdhd_options[0],$wdhd_plugin_version);
-    }
-  }
 }
 
 

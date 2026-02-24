@@ -89,6 +89,8 @@ $wswdteam_lang_str=array(
 'wswdteam_dark_mode' => 'wswdteam_dark_mode',
 'Sötét mód kérése a téma sablontól' => 'Sötét mód kérése a téma sablontól',
 'Vissza' => 'Vissza',
+'Tárolva' => 'Tárolva',
+'Jogosultsági szint' => 'Jogosultsági szint',
 
 );
 

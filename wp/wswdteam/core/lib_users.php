@@ -11,9 +11,80 @@ if (!defined('ABSPATH')){
 
 
 
+// teljes felhasználókezelés
+function wswdteam_users_admin(){
+  // adatfeldolgozás
+  wswdteam_user_formdata();
+  // főbb funkciók
+  if (isset($_POST['new'])){
+    // új adat gomb a táblából
+    wswdteam_user_form();
+  }else{
+    if (!isset($_POST['m'])){
+      wswdteam_user_table();
+    }
+  }
+}
+
+
+
+
+// teljes felhasználókezelés APP-ból
+function wswdteam_users_admin_app($role,$name=""){
+  if ($name!=""){
+    // adatfeldolgozás
+    wswdteam_user_formdata_app($role,$name);
+    // főbb funkciók
+    if (isset($_POST['new'])){
+      // új adat gomb a táblából
+      wswdteam_user_form_app($role,$name);
+    }else{
+      if (!isset($_POST['m'])){
+        wswdteam_user_table_app($role,$name);
+      }
+    }
+  }
+}
+
+
+
+// adat formból, feldolgozás
+function wswdteam_user_formdata(){
+  global $wswdteam_user_role_list,$wswdteam_option_user_name;
+
+  wswdteam_user_formdata_app($wswdteam_user_role_list,$wswdteam_option_user_name);
+}
+
+
+
+// adat form
+function wswdteam_user_form(){
+  global $wswdteam_user_role_list,$wswdteam_option_user_name;
+
+  wswdteam_user_form_app($wswdteam_user_role_list,$wswdteam_option_user_name);
+}
+
+
+
+// adat tábla
+function wswdteam_user_table(){
+  global $wswdteam_user_role_list,$wswdteam_option_user_name;
+
+  wswdteam_user_table_app($wswdteam_user_role_list,$wswdteam_option_user_name);
+}
+
+
+
+//fejléc
+function wswdteam_user_pagehead(){
+  wswdteam_user_pagehead_app();
+}
+
+
+
 
 // adatbeérkezés
-function wswdteam_user_formdata_app($data="",$name=""){
+function wswdteam_user_formdata_app($role,$name=""){
   echo("<div class=wswdteamspaceholder></div>");
   // adatfeldolgozás
   $data=wswdteam_get_option($name);
@@ -38,7 +109,7 @@ function wswdteam_user_formdata_app($data="",$name=""){
     // mehet gomb után
     $w_name=$_POST['uname'];
     $w_text=$_POST['urole'];
-    if ((isset($data[$w_name])&&$data[$w_name]!=$w_text)){
+    if (!isset($data[$w_name])||($data[$w_name]!=$w_text)){
       $data[$w_name]=$w_text;
       $r=wswdteam_save_option($data,$name);
       if ($r){
@@ -60,7 +131,7 @@ function wswdteam_user_formdata_app($data="",$name=""){
       }
       $w_name=$_POST['uname'];
       $w_text=$_POST['urole'];
-      wswdteam_user_form_app($w_id,$w_name,$w_text);
+      wswdteam_user_form_app($role,$w_id,$w_name,$w_text);
     }else{
     }
   }
@@ -69,9 +140,7 @@ function wswdteam_user_formdata_app($data="",$name=""){
 
 
 // adat form
-function wswdteam_user_form_app($w_id="",$w_uname="",$w_urole=""){
-  global $wswdteam_user_role_list;
-
+function wswdteam_user_form_app($role,$w_id="",$w_uname="",$w_urole=""){
   wswdteam_user_pagehead();
   if (isset($_POST['wpage'])){
     $page=$_POST['wpage'];
@@ -96,7 +165,7 @@ function wswdteam_user_form_app($w_id="",$w_uname="",$w_urole=""){
     <select id="urole" name="urole">
       <?php
         $i=0;
-        foreach($wswdteam_user_role_list as $r){
+        foreach($role as $r){
           if ($w_urole==$i){
             $sel="selected";
           }else{
@@ -120,8 +189,8 @@ function wswdteam_user_form_app($w_id="",$w_uname="",$w_urole=""){
 
 
 // adat tábla
-function wswdteam_user_table_app($data,$role,$name=""){
-  global $wswdteam_pagerow,$wswdteam_option_user_name,$wswdteam_user_role_list;
+function wswdteam_user_table_app($role,$name=""){
+  global $wswdteam_pagerow;
 
   wswdteam_user_pagehead_app();
   echo(wswdteam_lang("A rendszer által kezelt jogcsoportok").":<br /><br />");
@@ -129,8 +198,6 @@ function wswdteam_user_table_app($data,$role,$name=""){
     echo("$r<br />");
   }
   echo("<div class=\"wswdteamspaceholder\"></div>");
-  global $wswdteam_pagerow;
-
   wswdteam_user_pagehead_app();
   $data=wswdteam_get_option($name);
   $page=1;
@@ -172,12 +239,12 @@ function wswdteam_user_table_app($data,$role,$name=""){
     </thead>
     <tbody id="the-list">
   <?php
-  if ($data){
+  if (is_array($data)){
     $i=1;
     foreach($data as $s=>$d) {
     	echo("<tr id=\"post-$i\">");
     	echo("<td class=\"columnn-title\" data-colname=\"c$i\">$s</td>");
-	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">$wswdteam_user_role_list[$d]</td>");
+	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">$role[$d]</td>");
     	echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
 	    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
 	    echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$s\">");

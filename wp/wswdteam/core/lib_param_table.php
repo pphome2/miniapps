@@ -40,7 +40,7 @@ function wswdteam_param_form_app($w_id="",$w_name="",$w_text=""){
 
 
 // adatbeérkezés
-function wswdteam_param_formdata_app($data="",$name=""){
+function wswdteam_param_formdata_app($name=""){
   echo("<div class=wswdteamspaceholder></div>");
   // adatfeldolgozás
   $data=wswdteam_get_option($name);
@@ -65,7 +65,7 @@ function wswdteam_param_formdata_app($data="",$name=""){
     // mehet gomb után
     $w_name=$_POST['name'];
     $w_text=$_POST['text'];
-    if (isset($data[$w_name])&&($data[$w_name]!=$w_text)){
+    if (!isset($data[$w_name])||($data[$w_name]!=$w_text)){
       $data[$w_name]=$w_text;
       $r=wswdteam_save_option($data,$name);
       if ($r){
@@ -96,7 +96,7 @@ function wswdteam_param_formdata_app($data="",$name=""){
 
 
 //fejléc
-function wswdteam_param_pagehead_app(){
+function wswdteam_param_pagehead_app($name=""){
   echo("<br />");
   echo("<h1>".wswdteam_lang('Egyéb beállítások')."</h1>");
   echo("<br />");
@@ -111,13 +111,13 @@ function wswdteam_param_pagehead_app(){
 
 
 // paraméteradat tábla
-function wswdteam_param_table_app($data,$name=""){
+function wswdteam_param_table_app($name=""){
   global $wswdteam_pagerow;
 
   wswdteam_param_pagehead_app();
   $data=wswdteam_get_option($name);
   $page=1;
-  if (!$data){
+  if (is_array($data)){
     $db=count($data);
     if (isset($_POST['wpage'])){
       $page=$_POST['wpage'];
@@ -154,7 +154,7 @@ function wswdteam_param_table_app($data,$name=""){
     </thead>
     <tbody id="the-list">
   <?php
-  if ($data){
+  if (is_array($data)){
     $i=1;
     foreach($data as $s=>$d) {
     	echo("<tr id=\"post-$i\">");
@@ -164,7 +164,7 @@ function wswdteam_param_table_app($data,$name=""){
     	}else{
     	  $tl=$d;
     	}
-	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">$d</td>");
+	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">$tl</td>");
     	echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
 	    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
 	    echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$s\">");
@@ -196,7 +196,7 @@ function wswdteam_param_table_app($data,$name=""){
   </div>
 
   <?php
-  if (!$data){
+  if (is_array($data)){
     echo("<br />");
     wswdteam_pager_admin($db,$wswdteam_pagerow,$page,"wpage");
   }

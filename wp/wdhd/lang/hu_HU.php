@@ -8,6 +8,8 @@ $wdhd_lang_new=array();
 
 $wdhd_lang_str=array(
 
+'true' => 'be',
+'false' => 'ki',
 'WD HD' => 'WD HD',
 'Hibajegyek' => 'Hibajegyek',
 'Felhasználói jogok' => 'Felhasználói jogok',
@@ -42,7 +44,7 @@ $wdhd_lang_str=array(
 'Lezár' => 'Lezár',
 'Bejelentkezve' => 'Bejelentkezve',
 'felhasználó bejelentései' => 'felhasználó bejelentései',
-
+'Jogosultsági szint' => 'Jogosultsági szint',
 
 
 

@@ -53,28 +53,13 @@ $wdhd_category=array('Leírás',
 
 // sql táblák
 global $wdhd_table;
-$wdhd_table=array('wdhdparam',
-                  'wdhduser',
-                  'wdhdticket'
-                 );
+$wdhd_table=array('wdhdticket');
 
 // sql táblák létrehozása
 global $wpdb;
 global $wdhd_sql_install;
 $charset_collate=$wpdb->get_charset_collate();
 $sql0="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wdhd_table[0]." (
-                          id mediumint(9) NOT NULL AUTO_INCREMENT,
-                          name tinytext NOT NULL,
-                          text text NOT NULL,
-                          PRIMARY KEY  (id)
-                          ) ".$charset_collate.";";
-$sql1="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wdhd_table[1]." (
-                          id mediumint(9) NOT NULL AUTO_INCREMENT,
-                          uname tinytext NOT NULL,
-                          urole int NOT NULL,
-                          PRIMARY KEY  (id)
-                          ) ".$charset_collate.";";
-$sql2="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wdhd_table[2]." (
                           id mediumint(9) NOT NULL AUTO_INCREMENT,
                           t_time tinytext NOT NULL,
                           t_intype tinytext,
@@ -96,17 +81,11 @@ $sql2="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wdhd_table[2]." (
                           ) ".$charset_collate.";";
 
 // első telepítés
-$wdhd_sql_install=array($sql0,
-                        $sql1,
-                        $sql2
-                       );
+$wdhd_sql_install=array($sql0);
 
 // sql táblák frissítése
 global $wdteam_sql_update;
-$wdhd_sql_update=array($sql0,
-                        $sql1,
-                        $sql2
-                       );
+$wdhd_sql_update=array($sql0);
 
 
 
@@ -187,10 +166,23 @@ if (!isset($wdhd_category)){
                       );
 }
 
+
 //
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// a endszer részét képező fájlok (NE MÓDOSÍTSD)
+// a rendszer részét képező fájlok (NE MÓDOSÍTSD)
 //
+
+// OPTION neve LEHET MÁS NÉV IS GLOBÁLIS
+global $wdhd_option_name;
+$wdhd_option_name="wdhd_option_data";
+global $wdhd_option_data;
+$wdhd_option_data=array();
+// OPTION neve LEHET MÁS NÉV IS GLOBÁLIS
+global $wdhd_option_user_name;
+$wdhd_option_user_name="wdhd_option_user_data";
+global $wdhd_option_user_data;
+$wdhd_option_user_data=array();
+
 
 // betöltendő funkciók
 global $wdhd_inc_head,
@@ -214,8 +206,7 @@ $wdhd_admin_file='/admin/admin.php';
 global $wdhd_main_files;
 $wdhd_main_files=array('/core/main.php',
                        '/core/lib_connect.php',
-                       '/core/lib_sql_setup.php',
-                       '/core/lib_sys_setup.php'
+                       '/core/lib_setup.php'
                        );
 
 // rendszer fájlok
@@ -254,9 +245,7 @@ $wdhd_pagerow=20;
 // sql táblák
 if (!isset($wdhd_table)){
   global $wdhd_table;
-  $wdhd_table=array('wdhdparam',
-                    'wdhduser'
-                   );
+  $wdhd_table=array('wdhdticket');
 }
 
 // sql táblák létrehozása
@@ -264,30 +253,18 @@ if (!isset($wdhd_sql_install)){
   global $wpdb;
   global $wdhd_sql_install;
   $charset_collate=$wpdb->get_charset_collate();
-  $sql0="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wdhd_table[0]." (
-                            id mediumint(9) NOT NULL AUTO_INCREMENT,
-                            name tinytext NOT NULL,
-                            text text NOT NULL,
-                            PRIMARY KEY  (id)
-                            ) ".$charset_collate.";";
-  $sql1="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wdhd_table[1]." (
+  $sql0="CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$wdhd_table[1]." (
                             id mediumint(9) NOT NULL AUTO_INCREMENT,
                             uname tinytext NOT NULL,
                             urole int NOT NULL,
                             PRIMARY KEY  (id)
                             ) ".$charset_collate.";";
   $sql2="";
-  $wdhd_sql_install=array($sql0,
-                          $sql1,
-                          $sql2
-                         );
+  $wdhd_sql_install=array($sql0);
 
   // sql táblák frissítése
   global $wdteam_sql_update;
-  $wdhd_sql_update=array($sql0,
-                          $sql1,
-                          $sql2
-                         );
+  $wdhd_sql_update=array($sql0);
 }
 
 

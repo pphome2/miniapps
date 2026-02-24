@@ -47,13 +47,13 @@ function wswdteam_lang_newlines(){
 
 
 // app fordítás
-function wswdteam_lang_app($text='',$langstr='',$dot=true){
+function wswdteam_lang_app($text='',$langstr=array(),$dot=true){
   global $wswdteam_lang_new,$wswdteam_developer_mode;
 
-  if (isset($langstr)and(isset($langstr[$text]))){
+  if (isset($langstr[$text])){
     $line=$langstr[$text];
   }else{
-    if (($dot)and($wswdteam_developer_mode)){
+    if (($dot)&&($wswdteam_developer_mode)){
       $line='.'.$text.'.';
     }else{
       $line=$text;

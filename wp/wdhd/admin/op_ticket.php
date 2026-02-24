@@ -9,6 +9,13 @@ if (!defined('ABSPATH')){
 }
 
 
+// szükséges plugin ellenőrzés
+if (!defined('WSWDTEAM')){
+  exit;
+}
+
+
+
 // jogosultság ellenőrzése
 $ur=wdhd_user_right();
 if (!in_array($ur,[0])){
@@ -20,7 +27,7 @@ if (!in_array($ur,[0])){
 echo("<div class=wdhdspaceholder></div>");
 
 // adatfeldolgozás
-$table_name=$wpdb->prefix.$wdhd_table[2];
+$table_name=$wpdb->prefix.$wdhd_table[0];
 $table=true;
 
 // törlés
@@ -306,7 +313,7 @@ function wdhd_ttable(){
   global $wpdb,$wdhd_table,$wdhd_pagerow;
 
   wdhd_tpagehead();
-  $table_name=$wpdb->prefix.$wdhd_table[2];
+  $table_name=$wpdb->prefix.$wdhd_table[0];
   $sql="SELECT COUNT(*) FROM $table_name";
   $db=$wpdb->get_var($sql);
   if (isset($_POST['wpage'])){

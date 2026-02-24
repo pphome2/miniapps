@@ -254,13 +254,6 @@ add_filter('logout_redirect','wswdteam_logout_redirect');
 
 
 
-// plugin bekapcsolási feladatok
-function wswdteam_setup(){
-  wswdteam_db_init();
-  wswdteam_sys_init();
-}
-
-
 
 // plugin bekapcsolás
 function wswdteam_activate(){
@@ -290,6 +283,7 @@ function wswdteam_shortcode($atts=[],$content=null,$tag=''){
   return($content);
 }
 add_shortcode('wswdteam','wswdteam_shortcode');
+
 
 
 ?>

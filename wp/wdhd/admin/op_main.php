@@ -9,8 +9,13 @@ if (!defined('ABSPATH')){
 }
 
 
+// szükséges plugin ellenőrzés
+if (!defined('WSWDTEAM')){
+  exit;
+}
 
-echo("<div class=wdhdspaceholder></div>");
+
+
 
 // adatfeldolgozás
 // if (isset($_POST['name'])){}
@@ -24,36 +29,71 @@ wdhd_admin_main();
 
 // fő admin lap
 function wdhd_admin_main(){
-  global $wdhd_options;
+  global $wdhd_options,$wdhd_option_name,$wdhd_developer_mode;
 
+  $data=wswdteam_get_option($wdhd_option_name);
   echo("<span class=wdhdspaceholder></span>");
   // paraméterek
   echo("<b>".wdhd_lang("Rendszer paraméterek").":</b>");
   echo("<span class=wdhdspaceholder></span>");
-  $ver=get_option($wdhd_options[0],'0');
+  $d=$wdhd_options[0];
+  if (isset($data[$d])){
+    $ver=$data[$d];
+  }else{
+    $ver="-";
+  }
   echo($wdhd_options[0]." - ".$ver);
   echo("<br />");
-  $ver=get_option($wdhd_options[1],'0');
+  $d=$wdhd_options[1];
+  if (isset($data[$d])){
+    $ver=$data[$d];
+  }else{
+    $ver="-";
+  }
   echo($wdhd_options[1]." - ".$ver);
   echo("<span class=wdhdspaceholder></span>");
   echo("<b>".wdhd_lang("Alkalmazás paraméterek").":</b>");
   echo("<span class=wdhdspaceholder></span>");
-  $ver=wdhd_get_param($wdhd_options[0]);
+  $d=$wdhd_options[0];
+  if (isset($data[$d])){
+    $ver=$data[$d];
+  }else{
+    $ver="-";
+  }
   echo($wdhd_options[0]." - ".$ver);
   echo("<br />");
-  $ver=wdhd_get_param($wdhd_options[1]);
+  $d=$wdhd_options[1];
+  if (isset($data[$d])){
+    $ver=$data[$d];
+  }else{
+    $ver="-";
+  }
   echo($wdhd_options[1]." - ".$ver);
   echo("<br />");
-  $ver=wdhd_get_param("wdhd_developer_mode");
-  echo("wdhd_developer_mode"." - ".wdhd_lang($ver));
+  //$d=$wdhd_options[1];
+  //if (isset($data['wdhd_developer_mode'])){
+  //  $ver=$data[$d];
+  //}else{
+  //  $ver="-";
+  //}
+  if ($wdhd_developer_mode){
+    echo("wdhd_developer_mode"." - ".wdhd_lang('true'));
+  }else{
+    echo("wdhd_developer_mode"." - ".wdhd_lang('false'));
+  }
   echo("<span class=wdhdspaceholder></span>");
   // alkalmazás
   echo("<span class=wdhdspaceholder></span>");
   echo("<b>".wdhd_lang("Alkalmazás adatok").":</b>");
   echo("<span class=wdhdspaceholder></span>");
-  $t=wdhd_get_param("cím");
+  if (isset($data['wdhd_sp'])){
+    $t=$data['wdhd_sp'];
+  }else{
+    $t="-";
+  }
   if (isset($_POST['submit'])){
-    wdhd_save_param("cím",$_POST['text']);
+    wswdteam_add_option("wdhd_sp",$_POST['text'],$wdhd_option_name);
+    $t=$_POST['text'];
     echo(wdhd_message("Adatok elmentve").'<br />');
   }
   echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
@@ -70,6 +110,7 @@ function wdhd_admin_main(){
 
 //fejléc
 function wdhd_upagehead(){
+  echo("<span class=wdhdspaceholder></span>");
   echo("<br />");
   echo("<h1>".wdhd_lang('WD HD helpdesk rendszer')."</h1>");
   echo("<br />");
