@@ -45,7 +45,7 @@ $wdhd_lang_str=array(
 'Bejelentkezve' => 'Bejelentkezve',
 'felhasználó bejelentései' => 'felhasználó bejelentései',
 'Jogosultsági szint' => 'Jogosultsági szint',
-
+'Frissítések után' => 'Frissítések után',
 
 
 );

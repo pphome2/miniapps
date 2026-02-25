@@ -22,8 +22,19 @@ if ($w_status_line=="") {
 
 
 
+function minimal_theme_menu(){
+  $nav_menus=get_posts(array(
+                 'post_type'=>'wp_navigation',
+                 'post_status'=>'publish',
+                 'numberposts'=>1
+  ));
+  $n=$nav_menus[0];
+  $mid=$n->ID;
+}
+
+
 // beállítások
-function minimal_theme_setup() {
+function minimal_theme_setup(){
     // Támogatás a fejlécben megjelenő automatikus title tag-hez
     add_theme_support('title-tag');
     // Blokk stílusok alapértelmezett betöltése
@@ -159,6 +170,31 @@ add_filter('render_block',function($block_content,$block){
     }
     return $block_content;
 }, 10, 2);
+
+
+
+// menü cseréje
+add_filter('render_block_data','custom_change_navigation_menu_id',10,2);
+function custom_change_navigation_menu_id($parsed_block,$source_block){
+  // Csak a navigációs blokkot keressük
+  if ('core/navigation'===$parsed_block['blockName']){
+    // Ellenőrizzük, hogy van-e 'ref' (ez a menü ID-ja)
+    if (isset($parsed_block['attrs']['ref'])){
+      // Itt add meg az új ID-t (pl. $uj_menu_id)
+      $nav_menus=get_posts(array(
+                        'post_type'=>'wp_navigation',
+                        'post_status'=>'publish',
+                        'numberposts'=>1
+      ));
+      $menu_slug='header-navigacio';
+      $nav_menu=get_page_by_path($menu_slug,OBJECT,'wp_navigation');
+      $uj_menu_id=$nav_menu->ID;
+      $parsed_block['attrs']['ref']=$uj_menu_id;
+    }
+  }
+  return $parsed_block;
+}
+
 
 
 

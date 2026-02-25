@@ -16,6 +16,15 @@ if (!defined('WSWDTEAM')){
 
 
 
+// jogosultság ellenőrzése
+$ur=wdhd_user_right();
+if (!in_array($ur,[0])){
+  $l=wdhd_lang('Nem megfelelő jogosultság');
+  wdhd_error($l);
+  wdhd_error($ur);
+  //exit;
+}
+
 
 // adatfeldolgozás
 // if (isset($_POST['name'])){}

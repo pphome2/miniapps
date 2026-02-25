@@ -84,6 +84,24 @@ add_action('admin_menu','wswdteam_register_submenu_page3');
 
 
 
+// almenü hozzáadása
+function wswdteam_register_submenu_page4(){
+  $s0=plugin_dir_path(__FILE__).'/op_main.php';
+  $s2=plugin_dir_path(__FILE__).'/op_install.php';
+  $l=wswdteam_lang('Telepítések',false);
+  add_submenu_page(
+    $s0,
+    $l,
+    $l,
+    'manage_options',
+    $s2,
+    ''
+  );
+}
+add_action('admin_menu','wswdteam_register_submenu_page4');
+
+
+
 // menü törlése
 function wswdteam_remove_options_page(){
   remove_menu_page('wswdteam');

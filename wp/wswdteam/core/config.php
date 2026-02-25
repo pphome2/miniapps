@@ -112,6 +112,7 @@ global $wswdteam_main_files;
 $wswdteam_main_files=array('/core/main.php',
                            '/core/lib_backup.php',
                            '/core/lib_init.php',
+                           '/core/lib_install.php',
                            '/core/lib_lang.php',
                            '/core/lib_msg.php',
                            '/core/lib_opt_meta.php',

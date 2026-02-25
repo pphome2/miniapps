@@ -8,7 +8,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       WD HD plugin
+ * Plugin Name:       WD HelpDesk plugin
  * Plugin URI:        https://wswdteam.hu/plugin
  * Description:       WD HD heldesk plugin.
  * Version:           0.0.1
@@ -51,16 +51,6 @@ if (isset($wdhd_main_files)){
   }
 }
 
-// admin mód és admin vezérlés betöltése
-if (is_admin()){
-  if (file_exists(__DIR__.$wdhd_admin_file)){
-    include(__DIR__.$wdhd_admin_file);
-  }else{
-    exit;
-  }
-}
-
-
 
 
 // A 'plugins_loaded' eseménynél már minden plugin függvénye elérhető
@@ -87,13 +77,23 @@ function wdhd_main(){
           $wdhd_developer_mode,$wswdteam_developer_mode,
           $wdhd_pagerow,$wswdteam_pagerow,$wdhd_option_name;
 
+  // admin mód és admin vezérlés betöltése
+  if (is_admin()){
+    if (file_exists(__DIR__.$wdhd_admin_file)){
+      include(__DIR__.$wdhd_admin_file);
+    }else{
+      exit;
+    }
+  }
   // alkalmazásfájlok betöltése
-  if (isset($wdhd_content_files)){
-    foreach($wdhd_content_files as $f){
-      if (file_exists(__DIR__.$f)){
-        include(__DIR__.$f);
-      }else{
-        exit;
+  if (!is_admin()){
+    if (isset($wdhd_content_files)){
+      foreach($wdhd_content_files as $f){
+        if (file_exists(__DIR__.$f)){
+          include(__DIR__.$f);
+        }else{
+          exit;
+        }
       }
     }
   }

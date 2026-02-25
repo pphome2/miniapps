@@ -9,12 +9,20 @@ if (!defined('ABSPATH')){
 }
 
 
+
+// szükséges plugin ellenőrzés
+if (!defined('WSWDTEAM')){
+  exit;
+}
+
+
 // jogosultság ellenőrzése
 $ur=wdhd_user_right();
 if (!in_array($ur,[0])){
   $l=wdhd_lang('Nem megfelelő jogosultság');
   wdhd_error($l);
-  exit;
+  wdhd_error($ur);
+  //exit;
 }
 
 

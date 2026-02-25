@@ -8,54 +8,44 @@ if (!defined('ABSPATH')){
 }
 
 
-// jogosultság lekérdezése
-function wswdteam_user_right(){
-  global $wswdteam_table,$wpdb,$wswdteam_user_name;
 
-  $cuser=wp_get_current_user();
-  $wswdteam_user_name=$cuser->user_login;
-  $table_name=$wpdb->prefix.$wswdteam_table[0];
-  $sql="SELECT * FROM $table_name WHERE uname='$wswdteam_user_name';";
-  $res=$wpdb->get_results($sql);
-  if (count($res)<>0){
-    $t=$res[0];
-    $ur=$t->urole;
-  }else{
-    $um=get_userdata(get_current_user_id());
-    $us=$um->roles[0];
-    if ($us==="administrator"){
-      $ur=0;
-    }else{
-      $ur=9999;
-    }
+
+// jogosultság lekérdezése
+function wswdteam_user_right($user=""){
+  global $wswdteam_user_role,$wswdteam_option_user_name;
+
+  if ($user===""){
+    $user=wp_get_current_user();
   }
+  $data=wswdteam_get_option($wswdteam_option_user_name);
+  $ur="";
+  if (isset($data[$user])){
+    $ur=$data[$user];
+  }
+  if ($ur===""){
+    $ur=$wswdteam_user_role;
+  }
+  return($ur);
   return($ur);
 }
 
 
-// jogosultság lekérdezése
-function wswdteam_user_right_app($table=""){
-  global $wpdb;
 
-  $cuser=wp_get_current_user();
-  $uname=$cuser->user_login;
-  $table_name=$wpdb->prefix.$table[0];
-  $sql="SELECT * FROM $table_name WHERE uname='$uname';";
-  $res=$wpdb->get_results($sql);
-  if (count($res)<>0){
-    $t=$res[0];
-    $ur=$t->urole;
-  }else{
-    $um=get_userdata(get_current_user_id());
-    $us=$um->roles[0];
-    if ($us==="administrator"){
-      $ur=0;
-    }else{
-      $ur=9999;
-    }
+// jogosultság lekérdezése
+function wswdteam_user_right_app($name,$user){
+  global $wswdteam_user_role;
+
+  $data=wswdteam_get_option($name);
+  $ur="";
+  if (isset($data[$user])){
+    $ur=$data[$user];
+  }
+  if ($ur===""){
+    $ur=$wswdteam_user_role;
   }
   return($ur);
 }
+
 
 
 // felhasználó neve
@@ -66,11 +56,13 @@ function wswdteam_user_nicename(){
 }
 
 
+
 // felhasználó neve
 function wswdteam_user_nicename_app(){
   $r=wswdteam_user_nicename();
   return($r);
 }
+
 
 
 // felhasználó neve
@@ -81,6 +73,7 @@ function wswdteam_user_fullname(){
   $r=$cuser->display_name;
   return($r);
 }
+
 
 
 // felhasználó neve

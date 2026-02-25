@@ -21,10 +21,10 @@ $ur=wdhd_user_right();
 if (!in_array($ur,[0])){
   $l=wdhd_lang('Nem megfelelő jogosultság');
   wdhd_error($l);
-  exit;
+  wdhd_error($ur);
+  //exit;
 }
 
-echo("<div class=wdhdspaceholder></div>");
 
 // adatfeldolgozás
 $table_name=$wpdb->prefix.$wdhd_table[0];

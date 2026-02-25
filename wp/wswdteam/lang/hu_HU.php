@@ -91,6 +91,7 @@ $wswdteam_lang_str=array(
 'Vissza' => 'Vissza',
 'Tárolva' => 'Tárolva',
 'Jogosultsági szint' => 'Jogosultsági szint',
+'Telepítések' => 'Telepítések',
 
 );
 

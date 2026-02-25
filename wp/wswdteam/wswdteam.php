@@ -89,30 +89,15 @@ if ($dark==="true"){
 
 
 
-// karbantartási mód
-function wswdteam_maintenance(){
-  global $wswdteam_maintenance_mode,$wswdteam_maintenance_page;
-
-  if ($wswdteam_maintenance_mode && !current_user_can('manage_options')){
-    status_header(503);
-    header('Retry-After: 3600');
-    wp_redirect(plugin_dir_url(__FILE__).$wswdteam_maintenance_page);
-  }
-}
-if ($wswdteam_maintenance_mode){
-  add_action('template_redirect', 'wswdteam_maintenance');
-}
-
-
-
-
 // alkalmazásfájlok betöltése
-if (isset($wswdteam_content_files)){
-  foreach($wswdteam_content_files as $f){
-    if (file_exists(__DIR__.$f)){
-      include(__DIR__.$f);
-    }else{
-      exit;
+if (!is_admin()){
+  if (isset($wswdteam_content_files)){
+    foreach($wswdteam_content_files as $f){
+      if (file_exists(__DIR__.$f)){
+        include(__DIR__.$f);
+      }else{
+        exit;
+      }
     }
   }
 }
@@ -126,6 +111,7 @@ if (is_admin()){
     exit;
   }
 }
+
 
 
 // plugin előkészítés
@@ -166,6 +152,22 @@ function wswdteam_init(){
   $wswdteam_option_data=wswdteam_get_option($wswdteam_option_name);
 }
 add_action('init','wswdteam_init');
+
+
+
+// karbantartási mód
+function wswdteam_maintenance(){
+  global $wswdteam_maintenance_mode,$wswdteam_maintenance_page;
+
+  if ($wswdteam_maintenance_mode && !current_user_can('manage_options')){
+    status_header(503);
+    header('Retry-After: 3600');
+    wp_redirect(plugin_dir_url(__FILE__).$wswdteam_maintenance_page);
+  }
+}
+if ($wswdteam_maintenance_mode){
+  add_action('template_redirect', 'wswdteam_maintenance');
+}
 
 
 

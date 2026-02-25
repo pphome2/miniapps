@@ -7,6 +7,7 @@
 // kilépés ha nem wp-ből lett indítva
 if (!defined('ABSPATH')){
   exit;
+}
 
 
 
@@ -14,30 +15,30 @@ global $wswdteam_status_line;
 if (!isset($w_status_line)) {
   $w_status_line=date('Y.m.d.');
 }
-if ($w_status_line=="") {
+if ($w_status_line==""){
   $w_status_line=date('Y.m.d.');
 }
 
 global $w_header_title;
-if (!isset($w_header_title)) {
+if (!isset($w_header_title)){
   $w_header_title=date('Y.m.d.');
 }
-if ($w_header_title=="") {
+if ($w_header_title==""){
   $w_header_title=date('Y.m.d.');
 }
 
 global $w_credit;
-if (!isset($w_credit)) {
+if (!isset($w_credit)){
   $w_credit=date('Y.m.d.');
 }
-if ($w_credit=="") {
+if ($w_credit==""){
   $w_credit=date('Y.m.d.');
 }
 
 
 
 // beállítások
-function minimal_theme_setup() {
+function minimal_theme_setup(){
     // Támogatás a fejlécben megjelenő automatikus title tag-hez
     add_theme_support('title-tag');
     // Blokk stílusok alapértelmezett betöltése
@@ -74,7 +75,7 @@ function minimal_theme_color_styles(){
 
 
 // css betöltése
-function minimal_theme_enqueue_styles() {
+function minimal_theme_enqueue_styles(){
     wp_enqueue_style( 
         'minimal-theme-style',
         get_stylesheet_uri(),
@@ -107,7 +108,7 @@ add_shortcode('wswdteam_header_title','header_shortcode_title');
 
 
 // láb státusz sor
-function footer_shortcode_statusline() {
+function footer_shortcode_statusline(){
     global $w_status_line;
 
     $kimenet='';
@@ -121,7 +122,7 @@ add_shortcode('wswdteam_footer_statusline','footer_shortcode_statusline');
 
 
 // verzió
-function footer_shortcode_credit() {
+function footer_shortcode_credit(){
     global $w_credit;
 
     $kimenet='';
@@ -141,7 +142,7 @@ add_shortcode('wswdteam_footer_credit','footer_shortcode_credit');
 
 
 // saját logo a login oldalra
-function ws_login_logo() {
+function ws_login_logo(){
     global $w_applogo;
     ?>
     <style type="text/css">
@@ -159,11 +160,14 @@ function ws_login_logo() {
 }
 add_action( 'login_enqueue_scripts', 'ws_login_logo' );
 
+
+
 // A logó linkjének módosítása a saját oldaladra
-function ws_login_logo_url() {
+function ws_login_logo_url(){
     return home_url();
 }
 add_filter( 'login_headerurl', 'ws_login_logo_url' );
+
 
 
 // favicon csere
@@ -174,6 +178,31 @@ function wswd_custom_favicon( $url ) {
     //return get_stylesheet_directory_uri().'/assets/images/wswd-favicon.png';
     return $w_applogo;
 }
+
+
+
+// menü cseréje
+add_filter('render_block_data','custom_change_navigation_menu_id',10,2);
+function custom_change_navigation_menu_id($parsed_block,$source_block){
+  // Csak a navigációs blokkot keressük
+  if ('core/navigation'===$parsed_block['blockName']){
+    // Ellenőrizzük, hogy van-e 'ref' (ez a menü ID-ja)
+    if (isset($parsed_block['attrs']['ref'])){
+      // Itt add meg az új ID-t (pl. $uj_menu_id)
+      $nav_menus=get_posts(array(
+                        'post_type'=>'wp_navigation',
+                        'post_status'=>'publish',
+                        'numberposts'=>1
+      ));
+      $menu_slug='header-navigacio';
+      $nav_menu=get_page_by_path($menu_slug,OBJECT,'wp_navigation');
+      $uj_menu_id=$nav_menu->ID;
+      $parsed_block['attrs']['ref']=$uj_menu_id;
+    }
+  }
+  return $parsed_block;
+}
+
 
 
 // blokkok hozzáadása

@@ -43,13 +43,13 @@ function wdhd_get_param($name=""){
 
 // jogosultság lekérdezése
 function wdhd_user_right(){
-  global $wdhd_table,$wpdb,$wdhd_user_name;
+  global $wdhd_option_user_name;
 
   $cuser=wp_get_current_user();
   $wdhd_user_name=$cuser->user_login;
   $us="";
   if (function_exists('wswdteam_user_right_app')){
-    $us=wswdteam_user_right_app($wdhd_table);
+    $us=wswdteam_user_right_app($wdhd_option_user_name,$wdhd_user_name);
   }
   return($us);
 }

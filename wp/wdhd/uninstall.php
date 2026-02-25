@@ -27,6 +27,8 @@ foreach ($wdhd_table as $t){
 foreach ($wdhd_options as $o){
   delete_option($o);
 }
+delete_option($wdhd_option_name);
+delete_option($wdhd_option_user_name);
 
 // tárolt változók törlése
 foreach ($wdhd_category as $c){
