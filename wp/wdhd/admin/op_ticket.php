@@ -226,7 +226,7 @@ function wdhd_tform($r){
 
 // adat form
 function wdhd_tformnew(){
-  global $wpdb,$wdhd_table,$wdhd_ticket_type;
+  global $wpdb,$wdhd_table,$wdhd_ticket_type,$wdhd_option_user_name,$wdhd_user_role_list;
 
   wdhd_tpagehead();
   $page=$_POST['wpage'];
@@ -238,20 +238,16 @@ function wdhd_tformnew(){
     <input type="text" id="t_intype" name="t_intype" class="wdhdinputline" value=""><br /><br />
     <label for="name"><?php echo(wdhd_lang('Bejelentő')); ?>:</label><br />
     <?php
-      $table_name=$wpdb->prefix.$wdhd_table[1];
-      $sql="SELECT * FROM $table_name WHERE urole=1;";
-      $resn=$wpdb->get_results($sql);
-      if ($resn){
+      //$table_name=$wpdb->prefix.$wdhd_table[0];
+      //$sql="SELECT * FROM $table_name WHERE urole=1;";
+      //$resn=$wpdb->get_results($sql);
+      $d=wswdteam_get_option($wdhd_option_user_name);
+      if ($d){
         echo("<select id=\"t_inname\" name=\"t_inname\" class=\"wdhdinputline\">");
         echo("<option value=\"\"></option>");
-        foreach($resn as $rn){
-          $s=$rn->uname;
-          $sql="SELECT * FROM $wpdb->users WHERE `display_name`='$s';";
-          $resu=$wpdb->get_results($sql);
-          //$resu=get_user_by('display_name',$s);
-          if ($resu){
-            $u=$resu[0];
-            echo("<option value=\"$u->user_login\">$s ($u->user_login)</option>");
+        foreach($d as $u=>$r){
+          if ($r==="1"){
+            echo("<option value=\"$u\">$u</option>");
           }
         }
         echo("</select>");
@@ -356,9 +352,9 @@ function wdhd_ttable(){
   if (count($res)<>0){
     $i=1;
     foreach($res as $t) {
-	  echo("<tr id=\"post-$i\">");
-	  echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
-	  echo("<span class=button onclick=\"
+	    echo("<tr id=\"post-$i\">");
+	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
+	    echo("<span class=button onclick=\"
 	        if (getElementById('plusdata$i').style.display=='block'){
 	          getElementById('plusdata$i').style.display='none';
 	          this.innerHTML='+';
@@ -367,44 +363,44 @@ function wdhd_ttable(){
 	          this.innerHTML='-';
 	        }\">+</span>");
   	  echo("<span class=wdhdplus>$t->t_time</span>");
-	  echo("<span id=\"plusdata$i\" style=\"display:none;\" onclick=\"this.style.display='none';\">");
-	  echo("<b>".wdhd_lang("Típus").":</b> $t->t_intype<br />");
-	  echo("<b>".wdhd_lang("Bejelentő").":</b> $t->t_inname<br />");
-	  echo("<b>".wdhd_lang("Csoport").":</b> $t->t_indep<br />");
-	  echo("<b>".wdhd_lang("Telefonszám").":</b> $t->t_intel<br />");
-	  echo("<b>".wdhd_lang("E-mail").":</b> $t->t_inmail<br />");
-	  echo("<b>".wdhd_lang("Leírás").":</b> $t->t_text<br />");
-	  echo("<b>".wdhd_lang("Tervezett befejezés").":</b> $t->t_plantime<br />");
-	  echo("<b>".wdhd_lang("Feladat").":</b> $t->t_dep<br />");
-	  echo("<b>".wdhd_lang("Munka kiadva").":</b> $t->t_worker<br />");
-	  echo("<b>".wdhd_lang("Elvégzett munka").":</b> $t->t_action<br />");
-	  echo("<b>".wdhd_lang("Felhasznált eszközök").":</b> $t->t_parts<br />");
-	  echo("<b>".wdhd_lang("Mukaóra").":</b> $t->t_hour<br />");
-	  echo("<b>".wdhd_lang("Kiszállás (km)").":</b> $t->t_km<br />");
-	  echo("<b>".wdhd_lang("Bejelentés lezárva").":</b> $t->t_endtime<br />");
-	  echo("<b>".wdhd_lang("Bejelentést lezárta").":</b> $t->t_enduname<br />");
-	  echo("</span>");
-	  echo("</td>");
-	  echo("<td class=\"columnn-title\" data-colname=\"c$i\">$t->t_inname</td>");
- 	  if ($t->t_endtime<>""){
-	    $state=wdhd_lang("Lezárva")." - ".$t->t_endtime;
-	  }else{
-	    $state=wdhd_lang("Nyitott");
-	  }
-	  echo("<td class=\"columnn-title\" data-colname=\"c$i\">$state</td>");
-	  echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
-	  echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	  echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
-	  echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
+  	  echo("<span id=\"plusdata$i\" style=\"display:none;\" onclick=\"this.style.display='none';\">");
+	    echo("<b>".wdhd_lang("Típus").":</b> $t->t_intype<br />");
+	    echo("<b>".wdhd_lang("Bejelentő").":</b> $t->t_inname<br />");
+	    echo("<b>".wdhd_lang("Csoport").":</b> $t->t_indep<br />");
+	    echo("<b>".wdhd_lang("Telefonszám").":</b> $t->t_intel<br />");
+	    echo("<b>".wdhd_lang("E-mail").":</b> $t->t_inmail<br />");
+	    echo("<b>".wdhd_lang("Leírás").":</b> $t->t_text<br />");
+	    echo("<b>".wdhd_lang("Tervezett befejezés").":</b> $t->t_plantime<br />");
+	    echo("<b>".wdhd_lang("Feladat").":</b> $t->t_dep<br />");
+	    echo("<b>".wdhd_lang("Munka kiadva").":</b> $t->t_worker<br />");
+	    echo("<b>".wdhd_lang("Elvégzett munka").":</b> $t->t_action<br />");
+	    echo("<b>".wdhd_lang("Felhasznált eszközök").":</b> $t->t_parts<br />");
+	    echo("<b>".wdhd_lang("Mukaóra").":</b> $t->t_hour<br />");
+	    echo("<b>".wdhd_lang("Kiszállás (km)").":</b> $t->t_km<br />");
+	    echo("<b>".wdhd_lang("Bejelentés lezárva").":</b> $t->t_endtime<br />");
+	    echo("<b>".wdhd_lang("Bejelentést lezárta").":</b> $t->t_enduname<br />");
+	    echo("</span>");
+	    echo("</td>");
+	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">$t->t_inname</td>");
+ 	    if ($t->t_endtime<>""){
+	      $state=wdhd_lang("Lezárva")." - ".$t->t_endtime;
+	    }else{
+	      $state=wdhd_lang("Nyitott");
+	    }
+	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">$state</td>");
+	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
+	    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+	    echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
+	    echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
       echo("<input type=\"submit\" id=\"mod\" name=\"mod\" class=\"button\" value=\"+\">");
-	  echo("</form>");
-	  echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	  echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
-	  echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
+	    echo("</form>");
+	    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
+	    echo("<input type=\"hidden\" id=\"id\" name=\"id\" value=\"$t->id\">");
+	    echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
       echo("<input type=\"submit\" id=\"del\" name=\"del\" class=\"button\" value=\"-\">");
-	  echo("</form>");
-	  echo("</td>");
-	  echo("</tr>");
+	    echo("</form>");
+	    echo("</td>");
+	    echo("</tr>");
       $i++;
     }
   }

@@ -16,6 +16,7 @@ function wdhd_admin_menu(){
   add_action('admin_menu','wdhd_register_submenu_page2');
   add_action('admin_menu','wdhd_register_submenu_page4');
   add_action('admin_menu','wdhd_register_submenu_page5');
+  add_action('admin_menu','wdhd_register_submenu_page6');
 }
 
 
@@ -89,6 +90,23 @@ function wdhd_register_submenu_page4(){
 
 // almenü hozzáadása
 function wdhd_register_submenu_page5(){
+  $s0=plugin_dir_path(__FILE__).'/op_main.php';
+  $s2=plugin_dir_path(__FILE__).'/op_backup.php';
+  $l=wdhd_lang('Saját adatbázis mentése',false);
+  add_submenu_page(
+    $s0,
+    $l,
+    $l,
+    'manage_options',
+    $s2,
+    ''
+  );
+}
+//add_action('admin_menu','wdhd_register_submenu_page4');
+
+
+// almenü hozzáadása
+function wdhd_register_submenu_page6(){
   $s0=plugin_dir_path(__FILE__).'/op_main.php';
   $s2=plugin_dir_path(__FILE__).'/op_install.php';
   $l=wdhd_lang('Frissítések után',false);

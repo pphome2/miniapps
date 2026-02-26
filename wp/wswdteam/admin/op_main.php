@@ -154,7 +154,7 @@ function wswdteam_datatable(){
 //fejléc
 function wswdteam_upagehead(){
   echo("<br />");
-  echo("<h1>".wswdteam_lang('WSWDTeam rendszer')."</h1>");
+  echo("<h1>".wswdteam_lang('WSWDTeam app keretrendszer')."</h1>");
   echo("<br />");
   echo(wswdteam_lang('Beállítások'));
   echo("<span class=wswdteamspaceholder></span>");

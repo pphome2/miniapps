@@ -15,7 +15,8 @@ function wswdteam_user_right($user=""){
   global $wswdteam_user_role,$wswdteam_option_user_name;
 
   if ($user===""){
-    $user=wp_get_current_user();
+    $u=wp_get_current_user();
+    $user=$u->user_login;
   }
   $data=wswdteam_get_option($wswdteam_option_user_name);
   $ur="";
@@ -25,7 +26,6 @@ function wswdteam_user_right($user=""){
   if ($ur===""){
     $ur=$wswdteam_user_role;
   }
-  return($ur);
   return($ur);
 }
 

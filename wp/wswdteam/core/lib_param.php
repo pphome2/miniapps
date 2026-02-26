@@ -20,8 +20,8 @@ function wswdteam_param_admin(){
   }else{
     if (!isset($_POST['m'])){
       wswdteam_param_table();
-      wswdteam_post_load();
-      wswdteam_page_load();
+      //wswdteam_post_load();
+      //wswdteam_page_load();
     }
   }
 }
@@ -40,8 +40,8 @@ function wswdteam_param_admin_app($name,$dir1,$dir2){
     }else{
       if (!isset($_POST['m'])){
         wswdteam_param_table_app($name);
-        wswdteam_post_load_app($dir1);
-        wswdteam_page_load_app($dir2);
+        //wswdteam_post_load_app($dir1);
+        //wswdteam_page_load_app($dir2);
       }
     }
   }

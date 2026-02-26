@@ -7,12 +7,14 @@ if (!defined('WP_UNINSTALL_PLUGIN')){
   die;
 }
 
+
 // beállítások betöltése
 if (file_exists(__DIR__.'/core/config.php')){
   include(__DIR__.'/core/config.php');
 }else{
   exit;
 }
+
 
 
 // adatbázis tisztítása
@@ -23,12 +25,15 @@ foreach ($wswdteam_table as $t){
 }
 
 
+
 // tárolt változók törlése
 foreach ($wswdteam_options as $o){
   delete_option($o);
 }
 delete_option($wswdteam_option_name);
 delete_option($wswdteam_option_user_name);
+
+
 
 // tárolt változók törlése
 foreach ($wswdteam_category as $c){

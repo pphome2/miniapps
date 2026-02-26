@@ -184,7 +184,7 @@ $wswdteam_message_autohide=true;
 
 // sql táblák
 global $wswdteam_table;
-$wswdteam_table=array('wswdteamuser');
+$wswdteam_table=array();
 
 // kilépés ha nem wp-ből lett indítva
 if (defined('ABSPATH')){

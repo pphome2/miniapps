@@ -100,7 +100,7 @@ $wdhd_sql_update=array($sql0);
 // alkalmazás név
 global $wdhd_app_name;
 $wdhd_app_name='Helpdesk Rendszer';
-global $wdhd_aauthor_name;
+global $wdhd_author_name;
 $wdhd_author_name='WSWDTeam-HD';
 
 

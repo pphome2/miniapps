@@ -8,6 +8,7 @@ $wswdteam_lang_new=array();
 
 $wswdteam_lang_str=array(
 
+'WSWDTeam app keretrendszer' => 'WSWDTeam app keretrendszer',
 'Karbantartás' => 'Karbantartás',
 'Karbantartás folyamatban' => 'Karbantartás folyamatban',
 'Karbantartási üzemmód bekapcsolása' => 'Karbantartási üzemmód bekapcsolása',
@@ -92,6 +93,12 @@ $wswdteam_lang_str=array(
 'Tárolva' => 'Tárolva',
 'Jogosultsági szint' => 'Jogosultsági szint',
 'Telepítések' => 'Telepítések',
+'Adattáblák mentés alatt' => 'Adattáblák mentés alatt',
+'Mentés elkészítés megtörtént' => 'Mentés elkészítés megtörtént',
+'Mentés letöltése' => 'Mentés letöltése',
+'Fájlmentés elkészült' => 'Fájlmentés elkészült',
+'Fájlmentés letöltése' => 'Fájlmentés letöltése',
+
 
 );
 
