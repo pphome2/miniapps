@@ -18,6 +18,7 @@ function wswdteam_admin_backup(){
   echo("<span class=wswdteamspaceholder></span>");
   echo("<h2>".wswdteam_lang("Alkalmazás adatmentés")."</h2>");
   echo("<span class=wswdteamspaceholder></span>");
+  wswdteam_upload_file();
   wswdteam_backup_apptables();
   wswdteam_backup_backuplist();
   wswdteam_backup();
@@ -50,7 +51,7 @@ function wswdteam_backup(){
   echo("<span class=wswdteamspaceholder></span>");
   echo("<h2>".wswdteam_lang("Mentés feltöltése")."</h2>");
   echo("<span class=wswdteamspaceholder></span>");
-  wswdteam_restore_tables();
+  wswdteam_upload_sql_file();
 }
 
 
@@ -118,129 +119,6 @@ function wswdteam_inst_sql($sqlfile=""){
   return($ret);
 }
 
-
-
-// mentés fájlok listája
-function wswdteam_backup_backuplist($table=array(),$appname=""){
-  global $wswdteam_pagerow,$wswdteam_app_name,$wswdteam_developer_mode,$wswdteam_table;
-
-  if ($appname===""){
-    $p=strpos(plugin_basename(__DIR__),'/');
-    $appname=substr(plugin_basename(__DIR__),0,$p);
-  }
-  if (empty($table)){
-    $table=$wswdteam_table;
-  }
-  $md=wp_upload_dir();
-  $dn=$md['basedir']."/".$appname;
-  $upload_dir=wp_upload_dir();
-  $dnurl=$upload_dir['baseurl']."/".$appname;
-  if(!is_dir($dn)){
-    try{
-      mkdir($dn);
-    }catch (Exception $e){
-      if ($wswdteam_developer_mode){
-        echo($e->getMessage());
-      }
-    }
-  }
-  // fájl törlése
-  if (isset($_POST['bdel'])){
-    $bdelf=$dn."/".$_POST['file'];
-    //echo($bdelf);
-    try{
-      unlink($bdelf);
-      wswdteam_message(wswdteam_lang("Törlés megtörtént").".");
-    }catch (Exception $e){
-      wswdteam_message(wswdteam_lang("Hiba történt a törlés közben").".");
-      if ($wswdteam_developer_mode){
-        echo($e->getMessage());
-      }
-    }
-  }
-  // sql visszaállítás
-  if (isset($_POST['bres'])){
-    $bresf=$dn."/".$_POST['file'];
-    if (wswdteam_inst_sql($bresf)){
-      wswdteam_message(wswdteam_lang("Visszatöltés megtörtént").".");
-    }else{
-      wswdteam_message(wswdteam_lang("Hiba történt a visszatöltés közben").".");
-    }
-  }
-  echo("<span class=wswdteamspaceholder></span>");
-  // könyvtár beolvasás
-  $fl=scandir($dn,SCANDIR_SORT_DESCENDING);
-  $db=count($fl)-2;
-  // lapozás
-  if (isset($_POST['wpage'])){
-    $page=$_POST['wpage'];
-    if ($page<1){
-      $page=1;
-    }
-    if ($db<($page*$wswdteam_pagerow)){
-      if ($db<(($page-1)*$wswdteam_pagerow)){
-        $page=1;
-      }
-    }
-  }else{
-    $page=1;
-  }
-  $i=($page-1)*$wswdteam_pagerow;
-  ?>
-  <div style="width:99%">
-  <table class="wp-list-table widefat fixed striped table-view-list">
-    <thead>
-	  <tr>
-	    <th scope="col" id="title" class="manage-column" style="width:45%;"><?php echo(wswdteam_lang('Fájlnév')); ?></th>
-	    <th scope="col" id="author" class="manage-column" style="width:45%;"><?php echo(wswdteam_lang('Mentés ideje')); ?></th>
-	    <th scope="col" id="tags" class="manage-column"><?php echo(wswdteam_lang('Visszaálít/Töröl')); ?></th>
-	  </tr>
-    </thead>
-    <tbody id="the-list">
-  <?php
-  $i=1;
-  foreach($fl as $bf) {
-    if(!in_array($bf,array('.','..'))){
-  	  echo("<tr id=\"post-$i\">");
-	    echo("<td class=\"columnn-title\" data-colname=\"c$i\"><a href=\"$dnurl/$bf\">$bf</a></td>");
-	    $s=explode('.',$bf);
-	    $sd=substr($s[0],strlen($appname)+1,strlen($s[0]));
-	    $bfd=substr($sd,0,4).".".substr($sd,4,2).".".substr($sd,6,2)." ".substr($sd,8,2).":".substr($sd,10,2);
-	    //$bfd=date("Y.m.d. H:i",filemtime($dn."/".$bf));
-      echo("<td class=\"columnn-title\" data-colname=\"c$i\">$bfd</td>");
-	    echo("<td class=\"columnn-title\" data-colname=\"c$i\">");
-	    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	    echo("<input type=\"hidden\" id=\"file\" name=\"file\" value=\"$bf\">");
-	    echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
-      echo("<input type=\"submit\" id=\"bres\" name=\"bres\" class=\"button\" value=\"+\">");
-	    echo("</form>");
-	    echo("<form action=\"".menu_page_url(__FILE__)."\" method=\"post\">");
-	    echo("<input type=\"hidden\" id=\"file\" name=\"file\" value=\"$bf\">");
-	    echo("<input type=\"hidden\" id=\"wpage\" name=\"wpage\" value=\"$page\">");
-      echo("<input type=\"submit\" id=\"bdel\" name=\"bdel\" class=\"button\" value=\"-\">");
-	    echo("</form>");
-	    echo("</td>");
-	    echo("</tr>");
-      $i++;
-    }
-  }
-  ?>
-  </tbody>
-    <tfoot>
-	  <tr>
-	    <th scope="col" id="title" class="manage-column" style="width:45%;"><?php echo(wswdteam_lang('Fájlnév')); ?></th>
-	    <th scope="col" id="author" class="manage-column" style="width:45%;"><?php echo(wswdteam_lang('Mentés ideje')); ?></th>
-	    <th scope="col" id="tags" class="manage-column"><?php echo(wswdteam_lang('Visszaálít/Töröl')); ?></th>
-	  </tr>
-    </tfoot>
-  </table>
-  </div>
-
-  <?php
-  echo("<br />");
-  wswdteam_pager_admin($db,$wswdteam_pagerow,$page,"wpage");
-  echo("<span class=wswdteamspaceholder></span>");
-}
 
 
 
@@ -312,7 +190,7 @@ function wswdteam_backup_apptables($table=array(),$appname=""){
       fwrite($handle,$ret);
       fclose($handle);
     }catch (Exception $e){
-      echo(wswdteam_lang("Hiba történt a mentés közben").".<br />");
+      wswdteam_error(wswdteam_lang("Hiba történt a mentés közben").".<br />");
       if ($wswdteam_developer_mode){
         echo($e->getMessage());
       }
@@ -416,7 +294,7 @@ function wswdteam_delete_bfiles(){
 
 // fájl mentés
 function wswdteam_backup_files(){
-  global $wswdteam_app_name,$wswdteam_developer_mode;
+  global $wswdteam_developer_mode;
 
   if (is_admin()){
     $cl="button";
@@ -430,8 +308,10 @@ function wswdteam_backup_files(){
   echo("<span class=wswdteamspaceholder></span>");
   $md=wp_upload_dir();
   $hd=get_home_path();
-  $bfileurl=$md['baseurl'].'/'.$wswdteam_app_name.'.tar';
-  $bfile=$md['basedir'].'/'.$wswdteam_app_name.'.tar';
+  $p=strpos(plugin_basename(__DIR__),'/');
+  $appname=substr(plugin_basename(__DIR__),0,$p);
+  $bfileurl=$md['baseurl'].'/'.$appname.'.tar';
+  $bfile=$md['basedir'].'/'.$appname.'.tar';
   if (isset($_POST['file0'])){
     try {
       if (file_exists($bfile.".gz")){
@@ -441,9 +321,9 @@ function wswdteam_backup_files(){
       $a->buildFromDirectory($hd);
       $a->compress(Phar::GZ);
       unlink($bfile);
-      echo("$bfile.gz - ".wswdteam_lang("Fájlmentés elkészült")."<br /><br />");
+      echo("$bfileurl.gz - ".wswdteam_lang("Fájlmentés elkészült")."<br /><br />");
     }catch (Exception $e){
-      echo(wswdteam_lang("Hiba történt a mentés közben").".<br />");
+      wswdteam_error(wswdteam_lang("Hiba történt a mentés közben").".<br />");
       if ($wswdteam_developer_mode){
         echo($e->getMessage());
       }
@@ -461,7 +341,7 @@ function wswdteam_backup_files(){
 
 // adatmentés
 function wswdteam_backup_tables(){
-  global $wpdb,$wswdteam_backup_dl,$wswdteam_app_name,$wswdteam_developer_mode;
+  global $wpdb,$wswdteam_backup_dl,$wswdteam_developer_mode;
 
   
   if (is_admin()){
@@ -474,8 +354,10 @@ function wswdteam_backup_tables(){
   #$bfileurl=$md['baseurl']."/".current_time('YmdHis').'.sql';
   #$bfile=$md['basedir']."/".current_time('YmdHis').'.sql';
   $md=wp_upload_dir();
-  $bfileurl=$md['baseurl'].'/'.$wswdteam_app_name.'.sql';
-  $bfile=$md['basedir'].'/'.$wswdteam_app_name.'.sql';
+  $p=strpos(plugin_basename(__DIR__),'/');
+  $appname=substr(plugin_basename(__DIR__),0,$p);
+  $bfileurl=$md['baseurl'].'/'.$appname.'.sql';
+  $bfile=$md['basedir'].'/'.$appname.'.sql';
 
   // adattáblák mentése
   echo("<span class=wswdteamspaceholder></span>");
@@ -528,7 +410,7 @@ function wswdteam_backup_tables(){
         fwrite($handle,$ret);
         fclose($handle);
       }catch (Exception $e){
-        echo(wswdteam_lang("Hiba történt a mentés közben").".<br />");
+        wswdteam_error(wswdteam_lang("Hiba történt a mentés közben").".<br />");
         if ($wswdteam_developer_mode){
           echo($e->getMessage());
         }
@@ -550,10 +432,50 @@ function wswdteam_backup_tables(){
 }
 
 
+
+
+// egyedi sql fájl feltöltése
+function wswdteam_upload_file(){
+  global $wswdteam_developer_mode;
+
+  if (isset($_POST['uploadsavedsql'])){
+    echo("<span class=wswdteamspaceholder></span>");
+    $md=wp_upload_dir();
+    $p=strpos(plugin_basename(__DIR__),'/');
+    $appname=substr(plugin_basename(__DIR__),0,$p);
+    $bfileurl=$md['baseurl'].'/'.$appname;
+    $tdir=$md['basedir'].'/'.$appname;
+    try{
+      if ($_FILES['file1']['name']<>""){
+        $tfile=$tdir."/".$_FILES['file1']['name'];
+        //echo($_FILES['file1']['name']);
+        echo("<span class=wswdteamspaceholder></span>");
+        $ext=pathinfo($tfile,PATHINFO_EXTENSION);
+        if (in_array($ext,array('sql'))){
+          if (file_exists($tfile)){
+            unlink($tfile);
+          }
+          if (move_uploaded_file($_FILES['file1']['tmp_name'],$tfile)){
+            wswdteam_message(wswdteam_lang("A feltöltés megtörtént").".<br />");
+          }
+        }else{
+          wswdteam_error(wswdteam_lang("Nem megfelelő fájl.Csak *.sql fájl tölthető fel").".<br />");
+        }
+      }
+    }catch (Exception $e){
+      wswdteam_error(wswdteam_lang("Hiba történt a feltöltés közben").".<br />");
+      if ($wswdteam_developer_mode){
+        echo($e->getMessage());
+      }
+    }
+  }
+}
+    
+    
+    
 // adat visszatöltés
-function wswdteam_restore_tables(){
-  global $wpdb,$wswdteam_backup_dl,$wswdteam_app_name,$wswdteam_developer_mode,$wswdteam_app_name,
-         $wswdteam_setup_file;
+function wswdteam_upload_sql_file(){
+  global $wswdteam_developer_mode;
 
   if (is_admin()){
     $cl="button";
@@ -564,39 +486,12 @@ function wswdteam_restore_tables(){
   }
   // visszatöltés
   echo(wswdteam_lang("Mentés fájlok feltöltése visszaállításhoz").".<br />");
-  echo(wswdteam_lang("A nagy fájlméret miatt ajánlott a tárhely szólgáltató saját funkcióit használni. (FTP, vezérlőpult megoldások.)").".");
+  echo(wswdteam_lang("A nagy fájlméret miatt ajánlott a tárhely szólgáltató saját funkcióit használni. (FTP, vezérlőpult megoldások.)").".<br />");
+  echo(wswdteam_lang("Csak *.sql fájl tölthető fel").".<br />");
   $fup=(int)(ini_get('upload_max_filesize'));
   $pup=(int)(ini_get('post_max_size'));
-  $tdir=get_home_path();
-  if (($fup>=64)and($pup>=8)){
-    if (isset($_POST['res1'])){
-      echo("<span class=wswdteamspaceholder></span>");
-      //$md=wp_upload_dir();
-      //$tdir=$md['basedir'].'/';
-      try{
-        if ($_FILES['file1']['name']<>""){
-          $tfile=$tdir."/".$_FILES['file1']['name'];
-          echo($_FILES['file1']['name']);
-          echo("<span class=wswdteamspaceholder></span>");
-          $ext=pathinfo($tfile,PATHINFO_EXTENSION);
-          if (in_array($ext,array('sql','gz'))){
-            if (file_exists($tfile)){
-              unlink($tfile);
-            }
-            if (move_uploaded_file($_FILES['file1']['tmp_name'],$tfile)){
-              echo(wswdteam_lang("A feltöltés megtörtént").".<br />");
-            }
-          }else{
-            echo(wswdteam_lang("Nem megfelelő fájl.Csak *.sql és *.tar.gz tölthető fel").".<br />");
-          }
-        }
-      }catch (Exception $e){
-        echo(wswdteam_lang("Hiba történt a feltöltés közben").".<br />");
-        if ($wswdteam_developer_mode){
-          echo($e->getMessage());
-        }
-      }
-    }
+  echo(wswdteam_lang("Beállított méretkorlát: ")."$fup Mb ($pup).");
+  if (($fup>=2)and($pup>=8)){
     echo("<span class=wswdteamspaceholder></span>");
     echo("<form id=fres1 action=\"".$act."\" enctype=\"multipart/form-data\" method=\"post\">");
     echo("<label id=\"fres1l\" for=\"file1\" class=\"".$cl."\">".wswdteam_lang("Adatmentés kiválasztása")."</label>");
@@ -605,7 +500,7 @@ function wswdteam_restore_tables(){
     echo("function chlabel(){var v=document.forms['fres1']['file1'].files[0].name;document.getElementById('fres1l').innerHTML=v;}");
     echo("</script>");
     echo("<span class=wswdteamwordspace></span>");
-    echo("<input type=submit id=\"res1\" name=\"res1\" class=\"$cl\" value=\"".wswdteam_lang("Feltöltés")."\">");
+    echo("<input type=submit id=\"uploadsavedsql\" name=\"uploadsavedsql\" class=\"$cl\" value=\"".wswdteam_lang("Feltöltés")."\">");
     echo("</form>");
     echo("<span class=wswdteamspaceholder></span>");
   }else{
@@ -614,44 +509,7 @@ function wswdteam_restore_tables(){
     echo("<span class=wswdteamspaceholder></span>");
 
   }
-  $ok1=false;
-  $ok2=false;
-  $fl=scandir($tdir);
-  foreach($fl as $l){
-    $ext=pathinfo($l,PATHINFO_EXTENSION);
-    switch($ext){
-      case "sql":
-        $ok1=true;
-        break;
-      case "gz":
-        $ok2=true;
-        break;
-    }
-  }
-  if($ok1 and $ok2){
-    echo("<span class=wswdteamspaceholder></span>");
-    $sfile=plugin_dir_path(__FILE__).$wswdteam_setup_file;
-    $tfile=$tdir.$wswdteam_setup_file;
-    try{
-      if(file_exists($tfile)){
-        unlink($tfile);
-      }
-      copy($sfile,$tfile);
-    }catch (Exception $e){
-      echo(wswdteam_lang("Hiba történt a telepítő másolása közben").".<br />");
-      if ($wswdteam_developer_mode){
-        echo($e->getMessage());
-      }
-      echo("<span class=wswdteamspaceholder></span>");
-    }
-    if (file_exists($tfile)){
-      echo(wswdteam_lang(".sql és .tar.gz fájl található a fő könyvtárban. Az újratelepítés elindítható."));
-      echo("<span class=wswdteamspaceholder></span>");
-      $pd=get_site_url()."/".$wswdteam_setup_file;
-      echo("<a href=\"$pd\" id=\"bdl\" class=\"$cl\">".wswdteam_lang("Telepítő program indítása")."</a>");
-    }
-    echo("<span class=wswdteamspaceholder></span>");
-  }
+  echo("<span class=wswdteamspaceholder></span>");
 }
 
 

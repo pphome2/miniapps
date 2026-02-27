@@ -98,6 +98,11 @@ $wswdteam_lang_str=array(
 'Mentés letöltése' => 'Mentés letöltése',
 'Fájlmentés elkészült' => 'Fájlmentés elkészült',
 'Fájlmentés letöltése' => 'Fájlmentés letöltése',
+'Csak *.sql fájl tölthető fel' => 'Csak *.sql fájl tölthető fel',
+'Beállított méretkorlát: ' => 'Beállított méretkorlát: ',
+'A feltöltés megtörtént' => 'A feltöltés megtörtént',
+'Törlés megtörtént' => 'Törlés megtörtént',
+'Visszatöltés megtörtént' => 'Visszatöltés megtörtént',
 
 
 );

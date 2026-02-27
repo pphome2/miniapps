@@ -78,6 +78,8 @@ $wdhd_lang_str=array(
 'Nyitott' => 'Nyitott',
 'Saját adatok mentése' => 'Saját adatok mentése',
 'Saját adatbázis mentése' => 'Saját adatbázis mentése',
+'Saját adatok mentése' => 'Saját adatok mentése',
+'Mentés elkészítése megtörtént' => 'Mentés elkészítése megtörtént',
 
 
 );
