@@ -1,6 +1,0 @@
-MariaDB database/user for wp:
-
-CREATE DATABASE testdb;
-CREATE USER testuser@localhost IDENTIFIED BY "Password";
-GRANT ALL PRIVILEGES ON testdb.* TO testuser@localhost;
-
