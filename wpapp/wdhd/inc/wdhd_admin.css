@@ -1,0 +1,57 @@
+<style>
+
+table {
+  width:99%; !important
+}
+
+.wdhdplus{
+  margin-left:20px;
+}
+
+
+.wdhdspaceholder{
+  display:block;
+  max-height:2em;
+  height:2em;
+}
+
+.wdhdinputline{
+  width:80%;
+}
+
+form {
+  display:inline;
+  padding-right:5px;
+}
+
+#button {
+  padding-right:5px;
+}
+
+tbody>:nth-child(n):hover {
+  background-color: lightgray;
+}
+
+.wdhdpagerlineadmin{
+  width:99%;
+}
+
+.wdhdpagerlineadmin2{
+  float:right;
+}
+
+.wdhdapagerdots{
+  padding-right:10px;
+}
+
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+.wdhdwordspace{
+  margin-left:5px;
+}
+
+</style>
